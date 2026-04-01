@@ -1,0 +1,8 @@
+# Descrição da tarefa
+
+Descreva aqui a tarefa de forma bruta, como veio do backlog ou do contexto repassado pelo time.
+
+Exemplo:
+- O que precisa ser feito?
+- Qual o contexto ou problema que originou essa demanda?
+- Há alguma restrição ou dependência conhecida?

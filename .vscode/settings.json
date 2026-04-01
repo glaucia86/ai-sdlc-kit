@@ -1,0 +1,4 @@
+{
+  "chat.agentFilesLocations": { ".github/agents": true },
+  "chat.promptFilesLocations": { ".github/prompts": true }
+}
