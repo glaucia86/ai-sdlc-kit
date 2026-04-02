@@ -132,6 +132,8 @@ The remaining files are generated progressively throughout the workflow.
     planner.agent.md
     implementer.agent.md
     reviewer.agent.md
+    qa.agent.md
+    ops.agent.md
   prompts/
     discovery-refine.prompt.md       ← Discovery Phase
     discovery-spec.prompt.md         ← Discovery Phase
@@ -139,13 +141,17 @@ The remaining files are generated progressively throughout the workflow.
     discovery-tech-spec.prompt.md    ← Discovery Phase
     discovery-epics.prompt.md        ← Discovery Phase
     epic-init.prompt.md              ← Discovery Phase
+    epic-close.prompt.md
     task-init.prompt.md
     task-prd.prompt.md
     task-spec.prompt.md
     task-implement.prompt.md
     task-implement-frontend.prompt.md
     task-review.prompt.md
+    task-tests.prompt.md
     agents-init.prompt.md
+    context-sync.prompt.md
+    ops-triage.prompt.md
   templates/
     idea.template.md                ← Discovery Phase
     non-technical-spec.template.md  ← Discovery Phase
@@ -157,8 +163,8 @@ The remaining files are generated progressively throughout the workflow.
     PRD.template.md
     spec.template.md
   docs/
-    conventions.md
-    sdd-workflow.md
+    convencoes.md
+    fluxo-sdd.md
 .vscode/
   settings.json
 scripts/
