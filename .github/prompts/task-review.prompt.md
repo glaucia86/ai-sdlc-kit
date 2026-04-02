@@ -22,8 +22,6 @@ Conduct a structured review covering:
 - relevant deviations;
 - risks and points of attention;
 - gaps;
-- verification checklist from `spec-epic-<N>.md` — confirm all items are checked;
-- assessment of `decisions-log.md` — are the recorded decisions coherent with the implementation?
 - final recommendation.
 
 Rules:
@@ -33,4 +31,15 @@ Rules:
 - use clear headings and descriptive text;
 - use bullet points only when they help organize pending items.
 
-When done, supplement `doc-specs/<N>-epic/decisions-log.md` with any decisions or technical debt identified during the review that are not yet recorded.
+---
+
+When done:
+
+- If the review is part of a Flow A epic:
+  1. Confirm the checklist in `spec-epic-<N>.md` (section `### Verification checklist`) is fully verified. All items must be marked `[x]`; flag any unverified items with justification.
+  2. Assess whether the recorded decisions in `doc-specs/<N>-epic/decisions-log.md` are coherent with the implementation.
+  3. Supplement `doc-specs/<N>-epic/decisions-log.md` with any decisions or technical debt identified during the review that are not yet recorded.
+
+- If the review is **not** part of a Flow A epic (Flow B / no epic):
+  1. Validate the acceptance criteria and any verification checklist defined in `doc-specs/spec.md`. Flag any unmet criteria with justification.
+  2. You do not need to update an epic decisions log in this flow.
