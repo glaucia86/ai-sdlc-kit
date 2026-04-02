@@ -1,23 +1,28 @@
-# Kit SDD Orquestração
+# ai-sdlc-kit
 
 Kit reutilizável para executar um fluxo de Spec-Driven Development (SDD) com GitHub Copilot no VS Code.
 
-Este kit organiza o processo em etapas claras, com artefatos intermediários e checkpoints de revisão humana antes da implementação.
+A ideia central é simples: **nenhuma linha de código é escrita sem uma spec validada por humano.** O kit organiza o caminho da ideia ou tarefa bruta até a implementação, com checkpoints obrigatórios de revisão em cada etapa.
 
-O objetivo é evitar que a implementação comece diretamente a partir de uma tarefa bruta, sem que antes exista clareza funcional e técnica suficiente.
+O kit tem dois fluxos independentes:
+
+| | Fluxo A — Discovery + Delivery | Fluxo B — Delivery direto |
+|---|---|---|
+| **Entrada** | `idea.txt` (ideia bruta) | `tarefa.txt` (tarefa definida) |
+| **Quando usar** | Projeto novo, ideia a ser estruturada | Tarefa já clara, projeto em andamento |
+| **Saída** | Épicos com specs individuais | `spec.md` única |
+| **Opcional?** | Sim — pode pular e ir direto ao Fluxo B | — |
+
+Nenhum fluxo é pré-requisito do outro.
 
 ---
 
 ## Pré-requisitos
 
-Antes de começar, verifique se:
+Antes de começar:
 
-- o projeto está aberto no VS Code
-- os agentes estão habilitados no ambiente
-- os prompt files e custom agents estão sendo descobertos pelo VS Code
-- existe uma pasta chamada `doc-specs/` na raiz do projeto
-
-Para garantir que o VS Code descubra os agentes e prompts desta pasta, adicione ao `.vscode/settings.json` do projeto:
+- VS Code aberto com GitHub Copilot habilitado
+- Agentes e prompts descobertos pelo VS Code — adicione ao `.vscode/settings.json` do projeto:
 
 ```json
 {
@@ -26,26 +31,331 @@ Para garantir que o VS Code descubra os agentes e prompts desta pasta, adicione 
 }
 ```
 
+- Pasta `doc-specs/` criada na raiz do projeto
+
 ---
 
-## Estrutura esperada da pasta `doc-specs/`
+## Fluxo A — Discovery + Delivery (opcional)
 
-O fluxo assume os seguintes arquivos:
+Use quando você tem uma ideia bruta e precisa estruturá-la antes de implementar.
+
+### Antes de começar
+
+Crie o arquivo de entrada:
+
+```
+doc-specs/idea.txt
+```
+
+Escreva a ideia livremente — sem formato obrigatório.
+
+---
+
+### Passo 1 — Refinar a ideia
+
+```
+/discovery-refinar-ideia
+```
+
+**O que acontece:** o 🧭 Discovery Agent lê `idea.txt` e gera `doc-specs/idea.md` com a ideia estruturada, sem viés técnico.
+
+**✅ HIL obrigatório:** revise `idea.md` antes de continuar.
+- A ideia original foi preservada?
+- As ambiguidades foram registradas?
+- Há algo inventado que não estava em `idea.txt`?
+
+---
+
+### Passo 2 — Gerar especificação funcional
+
+```
+/discovery-non-technical-spec
+```
+
+**O que acontece:** o 🗂️ PM Agent lê `idea.md` e gera `doc-specs/non-technical-spec.md` com personas, jornadas de usuário, casos de uso e regras de negócio — sem linguagem técnica.
+
+**✅ HIL obrigatório:** revise `non-technical-spec.md` antes de continuar.
+- Os fluxos de usuário estão claros?
+- As regras de negócio foram capturadas corretamente?
+- Existem perguntas em aberto que precisam de resposta antes de avançar?
+
+---
+
+### Passo 3 — Gerar PRD
+
+```
+/discovery-prd
+```
+
+**O que acontece:** o 🧑‍💼 Tech Lead Agent lê `non-technical-spec.md` e gera `doc-specs/PRD.md` com requisitos funcionais, não funcionais e critérios de aceite estruturados.
+
+**✅ HIL obrigatório:** revise `PRD.md` antes de continuar.
+- O escopo está bem delimitado (incluído / não incluído)?
+- Os critérios de aceite fazem sentido?
+- Algo foi extrapolado além da especificação funcional?
+
+---
+
+### Passo 4 — Gerar especificação técnica
+
+```
+/discovery-technical-spec
+```
+
+**O que acontece:** o 🏗️ Architect Agent lê `PRD.md` e a codebase e gera `doc-specs/technical-spec.md` com decisões de arquitetura, componentes, contratos, fluxos técnicos e estratégia de testes.
+
+**✅ HIL obrigatório:** revise `technical-spec.md` antes de continuar.
+- As decisões de arquitetura estão fundamentadas?
+- Os riscos e dependências estão registrados?
+- Há ambiguidades que precisam ser resolvidas antes de quebrar em épicos?
+
+---
+
+### Passo 5 — Gerar épicos
+
+```
+/discovery-epics
+```
+
+**O que acontece:** o 🏗️ Architect Agent lê `technical-spec.md` e `PRD.md` e gera `doc-specs/epics.md` com os épicos ordenados por dependência técnica.
+
+**✅ HIL obrigatório:** revise `epics.md` antes de continuar.
+- O sequenciamento faz sentido técnico?
+- Cada épico é pequeno o suficiente para ser implementado de forma independente?
+- As dependências entre épicos estão corretas?
+
+---
+
+### Passo 6 — Preparar artefatos do épico
+
+```
+/epic-preparar
+```
+
+O agente pergunta o número do épico antes de agir.
+
+**O que acontece:** o 🏗️ Architect Agent gera três arquivos em `doc-specs/<N>-epic/`:
+
+| Arquivo | Conteúdo |
+|---|---|
+| `epic-<N>.md` | Contexto, escopo e critérios de conclusão do épico |
+| `PRD.md` | Requisitos funcionais e não funcionais do épico |
+| `spec-epic-<N>.md` | Especificação técnica implementável do épico |
+
+O agente pausa após cada arquivo e aguarda confirmação antes de gerar o próximo.
+
+**✅ HIL obrigatório para cada arquivo** — `epic-<N>.md`, `PRD.md` e `spec-epic-<N>.md`.
+
+> **Regra de ouro:** sem `spec-epic-<N>.md` validada por humano, não se implementa o épico N.
+
+---
+
+### Passo 7 — Implementar o épico
+
+```
+/sdd-implementar
+```
+
+Aponte manualmente para os arquivos do épico quando solicitado:
+- `doc-specs/<N>-epic/PRD.md`
+- `doc-specs/<N>-epic/spec-epic-<N>.md`
+
+**O que acontece:** o 🛠️ SDD Implementer lê os artefatos do épico, resume o plano de implementação e executa. Ao final, preenche o checklist de `spec-epic-<N>.md` e atualiza `decisions-log.md` com decisões tomadas.
+
+**⚠️ HIL recomendado:** acompanhe o plano proposto pelo agente antes de confirmar as alterações, especialmente em épicos maiores.
+
+---
+
+### Passo 8 — Revisar a entrega
+
+```
+/sdd-revisar
+```
+
+**O que acontece:** o 🔎 SDD Reviewer compara os artefatos do épico com a implementação e produz uma síntese de aderência, desvios, riscos e recomendação final.
+
+**✅ HIL obrigatório:** decida se a entrega está aprovada, se há correções obrigatórias ou se o épico precisa de ajuste antes de avançar para o próximo.
+
+---
+
+### Passo 9 — Fechar o épico
+
+```
+/ops-fechar-epico
+```
+
+O agente pergunta o número do épico antes de agir.
+
+**O que acontece:** o 🚀 Operations Agent lê os artefatos do épico e gera `doc-specs/<N>-epic/ops-epic-<N>.md` com preparação para deploy, observabilidade e feedback para épicos futuros.
+
+**✅ HIL obrigatório:** revise `ops-epic-<N>.md` antes de continuar.
+
+---
+
+### Passo 10 — Gate de produção
+
+Etapa manual — sem prompt de agente.
+
+1. Faça o merge da branch `feat/E<NN>-<slug>` para `main`.
+2. Execute o deploy.
+3. Valide em produção usando os critérios definidos em `ops-epic-<N>.md`.
+
+Somente após essa validação o próximo épico pode começar.
+
+---
+
+### Passo 11 — Atualizar memória global
+
+```
+/ops-atualizar-context
+```
+
+**O que acontece:** o 🏗️ Architect Agent lê `ops-epic-<N>.md` e `decisions-log.md` e atualiza `doc-specs/CONTEXT.md` com o épico concluído, ADRs e aprendizados.
+
+Após isso, repita a partir do **Passo 0** para o próximo épico.
+
+---
+
+## Fluxo B — Delivery direto
+
+Use quando a tarefa já está clara e definida. Este é o fluxo original do ai-sdlc-kit.
+
+### Antes de começar
+
+Crie o arquivo de entrada:
 
 ```
 doc-specs/tarefa.txt
-doc-specs/tarefa.md
-doc-specs/PRD.md
-doc-specs/spec.md
 ```
 
-Nem todos existem no início. No começo, normalmente você só terá:
+Escreva a descrição bruta da tarefa — pode estar desorganizada. O fluxo existe para organizar antes de implementar.
+
+---
+
+### Passo 1 — Estruturar a tarefa
 
 ```
-doc-specs/tarefa.txt
+/sdd-preparar-tarefa
 ```
 
-Os demais serão gerados ao longo do fluxo.
+**O que acontece:** o 📥 SDD Intake lê `tarefa.txt` e gera `doc-specs/tarefa.md` estruturado. Ele não acessa PRD, spec nem a codebase — apenas transforma a entrada bruta fielmente.
+
+**✅ HIL obrigatório:** revise `tarefa.md` antes de continuar.
+- O objetivo ficou claro?
+- Houve perda ou distorção de informação?
+- Existem ambiguidades que precisam ser resolvidas agora?
+
+---
+
+### Passo 2 — Gerar PRD
+
+```
+/sdd-gerar-prd
+```
+
+**O que acontece:** o 📐 SDD Planner lê `tarefa.md` e gera `doc-specs/PRD.md` com visão geral, objetivos, escopo, requisitos funcionais e não funcionais, critérios de aceite e perguntas abertas.
+
+**✅ HIL obrigatório:** revise `PRD.md` antes de continuar.
+- O PRD representa corretamente a tarefa?
+- O escopo está delimitado (incluído / não incluído)?
+- Existem perguntas abertas que precisam de resposta antes da spec?
+
+---
+
+### Passo 3 — Gerar spec
+
+```
+/sdd-gerar-spec
+```
+
+**O que acontece:** o 📐 SDD Planner lê `PRD.md` e a codebase e gera `doc-specs/spec.md` com contexto técnico, componentes afetados, fluxo de implementação, estratégia de testes, riscos e dúvidas em aberto.
+
+**✅ HIL obrigatório:** revise `spec.md` antes de continuar.
+- A spec está coerente com o PRD?
+- As decisões técnicas estão explícitas o suficiente?
+- A implementação conseguirá seguir esse documento sem suposições perigosas?
+
+> **Regra de ouro:** sem `spec.md` validada por humano, não se implementa.
+
+---
+
+### Passo 4 — Implementar
+
+```
+/sdd-implementar
+```
+
+Para tarefas com componentes de frontend, use:
+
+```
+/sdd-implementar-frontend
+```
+
+**O que acontece:** o 🛠️ SDD Implementer lê `PRD.md` e `spec.md`, resume o plano, identifica arquivos afetados e executa a implementação. Se encontrar uma ambiguidade crítica, para e sinaliza.
+
+**⚠️ HIL recomendado:** acompanhe o plano proposto antes de confirmar, especialmente em mudanças maiores.
+
+---
+
+### Passo 5 — Revisar a entrega
+
+```
+/sdd-revisar
+```
+
+**O que acontece:** o 🔎 SDD Reviewer compara `PRD.md`, `spec.md` e a implementação. Produz: síntese de aderência, desvios encontrados, riscos, lacunas e recomendação final.
+
+**✅ HIL obrigatório:** decida se a entrega está aprovada ou se há correções antes de fechar a tarefa.
+
+---
+
+## Quando voltar uma etapa
+
+| Situação | Volte para |
+|---|---|
+| A tarefa foi mal interpretada | Etapa de intake / `idea.txt` |
+| O PRD não reflete o escopo correto | Geração do PRD |
+| A spec está superficial ou ambígua | Geração da spec |
+| O implementador encontrou ambiguidade crítica | Spec (ajustar e regenerar) |
+| O reviewer apontou desvio de especificação | Spec ou PRD |
+
+---
+
+## Referência — Agentes
+
+| Agente | Fluxo | Responsabilidade |
+|---|---|---|
+| 🧭 Discovery Agent | A | Refina `idea.txt` e gera `idea.md` sem viés técnico |
+| 🗂️ PM Agent | A | Gera `non-technical-spec.md` com especificação funcional |
+| 🧑‍💼 Tech Lead Agent | A | Gera `PRD.md` a partir da especificação funcional |
+| 🏗️ Architect Agent | A | Gera `technical-spec.md`, `epics.md`, artefatos por épico e atualiza `CONTEXT.md` |
+| 🚀 Operations Agent | A | Fecha o ciclo do épico: deploy, observabilidade, feedback |
+| 📥 SDD Intake | B | Estrutura `tarefa.txt` em `tarefa.md` |
+| 📐 SDD Planner | B | Gera `PRD.md` e `spec.md` |
+| 🛠️ SDD Implementer | A e B | Implementa com base nos artefatos aprovados |
+| 🔎 SDD Reviewer | A e B | Revisa aderência entre spec e implementação |
+
+---
+
+## Referência — Prompts
+
+| Prompt | Fluxo | O que faz |
+|---|---|---|
+| `/discovery-refinar-ideia` | A | `idea.txt` → `idea.md` |
+| `/discovery-non-technical-spec` | A | `idea.md` → `non-technical-spec.md` |
+| `/discovery-prd` | A | `non-technical-spec.md` → `PRD.md` |
+| `/discovery-technical-spec` | A | `PRD.md` → `technical-spec.md` + `CONTEXT.md` |
+| `/discovery-epics` | A | `technical-spec.md` → `epics.md` |
+| `/epic-preparar` | A | Gera os 4 artefatos de `doc-specs/<N>-epic/` (incluindo `decisions-log.md`) |
+| `/ops-fechar-epico` | A | Gera `ops-epic-<N>.md` com deploy, observabilidade e feedback |
+| `/ops-atualizar-context` | A | Atualiza `CONTEXT.md` com ADRs e aprendizados do épico |
+| `/sdd-preparar-tarefa` | B | `tarefa.txt` → `tarefa.md` |
+| `/sdd-gerar-prd` | B | `tarefa.md` → `PRD.md` |
+| `/sdd-gerar-spec` | B | `PRD.md` → `spec.md` |
+| `/sdd-implementar` | A e B | Implementa com base nos artefatos aprovados |
+| `/sdd-implementar-frontend` | A e B | Implementa frontend com skills de design injetadas |
+| `/sdd-revisar` | A e B | Revisa aderência entre artefatos e implementação |
+| `/sdd-bootstrap-agents-md` | — | Gera `AGENTS.md` inicial para o projeto |
 
 ---
 
@@ -54,318 +364,76 @@ Os demais serão gerados ao longo do fluxo.
 ```
 .github/
   agents/
+    discovery.agent.md
+    pm.agent.md
+    tech-lead.agent.md
+    architect.agent.md
+    operations.agent.md
+    sdd-intake.agent.md
     sdd-planner.agent.md
     sdd-implementer.agent.md
     sdd-reviewer.agent.md
   prompts/
+    discovery-refinar-ideia.prompt.md
+    discovery-non-technical-spec.prompt.md
+    discovery-prd.prompt.md
+    discovery-technical-spec.prompt.md
+    discovery-epics.prompt.md
+    epic-preparar.prompt.md
+    ops-fechar-epico.prompt.md
+    ops-atualizar-context.prompt.md
     sdd-preparar-tarefa.prompt.md
     sdd-gerar-prd.prompt.md
     sdd-gerar-spec.prompt.md
     sdd-implementar.prompt.md
+    sdd-implementar-frontend.prompt.md
     sdd-revisar.prompt.md
     sdd-bootstrap-agents-md.prompt.md
   templates/
+    idea.template.md
+    non-technical-spec.template.md
+    technical-spec.template.md
+    epics.template.md
+    epic-N.template.md
+    spec-epic-N.template.md
+    ops-epic-N.template.md
+    decisions-log.template.md
+    CONTEXT.template.md
     AGENTS.base.md
     PRD.template.md
     spec.template.md
   docs/
     convencoes.md
     fluxo-sdd.md
-.vscode/
-  settings.json
 ```
-
----
-
-## Papel de cada agente
-
-### 📐 SDD Planner
-
-Responsável por planejamento e especificação. Ele:
-
-- lê a tarefa
-- gera `tarefa.md`
-- gera `PRD.md`
-- gera `spec.md`
-- não implementa código
-
-### 🛠️ SDD Implementer
-
-Responsável por implementação. Ele:
-
-- lê `PRD.md` e `spec.md`
-- resume o que será feito antes de alterar qualquer arquivo
-- implementa a tarefa
-- tenta manter aderência ao escopo definido
-- sinaliza ambiguidades críticas em vez de decidir sozinho
-
-### 🔎 SDD Reviewer
-
-Responsável por revisão final. Ele:
-
-- compara `PRD.md`, `spec.md` e implementação
-- aponta desvios, riscos, lacunas e pendências
-- produz uma recomendação final acionável
-
----
-
-## Papel de cada prompt
-
-| Prompt | O que faz |
-|---|---|
-| `/sdd-preparar-tarefa` | Transforma `tarefa.txt` em `tarefa.md` |
-| `/sdd-gerar-prd` | Transforma `tarefa.md` em `PRD.md` |
-| `/sdd-gerar-spec` | Transforma `PRD.md` em `spec.md` |
-| `/sdd-implementar` | Inicia a implementação com base em `PRD.md` e `spec.md` |
-| `/sdd-revisar` | Executa revisão de aderência entre artefatos e código |
-| `/sdd-bootstrap-agents-md` | Gera um `AGENTS.md` inicial, minimalista e estável para o projeto |
-
----
-
-## Execução do fluxo completo
-
-### Etapa 0 — Criar a entrada inicial da tarefa
-
-Crie a pasta `doc-specs/`, se ainda não existir. Depois, crie o arquivo:
-
-```
-doc-specs/tarefa.txt
-```
-
-Esse arquivo deve conter a descrição bruta da tarefa, normalmente vinda do backlog, da ferramenta de gestão ou do contexto repassado pelo time. Essa descrição ainda pode estar desorganizada. O fluxo existe justamente para organizar isso antes de implementar.
-
----
-
-### Etapa 1 — Gerar `tarefa.md`
-
-No chat do Copilot, execute:
-
-```
-/sdd-preparar-tarefa
-```
-
-Essa etapa usa o agente 📐 SDD Planner para ler `doc-specs/tarefa.txt` e gerar `doc-specs/tarefa.md`.
-
-**HIL obrigatório após esta etapa.**
-Antes de seguir, uma pessoa deve revisar `tarefa.md`. A revisão humana deve responder:
-
-- o objetivo da tarefa ficou claro?
-- houve perda de informação?
-- algo foi interpretado errado?
-- existem ambiguidades que precisam ser corrigidas agora?
-
-Se a resposta for "não está bom o suficiente", ajuste a entrada e execute novamente a etapa. Não avance para o PRD sem essa validação.
-
----
-
-### Etapa 2 — Gerar `PRD.md`
-
-No chat do Copilot, execute:
-
-```
-/sdd-gerar-prd
-```
-
-Essa etapa usa o agente 📐 SDD Planner para ler `doc-specs/tarefa.md` e gerar `doc-specs/PRD.md`.
-
-O PRD é gerado com a seguinte estrutura: visão geral, objetivos, escopo (incluído / não incluído), premissas, requisitos funcionais, requisitos não funcionais, critérios de aceite e perguntas abertas.
-
-**HIL obrigatório após esta etapa.**
-Antes de seguir, uma pessoa deve revisar `PRD.md`. A revisão humana deve responder:
-
-- o PRD representa corretamente a tarefa?
-- os objetivos estão coerentes?
-- o escopo está claro?
-- os critérios de aceite fazem sentido?
-- existem perguntas abertas que precisam ser respondidas antes da spec?
-
-Se houver desalinhamento, ajuste e regenere o PRD. Não avance para a spec sem essa validação.
-
----
-
-### Etapa 3 — Gerar `spec.md`
-
-No chat do Copilot, execute:
-
-```
-/sdd-gerar-spec
-```
-
-Essa etapa usa o agente 📐 SDD Planner para ler `doc-specs/PRD.md` e gerar `doc-specs/spec.md`.
-
-A spec é gerada com a seguinte estrutura: contexto, objetivo técnico, escopo de implementação, impacto na arquitetura, componentes afetados, fluxo funcional esperado, regras técnicas, estratégia de implementação, estratégia de testes, critérios de aceite técnicos, riscos e dúvidas em aberto.
-
-**HIL obrigatório após esta etapa.**
-Antes de seguir, uma pessoa deve revisar `spec.md`. A revisão humana deve responder:
-
-- a spec está coerente com o PRD?
-- ela está técnica o suficiente para implementação?
-- há decisões técnicas importantes implícitas demais?
-- faltam riscos, dependências ou dúvidas em aberto?
-- a implementação conseguirá seguir esse documento sem suposições perigosas?
-
-Se a spec estiver superficial ou desalinhada, refine e regenere. A implementação não deve começar sem aprovação humana da spec.
-
----
-
-### Etapa 4 — Implementar
-
-Somente depois da aprovação humana de `spec.md`, execute:
-
-```
-/sdd-implementar
-```
-
-Essa etapa usa o agente 🛠️ SDD Implementer para:
-
-- ler `doc-specs/PRD.md` e `doc-specs/spec.md`
-- resumir o que será implementado
-- identificar os principais arquivos e componentes afetados
-- sinalizar ambiguidades críticas antes de alterar qualquer arquivo
-- iniciar a implementação
-
-Se o agente encontrar uma ambiguidade crítica, ele deve sinalizar e parar, em vez de decidir sozinho. Se isso acontecer, o correto é voltar para a etapa da spec e ajustar o documento.
-
-**HIL recomendado durante a implementação.**
-Dependendo do tamanho da mudança, vale acompanhar o plano proposto pelo agente, os arquivos que ele pretende alterar e as mudanças mais sensíveis. Em tarefas pequenas isso pode ser mais leve. Em tarefas maiores, esse acompanhamento é importante.
-
----
-
-### Etapa 5 — Revisar a entrega
-
-Depois da implementação, execute:
-
-```
-/sdd-revisar
-```
-
-Essa etapa usa o agente 🔎 SDD Reviewer para revisar `doc-specs/PRD.md`, `doc-specs/spec.md` e a implementação atual.
-
-A saída deve apontar: síntese da aderência, desvios encontrados, riscos e pontos de atenção, lacunas e recomendação final.
-
-**HIL obrigatório no fechamento.**
-Uma pessoa deve revisar a saída do revisor e decidir:
-
-- a entrega está aderente ao escopo?
-- existem correções obrigatórias?
-- a spec precisa ser ajustada?
-- a implementação pode seguir para o próximo estágio?
-
-O agente revisor ajuda a encontrar inconsistências, mas a decisão final continua humana.
-
----
-
-## Resumo dos checkpoints HIL
-
-**Obrigatórios:**
-- após `tarefa.md`
-- após `PRD.md`
-- após `spec.md`
-- após revisão final do reviewer
-
-**Recomendados:**
-- durante a implementação, especialmente em mudanças maiores
-
----
-
-## Regra principal do fluxo
-
-**Sem `spec.md` validada por humano, não se implementa.**
-
-Essa é a regra central desta orquestração.
-
----
-
-## Quando voltar uma etapa
-
-Volte para a etapa anterior quando:
-
-- a tarefa estiver mal representada
-- o PRD não refletir corretamente o escopo
-- a spec estiver superficial ou ambígua
-- a implementação depender de decisões não documentadas
-- o reviewer apontar desvios que indicam erro de especificação
-
----
-
-## Quando usar `/sdd-bootstrap-agents-md`
-
-Use esse prompt apenas quando quiser criar ou revisar o `AGENTS.md` do projeto. Ele não faz parte do fluxo obrigatório por tarefa.
-
-Ele existe para gerar um `AGENTS.md` inicial: minimalista, estável, coerente com o projeto e alinhado com progressive disclosure.
-
----
-
-## Fluxo resumido
-
-```
-tarefa.txt
-   ↓
-/sdd-preparar-tarefa
-   ↓
-HIL — revisar tarefa.md
-   ↓
-/sdd-gerar-prd
-   ↓
-HIL — revisar PRD.md
-   ↓
-/sdd-gerar-spec
-   ↓
-HIL — revisar spec.md
-   ↓
-/sdd-implementar
-   ↓
-/sdd-revisar
-   ↓
-HIL final
-```
-
----
-
-## Boas práticas
-
-- não pule a revisão da spec
-- não trate o PRD como documento técnico
-- não deixe ambiguidades sem registro
-- não use o implementador para descobrir escopo
-- use o reviewer para validar aderência, não para redefinir a tarefa
-
----
-
-## Resultado esperado
-
-Ao final do processo, deve existir coerência entre:
-
-- a descrição original da tarefa
-- a tarefa estruturada
-- o PRD
-- a spec
-- a implementação
-- a revisão final
-
-Esse é o sinal de que o fluxo SDD funcionou corretamente.
 
 ---
 
 ## Como instalar em um projeto
 
-Há duas formas de usar esta orquestração.
-
 ### Opção A — copiar para o projeto
 
-Copie:
-- `agents/*` para `.github/agents/`
-- `prompts/*` para `.github/prompts/`
+Copie `agents/*` e `prompts/*` para `.github/agents/` e `.github/prompts/` do seu projeto.
 
-Essa opção é a mais simples quando você quer que o fluxo viaje junto com o repositório.
+### Opção B — apontar o VS Code para a pasta do kit
 
-### Opção B — manter a pasta reutilizável e apontar o VS Code para ela
-
-Se você preferir manter `sdd-orquestracao` fora da `.github`, adicione no arquivo `.vscode/settings.json` do projeto:
+Adicione ao `.vscode/settings.json` do projeto:
 
 ```json
 {
-  "chat.agentFilesLocations": { "./sdd-orquestracao/agents": true },
-  "chat.promptFilesLocations": { "./sdd-orquestracao/prompts": true }
+  "chat.agentFilesLocations": { "./ai-sdlc-kit/agents": true },
+  "chat.promptFilesLocations": { "./ai-sdlc-kit/prompts": true }
 }
+```
+
+Para instalar automaticamente (detecta e faz merge do `settings.json` existente):
+
+```bash
+make install
+```
+
+Para apontar para um caminho externo personalizado:
+
+```bash
+make install-external PATH=/caminho/para/ai-sdlc-kit
 ```

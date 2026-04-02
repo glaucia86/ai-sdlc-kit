@@ -1,7 +1,12 @@
 ---
-name: "🛠️ SDD Implementer"
+name: "🛠️ Implementer"
 description: "Implementa a tarefa com base em spec.md e PRD.md, com foco em aderência ao SDD."
+tools: ["search/codebase", "search/usages", "create_file", "edit_file"]
 handoffs:
+  - label: "Gerar testes e validar implementação"
+    agent: "🧪 QA Agent"
+    prompt: "Leia spec-epic-<N>.md e CONTEXT.md. Gere cenários de teste, descreva dados sintéticos necessários, execute os testes do projeto e reporte o resultado antes de acionar /sdd-revisar."
+    send: false
   - label: "Revisar implementação"
     agent: "🔎 SDD Reviewer"
     prompt: "Leia o PRD.md, o spec.md e a implementação realizada. Revise aderência, riscos, lacunas e pontos a corrigir."

@@ -1,6 +1,7 @@
 ---
-name: "📐 SDD Planner"
+name: "📐 Planner"
 description: "Planeja a tarefa em SDD, gera PRD.md e spec.md com base na tarefa e na codebase, sem implementar código."
+tools: ["search/codebase", "create_file", "edit_file"]
 handoffs:
   - label: "Iniciar implementação"
     agent: "🛠️ SDD Implementer"

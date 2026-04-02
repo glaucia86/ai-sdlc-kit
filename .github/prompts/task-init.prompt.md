@@ -1,7 +1,7 @@
 ---
 name: "sdd-preparar-tarefa"
 description: "Lê a descrição bruta da tarefa e gera tarefa.md em formato estruturado."
-agent: "📐 SDD Planner"
+agent: "� SDD Intake"
 ---
 
 Leia atentamente o arquivo `doc-specs/tarefa.txt`.

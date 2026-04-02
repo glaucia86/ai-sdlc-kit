@@ -23,3 +23,8 @@
 ## Riscos, dependências e pontos de atenção
 
 ## Dúvidas ou ambiguidades em aberto
+
+## Histórico de revisões
+
+| Versão | Data | Autor | Alteração |
+|---|---|---|---|

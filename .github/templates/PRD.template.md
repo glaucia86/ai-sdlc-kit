@@ -17,3 +17,8 @@
 ## Critérios de aceite
 
 ## Perguntas abertas
+
+## Histórico de revisões
+
+| Versão | Data | Autor | Alteração |
+|---|---|---|---|

@@ -1,5 +1,5 @@
 ---
-name: "🔎 SDD Reviewer"
+name: "🔎 Reviewer"
 description: "Revisa PRD.md, spec.md e implementação realizada, avaliando aderência ao fluxo SDD."
 tools: ["search/codebase", "search/usages"]
 ---

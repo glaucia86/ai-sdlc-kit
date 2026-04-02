@@ -130,6 +130,27 @@ O time deve voltar para a etapa anterior quando:
 - houver falta de clareza que comprometa a implementação
 - a revisão humana identificar interpretação errada do escopo
 
+## O que significa `send: false` nos handoffs
+
+Os handoffs definidos nos arquivos `.agent.md` usam a propriedade `send: false`. Isso significa que o handoff é preparado pelo agente, mas **não é executado automaticamente**.
+
+O Copilot exibe o handoff como uma opção de continuação, mas aguarda confirmação humana antes de invocar o próximo agente. Esse comportamento é intencional e faz parte do Human in the Loop do fluxo SDD.
+
+Sem confirmação manual, o fluxo não avança. Isso garante que nenhuma etapa seja pulada inadvertidamente.
+
+## Convenção de histórico de revisões nos artefatos
+
+Todo artefato gerado pelo fluxo (`PRD.md` e `spec.md`) deve incluir uma seção `## Histórico de revisões` ao final do documento.
+
+Essa seção deve ser preenchida manualmente após cada roda de revisão humana que resultar em ajuste no artefato:
+
+| Versão | Data | Autor | Alteração |
+|---|---|---|---|
+| 1.0 | AAAA-MM-DD | nome | versão inicial |
+| 1.1 | AAAA-MM-DD | nome | descrição breve da alteração |
+
+O objetivo é manter rastreabilidade sem introduzir tooling externo. Em tarefas grandes, o PRD pode ser editado várias vezes antes da spec ser aprovada; o histórico torna essas iterações visíveis.
+
 ## Papel do AGENTS.md do projeto
 
 O `AGENTS.md` da raiz do projeto, quando existir, deve ser estável e minimalista.
@@ -147,3 +168,145 @@ Ao final do processo, deve existir coerência entre:
 - a tradução técnica na spec
 - a implementação realizada
 - a revisão final
+
+---
+
+## Fase de Discovery
+
+### O que é a Fase de Discovery
+
+A Fase de Discovery é uma fase **opcional** que precede o fluxo SDD por tarefa.
+
+Ela é indicada para projetos novos ou quando há necessidade de estruturar uma ideia antes de quebrá-la em tarefas implementáveis. Quando a equipe já tem tarefas definidas e claras, o Fluxo B (Delivery direto) pode ser usado sem passar pela Discovery.
+
+### Entrada do fluxo
+
+A entrada da Fase de Discovery é o arquivo `doc-specs/idea.txt`, equivalente ao `tarefa.txt` no Fluxo B. Deve conter a ideia bruta, sem formatação obrigatória.
+
+### Dois fluxos independentes
+
+O kit suporta dois fluxos de trabalho independentes:
+
+**Fluxo A — Discovery + Delivery** (quando existe uma ideia a ser estruturada):
+`idea.txt → idea.md → non-technical-spec.md → PRD.md → technical-spec.md → epics.md → spec-epic-N.md → implementação`
+
+**Fluxo B — Delivery direto** (quando a tarefa já está clara):
+`tarefa.txt → tarefa.md → PRD.md → spec.md → implementação`
+
+Nenhum fluxo é pré-requisito do outro. A escolha é feita pelo time com base no contexto do projeto.
+
+### Papéis dos novos agentes
+
+| Agente | Arquivo | Responsabilidade |
+|---|---|---|
+| 🧭 Discovery Agent | `discovery.agent.md` | Lê `idea.txt` e gera `idea.md` sem viés técnico |
+| 🗂️ PM Agent | `pm.agent.md` | Lê `idea.md` e gera `non-technical-spec.md` |
+| 🧑‍💼 Tech Lead Agent | `tech-lead.agent.md` | Lê `non-technical-spec.md` e gera `PRD.md` |
+| 🏗️ Architect Agent | `architect.agent.md` | Gera `technical-spec.md` e `epics.md`; prepara artefatos de épicos |
+
+### HILs obrigatórios na Fase de Discovery
+
+Todos os artefatos da fase de Discovery exigem revisão humana antes de avançar:
+
+| Artefato | Prompt que o gera | HIL |
+|---|---|---|
+| `idea.md` | `/discovery-refinar-ideia` | ✅ obrigatório |
+| `non-technical-spec.md` | `/discovery-non-technical-spec` | ✅ obrigatório |
+| `PRD.md` | `/discovery-prd` | ✅ obrigatório |
+| `technical-spec.md` | `/discovery-technical-spec` | ✅ obrigatório |
+| `epics.md` | `/discovery-epics` | ✅ obrigatório |
+| `epic-<N>.md` | `/epic-preparar` | ✅ obrigatório |
+| `doc-specs/<N>-epic/PRD.md` | `/epic-preparar` | ✅ obrigatório |
+| `spec-epic-<N>.md` | `/epic-preparar` | ✅ obrigatório |
+
+### Regra de ouro do fluxo expandido
+
+> **Sem `spec-epic-<N>.md` validada por humano, não se implementa o épico N.**
+
+Essa regra é a extensão direta da regra original do ai-sdlc-kit e deve constar no `AGENTS.md` de todo projeto que usar este kit com a Fase de Discovery.
+
+### Convenção de nomeação de pastas de épicos
+
+As pastas de épicos seguem o padrão `doc-specs/<NN>-epic/` com dois dígitos:
+
+- `doc-specs/01-epic/`
+- `doc-specs/02-epic/`
+- `doc-specs/10-epic/`
+
+Cada pasta contém três artefatos: `epic-<N>.md`, `PRD.md` e `spec-epic-<N>.md`.
+
+### Implementação por épico
+
+Após os HILs dos três artefatos do épico, a implementação segue com `/sdd-implementar`, apontando manualmente para os arquivos do épico:
+- `doc-specs/<N>-epic/PRD.md`
+- `doc-specs/<N>-epic/spec-epic-<N>.md`
+
+O agente implementador utilizado é o mesmo do Fluxo B (`🛠️ SDD Implementer`). Não há um implementador separado para épicos.
+---
+
+## Fase de Operations
+
+### O que é a Fase de Operations
+
+A Fase de Operations fecha o ciclo de cada épico após a revisão final aprovada pelo humano. Ela cobre três responsabilidades: preparação para deploy, observabilidade em produção e feedback para épicos futuros.
+
+Nenhum épico está concluído até que `ops-epic-<N>.md` seja gerado e o deploy seja validado em produção.
+
+### Branch por épico
+
+Cada épico é desenvolvido em sua própria branch, criada antes de `/epic-preparar`. A convenção de nome é:
+
+```
+feat/E<NN>-<slug-do-epico>
+```
+
+Onde `<NN>` é o número do épico com dois dígitos e `<slug>` é um identificador curto em kebab-case extraído do nome do épico. Exemplos:
+
+- `feat/E01-autenticacao`
+- `feat/E02-onboarding-usuario`
+- `feat/E03-painel-admin`
+
+A branch do épico N deve ser mergeada para `main` somente após:
+1. `ops-epic-<N>.md` gerado e aprovado (HIL)
+2. Deploy executado e validado em produção
+
+O próximo épico só pode começar após a branch anterior estar mergeada e o deploy validado.
+
+### CONTEXT.md — memória global do projeto
+
+`doc-specs/CONTEXT.md` é a memória global do projeto. É criado pelo Architect Agent ao final de `/discovery-technical-spec` e atualizado pelo mesmo agente via `/ops-atualizar-context` após cada épico fechado.
+
+Todos os agentes devem ler `doc-specs/CONTEXT.md` antes de agir. Regra inviolable: **nunca remova conteúdo de `CONTEXT.md`** — apenas acrescente ou atualize.
+
+### decisions-log.md — registro de ADRs por épico
+
+`doc-specs/<N>-epic/decisions-log.md` registra as decisões técnicas tomadas durante cada épico. É criado vazio pelo Architect Agent via `/epic-preparar` e preenchido pelo SDD Implementer durante a implementação. O SDD Reviewer o complementa durante a revisão. O Operations Agent o lê ao gerar `ops-epic-<N>.md`.
+
+### Checklist de verificação em `spec-epic-<N>.md`
+
+A seção `## Critérios de aceite técnicos` de cada `spec-epic-<N>.md` contém um checklist estruturado. O SDD Implementer deve marcar todos os itens antes de acionar `/sdd-revisar`. Itens não marcados bloqueiam o handoff para revisão.
+
+### Sequência completa por épico
+
+```
+0.  Criar branch feat/E<NN>-<slug>          [pré-requisito manual]
+1.  /epic-preparar <N>                       [HIL: epic-<N>.md]
+                                             [HIL: PRD.md do épico]
+                                             [HIL: spec-epic-<N>.md]
+2.  /sdd-implementar
+3.  Preencher checklist + decisions-log.md
+4.  /sdd-revisar                             [HIL obrigatório]
+5.  /ops-fechar-epico <N>                    [HIL obrigatório]
+6.  Mergear branch feat/E<NN>-<slug>         [gate manual]
+7.  Validar em produção                      [gate manual]
+8.  /ops-atualizar-context <N>
+9.  Avançar para o próximo épico
+```
+
+### HILs obrigatórios na Fase de Operations
+
+| Artefato | Prompt que o gera | HIL |
+|---|---|---|
+| `ops-epic-<N>.md` | `/ops-fechar-epico` | ✅ obrigatório |
+| Merge da branch + validação em produção | — gate manual | ✅ obrigatório |
+| `CONTEXT.md` atualizado | `/ops-atualizar-context` | ⚠️ recomendado revisar |
