@@ -157,7 +157,7 @@ O `AGENTS.md` da raiz do projeto, quando existir, deve ser estável e minimalist
 
 Ele não substitui o fluxo SDD por tarefa.
 
-O fluxo SDD fica concentrado nesta orquestração (`sdd-orquestracao`) e nos artefatos criados em `doc-specs/`.
+O fluxo SDD fica concentrado nesta orquestração (`ai-sdlc-kit`) e nos artefatos criados em `doc-specs/`.
 
 ## Resultado esperado
 
