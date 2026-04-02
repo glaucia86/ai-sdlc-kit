@@ -518,8 +518,8 @@ If you prefer to keep `ai-sdlc-kit` outside of `.github`, add the following to y
 
 ```json
 {
-  "chat.agentFilesLocations": { "./ai-sdlc-kit/agents": true },
-  "chat.promptFilesLocations": { "./ai-sdlc-kit/prompts": true }
+  "chat.agentFilesLocations": { "./ai-sdlc-kit/.github/agents": true },
+  "chat.promptFilesLocations": { "./ai-sdlc-kit/.github/prompts": true }
 }
 ```
 
