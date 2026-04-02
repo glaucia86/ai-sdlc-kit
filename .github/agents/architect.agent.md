@@ -8,8 +8,8 @@ handoffs:
     prompt: "Read technical-spec.md and generate epics.md."
     send: false
   - label: "Prepare first epic"
-    agent: "🛠️ Implementer"
-    prompt: "Read epics.md and prepare the artifacts for epic 1 in doc-specs/01-epic/."
+    agent: "🏗️ Architect"
+    prompt: "Use the `/epic-init` prompt to read epics.md and prepare the artifacts for epic 1 in doc-specs/01-epic/."
     send: false
   - label: "Close epic with Operations"
     agent: "🚀 Ops"
