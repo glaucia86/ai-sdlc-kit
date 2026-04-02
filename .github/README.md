@@ -424,8 +424,8 @@ Adicione ao `.vscode/settings.json` do projeto:
 
 ```json
 {
-  "chat.agentFilesLocations": { "./ai-sdlc-kit/agents": true },
-  "chat.promptFilesLocations": { "./ai-sdlc-kit/prompts": true }
+  "chat.agentFilesLocations": { "./ai-sdlc-kit/.github/agents": true },
+  "chat.promptFilesLocations": { "./ai-sdlc-kit/.github/prompts": true }
 }
 ```
 
