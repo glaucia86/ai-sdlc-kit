@@ -1,4 +1,5 @@
-import { redirect } from 'next/navigation';
+import { HomePage, isHomeLocale } from '@/components/home-page';
+import { notFound } from 'next/navigation';
 
 export default async function LangHomePage({
   params,
@@ -6,5 +7,10 @@ export default async function LangHomePage({
   params: Promise<{ lang: string }>;
 }) {
   const { lang } = await params;
-  redirect(`/${lang}/get-started/installation`);
+
+  if (!isHomeLocale(lang)) {
+    notFound();
+  }
+
+  return <HomePage locale={lang} />;
 }

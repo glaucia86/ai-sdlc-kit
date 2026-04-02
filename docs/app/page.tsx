@@ -1,5 +1,5 @@
-import { redirect } from 'next/navigation';
+import { HomePage } from '@/components/home-page';
 
 export default function RootPage() {
-  redirect('/en/get-started/installation');
+  return <HomePage locale="en" />;
 }
