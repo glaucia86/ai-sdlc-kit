@@ -1,28 +1,28 @@
-# Decisions Log — Épico <N>
+# Decisions Log — Epic <N>
 
-> Registre aqui toda decisão técnica relevante tomada durante este épico.
-> Este arquivo é lido pelo Architect Agent ao atualizar CONTEXT.md.
-> Nunca remova entradas. Apenas acrescente ou atualize o status.
-
----
-
-## Decisões tomadas
-
-### [Título da decisão]
-
-- **Data:** YYYY-MM-DD
-- **Contexto:** Por que essa decisão foi necessária.
-- **Decisão:** O que foi decidido.
-- **Alternativas consideradas:** O que foi descartado e por quê.
-- **Consequências:** O que muda no projeto a partir dessa decisão.
-- **Status:** Aceita | Em revisão | Revertida
+> Record here every relevant technical decision made during this epic.
+> This file is read by the Architect when updating CONTEXT.md.
+> Never remove entries. Only add or update the status.
 
 ---
 
-## Dívidas técnicas identificadas
+## Decisions made
 
-<!-- O que foi deixado para depois, conscientemente, com justificativa -->
+### [Decision title]
 
-## Impacto em épicos futuros
+- **Date:** YYYY-MM-DD
+- **Context:** Why this decision was necessary.
+- **Decision:** What was decided.
+- **Alternatives considered:** What was discarded and why.
+- **Consequences:** What changes in the project from this decision onwards.
+- **Status:** Accepted | Under review | Reverted
 
-<!-- O que o time deve saber antes de iniciar o próximo épico -->
+---
+
+## Technical debt identified
+
+<!-- What was deliberately left for later, with justification -->
+
+## Impact on future epics
+
+<!-- What the team should know before starting the next epic -->

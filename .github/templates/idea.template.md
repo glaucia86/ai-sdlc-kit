@@ -1,17 +1,17 @@
-# Ideia
+# Idea
 
-## Resumo da ideia original
+## Summary of the original idea
 
-## Problema que resolve
+## Problem it solves
 
-## Público-alvo
+## Target audience
 
-## Valor principal esperado
+## Main expected value
 
-## Funcionalidades percebidas
+## Perceived features
 
-## Regras de negócio identificadas
+## Identified business rules
 
-## Melhorias e refinamentos sugeridos
+## Suggested improvements and refinements
 
-## Perguntas em aberto
+## Open questions

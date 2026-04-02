@@ -1,47 +1,47 @@
 ---
-name: "discovery-technical-spec"
-description: "Lê PRD.md e gera technical-spec.md com especificação técnica detalhada."
-agent: "🏗️ Architect Agent"
+name: "discovery-tech-spec"
+description: "Reads PRD.md and generates technical-spec.md with detailed technical specification."
+agent: "🏗️ Architect"
 ---
 
 #file:doc-specs/PRD.md
 #file:doc-specs/non-technical-spec.md
 
-Leia atentamente os arquivos `doc-specs/PRD.md` e `doc-specs/non-technical-spec.md`.
+Carefully read `doc-specs/PRD.md` and `doc-specs/non-technical-spec.md`.
 
-Com base EXCLUSIVAMENTE nesses conteúdos e no contexto observável da codebase, gere um arquivo `doc-specs/technical-spec.md`.
+Based EXCLUSIVELY on these contents and the observable codebase context, generate a `doc-specs/technical-spec.md` file.
 
-O `technical-spec.md` deve conter:
-1. Contexto e objetivo técnico
-2. Decisões de arquitetura
-3. Componentes e módulos principais
-4. Contratos e interfaces (tipos, entidades, APIs)
-5. Fluxos técnicos detalhados
-6. Estratégia de banco de dados e persistência
-7. Estratégia de autenticação e autorização (se aplicável)
-8. Estratégia de testes
-9. Critérios de aceite técnicos
-10. Riscos, dependências e pontos de atenção
-11. Dúvidas e ambiguidades em aberto
+The `technical-spec.md` must contain:
+1. Technical context and objective
+2. Architecture decisions
+3. Main components and modules
+4. Contracts and interfaces (types, entities, APIs)
+5. Detailed technical flows
+6. Database and persistence strategy
+7. Authentication and authorization strategy (if applicable)
+8. Testing strategy
+9. Technical acceptance criteria
+10. Risks, dependencies, and points of attention
+11. Open questions and ambiguities
 
-Regras:
-- não implemente código de produção
-- fundamente decisões técnicas no PRD e na codebase observável
-- seja detalhado e robusto
-- escreva em português do Brasil
-- use TypeScript como referência de linguagem para tipos e contratos
+Rules:
+- do not implement production code
+- ground technical decisions in the PRD and the observable codebase
+- be detailed and robust
+- write in English
+- use TypeScript as a language reference for types and contracts
 
-Ao concluir, avise o usuário que `technical-spec.md` está pronto para revisão (HIL obrigatório antes de avançar para `/discovery-epics`).
+When done, notify the user that `technical-spec.md` is ready for review (mandatory HIL before proceeding to `/discovery-epics`).
 
 ---
 
-Após a aprovação do usuário, crie também o arquivo `doc-specs/CONTEXT.md` com o seguinte conteúdo inicial:
+After user approval, also create the `doc-specs/CONTEXT.md` file with the following initial content:
 
-- Seção `## Propósito do projeto`: resumo em 2-3 frases extraído de `doc-specs/idea.md`
-- Seção `## Stack e convenções técnicas`: extraído de `doc-specs/technical-spec.md` (linguagens, frameworks, padrões, estrutura de pastas)
-- Seção `## Restrições globais`: extraído de `doc-specs/technical-spec.md`
-- Demais seções (`## Decisões arquiteturais (ADRs)`, `## Épicos concluídos`, `## Aprendizados e ajustes de rota`, `## Perguntas abertas de nível global`): deixar vazias com o comentário `<!-- a preencher durante o desenvolvimento -->`
+- Section `## Project purpose`: 2-3 sentence summary extracted from `doc-specs/idea.md`
+- Section `## Stack and technical conventions`: extracted from `doc-specs/technical-spec.md` (languages, frameworks, patterns, folder structure)
+- Section `## Global constraints`: extracted from `doc-specs/technical-spec.md`
+- Remaining sections (`## Architecture decisions (ADRs)`, `## Completed epics`, `## Learnings and course adjustments`, `## Global-level open questions`): leave empty with the comment `<!-- to be filled during development -->`
 
-Use o template `.github/templates/CONTEXT.template.md` como estrutura de referência.
+Use the template `.github/templates/CONTEXT.template.md` as the reference structure.
 
-Não preencha as seções de ADRs, épicos concluídos ou aprendizados — elas serão preenchidas pelo Operations Agent ao longo dos épicos.
+Do not fill in the ADRs, completed epics, or learnings sections — they will be filled by the Ops Agent throughout the epics.

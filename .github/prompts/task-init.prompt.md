@@ -1,27 +1,27 @@
 ---
-name: "sdd-preparar-tarefa"
-description: "Lê a descrição bruta da tarefa e gera tarefa.md em formato estruturado."
-agent: "� SDD Intake"
+name: "task-init"
+description: "Reads the raw task description and generates tarefa.md in structured format."
+agent: "📥 Intake"
 ---
 
-Leia atentamente o arquivo `doc-specs/tarefa.txt`.
+Carefully read the `doc-specs/tarefa.txt` file.
 
-Com base EXCLUSIVAMENTE nesse conteúdo, gere um arquivo `doc-specs/tarefa.md` em Markdown.
+Based EXCLUSIVELY on that content, generate a `doc-specs/tarefa.md` file in Markdown.
 
-Objetivo:
-Transformar a descrição bruta da tarefa em um documento mais claro, organizado e fiel ao conteúdo original.
+Objective:
+Transform the raw task description into a clearer, organized document that is faithful to the original content.
 
-O `tarefa.md` deve conter:
-- contexto da demanda;
-- objetivo principal;
-- requisitos percebidos;
-- restrições e premissas observáveis;
-- dúvidas e ambiguidades em aberto.
+The `tarefa.md` must contain:
+- demand context;
+- main objective;
+- perceived requirements;
+- observable constraints and assumptions;
+- open questions and ambiguities.
 
-Regras:
-- não invente requisitos;
-- não reescreva de forma excessivamente genérica;
-- preserve o sentido da tarefa original;
-- use subtítulos claros e texto descritivo;
-- use bullets apenas quando necessário;
-- escreva em português do Brasil.
+Rules:
+- do not invent requirements;
+- do not rewrite in an excessively generic way;
+- preserve the meaning of the original task;
+- use clear headings and descriptive text;
+- use bullet points only when necessary;
+- write in English.

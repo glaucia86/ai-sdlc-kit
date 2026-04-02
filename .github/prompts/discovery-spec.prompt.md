@@ -1,31 +1,31 @@
 ---
-name: "discovery-non-technical-spec"
-description: "Lê idea.md e gera non-technical-spec.md com especificação funcional detalhada."
-agent: "🗂️ PM Agent"
+name: "discovery-spec"
+description: "Reads idea.md and generates non-technical-spec.md with detailed functional specification."
+agent: "🗂️ PM"
 ---
 
 #file:doc-specs/idea.md
 
-Leia atentamente o arquivo `doc-specs/idea.md`.
+Carefully read the `doc-specs/idea.md` file.
 
-Com base EXCLUSIVAMENTE nesse conteúdo, gere um arquivo `doc-specs/non-technical-spec.md`.
+Based EXCLUSIVELY on that content, generate a `doc-specs/non-technical-spec.md` file.
 
-O `non-technical-spec.md` deve conter:
-1. Visão do produto
-2. Personas e público-alvo
-3. Jornadas de usuário principais
-4. Casos de uso detalhados
-5. Regras de negócio explícitas
-6. Fluxos funcionais esperados
-7. Critérios de aceite funcionais
-8. Restrições e premissas
-9. Perguntas em aberto
+The `non-technical-spec.md` must contain:
+1. Product vision
+2. Personas and target audience
+3. Main user journeys
+4. Detailed use cases
+5. Explicit business rules
+6. Expected functional flows
+7. Functional acceptance criteria
+8. Constraints and assumptions
+9. Open questions
 
-Regras:
-- não mencione tecnologia, banco de dados, APIs ou código
-- seja detalhado e robusto
-- não invente requisitos
-- escreva em português do Brasil
-- use subtítulos claros e texto descritivo
+Rules:
+- do not mention technology, databases, APIs, or code
+- be detailed and robust
+- do not invent requirements
+- write in English
+- use clear headings and descriptive text
 
-Ao concluir, avise o usuário que `non-technical-spec.md` está pronto para revisão (HIL obrigatório antes de avançar para `/discovery-prd`).
+When done, notify the user that `non-technical-spec.md` is ready for review (mandatory HIL before proceeding to `/discovery-prd`).

@@ -1,30 +1,30 @@
 # spec
 
-## Contexto da tarefa
+## Task context
 
-## Objetivo técnico
+## Technical objective
 
-## Escopo de implementação
+## Implementation scope
 
-## Impacto na arquitetura atual
+## Impact on current architecture
 
-## Componentes/arquivos potencialmente afetados
+## Potentially affected components/files
 
-## Fluxo funcional esperado
+## Expected functional flow
 
-## Regras e restrições técnicas
+## Rules and technical restrictions
 
-## Estratégia de implementação sugerida
+## Suggested implementation strategy
 
-## Estratégia de testes e validação
+## Testing and validation strategy
 
-## Critérios de aceite técnicos
+## Technical acceptance criteria
 
-## Riscos, dependências e pontos de atenção
+## Risks, dependencies, and points of attention
 
-## Dúvidas ou ambiguidades em aberto
+## Open questions or ambiguities
 
-## Histórico de revisões
+## Revision history
 
-| Versão | Data | Autor | Alteração |
+| Version | Date | Author | Change |
 |---|---|---|---|

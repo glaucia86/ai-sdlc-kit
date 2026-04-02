@@ -1,13 +1,13 @@
-# Épico <N> — [Nome]
+# Epic <N> — [Name]
 
-## Contexto e objetivo
+## Context and objective
 
-## Escopo
+## Scope
 
-### Incluído
+### Included
 
-### Não incluído
+### Not included
 
-## Dependências de épicos anteriores
+## Dependencies on previous epics
 
-## Critérios de conclusão
+## Completion criteria

@@ -1,34 +1,34 @@
 ---
-name: "sdd-gerar-spec"
-description: "Gera spec.md a partir de PRD.md com foco em implementação."
-agent: "📐 SDD Planner"
+name: "task-spec"
+description: "Generates spec.md from PRD.md with a focus on implementation."
+agent: "📐 Planner"
 ---
 
-Leia atentamente o arquivo `doc-specs/PRD.md`.
+Carefully read the `doc-specs/PRD.md` file.
 
-Com base EXCLUSIVAMENTE no conteúdo de `PRD.md` e no contexto observável da codebase atual, gere um arquivo `doc-specs/spec.md`.
+Based EXCLUSIVELY on the content of `PRD.md` and the observable context of the current codebase, generate a `doc-specs/spec.md` file.
 
-O `spec.md` deve conter:
+The `spec.md` must contain:
 
-1. Contexto da tarefa
-2. Objetivo técnico
-3. Escopo de implementação
-4. Impacto na arquitetura atual
-5. Componentes/arquivos potencialmente afetados
-6. Fluxo funcional esperado
-7. Regras e restrições técnicas
-8. Estratégia de implementação sugerida
-9. Estratégia de testes e validação
-10. Critérios de aceite técnicos
-11. Riscos, dependências e pontos de atenção
-12. Dúvidas ou ambiguidades em aberto
+1. Task context
+2. Technical objective
+3. Implementation scope
+4. Impact on current architecture
+5. Potentially affected components/files
+6. Expected functional flow
+7. Technical rules and constraints
+8. Suggested implementation strategy
+9. Testing and validation strategy
+10. Technical acceptance criteria
+11. Risks, dependencies, and points of attention
+12. Open questions or ambiguities
 
-> observação: o `spec.md` deve ser gerado de forma bem detalhada e robusta, servindo como um guia técnico claro e acionável para a implementação da etapa descrita no PRD. O foco deve ser na clareza, precisão e utilidade prática para os desenvolvedores que irão implementar a funcionalidade.
+> note: the `spec.md` should be generated in great detail and robustness, serving as a clear and actionable technical guide for the implementation of the step described in the PRD. The focus should be on clarity, precision, and practical utility for the developers who will implement the feature.
 
-Regras:
-- não invente requisitos;
-- não extrapole além do PRD e da codebase observável;
-- explicite dúvidas e ambiguidades;
-- escreva em português do Brasil;
-- use texto técnico, objetivo e acionável;
-- estruture a saída para servir como base direta para implementação via Agent Mode.
+Rules:
+- do not invent requirements;
+- do not extrapolate beyond the PRD and the observable codebase;
+- make questions and ambiguities explicit;
+- write in English;
+- use technical, objective, and actionable text;
+- structure the output to serve as a direct base for implementation via Agent Mode.

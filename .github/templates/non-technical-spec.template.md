@@ -1,19 +1,19 @@
-# Especificação Não Técnica
+# Non-Technical Specification
 
-## Visão do produto
+## Product vision
 
-## Personas e público-alvo
+## Personas and target audience
 
-## Jornadas de usuário principais
+## Main user journeys
 
-## Casos de uso detalhados
+## Detailed use cases
 
-## Regras de negócio
+## Business rules
 
-## Fluxos funcionais esperados
+## Expected functional flows
 
-## Critérios de aceite funcionais
+## Functional acceptance criteria
 
-## Restrições e premissas
+## Constraints and assumptions
 
-## Perguntas em aberto
+## Open questions

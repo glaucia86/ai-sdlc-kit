@@ -1,24 +1,24 @@
 # PRD
 
-## Visão geral
+## Overview
 
-## Objetivos
+## Objectives
 
-## Escopo
-### Incluído
-### Não incluído
+## Scope
+### Included
+### Not included
 
-## Premissas
+## Assumptions
 
-## Requisitos funcionais
+## Functional requirements
 
-## Requisitos não funcionais
+## Non-functional requirements
 
-## Critérios de aceite
+## Acceptance criteria
 
-## Perguntas abertas
+## Open questions
 
-## Histórico de revisões
+## Revision history
 
-| Versão | Data | Autor | Alteração |
+| Version | Date | Author | Change |
 |---|---|---|---|

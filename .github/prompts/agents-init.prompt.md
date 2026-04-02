@@ -1,32 +1,32 @@
 ---
-name: "sdd-bootstrap-agents-md"
-description: "Cria o AGENTS.md inicial do repositório com Progressive Disclosure."
-agent: "📐 SDD Planner"
+name: "agents-init"
+description: "Creates the initial repository AGENTS.md with Progressive Disclosure."
+agent: "📐 Planner"
 ---
 
-Leia atentamente:
+Carefully read:
 - `doc-specs/PRD.md`
-- a codebase atual
+- the current codebase
 
-Com base EXCLUSIVAMENTE nesses insumos, gere um arquivo `AGENTS.md` minimalista e estável para a raiz do projeto.
+Based EXCLUSIVELY on these inputs, generate a minimalist and stable `AGENTS.md` file for the project root.
 
-Princípios obrigatórios:
-- o AGENTS.md raiz deve ser curto, estável e minimalista;
-- deve-se criar esse arquivo na raiz do projeto, mesmo que o conteúdo seja mínimo;
-- documente apenas comportamento global do agente;
-- não transforme o arquivo em um documento gigante;
+Mandatory principles:
+- the root AGENTS.md must be short, stable, and minimalist;
+- this file must be created at the project root, even if the content is minimal;
+- document only the global agent behavior;
+- do not turn the file into a large document;
 - use progressive disclosure;
-- direcione instruções especializadas para arquivos secundários, quando necessário;
-- não documente estruturas profundas, caminhos instáveis ou detalhes desnecessários.
+- direct specialized instructions to secondary files when necessary;
+- do not document deep structures, unstable paths, or unnecessary details.
 
-O `AGENTS.md` deve conter:
-- uma frase de propósito do projeto;
-- comportamento global do agente (do / don't);
-- limites claros do agente;
-- seção "Arquivos especializados" com links para conteúdos complementares, se necessário.
+The `AGENTS.md` must contain:
+- a one-sentence project purpose;
+- global agent behavior (do / don't);
+- clear agent boundaries;
+- a "Specialized files" section with links to supplementary content, if necessary.
 
-Regras:
-- não invente padrões;
-- não introduza convenções que não estejam refletidas no projeto;
-- documente comportamento, não implementação;
-- escreva em português do Brasil.
+Rules:
+- do not invent patterns;
+- do not introduce conventions not reflected in the project;
+- document behavior, not implementation;
+- write in English.

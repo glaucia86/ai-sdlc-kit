@@ -1,83 +1,83 @@
 ---
-name: "sdd-gerar-testes"
-description: "Gera cenários de teste e dados sintéticos a partir da spec do épico, executa os testes e reporta o resultado antes de acionar /sdd-revisar."
-agent: "🧪 QA Agent"
+name: "task-tests"
+description: "Generates test scenarios and synthetic data from the epic spec, runs the tests, and reports the result before triggering /task-review."
+agent: "🧪 QA"
 ---
 
 #file:doc-specs/CONTEXT.md
 
-Leia atentamente:
+Carefully read:
 
-- `doc-specs/CONTEXT.md` — para identificar o comando de teste configurado no projeto (seção "Convenções de teste") e a estratégia de dados de teste
-- O `spec-epic-<N>.md` do épico em andamento em `doc-specs/<N>-epic/` — para extrair comportamentos esperados e critérios de aceite
-- O `PRD.md` do épico em `doc-specs/<N>-epic/` — para contexto adicional dos requisitos
+- `doc-specs/CONTEXT.md` — to identify the test command configured in the project (section "Test conventions") and the test data strategy
+- The `spec-epic-<N>.md` of the ongoing epic in `doc-specs/<N>-epic/` — to extract expected behaviors and acceptance criteria
+- The `PRD.md` of the epic in `doc-specs/<N>-epic/` — for additional requirements context
 
-Se a implementação for parte do Fluxo B (sem épico), leia:
+If the implementation is part of Flow B (without an epic), read:
 - `doc-specs/spec.md`
 - `doc-specs/PRD.md`
 
 ---
 
-## Passo 1 — Gerar cenários de teste
+## Step 1 — Generate test scenarios
 
-Para cada comportamento verificável descrito na spec, gere cenários estruturados no formato:
+For each verifiable behavior described in the spec, generate structured scenarios in the format:
 
 ```
-**Cenário:** [nome descritivo]
-**Dado:** [estado inicial ou pré-condição]
-**Quando:** [ação executada]
-**Então:** [resultado esperado e observável]
-**Tipo:** Unitário | Integração | Funcional
+**Scenario:** [descriptive name]
+**Given:** [initial state or precondition]
+**When:** [action performed]
+**Then:** [expected and observable result]
+**Type:** Unit | Integration | Functional
 ```
 
-Cubra obrigatoriamente:
-- Casos normais (caminho feliz)
-- Valores-limite (boundary values)
-- Entradas inválidas que devem ser rejeitadas
-- Edge cases descritos ou implícitos na spec
+Mandatory coverage:
+- Normal cases (happy path)
+- Boundary values
+- Invalid inputs that must be rejected
+- Edge cases described or implied in the spec
 
-## Passo 2 — Descrever dados de teste sintéticos
+## Step 2 — Describe synthetic test data
 
-Para os cenários gerados, descreva os dados necessários:
-- O que é um dado de entrada válido típico?
-- Quais são os valores-limite (mínimo, máximo, vazio, nulo)?
-- Quais entradas devem ser rejeitadas pelo sistema?
-- Há dependências entre dados (ordem de criação, estado prévio necessário)?
+For the generated scenarios, describe the required data:
+- What is a typical valid input?
+- What are the boundary values (minimum, maximum, empty, null)?
+- Which inputs must be rejected by the system?
+- Are there data dependencies (creation order, required prior state)?
 
-Use a estratégia de dados de teste registrada em `CONTEXT.md` como referência de convenção.
-Descreva em linguagem natural — não gere fixtures com sintaxe específica de arquivo ou linguagem.
+Use the test data strategy recorded in `CONTEXT.md` as a convention reference.
+Describe in natural language — do not generate fixtures with file- or language-specific syntax.
 
-## Passo 3 — Executar os testes
+## Step 3 — Run the tests
 
-1. Localize o campo `### Comando para executar os testes` em `CONTEXT.md`.
-2. **Se o campo não estiver preenchido:** pare aqui e informe ao usuário: "O comando de teste não está configurado em `CONTEXT.md`. Por favor, informe o comando para que eu possa continuar."
-3. Execute o comando de teste do projeto.
-4. Aguarde a conclusão e colete o resultado.
+1. Locate the `### Command to run tests` field in `CONTEXT.md`.
+2. **If the field is not filled:** stop here and inform the user: "The test command is not configured in `CONTEXT.md`. Please provide the command so I can continue."
+3. Execute the project's test command.
+4. Wait for completion and collect the result.
 
-## Passo 4 — Reportar resultado
+## Step 4 — Report result
 
-Produza um relatório com:
+Produce a report with:
 
-- **Cenários gerados:** total e contagem por tipo (Unitário / Integração / Funcional)
-- **Cobertura dos critérios de aceite:** quais itens do checklist do `spec-epic-<N>.md` estão cobertos por algum cenário
-- **Resultado da execução:** total de testes executados, passaram, falharam, não executados
-- **Falhas detalhadas (se houver):** uma entrada por falha com: qual teste falhou, mensagem de erro e rastreabilidade ao critério de aceite correspondente
+- **Generated scenarios:** total and count by type (Unit / Integration / Functional)
+- **Acceptance criteria coverage:** which items from the `spec-epic-<N>.md` checklist are covered by a scenario
+- **Execution result:** total tests executed, passed, failed, not executed
+- **Detailed failures (if any):** one entry per failure with: which test failed, error message, and traceability to the corresponding acceptance criterion
 
-## Gate de QA (obrigatório antes de acionar /sdd-revisar)
+## QA Gate (mandatory before triggering /task-review)
 
-Ao final do relatório, sinalize explicitamente:
+At the end of the report, explicitly signal:
 
-- Se todos os testes passaram:
-  > ✅ **Gate liberado** — nenhum teste falhou. Pode acionar `/sdd-revisar`.
+- If all tests passed:
+  > ✅ **Gate cleared** — no test failed. You may trigger `/task-review`.
 
-- Se há falhas:
-  > 🔴 **Gate bloqueado** — [N] teste(s) falharam. Corrija os problemas apontados acima antes de acionar `/sdd-revisar`. Não avance sem validação humana explícita.
+- If there are failures:
+  > 🔴 **Gate blocked** — [N] test(s) failed. Fix the issues pointed out above before triggering `/task-review`. Do not proceed without explicit human validation.
 
-- Se o comando de teste não está configurado:
-  > ⚠️ **Gate suspenso** — comando de teste ausente em `CONTEXT.md`. Informe o comando para que os testes possam ser executados.
+- If the test command is not configured:
+  > ⚠️ **Gate suspended** — test command missing in `CONTEXT.md`. Provide the command so that tests can be executed.
 
-Regras:
-- fundamente todos os cenários em comportamentos rastreáveis à spec;
-- não mencione linguagens, frameworks ou ferramentas específicas além do que estiver registrado em `CONTEXT.md`;
-- escreva em português do Brasil;
-- não avance para `/sdd-revisar` sem gate liberado ou aprovação humana explícita.
+Rules:
+- ground all scenarios in behaviors traceable to the spec;
+- do not mention specific languages, frameworks, or tools beyond what is recorded in `CONTEXT.md`;
+- write in English;
+- do not proceed to `/task-review` without a cleared gate or explicit human approval.

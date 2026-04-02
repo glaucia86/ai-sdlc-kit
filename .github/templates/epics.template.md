@@ -1,23 +1,23 @@
-# Épicos
+# Epics
 
-## Visão geral
+## Overview
 
-## Tabela cronológica
+## Chronological table
 
-| Semana | Épico | Nome | Depende de |
+| Week | Epic | Name | Depends on |
 |--------|-------|------|------------|
 | 1      | E1    |      | —          |
 
-## Detalhamento dos épicos
+## Epic breakdown
 
-### E1 — [Nome]
+### E1 — [Name]
 
-**Descrição funcional:**
+**Functional description:**
 
-**Objetivo técnico:**
+**Technical objective:**
 
-**Dependências:**
+**Dependencies:**
 
-**Critérios de conclusão:**
+**Completion criteria:**
 
-## Mapa de dependências
+## Dependency map

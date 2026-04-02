@@ -1,9 +1,9 @@
 # AGENTS.md
 
-## Propósito do projeto
+## Project purpose
 
-## Comportamento global do agente
+## Global agent behavior
 
-## Limites do agente
+## Agent boundaries
 
-## Arquivos especializados
+## Specialized files

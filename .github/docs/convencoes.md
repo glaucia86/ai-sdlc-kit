@@ -199,10 +199,10 @@ Nenhum fluxo é pré-requisito do outro. A escolha é feita pelo time com base n
 
 | Agente | Arquivo | Responsabilidade |
 |---|---|---|
-| 🧭 Discovery Agent | `discovery.agent.md` | Lê `idea.txt` e gera `idea.md` sem viés técnico |
-| 🗂️ PM Agent | `pm.agent.md` | Lê `idea.md` e gera `non-technical-spec.md` |
-| 🧑‍💼 Tech Lead Agent | `tech-lead.agent.md` | Lê `non-technical-spec.md` e gera `PRD.md` |
-| 🏗️ Architect Agent | `architect.agent.md` | Gera `technical-spec.md` e `epics.md`; prepara artefatos de épicos |
+| 🧭 Discovery | `discovery.agent.md` | Lê `idea.txt` e gera `idea.md` sem viés técnico |
+| 🗂️ PM | `pm.agent.md` | Lê `idea.md` e gera `non-technical-spec.md` |
+| 🧑‍💼 Tech Lead | `tech-lead.agent.md` | Lê `non-technical-spec.md` e gera `PRD.md` |
+| 🏗️ Architect | `architect.agent.md` | Gera `technical-spec.md` e `epics.md`; prepara artefatos de épicos |
 
 ### HILs obrigatórios na Fase de Discovery
 
@@ -210,14 +210,14 @@ Todos os artefatos da fase de Discovery exigem revisão humana antes de avançar
 
 | Artefato | Prompt que o gera | HIL |
 |---|---|---|
-| `idea.md` | `/discovery-refinar-ideia` | ✅ obrigatório |
-| `non-technical-spec.md` | `/discovery-non-technical-spec` | ✅ obrigatório |
+| `idea.md` | `/discovery-refine` | ✅ obrigatório |
+| `non-technical-spec.md` | `/discovery-spec` | ✅ obrigatório |
 | `PRD.md` | `/discovery-prd` | ✅ obrigatório |
-| `technical-spec.md` | `/discovery-technical-spec` | ✅ obrigatório |
+| `technical-spec.md` | `/discovery-tech-spec` | ✅ obrigatório |
 | `epics.md` | `/discovery-epics` | ✅ obrigatório |
-| `epic-<N>.md` | `/epic-preparar` | ✅ obrigatório |
-| `doc-specs/<N>-epic/PRD.md` | `/epic-preparar` | ✅ obrigatório |
-| `spec-epic-<N>.md` | `/epic-preparar` | ✅ obrigatório |
+| `epic-<N>.md` | `/epic-init` | ✅ obrigatório |
+| `doc-specs/<N>-epic/PRD.md` | `/epic-init` | ✅ obrigatório |
+| `spec-epic-<N>.md` | `/epic-init` | ✅ obrigatório |
 
 ### Regra de ouro do fluxo expandido
 
@@ -237,11 +237,11 @@ Cada pasta contém três artefatos: `epic-<N>.md`, `PRD.md` e `spec-epic-<N>.md`
 
 ### Implementação por épico
 
-Após os HILs dos três artefatos do épico, a implementação segue com `/sdd-implementar`, apontando manualmente para os arquivos do épico:
+Após os HILs dos três artefatos do épico, a implementação segue com `/task-implement`, apontando manualmente para os arquivos do épico:
 - `doc-specs/<N>-epic/PRD.md`
 - `doc-specs/<N>-epic/spec-epic-<N>.md`
 
-O agente implementador utilizado é o mesmo do Fluxo B (`🛠️ SDD Implementer`). Não há um implementador separado para épicos.
+O agente implementador utilizado é o mesmo do Fluxo B (`🛠️ Implementer`). Não há um implementador separado para épicos.
 ---
 
 ## Fase de Operations
@@ -254,7 +254,7 @@ Nenhum épico está concluído até que `ops-epic-<N>.md` seja gerado e o deploy
 
 ### Branch por épico
 
-Cada épico é desenvolvido em sua própria branch, criada antes de `/epic-preparar`. A convenção de nome é:
+Cada épico é desenvolvido em sua própria branch, criada antes de `/epic-init`. A convenção de nome é:
 
 ```
 feat/E<NN>-<slug-do-epico>
@@ -274,32 +274,32 @@ O próximo épico só pode começar após a branch anterior estar mergeada e o d
 
 ### CONTEXT.md — memória global do projeto
 
-`doc-specs/CONTEXT.md` é a memória global do projeto. É criado pelo Architect Agent ao final de `/discovery-technical-spec` e atualizado pelo mesmo agente via `/ops-atualizar-context` após cada épico fechado.
+`doc-specs/CONTEXT.md` é a memória global do projeto. É criado pelo Architect ao final de `/discovery-tech-spec` e atualizado pelo mesmo agente via `/context-sync` após cada épico fechado.
 
 Todos os agentes devem ler `doc-specs/CONTEXT.md` antes de agir. Regra inviolable: **nunca remova conteúdo de `CONTEXT.md`** — apenas acrescente ou atualize.
 
 ### decisions-log.md — registro de ADRs por épico
 
-`doc-specs/<N>-epic/decisions-log.md` registra as decisões técnicas tomadas durante cada épico. É criado vazio pelo Architect Agent via `/epic-preparar` e preenchido pelo SDD Implementer durante a implementação. O SDD Reviewer o complementa durante a revisão. O Operations Agent o lê ao gerar `ops-epic-<N>.md`.
+`doc-specs/<N>-epic/decisions-log.md` registra as decisões técnicas tomadas durante cada épico. É criado vazio pelo Architect via `/epic-init` e preenchido pelo Implementer durante a implementação. O Reviewer o complementa durante a revisão. O Ops Agent o lê ao gerar `ops-epic-<N>.md`.
 
 ### Checklist de verificação em `spec-epic-<N>.md`
 
-A seção `## Critérios de aceite técnicos` de cada `spec-epic-<N>.md` contém um checklist estruturado. O SDD Implementer deve marcar todos os itens antes de acionar `/sdd-revisar`. Itens não marcados bloqueiam o handoff para revisão.
+A seção `## Critérios de aceite técnicos` de cada `spec-epic-<N>.md` contém um checklist estruturado. O Implementer deve marcar todos os itens antes de acionar `/task-review`. Itens não marcados bloqueiam o handoff para revisão.
 
 ### Sequência completa por épico
 
 ```
 0.  Criar branch feat/E<NN>-<slug>          [pré-requisito manual]
-1.  /epic-preparar <N>                       [HIL: epic-<N>.md]
+1.  /epic-init <N>                       [HIL: epic-<N>.md]
                                              [HIL: PRD.md do épico]
                                              [HIL: spec-epic-<N>.md]
-2.  /sdd-implementar
+2.  /task-implement
 3.  Preencher checklist + decisions-log.md
-4.  /sdd-revisar                             [HIL obrigatório]
-5.  /ops-fechar-epico <N>                    [HIL obrigatório]
+4.  /task-review                             [HIL obrigatório]
+5.  /epic-close <N>                    [HIL obrigatório]
 6.  Mergear branch feat/E<NN>-<slug>         [gate manual]
 7.  Validar em produção                      [gate manual]
-8.  /ops-atualizar-context <N>
+8.  /context-sync <N>
 9.  Avançar para o próximo épico
 ```
 
@@ -307,6 +307,6 @@ A seção `## Critérios de aceite técnicos` de cada `spec-epic-<N>.md` contém
 
 | Artefato | Prompt que o gera | HIL |
 |---|---|---|
-| `ops-epic-<N>.md` | `/ops-fechar-epico` | ✅ obrigatório |
+| `ops-epic-<N>.md` | `/epic-close` | ✅ obrigatório |
 | Merge da branch + validação em produção | — gate manual | ✅ obrigatório |
-| `CONTEXT.md` atualizado | `/ops-atualizar-context` | ⚠️ recomendado revisar |
+| `CONTEXT.md` atualizado | `/context-sync` | ⚠️ recomendado revisar |

@@ -1,52 +1,52 @@
-# CONTEXT.md — Memória Global do Projeto
+# CONTEXT.md — Project Global Memory
 
-> Este arquivo é lido por todos os agentes antes de qualquer ação.
-> Ele é criado pelo Architect Agent ao final de `/discovery-technical-spec`.
-> Ele é atualizado pelo Architect Agent após cada épico concluído via `/ops-atualizar-context`.
-> Nunca remova seções. Apenas acrescente ou atualize.
+> This file is read by all agents before any action.
+> It is created by the Architect at the end of `/discovery-tech-spec`.
+> It is updated by the Architect after each completed epic via `/context-sync`.
+> Never remove sections. Only append or update.
 
 ---
 
-## Propósito do projeto
+## Project purpose
 
-<!-- Resumo em 2-3 frases extraído de idea.md -->
+<!-- 2-3 sentence summary extracted from idea.md -->
 
-## Stack e convenções técnicas
+## Stack and technical conventions
 
-<!-- Linguagens, frameworks, padrões de projeto, estrutura de pastas -->
-<!-- Extraído de technical-spec.md -->
+<!-- Languages, frameworks, design patterns, folder structure -->
+<!-- Extracted from technical-spec.md -->
 
-## Decisões arquiteturais (ADRs)
+## Architecture decisions (ADRs)
 
-<!-- Formato: ### ADR-001 — [Título] | Data: YYYY-MM-DD | Status: Aceita -->
-<!-- Adicionar uma entrada por decisão relevante tomada em qualquer épico -->
+<!-- Format: ### ADR-001 — [Title] | Date: YYYY-MM-DD | Status: Accepted -->
+<!-- Add one entry per relevant decision made in any epic -->
 
-## Restrições globais
+## Global constraints
 
-<!-- O que NUNCA deve ser feito neste projeto -->
-<!-- Extraído de technical-spec.md e atualizado a cada épico -->
+<!-- What MUST NEVER be done in this project -->
+<!-- Extracted from technical-spec.md and updated each epic -->
 
-## Épicos concluídos
+## Completed epics
 
-<!-- Formato: - E1 — [Nome] | Concluído em: YYYY-MM-DD | Observações: [resumo em uma frase] -->
+<!-- Format: - E1 — [Name] | Completed on: YYYY-MM-DD | Notes: [one-sentence summary] -->
 
-## Aprendizados e ajustes de rota
+## Learnings and course adjustments
 
-<!-- Registrar aqui o que o Reviewer e o Operations Agent identificaram que impactou épicos futuros -->
+<!-- Record here what the Reviewer and Ops Agent identified that impacted future epics -->
 
-## Perguntas abertas de nível global
+## Global-level open questions
 
-<!-- Dúvidas que transcendem um épico específico -->
+<!-- Questions that transcend a specific epic -->
 
-## Convenções de teste
+## Test conventions
 
-### Comando para executar os testes
+### Command to run tests
 
-<!-- Informe o comando usado neste projeto para executar todos os testes.
-     Exemplos: make test | cargo test | go test ./... | ./gradlew test | ./scripts/test.sh
-     O QA Agent usará este comando ao acionar /sdd-gerar-testes. -->
+<!-- Enter the command used in this project to run all tests.
+     Examples: make test | cargo test | go test ./... | ./gradlew test | ./scripts/test.sh
+     QA will use this command when triggering /task-tests. -->
 
-### Estratégia de dados de teste
+### Test data strategy
 
-<!-- Descreva onde ficam os dados de teste (ex: pasta fixtures/, helpers de fábrica, mocks inline).
-     Não especifique sintaxe — descreva apenas a convenção adotada no projeto. -->
+<!-- Describe where test data lives (e.g.: fixtures/ folder, factory helpers, inline mocks).
+     Do not specify syntax — only describe the convention adopted in the project. -->

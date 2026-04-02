@@ -54,10 +54,10 @@ Escreva a ideia livremente — sem formato obrigatório.
 ### Passo 1 — Refinar a ideia
 
 ```
-/discovery-refinar-ideia
+/discovery-refine
 ```
 
-**O que acontece:** o 🧭 Discovery Agent lê `idea.txt` e gera `doc-specs/idea.md` com a ideia estruturada, sem viés técnico.
+**O que acontece:** o 🧭 Discovery lê `idea.txt` e gera `doc-specs/idea.md` com a ideia estruturada, sem viés técnico.
 
 **✅ HIL obrigatório:** revise `idea.md` antes de continuar.
 - A ideia original foi preservada?
@@ -69,10 +69,10 @@ Escreva a ideia livremente — sem formato obrigatório.
 ### Passo 2 — Gerar especificação funcional
 
 ```
-/discovery-non-technical-spec
+/discovery-spec
 ```
 
-**O que acontece:** o 🗂️ PM Agent lê `idea.md` e gera `doc-specs/non-technical-spec.md` com personas, jornadas de usuário, casos de uso e regras de negócio — sem linguagem técnica.
+**O que acontece:** o 🗂️ PM lê `idea.md` e gera `doc-specs/non-technical-spec.md` com personas, jornadas de usuário, casos de uso e regras de negócio — sem linguagem técnica.
 
 **✅ HIL obrigatório:** revise `non-technical-spec.md` antes de continuar.
 - Os fluxos de usuário estão claros?
@@ -87,7 +87,7 @@ Escreva a ideia livremente — sem formato obrigatório.
 /discovery-prd
 ```
 
-**O que acontece:** o 🧑‍💼 Tech Lead Agent lê `non-technical-spec.md` e gera `doc-specs/PRD.md` com requisitos funcionais, não funcionais e critérios de aceite estruturados.
+**O que acontece:** o 🧑‍💼 Tech Lead lê `non-technical-spec.md` e gera `doc-specs/PRD.md` com requisitos funcionais, não funcionais e critérios de aceite estruturados.
 
 **✅ HIL obrigatório:** revise `PRD.md` antes de continuar.
 - O escopo está bem delimitado (incluído / não incluído)?
@@ -99,10 +99,10 @@ Escreva a ideia livremente — sem formato obrigatório.
 ### Passo 4 — Gerar especificação técnica
 
 ```
-/discovery-technical-spec
+/discovery-tech-spec
 ```
 
-**O que acontece:** o 🏗️ Architect Agent lê `PRD.md` e a codebase e gera `doc-specs/technical-spec.md` com decisões de arquitetura, componentes, contratos, fluxos técnicos e estratégia de testes.
+**O que acontece:** o 🏗️ Architect lê `PRD.md` e a codebase e gera `doc-specs/technical-spec.md` com decisões de arquitetura, componentes, contratos, fluxos técnicos e estratégia de testes.
 
 **✅ HIL obrigatório:** revise `technical-spec.md` antes de continuar.
 - As decisões de arquitetura estão fundamentadas?
@@ -117,7 +117,7 @@ Escreva a ideia livremente — sem formato obrigatório.
 /discovery-epics
 ```
 
-**O que acontece:** o 🏗️ Architect Agent lê `technical-spec.md` e `PRD.md` e gera `doc-specs/epics.md` com os épicos ordenados por dependência técnica.
+**O que acontece:** o 🏗️ Architect lê `technical-spec.md` e `PRD.md` e gera `doc-specs/epics.md` com os épicos ordenados por dependência técnica.
 
 **✅ HIL obrigatório:** revise `epics.md` antes de continuar.
 - O sequenciamento faz sentido técnico?
@@ -129,12 +129,12 @@ Escreva a ideia livremente — sem formato obrigatório.
 ### Passo 6 — Preparar artefatos do épico
 
 ```
-/epic-preparar
+/epic-init
 ```
 
 O agente pergunta o número do épico antes de agir.
 
-**O que acontece:** o 🏗️ Architect Agent gera três arquivos em `doc-specs/<N>-epic/`:
+**O que acontece:** o 🏗️ Architect gera três arquivos em `doc-specs/<N>-epic/`:
 
 | Arquivo | Conteúdo |
 |---|---|
@@ -153,14 +153,14 @@ O agente pausa após cada arquivo e aguarda confirmação antes de gerar o próx
 ### Passo 7 — Implementar o épico
 
 ```
-/sdd-implementar
+/task-implement
 ```
 
 Aponte manualmente para os arquivos do épico quando solicitado:
 - `doc-specs/<N>-epic/PRD.md`
 - `doc-specs/<N>-epic/spec-epic-<N>.md`
 
-**O que acontece:** o 🛠️ SDD Implementer lê os artefatos do épico, resume o plano de implementação e executa. Ao final, preenche o checklist de `spec-epic-<N>.md` e atualiza `decisions-log.md` com decisões tomadas.
+**O que acontece:** o 🛠️ Implementer lê os artefatos do épico, resume o plano de implementação e executa. Ao final, preenche o checklist de `spec-epic-<N>.md` e atualiza `decisions-log.md` com decisões tomadas.
 
 **⚠️ HIL recomendado:** acompanhe o plano proposto pelo agente antes de confirmar as alterações, especialmente em épicos maiores.
 
@@ -169,10 +169,10 @@ Aponte manualmente para os arquivos do épico quando solicitado:
 ### Passo 8 — Revisar a entrega
 
 ```
-/sdd-revisar
+/task-review
 ```
 
-**O que acontece:** o 🔎 SDD Reviewer compara os artefatos do épico com a implementação e produz uma síntese de aderência, desvios, riscos e recomendação final.
+**O que acontece:** o 🔎 Reviewer compara os artefatos do épico com a implementação e produz uma síntese de aderência, desvios, riscos e recomendação final.
 
 **✅ HIL obrigatório:** decida se a entrega está aprovada, se há correções obrigatórias ou se o épico precisa de ajuste antes de avançar para o próximo.
 
@@ -181,12 +181,12 @@ Aponte manualmente para os arquivos do épico quando solicitado:
 ### Passo 9 — Fechar o épico
 
 ```
-/ops-fechar-epico
+/epic-close
 ```
 
 O agente pergunta o número do épico antes de agir.
 
-**O que acontece:** o 🚀 Operations Agent lê os artefatos do épico e gera `doc-specs/<N>-epic/ops-epic-<N>.md` com preparação para deploy, observabilidade e feedback para épicos futuros.
+**O que acontece:** o 🚀 Ops lê os artefatos do épico e gera `doc-specs/<N>-epic/ops-epic-<N>.md` com preparação para deploy, observabilidade e feedback para épicos futuros.
 
 **✅ HIL obrigatório:** revise `ops-epic-<N>.md` antes de continuar.
 
@@ -207,10 +207,10 @@ Somente após essa validação o próximo épico pode começar.
 ### Passo 11 — Atualizar memória global
 
 ```
-/ops-atualizar-context
+/context-sync
 ```
 
-**O que acontece:** o 🏗️ Architect Agent lê `ops-epic-<N>.md` e `decisions-log.md` e atualiza `doc-specs/CONTEXT.md` com o épico concluído, ADRs e aprendizados.
+**O que acontece:** o 🏗️ Architect lê `ops-epic-<N>.md` e `decisions-log.md` e atualiza `doc-specs/CONTEXT.md` com o épico concluído, ADRs e aprendizados.
 
 Após isso, repita a partir do **Passo 0** para o próximo épico.
 
@@ -235,10 +235,10 @@ Escreva a descrição bruta da tarefa — pode estar desorganizada. O fluxo exis
 ### Passo 1 — Estruturar a tarefa
 
 ```
-/sdd-preparar-tarefa
+/task-init
 ```
 
-**O que acontece:** o 📥 SDD Intake lê `tarefa.txt` e gera `doc-specs/tarefa.md` estruturado. Ele não acessa PRD, spec nem a codebase — apenas transforma a entrada bruta fielmente.
+**O que acontece:** o 📥 Intake lê `tarefa.txt` e gera `doc-specs/tarefa.md` estruturado. Ele não acessa PRD, spec nem a codebase — apenas transforma a entrada bruta fielmente.
 
 **✅ HIL obrigatório:** revise `tarefa.md` antes de continuar.
 - O objetivo ficou claro?
@@ -250,10 +250,10 @@ Escreva a descrição bruta da tarefa — pode estar desorganizada. O fluxo exis
 ### Passo 2 — Gerar PRD
 
 ```
-/sdd-gerar-prd
+/task-prd
 ```
 
-**O que acontece:** o 📐 SDD Planner lê `tarefa.md` e gera `doc-specs/PRD.md` com visão geral, objetivos, escopo, requisitos funcionais e não funcionais, critérios de aceite e perguntas abertas.
+**O que acontece:** o 📐 Planner lê `tarefa.md` e gera `doc-specs/PRD.md` com visão geral, objetivos, escopo, requisitos funcionais e não funcionais, critérios de aceite e perguntas abertas.
 
 **✅ HIL obrigatório:** revise `PRD.md` antes de continuar.
 - O PRD representa corretamente a tarefa?
@@ -265,10 +265,10 @@ Escreva a descrição bruta da tarefa — pode estar desorganizada. O fluxo exis
 ### Passo 3 — Gerar spec
 
 ```
-/sdd-gerar-spec
+/task-spec
 ```
 
-**O que acontece:** o 📐 SDD Planner lê `PRD.md` e a codebase e gera `doc-specs/spec.md` com contexto técnico, componentes afetados, fluxo de implementação, estratégia de testes, riscos e dúvidas em aberto.
+**O que acontece:** o 📐 Planner lê `PRD.md` e a codebase e gera `doc-specs/spec.md` com contexto técnico, componentes afetados, fluxo de implementação, estratégia de testes, riscos e dúvidas em aberto.
 
 **✅ HIL obrigatório:** revise `spec.md` antes de continuar.
 - A spec está coerente com o PRD?
@@ -282,16 +282,16 @@ Escreva a descrição bruta da tarefa — pode estar desorganizada. O fluxo exis
 ### Passo 4 — Implementar
 
 ```
-/sdd-implementar
+/task-implement
 ```
 
 Para tarefas com componentes de frontend, use:
 
 ```
-/sdd-implementar-frontend
+/task-implement-frontend
 ```
 
-**O que acontece:** o 🛠️ SDD Implementer lê `PRD.md` e `spec.md`, resume o plano, identifica arquivos afetados e executa a implementação. Se encontrar uma ambiguidade crítica, para e sinaliza.
+**O que acontece:** o 🛠️ Implementer lê `PRD.md` e `spec.md`, resume o plano, identifica arquivos afetados e executa a implementação. Se encontrar uma ambiguidade crítica, para e sinaliza.
 
 **⚠️ HIL recomendado:** acompanhe o plano proposto antes de confirmar, especialmente em mudanças maiores.
 
@@ -300,10 +300,10 @@ Para tarefas com componentes de frontend, use:
 ### Passo 5 — Revisar a entrega
 
 ```
-/sdd-revisar
+/task-review
 ```
 
-**O que acontece:** o 🔎 SDD Reviewer compara `PRD.md`, `spec.md` e a implementação. Produz: síntese de aderência, desvios encontrados, riscos, lacunas e recomendação final.
+**O que acontece:** o 🔎 Reviewer compara `PRD.md`, `spec.md` e a implementação. Produz: síntese de aderência, desvios encontrados, riscos, lacunas e recomendação final.
 
 **✅ HIL obrigatório:** decida se a entrega está aprovada ou se há correções antes de fechar a tarefa.
 
@@ -325,15 +325,15 @@ Para tarefas com componentes de frontend, use:
 
 | Agente | Fluxo | Responsabilidade |
 |---|---|---|
-| 🧭 Discovery Agent | A | Refina `idea.txt` e gera `idea.md` sem viés técnico |
-| 🗂️ PM Agent | A | Gera `non-technical-spec.md` com especificação funcional |
-| 🧑‍💼 Tech Lead Agent | A | Gera `PRD.md` a partir da especificação funcional |
-| 🏗️ Architect Agent | A | Gera `technical-spec.md`, `epics.md`, artefatos por épico e atualiza `CONTEXT.md` |
-| 🚀 Operations Agent | A | Fecha o ciclo do épico: deploy, observabilidade, feedback |
-| 📥 SDD Intake | B | Estrutura `tarefa.txt` em `tarefa.md` |
-| 📐 SDD Planner | B | Gera `PRD.md` e `spec.md` |
-| 🛠️ SDD Implementer | A e B | Implementa com base nos artefatos aprovados |
-| 🔎 SDD Reviewer | A e B | Revisa aderência entre spec e implementação |
+| 🧭 Discovery | A | Refina `idea.txt` e gera `idea.md` sem viés técnico |
+| 🗂️ PM | A | Gera `non-technical-spec.md` com especificação funcional |
+| 🧑‍💼 Tech Lead | A | Gera `PRD.md` a partir da especificação funcional |
+| 🏗️ Architect | A | Gera `technical-spec.md`, `epics.md`, artefatos por épico e atualiza `CONTEXT.md` |
+| 🚀 Ops | A | Fecha o ciclo do épico: deploy, observabilidade, feedback |
+| 📥 Intake | B | Estrutura `tarefa.txt` em `tarefa.md` |
+| 📐 Planner | B | Gera `PRD.md` e `spec.md` |
+| 🛠️ Implementer | A e B | Implementa com base nos artefatos aprovados |
+| 🔎 Reviewer | A e B | Revisa aderência entre spec e implementação |
 
 ---
 
@@ -341,21 +341,21 @@ Para tarefas com componentes de frontend, use:
 
 | Prompt | Fluxo | O que faz |
 |---|---|---|
-| `/discovery-refinar-ideia` | A | `idea.txt` → `idea.md` |
-| `/discovery-non-technical-spec` | A | `idea.md` → `non-technical-spec.md` |
+| `/discovery-refine` | A | `idea.txt` → `idea.md` |
+| `/discovery-spec` | A | `idea.md` → `non-technical-spec.md` |
 | `/discovery-prd` | A | `non-technical-spec.md` → `PRD.md` |
-| `/discovery-technical-spec` | A | `PRD.md` → `technical-spec.md` + `CONTEXT.md` |
+| `/discovery-tech-spec` | A | `PRD.md` → `technical-spec.md` + `CONTEXT.md` |
 | `/discovery-epics` | A | `technical-spec.md` → `epics.md` |
-| `/epic-preparar` | A | Gera os 4 artefatos de `doc-specs/<N>-epic/` (incluindo `decisions-log.md`) |
-| `/ops-fechar-epico` | A | Gera `ops-epic-<N>.md` com deploy, observabilidade e feedback |
-| `/ops-atualizar-context` | A | Atualiza `CONTEXT.md` com ADRs e aprendizados do épico |
-| `/sdd-preparar-tarefa` | B | `tarefa.txt` → `tarefa.md` |
-| `/sdd-gerar-prd` | B | `tarefa.md` → `PRD.md` |
-| `/sdd-gerar-spec` | B | `PRD.md` → `spec.md` |
-| `/sdd-implementar` | A e B | Implementa com base nos artefatos aprovados |
-| `/sdd-implementar-frontend` | A e B | Implementa frontend com skills de design injetadas |
-| `/sdd-revisar` | A e B | Revisa aderência entre artefatos e implementação |
-| `/sdd-bootstrap-agents-md` | — | Gera `AGENTS.md` inicial para o projeto |
+| `/epic-init` | A | Gera os 4 artefatos de `doc-specs/<N>-epic/` (incluindo `decisions-log.md`) |
+| `/epic-close` | A | Gera `ops-epic-<N>.md` com deploy, observabilidade e feedback |
+| `/context-sync` | A | Atualiza `CONTEXT.md` com ADRs e aprendizados do épico |
+| `/task-init` | B | `tarefa.txt` → `tarefa.md` |
+| `/task-prd` | B | `tarefa.md` → `PRD.md` |
+| `/task-spec` | B | `PRD.md` → `spec.md` |
+| `/task-implement` | A e B | Implementa com base nos artefatos aprovados |
+| `/task-implement-frontend` | A e B | Implementa frontend com skills de design injetadas |
+| `/task-review` | A e B | Revisa aderência entre artefatos e implementação |
+| `/agents-init` | — | Gera `AGENTS.md` inicial para o projeto |
 
 ---
 
@@ -368,27 +368,27 @@ Para tarefas com componentes de frontend, use:
     pm.agent.md
     tech-lead.agent.md
     architect.agent.md
-    operations.agent.md
-    sdd-intake.agent.md
-    sdd-planner.agent.md
-    sdd-implementer.agent.md
-    sdd-reviewer.agent.md
+    ops.agent.md
+    intake.agent.md
+    planner.agent.md
+    implementer.agent.md
+    reviewer.agent.md
   prompts/
-    discovery-refinar-ideia.prompt.md
-    discovery-non-technical-spec.prompt.md
+    discovery-refine.prompt.md
+    discovery-spec.prompt.md
     discovery-prd.prompt.md
-    discovery-technical-spec.prompt.md
+    discovery-tech-spec.prompt.md
     discovery-epics.prompt.md
-    epic-preparar.prompt.md
-    ops-fechar-epico.prompt.md
-    ops-atualizar-context.prompt.md
-    sdd-preparar-tarefa.prompt.md
-    sdd-gerar-prd.prompt.md
-    sdd-gerar-spec.prompt.md
-    sdd-implementar.prompt.md
-    sdd-implementar-frontend.prompt.md
-    sdd-revisar.prompt.md
-    sdd-bootstrap-agents-md.prompt.md
+    epic-init.prompt.md
+    epic-close.prompt.md
+    context-sync.prompt.md
+    task-init.prompt.md
+    task-prd.prompt.md
+    task-spec.prompt.md
+    task-implement.prompt.md
+    task-implement-frontend.prompt.md
+    task-review.prompt.md
+    agents-init.prompt.md
   templates/
     idea.template.md
     non-technical-spec.template.md

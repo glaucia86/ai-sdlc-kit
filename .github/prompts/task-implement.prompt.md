@@ -1,37 +1,37 @@
 ---
-name: "sdd-implementar"
-description: "Inicia a implementação da tarefa com base no PRD.md e spec.md."
-agent: "🛠️ SDD Implementer"
+name: "task-implement"
+description: "Starts the task implementation based on PRD.md and spec.md."
+agent: "🛠️ Implementer"
 ---
 
 #file:doc-specs/CONTEXT.md
 
-Leia atentamente os arquivos:
+Carefully read the files:
 
 - `doc-specs/PRD.md`
 - `doc-specs/spec.md`
 
-Se a implementação for parte de um épico do Fluxo A, leia também:
-- o `PRD.md` e `spec-epic-<N>.md` do épico em andamento em `doc-specs/<N>-epic/`
+If the implementation is part of a Flow A epic, also read:
+- the `PRD.md` and `spec-epic-<N>.md` of the ongoing epic in `doc-specs/<N>-epic/`
 - `doc-specs/<N>-epic/decisions-log.md`
 
-Antes de alterar qualquer arquivo:
-1. resuma rapidamente o que será implementado;
-2. identifique os principais arquivos e componentes potencialmente impactados;
-3. sinalize qualquer ambiguidade crítica.
+Before modifying any file:
+1. briefly summarize what will be implemented;
+2. identify the main files and components potentially impacted;
+3. flag any critical ambiguities.
 
-Em seguida, inicie a implementação da tarefa com base em `spec.md` (ou `spec-epic-<N>.md`).
+Then start the task implementation based on `spec.md` (or `spec-epic-<N>.md`).
 
-Regras:
-- preserve os padrões existentes da codebase;
-- faça mudanças mínimas e intencionais;
-- não introduza convenções não sustentadas pelo projeto;
-- ao final, apresente um resumo do que foi implementado, como foi validado e o que ficou pendente.
+Rules:
+- preserve the existing codebase patterns;
+- make minimal and intentional changes;
+- do not introduce conventions not supported by the project;
+- at the end, present a summary of what was implemented, how it was validated, and what remains pending.
 
 ---
 
-Antes de encerrar e acionar `/sdd-revisar`:
+Before finishing and triggering `/task-review`:
 
-1. Verifique o checklist de `spec-epic-<N>.md` (seção `### Checklist de verificação`). Marque cada item verificado com `[x]`. Itens não verificados devem ser sinalizados com justificativa antes de avançar.
-2. Registre em `doc-specs/<N>-epic/decisions-log.md` qualquer decisão técnica relevante tomada durante a implementação.
-3. Só acione `/sdd-revisar` após o checklist estar integralmente preenchido.
+1. Check the checklist in `spec-epic-<N>.md` (section `### Verification checklist`). Mark each verified item with `[x]`. Unverified items must be flagged with justification before proceeding.
+2. Record in `doc-specs/<N>-epic/decisions-log.md` any relevant technical decision made during the implementation.
+3. Only trigger `/task-review` after the checklist is fully completed.

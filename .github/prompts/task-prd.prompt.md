@@ -1,31 +1,31 @@
 ---
-name: "sdd-gerar-prd"
-description: "Gera PRD.md a partir de tarefa.md usando o agente de planejamento SDD."
-agent: "📐 SDD Planner"
+name: "task-prd"
+description: "Generates PRD.md from tarefa.md using the SDD planning agent."
+agent: "📐 Planner"
 ---
 
-Leia atentamente o arquivo `doc-specs/tarefa.md`.
+Carefully read the `doc-specs/tarefa.md` file.
 
-Com base EXCLUSIVAMENTE nesse conteúdo e no contexto observável da codebase, gere um arquivo `doc-specs/PRD.md`.
+Based EXCLUSIVELY on that content and the observable codebase context, generate a `doc-specs/PRD.md` file.
 
-O `PRD.md` deve conter exatamente:
+The `PRD.md` must contain exactly:
 
-1. Visão geral
-2. Objetivos
-3. Escopo (incluído / não incluído)
-4. Premissas
-5. Requisitos funcionais
-6. Requisitos não funcionais
-7. Critérios de aceite
-8. Perguntas abertas
+1. Overview
+2. Objectives
+3. Scope (included / not included)
+4. Assumptions
+5. Functional requirements
+6. Non-functional requirements
+7. Acceptance criteria
+8. Open questions
 
-> observação: o `PRD.md` deve ser gerado de forma bem detalhada e robusta, servindo como um guia claro e acionável para toda a equipe de desenvolvimento. O foco deve ser na clareza, precisão e utilidade prática para orientar a implementação da etapa descrita na tarefa.
+> note: the `PRD.md` should be generated in great detail and robustness, serving as a clear and actionable guide for the entire development team. The focus should be on clarity, precision, and practical utility to guide the implementation of the step described in the task.
 
-Regras:
-- não invente requisitos;
-- não extrapole além do que estiver em `tarefa.md`;
-- quando houver ambiguidade, registre em "Perguntas abertas";
-- escreva em português do Brasil;
-- seja curto, objetivo e fiel à tarefa;
-- use subtítulos claros;
-- evite excesso de bullets.
+Rules:
+- do not invent requirements;
+- do not extrapolate beyond what is in `tarefa.md`;
+- when there is ambiguity, record it in "Open questions";
+- write in English;
+- be concise, objective, and faithful to the task;
+- use clear headings;
+- avoid excessive bullet points.

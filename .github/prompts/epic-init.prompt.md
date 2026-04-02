@@ -1,7 +1,7 @@
 ---
-name: "epic-preparar"
-description: "Prepara os artefatos de especificação para um épico específico dentro de doc-specs/<N>-epic/."
-agent: "🏗️ Architect Agent"
+name: "epic-init"
+description: "Prepares specification artifacts for a specific epic within doc-specs/<N>-epic/."
+agent: "🏗️ Architect"
 ---
 
 #file:doc-specs/CONTEXT.md
@@ -9,74 +9,74 @@ agent: "🏗️ Architect Agent"
 #file:doc-specs/technical-spec.md
 #file:doc-specs/PRD.md
 
-**Antes de iniciar, pergunte ao usuário:** "Qual o número do épico a ser preparado? (ex: 1, 2, 3)"
+**Before starting, ask the user:** "What is the number of the epic to be prepared? (e.g.: 1, 2, 3)"
 
-Aguarde a resposta antes de continuar.
+Wait for the answer before continuing.
 
 ---
 
-Para o épico informado (chamado aqui de N, com dois dígitos — ex: `01`, `02`):
+For the reported epic (referred to here as N, with two digits — e.g.: `01`, `02`):
 
-1. Crie a pasta `doc-specs/<N>-epic/`.
+1. Create the folder `doc-specs/<N>-epic/`.
 
-2. Gere os seguintes arquivos dentro dessa pasta:
+2. Generate the following files within that folder:
 
 ### `doc-specs/<N>-epic/epic-<N>.md`
-Descrição detalhada do épico:
-- contexto e objetivo
-- escopo (o que está incluído e o que não está)
-- dependências de épicos anteriores
-- critérios de conclusão
+Detailed description of the epic:
+- context and objective
+- scope (what is included and what is not)
+- dependencies on previous epics
+- completion criteria
 
-**Pause aqui e avise o usuário que `epic-<N>.md` está pronto para revisão (HIL obrigatório).**
+**Pause here and notify the user that `epic-<N>.md` is ready for review (mandatory HIL).**
 
 ### `doc-specs/<N>-epic/PRD.md`
-PRD específico para este épico:
-- visão geral do épico
-- objetivos
-- requisitos funcionais do épico
-- requisitos não funcionais do épico
-- critérios de aceite
-- perguntas abertas
+Epic-specific PRD:
+- epic overview
+- objectives
+- epic functional requirements
+- epic non-functional requirements
+- acceptance criteria
+- open questions
 
-**Pause aqui e avise o usuário que `PRD.md` do épico está pronto para revisão (HIL obrigatório).**
+**Pause here and notify the user that the epic `PRD.md` is ready for review (mandatory HIL).**
 
 ### `doc-specs/<N>-epic/spec-epic-<N>.md`
-Especificação técnica do épico:
-- contexto técnico
-- objetivo técnico
-- escopo de implementação
-- arquivos e componentes potencialmente afetados
-- fluxo técnico esperado
-- regras e restrições
-- estratégia de implementação
-- estratégia de testes
-- critérios de aceite técnicos
-- riscos e dúvidas em aberto
+Epic technical specification:
+- technical context
+- technical objective
+- implementation scope
+- potentially affected files and components
+- expected technical flow
+- rules and constraints
+- implementation strategy
+- testing strategy
+- technical acceptance criteria
+- risks and open questions
 
-**Pause aqui e avise o usuário que `spec-epic-<N>.md` está pronto para revisão (HIL obrigatório).**
-
----
-
-Regras:
-- não implemente código de produção
-- fundamente tudo em epics.md e technical-spec.md
-- sinalize ambiguidades em vez de assumir decisões
-- escreva em português do Brasil
-- aguarde confirmação do usuário após cada arquivo antes de gerar o próximo
-
-Antes de gerar os artefatos, verifique se a branch `feat/E<NN>-<slug>` foi criada para este épico. Se não foi, sinalize ao usuário:
-
-> **Pré-requisito:** Crie a branch a seguir antes de iniciar a implementação:
-> `git checkout -b feat/E<NN>-<slug-do-epico>`
-> Onde `<NN>` é o número do épico com dois dígitos e `<slug>` é um identificador curto em kebab-case.
+**Pause here and notify the user that `spec-epic-<N>.md` is ready for review (mandatory HIL).**
 
 ---
 
-Após gerar `doc-specs/<N>-epic/spec-epic-<N>.md`, crie também o arquivo `doc-specs/<N>-epic/decisions-log.md` com a estrutura do template `.github/templates/decisions-log.template.md` (vazio, apenas com a estrutura pronta para ser preenchida durante a implementação).
+Rules:
+- do not implement production code
+- ground everything in epics.md and technical-spec.md
+- flag ambiguities instead of assuming decisions
+- write in English
+- wait for user confirmation after each file before generating the next
 
-**Pause aqui e avise o usuário que `decisions-log.md` foi criado e está pronto para uso durante a implementação.**
+Before generating the artifacts, check whether the branch `feat/E<NN>-<slug>` has been created for this epic. If not, notify the user:
+
+> **Prerequisite:** Create the following branch before starting implementation:
+> `git checkout -b feat/E<NN>-<slug-of-epic>`
+> Where `<NN>` is the epic number with two digits and `<slug>` is a short kebab-case identifier.
 
 ---
 
-Após todos os HILs aprovados, informe ao usuário que os artefatos do épico estão prontos e que a implementação pode ser iniciada com `/sdd-implementar`, apontando manualmente para os arquivos `doc-specs/<N>-epic/PRD.md` e `doc-specs/<N>-epic/spec-epic-<N>.md`.
+After generating `doc-specs/<N>-epic/spec-epic-<N>.md`, also create the file `doc-specs/<N>-epic/decisions-log.md` with the structure from `.github/templates/decisions-log.template.md` (empty, just the structure ready to be filled in during implementation).
+
+**Pause here and notify the user that `decisions-log.md` has been created and is ready for use during implementation.**
+
+---
+
+After all HILs are approved, inform the user that the epic artifacts are ready and that implementation can be started with `/task-implement`, pointing manually to the files `doc-specs/<N>-epic/PRD.md` and `doc-specs/<N>-epic/spec-epic-<N>.md`.

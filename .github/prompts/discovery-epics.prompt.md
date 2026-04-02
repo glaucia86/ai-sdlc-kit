@@ -1,33 +1,33 @@
 ---
 name: "discovery-epics"
-description: "Lê technical-spec.md e gera epics.md com os épicos ordenados cronologicamente."
-agent: "🏗️ Architect Agent"
+description: "Reads technical-spec.md and generates epics.md with epics ordered chronologically."
+agent: "🏗️ Architect"
 ---
 
 #file:doc-specs/technical-spec.md
 #file:doc-specs/PRD.md
 
-Leia atentamente `doc-specs/technical-spec.md` e `doc-specs/PRD.md`.
+Carefully read `doc-specs/technical-spec.md` and `doc-specs/PRD.md`.
 
-Com base EXCLUSIVAMENTE nesses conteúdos, gere um arquivo `doc-specs/epics.md`.
+Based EXCLUSIVELY on these contents, generate a `doc-specs/epics.md` file.
 
-O `epics.md` deve conter:
-1. Visão geral dos épicos
-2. Tabela cronológica de épicos (semanas / sprints)
-3. Para cada épico:
+The `epics.md` must contain:
+1. Overview of the epics
+2. Chronological table of epics (weeks / sprints)
+3. For each epic:
    - ID (E1, E2, E3...)
-   - Nome
-   - Descrição funcional
-   - Objetivo técnico
-   - Dependências de outros épicos
-   - Critérios de conclusão
-4. Mapa de dependências entre épicos
+   - Name
+   - Functional description
+   - Technical objective
+   - Dependencies on other epics
+   - Completion criteria
+4. Dependency map between epics
 
-Regras:
-- ordene por dependência técnica, não por prioridade de negócio
-- épicos com dependência devem aparecer depois dos que dependem
-- não invente funcionalidades
-- escreva em português do Brasil
-- cada épico deve ser pequeno o suficiente para ser implementado de forma independente
+Rules:
+- order by technical dependency, not by business priority
+- epics with dependencies must appear after the ones they depend on
+- do not invent features
+- write in English
+- each epic must be small enough to be implemented independently
 
-Ao concluir, avise o usuário que `epics.md` está pronto para revisão (HIL obrigatório antes de avançar para `/epic-preparar`).
+When done, notify the user that `epics.md` is ready for review (mandatory HIL before proceeding to `/epic-init`).

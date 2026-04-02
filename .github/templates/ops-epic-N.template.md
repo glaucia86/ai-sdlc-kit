@@ -1,63 +1,63 @@
-# Operations — Épico <N>
+# Operations — Epic <N>
 
-## Resumo da entrega
+## Delivery summary
 
-## Preparação para deploy
+## Deployment preparation
 
-### Variáveis de ambiente necessárias
+### Required environment variables
 
-### Dependências de infraestrutura
+### Infrastructure dependencies
 
-### Sequência de deploy
+### Deployment sequence
 
 ### Breaking changes
 
-### Plano de rollback
+### Rollback plan
 
-## Observabilidade
+## Observability
 
-### Logs críticos
+### Critical logs
 
-### Métricas de saúde
+### Health metrics
 
-### Alertas recomendados
+### Recommended alerts
 
-### Critérios de validação em produção
+### Production validation criteria
 
-## Padrões de anomalia esperados
+## Expected anomaly patterns
 
-> Defina o que distingue comportamento normal de anormal para os fluxos deste épico.
-> Use métricas e observações agnósticas à ferramenta de monitoramento (ex: taxa de erro, latência, volume).
+> Define what distinguishes normal from abnormal behavior for the flows in this epic.
+> Use tool-agnostic metrics and observations (e.g.: error rate, latency, volume).
 
-| Indicador | Valor normal esperado | Limiar de alerta | Limiar crítico |
+| Indicator | Expected normal value | Alert threshold | Critical threshold |
 |---|---|---|---|
-| <!-- ex: taxa de erro nas rotas do épico --> | <!-- ex: < 0,5% --> | <!-- ex: > 2% --> | <!-- ex: > 5% --> |
-| <!-- ex: tempo de resposta médio --> | <!-- ex: < 200 ms --> | <!-- ex: > 500 ms --> | <!-- ex: > 2 s --> |
+| <!-- e.g.: error rate on epic routes --> | <!-- e.g.: < 0.5% --> | <!-- e.g.: > 2% --> | <!-- e.g.: > 5% --> |
+| <!-- e.g.: average response time --> | <!-- e.g.: < 200 ms --> | <!-- e.g.: > 500 ms --> | <!-- e.g.: > 2 s --> |
 
-<!-- Adicione quantas linhas forem necessárias. Se não aplicável, escreva "Não aplicável neste épico." -->
+<!-- Add as many rows as needed. If not applicable, write "Not applicable in this epic." -->
 
-## Playbook de triagem de incidentes
+## Incident triage playbook
 
-> Para cada sintoma relevante, descreva o caminho de investigação e remediação.
-> Este playbook é utilizado pelo prompt `/ops-triagem-incidente`.
+> For each relevant symptom, describe the investigation and remediation path.
+> This playbook is used by the `/ops-triage` prompt.
 
-### [Sintoma 1 — ex: erro inesperado em produção]
+### [Symptom 1 — e.g.: unexpected error in production]
 
-- **Hipótese provável:** <!-- O que provavelmente causou isso? -->
-- **Investigação imediata:** <!-- Onde olhar primeiro? Quais logs, métricas ou endpoints verificar? -->
-- **Ação de remediação:**
-  1. Contornar: <!-- Ação imediata para limitar o impacto sem corrigir a causa -->
-  2. Mitigar: <!-- Reduzir o impacto enquanto a correção é preparada -->
-  3. Corrigir: <!-- Correção definitiva -->
-  4. Prevenir: <!-- O que mudar para que isso não repita -->
-- **Escalonamento:** <!-- Se as ações acima não resolverem em X minutos, quem/o quê acionar? -->
+- **Most likely hypothesis:** <!-- What probably caused this? -->
+- **Immediate investigation:** <!-- Where to look first? Which logs, metrics, or endpoints to check? -->
+- **Remediation action:**
+  1. Workaround: <!-- Immediate action to limit impact without fixing the root cause -->
+  2. Mitigate: <!-- Reduce impact while the fix is being prepared -->
+  3. Fix: <!-- Definitive fix -->
+  4. Prevent: <!-- What to change so this doesn't happen again -->
+- **Escalation:** <!-- If the above actions don't resolve in X minutes, who/what to escalate to? -->
 
-<!-- Adicione um bloco por sintoma relevante identificado para este épico. -->
+<!-- Add one block per relevant symptom identified for this epic. -->
 
-## Feedback para épicos futuros
+## Feedback for future epics
 
-### Aprendizados
+### Learnings
 
-### Riscos identificados
+### Identified risks
 
-### Sugestões de ajuste no epics.md
+### Adjustment suggestions for epics.md

@@ -1,8 +1,8 @@
-# Descrição da tarefa
+# Task Description
 
-Descreva aqui a tarefa de forma bruta, como veio do backlog ou do contexto repassado pelo time.
+Describe the task here in raw form, as it came from the backlog or context shared by the team.
 
-Exemplo:
-- O que precisa ser feito?
-- Qual o contexto ou problema que originou essa demanda?
-- Há alguma restrição ou dependência conhecida?
+Example:
+- What needs to be done?
+- What is the context or problem that originated this request?
+- Are there any known constraints or dependencies?

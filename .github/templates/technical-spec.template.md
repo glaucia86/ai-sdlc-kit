@@ -1,23 +1,23 @@
-# Especificação Técnica
+# Technical Specification
 
-## Contexto e objetivo técnico
+## Context and technical objective
 
-## Decisões de arquitetura
+## Architecture decisions
 
-## Componentes e módulos principais
+## Main components and modules
 
-## Contratos e interfaces
+## Contracts and interfaces
 
-## Fluxos técnicos detalhados
+## Detailed technical flows
 
-## Estratégia de persistência
+## Persistence strategy
 
-## Estratégia de autenticação e autorização
+## Authentication and authorization strategy
 
-## Estratégia de testes
+## Testing strategy
 
-## Critérios de aceite técnicos
+## Technical acceptance criteria
 
-## Riscos, dependências e pontos de atenção
+## Risks, dependencies, and points of attention
 
-## Dúvidas e ambiguidades em aberto
+## Open questions and ambiguities

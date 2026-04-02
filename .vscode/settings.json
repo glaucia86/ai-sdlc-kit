@@ -1,4 +1,9 @@
 {
   "chat.agentFilesLocations": { ".github/agents": true },
-  "chat.promptFilesLocations": { ".github/prompts": true }
+  "chat.promptFilesLocations": {
+    ".github/prompts": true
+  },
+  "chat.tools.terminal.autoApprove": {
+    "/c/Python313/python": true
+  }
 }

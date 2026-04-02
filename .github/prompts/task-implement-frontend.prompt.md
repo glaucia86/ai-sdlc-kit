@@ -1,7 +1,7 @@
 ---
-name: "sdd-implementar-frontend"
-description: "Inicia a implementação de tarefas de frontend com base no PRD.md e spec.md, aplicando as diretrizes de design e acessibilidade."
-agent: "🛠️ SDD Implementer"
+name: "task-implement-frontend"
+description: "Starts the implementation of frontend tasks based on PRD.md and spec.md, applying design and accessibility guidelines."
+agent: "🛠️ Implementer"
 ---
 
 #file:doc-specs/PRD.md
@@ -9,18 +9,18 @@ agent: "🛠️ SDD Implementer"
 #file:.github/skills/frontend-design/SKILL.md
 #file:.github/skills/web-design-guidelines/SKILL.md
 
-Leia atentamente os artefatos de especificação e as diretrizes de design acima.
+Carefully read the specification artifacts and design guidelines above.
 
-Antes de alterar qualquer arquivo:
-1. resuma rapidamente o que será implementado;
-2. identifique os principais arquivos e componentes potencialmente impactados;
-3. sinalize qualquer ambiguidade crítica.
+Before modifying any file:
+1. briefly summarize what will be implemented;
+2. identify the main files and components potentially impacted;
+3. flag any critical ambiguities.
 
-Em seguida, inicie a implementação da tarefa com base em `spec.md`, aplicando as diretrizes de design e acessibilidade presentes nas skills carregadas.
+Then start the task implementation based on `spec.md`, applying the design and accessibility guidelines from the loaded skills.
 
-Regras:
-- preserve os padrões existentes da codebase;
-- faça mudanças mínimas e intencionais;
-- não introduza convenções não sustentadas pelo projeto;
-- aplique as diretrizes de frontend-design e web-design-guidelines em todas as decisões de UI;
-- ao final, apresente um resumo do que foi implementado, como foi validado e o que ficou pendente.
+Rules:
+- preserve the existing codebase patterns;
+- make minimal and intentional changes;
+- do not introduce conventions not supported by the project;
+- apply frontend-design and web-design-guidelines directives to all UI decisions;
+- at the end, present a summary of what was implemented, how it was validated, and what remains pending.

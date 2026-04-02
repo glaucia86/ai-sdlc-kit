@@ -1,70 +1,70 @@
 ---
-name: "ops-atualizar-context"
-description: "Atualiza CONTEXT.md com ADRs, aprendizados e épico concluído após fechamento e validação em produção."
-agent: "🏗️ Architect Agent"
+name: "context-sync"
+description: "Updates CONTEXT.md with ADRs, learnings, and closed epic after closure and production validation."
+agent: "🏗️ Architect"
 ---
 
 #file:doc-specs/CONTEXT.md
 
-**Antes de iniciar, pergunte ao usuário:** "Qual o número do épico que foi fechado e validado em produção? (ex: 1, 2, 3)"
+**Before starting, ask the user:** "What is the number of the epic that was closed and validated in production? (e.g.: 1, 2, 3)"
 
-Aguarde a resposta antes de continuar.
+Wait for the answer before continuing.
 
 ---
 
-Para o épico informado (chamado aqui de N, com dois dígitos — ex: `01`, `02`):
+For the reported epic (referred to here as N, with two digits — e.g.: `01`, `02`):
 
-Leia atentamente:
+Carefully read:
 - `doc-specs/<N>-epic/ops-epic-<N>.md`
 - `doc-specs/<N>-epic/decisions-log.md`
 
-Com base nesses artefatos, atualize `doc-specs/CONTEXT.md` seguindo os passos abaixo:
+Based on these artifacts, update `doc-specs/CONTEXT.md` following the steps below:
 
 ---
 
-### Passo 1 — Registrar o épico concluído
+### Step 1 — Record the completed epic
 
-Na seção `## Épicos concluídos`, adicione uma nova entrada:
-
-```
-- E<N> — [Nome do épico] | Concluído em: YYYY-MM-DD | Observações: [resumo em uma frase]
-```
-
----
-
-### Passo 2 — Registrar ADRs
-
-Na seção `## Decisões arquiteturais (ADRs)`, extraia e registre todas as decisões relevantes encontradas em `decisions-log.md` que ainda não constam no `CONTEXT.md`. Use o formato:
+In the `## Completed epics` section, add a new entry:
 
 ```
-### ADR-<sequencial> — [Título] | Data: YYYY-MM-DD | Status: Aceita
-[Resumo da decisão em 2-3 frases]
+- E<N> — [Epic name] | Completed on: YYYY-MM-DD | Notes: [one-sentence summary]
 ```
 
 ---
 
-### Passo 3 — Registrar aprendizados
+### Step 2 — Record ADRs
 
-Na seção `## Aprendizados e ajustes de rota`, adicione os aprendizados identificados em `ops-epic-<N>.md` que impactam épicos futuros.
+In the `## Architecture decisions (ADRs)` section, extract and record all relevant decisions found in `decisions-log.md` that are not yet in `CONTEXT.md`. Use the format:
 
----
-
-### Passo 4 — Atualizar perguntas abertas
-
-Na seção `## Perguntas abertas de nível global`, adicione ou resolva perguntas com base no que foi descoberto durante este épico.
-
----
-
-### Passo 5 — Atualizar restrições globais
-
-Na seção `## Restrições globais`, adicione qualquer nova restrição identificada durante a implementação ou operação deste épico.
+```
+### ADR-<sequential> — [Title] | Date: YYYY-MM-DD | Status: Accepted
+[Decision summary in 2-3 sentences]
+```
 
 ---
 
-Regras:
-- **NUNCA remova conteúdo existente de `CONTEXT.md`** — apenas acrescente ou atualize
-- Mantenha o formato e a estrutura do arquivo intactos
-- Escreva em português do Brasil
-- Se uma seção já contiver a informação relevante, não duplique — apenas atualize se houver mudança
+### Step 3 — Record learnings
 
-**Ao concluir, avise o usuário que `CONTEXT.md` foi atualizado e que o kit está pronto para iniciar o épico seguinte com `/epic-preparar <N+1>`.**
+In the `## Learnings and course adjustments` section, add the learnings identified in `ops-epic-<N>.md` that impact future epics.
+
+---
+
+### Step 4 — Update open questions
+
+In the `## Global-level open questions` section, add or resolve questions based on what was discovered during this epic.
+
+---
+
+### Step 5 — Update global constraints
+
+In the `## Global constraints` section, add any new constraint identified during the implementation or operation of this epic.
+
+---
+
+Rules:
+- **NEVER remove existing content from `CONTEXT.md`** — only append or update
+- Keep the file format and structure intact
+- Write in the same language the user is using.
+- If a section already contains the relevant information, do not duplicate — only update if there is a change
+
+**When done, notify the user that `CONTEXT.md` has been updated and that the kit is ready to start the next epic with `/epic-init <N+1>`.**

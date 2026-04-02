@@ -1,100 +1,100 @@
 ---
-name: "ops-fechar-epico"
-description: "Fecha o ciclo do épico: prepara deploy, define observabilidade e registra feedback para épicos futuros."
-agent: "🚀 Operations Agent"
+name: "epic-close"
+description: "Closes the epic cycle: prepares deploy, defines observability, and records feedback for future epics."
+agent: "🚀 Ops"
 ---
 
 #file:doc-specs/CONTEXT.md
 #file:doc-specs/epics.md
 
-**Antes de iniciar, pergunte ao usuário:** "Qual o número do épico a ser fechado? (ex: 1, 2, 3)"
+**Before starting, ask the user:** "What is the number of the epic to be closed? (e.g.: 1, 2, 3)"
 
-Aguarde a resposta antes de continuar.
+Wait for the answer before continuing.
 
 ---
 
-Para o épico informado (chamado aqui de N, com dois dígitos — ex: `01`, `02`):
+For the reported epic (referred to here as N, with two digits — e.g.: `01`, `02`):
 
-Leia atentamente:
+Carefully read:
 - `doc-specs/<N>-epic/spec-epic-<N>.md`
 - `doc-specs/<N>-epic/decisions-log.md`
 - `doc-specs/<N>-epic/PRD.md`
 
-Com base nesses artefatos e no contexto global do projeto, gere o arquivo `doc-specs/<N>-epic/ops-epic-<N>.md` com a seguinte estrutura:
+Based on these artifacts and the project's global context, generate the file `doc-specs/<N>-epic/ops-epic-<N>.md` with the following structure:
 
 ---
 
-## 1. Resumo da entrega
+## 1. Delivery summary
 
-O que foi implementado neste épico, de forma objetiva e rastreável ao PRD.
+What was implemented in this epic, objectively and traceably to the PRD.
 
 ---
 
-## 2. Preparação para deploy
+## 2. Deploy preparation
 
-### Variáveis de ambiente necessárias
-Liste todas as variáveis de ambiente que este épico introduz ou modifica.
+### Required environment variables
+List all environment variables this epic introduces or modifies.
 
-### Dependências de infraestrutura
-Banco de dados, filas, armazenamento, serviços externos — o que este épico requer.
+### Infrastructure dependencies
+Database, queues, storage, external services — what this epic requires.
 
-### Sequência de deploy recomendada
-Ordem segura de execução: migrations, seeds, toggles, serviços. Identifique o que não pode ser revertido facilmente.
+### Recommended deploy sequence
+Safe execution order: migrations, seeds, toggles, services. Identify what cannot be easily rolled back.
 
 ### Breaking changes
-Liste mudanças que afetam contratos com outros serviços, clientes ou épicos futuros.
+List changes that affect contracts with other services, clients, or future epics.
 
-### Plano de rollback
-O que fazer se o deploy precisar ser revertido.
-
----
-
-## 3. Observabilidade
-
-### Logs críticos a monitorar
-Quais entradas de log indicam que o épico está funcionando corretamente (e quais indicam falha).
-
-### Métricas de saúde propostas
-O que medir para garantir que os fluxos implementados estão saudáveis em produção.
-
-### Alertas recomendados
-Condições que devem disparar alertas operacionais.
-
-### Critérios de validação em produção
-Como confirmar, após o deploy, que o épico está funcionando conforme o esperado.
+### Rollback plan
+What to do if the deploy needs to be reverted.
 
 ---
 
-## 4. Dívidas técnicas registradas
+## 3. Observability
 
-O que foi conscientemente adiado neste épico, com justificativa.
+### Critical logs to monitor
+Which log entries indicate the epic is working correctly (and which indicate failure).
 
----
+### Proposed health metrics
+What to measure to ensure the implemented flows are healthy in production.
 
-## 5. Feedback para épicos futuros
+### Recommended alerts
+Conditions that should trigger operational alerts.
 
-### Aprendizados
-O que este épico ensinou que impacta o planejamento dos próximos.
-
-### Riscos identificados
-O que deve ser endereçado antes de avançar para o próximo épico.
-
-### Sugestões de ajuste no epics.md
-Se a execução deste épico revelou a necessidade de revisar escopo, sequência ou critérios de épicos futuros, registre aqui.
+### Production validation criteria
+How to confirm, after deploy, that the epic is working as expected.
 
 ---
 
-Regras:
-- baseie tudo no que está nos artefatos do épico — não invente problemas
-- escreva em português do Brasil
-- use linguagem técnica, objetiva e acionável
-- se alguma seção não se aplicar ao épico, registre explicitamente "Não aplicável neste épico." em vez de omitir
+## 4. Recorded technical debt
 
-**Pause aqui e avise o usuário que `ops-epic-<N>.md` está pronto para revisão (HIL obrigatório).**
+What was consciously deferred in this epic, with justification.
 
-Após a aprovação do usuário, sinalize:
+---
 
-> **Gate de produção:**
-> 1. Faça o merge da branch `feat/E<NN>-<slug>` para `main`.
-> 2. Execute o deploy e valide em produção usando os critérios definidos em "Critérios de validação em produção" acima.
-> 3. Após confirmar que o épico está funcionando em produção, execute `/ops-atualizar-context <N>` e avance para o próximo épico.
+## 5. Feedback for future epics
+
+### Learnings
+What this epic taught that impacts the planning of upcoming ones.
+
+### Identified risks
+What must be addressed before moving to the next epic.
+
+### Suggested adjustments to epics.md
+If the execution of this epic revealed the need to revise scope, sequence, or criteria of future epics, record it here.
+
+---
+
+Rules:
+- base everything on what is in the epic artifacts — do not invent problems
+- write in English
+- use technical, objective, and actionable language
+- if any section does not apply to the epic, explicitly record "Not applicable for this epic." instead of omitting it
+
+**Pause here and notify the user that `ops-epic-<N>.md` is ready for review (mandatory HIL).**
+
+After user approval, signal:
+
+> **Production gate:**
+> 1. Merge the branch `feat/E<NN>-<slug>` into `main`.
+> 2. Run the deploy and validate in production using the criteria defined in "Production validation criteria" above.
+> 3. After confirming the epic is working in production, run `/context-sync <N>` and proceed to the next epic.

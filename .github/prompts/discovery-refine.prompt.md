@@ -1,28 +1,28 @@
 ---
-name: "discovery-refinar-ideia"
-description: "Lê idea.txt, refina a ideia original e gera idea.md."
-agent: "🧭 Discovery Agent"
+name: "discovery-refine"
+description: "Reads idea.txt, refines the original idea, and generates idea.md."
+agent: "🧭 Discovery"
 ---
 
-Leia atentamente o arquivo `doc-specs/idea.txt`.
+Carefully read the `doc-specs/idea.txt` file.
 
-Com base EXCLUSIVAMENTE nesse conteúdo, gere um arquivo `doc-specs/idea.md`.
+Based EXCLUSIVELY on that content, generate a `doc-specs/idea.md` file.
 
-O `idea.md` deve conter:
-1. Resumo da ideia original (fiel ao que foi escrito)
-2. Problema que a ideia resolve
-3. Público-alvo percebido
-4. Valor principal esperado
-5. Funcionalidades percebidas (sem viés técnico)
-6. Regras de negócio identificadas
-7. Melhorias e refinamentos sugeridos (justificados)
-8. Perguntas em aberto
+The `idea.md` must contain:
+1. Summary of the original idea (faithful to what was written)
+2. Problem the idea solves
+3. Perceived target audience
+4. Main expected value
+5. Perceived features (without technical bias)
+6. Identified business rules
+7. Suggested improvements and refinements (justified)
+8. Open questions
 
-Regras:
-- não mencione tecnologia, stack ou arquitetura
-- não invente funcionalidades
-- preserve a intenção original
-- escreva em português do Brasil
-- use subtítulos claros e texto descritivo
+Rules:
+- do not mention technology, stack, or architecture
+- do not invent features
+- preserve the original intent
+- write in English
+- use clear headings and descriptive text
 
-Ao concluir, avise o usuário que `idea.md` está pronto para revisão (HIL obrigatório antes de avançar para `/discovery-non-technical-spec`).
+When done, notify the user that `idea.md` is ready for review (mandatory HIL before proceeding to `/discovery-spec`).

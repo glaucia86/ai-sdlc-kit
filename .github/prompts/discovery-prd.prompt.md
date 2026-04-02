@@ -1,30 +1,30 @@
 ---
 name: "discovery-prd"
-description: "Lê non-technical-spec.md e gera PRD.md detalhado."
-agent: "🧑‍💼 Tech Lead Agent"
+description: "Reads non-technical-spec.md and generates a detailed PRD.md."
+agent: "🧑‍💼 Tech Lead"
 ---
 
 #file:doc-specs/non-technical-spec.md
 
-Leia atentamente o arquivo `doc-specs/non-technical-spec.md`.
+Carefully read the `doc-specs/non-technical-spec.md` file.
 
-Com base EXCLUSIVAMENTE nesse conteúdo, gere um arquivo `doc-specs/PRD.md`.
+Based EXCLUSIVELY on that content, generate a `doc-specs/PRD.md` file.
 
-O `PRD.md` deve conter:
-1. Visão geral
-2. Objetivos
-3. Escopo (incluído / não incluído)
-4. Premissas
-5. Requisitos funcionais
-6. Requisitos não funcionais
-7. Critérios de aceite
-8. Perguntas abertas
+The `PRD.md` must contain:
+1. Overview
+2. Objectives
+3. Scope (included / not included)
+4. Assumptions
+5. Functional requirements
+6. Non-functional requirements
+7. Acceptance criteria
+8. Open questions
 
-Regras:
-- não invente requisitos
-- não extrapole além de non-technical-spec.md
-- seja detalhado e robusto
-- escreva em português do Brasil
-- use subtítulos claros e evite excesso de bullets
+Rules:
+- do not invent requirements
+- do not extrapolate beyond non-technical-spec.md
+- be detailed and robust
+- write in English
+- use clear headings and avoid excessive bullet points
 
-Ao concluir, avise o usuário que `PRD.md` está pronto para revisão (HIL obrigatório antes de avançar para `/discovery-technical-spec`).
+When done, notify the user that `PRD.md` is ready for review (mandatory HIL before proceeding to `/discovery-tech-spec`).
