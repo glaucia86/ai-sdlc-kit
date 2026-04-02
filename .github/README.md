@@ -373,6 +373,7 @@ Para tarefas com componentes de frontend, use:
     planner.agent.md
     implementer.agent.md
     reviewer.agent.md
+    qa.agent.md
   prompts/
     discovery-refine.prompt.md
     discovery-spec.prompt.md
@@ -388,6 +389,8 @@ Para tarefas com componentes de frontend, use:
     task-implement.prompt.md
     task-implement-frontend.prompt.md
     task-review.prompt.md
+    task-tests.prompt.md
+    ops-triage.prompt.md
     agents-init.prompt.md
   templates/
     idea.template.md
