@@ -32,6 +32,12 @@ Rules:
 
 Before finishing and triggering `/task-review`:
 
-1. Check the checklist in `spec-epic-<N>.md` (section `### Verification checklist`). Mark each verified item with `[x]`. Unverified items must be flagged with justification before proceeding.
-2. Record in `doc-specs/<N>-epic/decisions-log.md` any relevant technical decision made during the implementation.
-3. Only trigger `/task-review` after the checklist is fully completed.
+- If the implementation is part of a Flow A epic:
+  1. Check the checklist in `spec-epic-<N>.md` (section `### Verification checklist`). Mark each verified item with `[x]`. Unverified items must be flagged with justification before proceeding.
+  2. Record in `doc-specs/<N>-epic/decisions-log.md` any relevant technical decision made during the implementation.
+  3. Only trigger `/task-review` after the epic checklist in `spec-epic-<N>.md` is fully completed (or any unverified items are explicitly justified).
+
+- If the implementation is **not** part of a Flow A epic (Flow B / no epic):
+  1. Check the acceptance criteria and any verification checklist defined in `doc-specs/spec.md` (for example, a section `### Verification checklist` if present). Ensure all relevant items are covered; if there is an explicit checklist, mark each verified item with `[x]` and flag any unverified items with justification.
+  2. You do not need to update an epic decisions log in this flow.
+  3. Only trigger `/task-review` after the relevant acceptance criteria and any checklist in `spec.md` are fully satisfied (or any deviations are explicitly justified).
