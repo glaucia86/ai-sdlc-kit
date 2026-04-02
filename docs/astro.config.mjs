@@ -4,11 +4,14 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
   site: 'https://glaucia86.github.io',
   base: '/ai-sdlc-kit',
+  trailingSlash: 'ignore',
   integrations: [
     starlight({
       title: 'AI SDLC Kit',
       description:
         'A spec-driven, human-in-the-loop AI development lifecycle kit for GitHub Copilot.',
+      disable404Route: true,
+      customCss: ['./src/styles/custom.css'],
       logo: {
         src: './src/assets/logo.svg',
       },
@@ -18,9 +21,13 @@ export default defineConfig({
         pt: { label: 'Português', lang: 'pt-BR' },
         es: { label: 'Español', lang: 'es' },
       },
-      social: {
-        github: 'https://github.com/glaucia86/ai-sdlc-kit',
-      },
+      social: [
+        {
+          icon: 'github',
+          label: 'GitHub',
+          href: 'https://github.com/glaucia86/ai-sdlc-kit',
+        },
+      ],
       sidebar: [
         {
           label: 'Get Started',
