@@ -3,8 +3,250 @@
 import { useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { motion, useScroll, useTransform } from 'motion/react';
+import { motion, useScroll, useTransform, useSpring } from 'motion/react';
+import { Telescope, ScrollText, GitBranch, Network, Inbox, Map, Compass, FileText, ClipboardList, Layers, Code2, Rocket, Route, ShieldCheck, BookOpen, Github, ExternalLink, type LucideIcon } from 'lucide-react';
 import { supportedLocales, type HomeLocale } from '@/lib/locale';
+
+// Agent icons — ordered to match agentCards index (0–5)
+const agentIconList: LucideIcon[] = [Telescope, ScrollText, GitBranch, Network, Inbox, Map];
+
+// Pipeline step icons — ordered to match steps index (0–5)
+const stepIconList: LucideIcon[] = [Compass, FileText, ClipboardList, Layers, Code2, Rocket];
+
+// Per-step color spectrum: amber → orange → yellow → emerald → teal → cyan
+const pipelineColors = [
+  { color: '#F59E0B', rgb: '245,158,11' },
+  { color: '#F97316', rgb: '249,115,22' },
+  { color: '#EAB308', rgb: '234,179,8'  },
+  { color: '#10B981', rgb: '16,185,129' },
+  { color: '#14B8A6', rgb: '20,184,166' },
+  { color: '#06B6D4', rgb: '6,182,212'  },
+];
+
+// Panel card metadata — icon + category label per panel index
+const panelMeta: Array<{ Icon: LucideIcon; category: string }> = [
+  { Icon: Route,       category: 'Foundation' },
+  { Icon: ShieldCheck, category: 'Governance' },
+  { Icon: BookOpen,    category: 'Reference'  },
+];
+
+// ─── PanelCard: 3-D cursor-tracking tilt card ───────────────────────────────
+type PanelCardProps = {
+  panel: { title: string; text: string; href: string; linkLabel: string };
+  i: number;
+  featured: boolean;
+};
+
+function PanelCard({ panel, i, featured }: PanelCardProps) {
+  const { Icon, category } = panelMeta[i];
+
+  return (
+    <motion.article
+      key={panel.title}
+      initial={{ opacity: 0, y: 44 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-64px' }}
+      transition={{ duration: 0.75, delay: i * 0.13, ease: [0.22, 1, 0.36, 1] }}
+      className="relative flex flex-col overflow-hidden"
+      style={{
+        background: featured
+          ? 'linear-gradient(158deg, rgba(245,158,11,0.11) 0%, rgba(6,7,10,0.97) 55%)'
+          : 'rgba(255,255,255,0.024)',
+        border: featured
+          ? '1px solid rgba(245,158,11,0.30)'
+          : '1px solid rgba(255,255,255,0.07)',
+        boxShadow: featured
+          ? '0 -24px 80px -20px rgba(245,158,11,0.11), inset 0 1px 0 rgba(245,158,11,0.07)'
+          : 'inset 0 1px 0 rgba(255,255,255,0.04)',
+      }}
+    >
+      {/* Top accent bar — static, tapered gradient */}
+      <div
+        className="absolute left-0 top-0 h-[2px]"
+        style={{
+          width: featured ? '100%' : '48%',
+          background: featured
+            ? 'linear-gradient(90deg, #F59E0B 0%, rgba(245,158,11,0.25) 100%)'
+            : 'linear-gradient(90deg, rgba(255,255,255,0.22) 0%, transparent 100%)',
+        }}
+      />
+
+      {/* Ambient glow overlay — always visible */}
+      <div
+        className="pointer-events-none absolute inset-0"
+        aria-hidden="true"
+        style={{
+          background: featured
+            ? 'radial-gradient(ellipse at 50% 0%, rgba(245,158,11,0.11) 0%, transparent 60%)'
+            : 'radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.025) 0%, transparent 56%)',
+        }}
+      />
+
+      {/* SVG grain overlay */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`,
+          backgroundRepeat: 'repeat',
+          backgroundSize: '180px 180px',
+          opacity: featured ? 0.10 : 0.07,
+          mixBlendMode: 'overlay',
+        }}
+      />
+
+      {/* Card body */}
+      <div className="relative flex flex-1 flex-col p-8 lg:p-10">
+        {/* Top row: index label + icon */}
+        <div className="mb-8 flex items-start justify-between">
+          <span
+            className="text-[10px] font-bold uppercase tracking-[0.44em]"
+            style={{
+              fontFamily: 'var(--font-label)',
+              color: featured ? 'rgba(245,158,11,0.70)' : 'rgba(255,255,255,0.26)',
+              animation: `panelIdxPop 0.55s cubic-bezier(0.34,1.56,0.64,1) ${0.3 + i * 0.13}s both`,
+              display: 'inline-block',
+            }}
+          >
+            {`0${i + 1}`}
+          </span>
+
+          {/* Icon container */}
+          <div
+            className="flex h-12 w-12 items-center justify-center rounded-xl"
+            style={{
+              background: featured ? 'rgba(245,158,11,0.09)' : 'rgba(255,255,255,0.05)',
+              border: featured
+                ? '1px solid rgba(245,158,11,0.28)'
+                : '1px solid rgba(255,255,255,0.1)',
+              boxShadow: featured ? '0 0 24px -6px rgba(245,158,11,0.42)' : 'none',
+            }}
+          >
+            <Icon
+              size={22}
+              strokeWidth={1.4}
+              style={{ color: featured ? '#F59E0B' : 'rgba(255,255,255,0.48)' }}
+              aria-hidden="true"
+            />
+          </div>
+        </div>
+
+        {/* Category pill */}
+        <span
+          className="mb-5 inline-flex w-fit items-center gap-2 rounded-full px-3 py-[4px] text-[8px] font-medium uppercase tracking-[0.34em]"
+          style={{
+            fontFamily: 'var(--font-label)',
+            background: featured ? 'rgba(245,158,11,0.07)' : 'rgba(255,255,255,0.05)',
+            color: featured ? 'rgba(245,158,11,0.72)' : 'rgba(255,255,255,0.26)',
+            border: featured
+              ? '1px solid rgba(245,158,11,0.17)'
+              : '1px solid rgba(255,255,255,0.08)',
+          }}
+        >
+          <span
+            className="inline-block h-[5px] w-[5px] rounded-full"
+            style={{ background: featured ? '#F59E0B' : 'rgba(255,255,255,0.3)' }}
+          />
+          {category}
+        </span>
+
+        {/* Title */}
+        <h2
+          className="mb-4 leading-[1.12]"
+          style={{
+            fontFamily: 'var(--font-display)',
+            fontWeight: 400,
+            fontSize: 'clamp(1.3rem, 2.4vw, 1.72rem)',
+            color: featured ? '#F5ECB8' : '#f0ece4',
+            letterSpacing: '-0.015em',
+          }}
+        >
+          {panel.title}
+        </h2>
+
+        {/* Separator line — static */}
+        <div
+          className="mb-5 h-px"
+          style={{
+            width: featured ? '56px' : '36px',
+            background: featured
+              ? 'linear-gradient(90deg, rgba(245,158,11,0.65) 0%, rgba(245,158,11,0.18) 100%)'
+              : 'rgba(255,255,255,0.13)',
+          }}
+        />
+
+        {/* Body text */}
+        <p
+          className="flex-1 text-sm leading-[1.9]"
+          style={{ color: 'rgba(255,255,255,0.40)', fontWeight: 300, fontFamily: 'var(--font-sans)' }}
+        >
+          {panel.text}
+        </p>
+
+        {/* Footer link */}
+        <div className="mt-8">
+          <Link
+            href={panel.href}
+            className="group/link inline-flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.22em]"
+            style={{
+              fontFamily: 'var(--font-label)',
+              color: featured ? 'rgba(245,158,11,0.62)' : 'rgba(255,255,255,0.32)',
+              transition: 'color 0.2s ease',
+            }}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.color = featured ? '#F59E0B' : 'rgba(255,255,255,0.68)')
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.color = featured
+                ? 'rgba(245,158,11,0.62)'
+                : 'rgba(255,255,255,0.32)')
+            }
+          >
+            <span style={{ borderBottom: '1px solid currentColor', paddingBottom: 1 }}>
+              {panel.linkLabel}
+            </span>
+            <span className="translate-x-0 transition-transform duration-200 group-hover/link:translate-x-1">
+              →
+            </span>
+          </Link>
+        </div>
+      </div>
+
+      {/* Slot-machine watermark number */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -bottom-5 -right-1 select-none overflow-hidden leading-none"
+        style={{ height: '9rem', fontFamily: 'var(--font-label)', fontSize: '9rem', fontWeight: 700, letterSpacing: '-0.05em' }}
+      >
+        <motion.span
+          initial={{ y: '100%' }}
+          whileInView={{ y: '0%' }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.9, delay: 0.3 + i * 0.14, ease: [0.22, 1, 0.36, 1] }}
+          className="inline-block"
+          style={{
+            WebkitTextFillColor: 'transparent',
+            WebkitTextStroke: featured
+              ? '1.5px rgba(245,158,11,0.30)'
+              : '1px rgba(255,255,255,0.11)',
+            backgroundImage: featured
+              ? 'linear-gradient(105deg, rgba(245,158,11,0.04) 0%, rgba(245,158,11,0.14) 25%, rgba(245,178,40,0.78) 50%, rgba(245,158,11,0.14) 75%, rgba(245,158,11,0.04) 100%)'
+              : 'linear-gradient(105deg, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.32) 50%, rgba(255,255,255,0.05) 75%, rgba(255,255,255,0.01) 100%)',
+            backgroundSize: '300% auto',
+            WebkitBackgroundClip: 'text',
+            backgroundClip: 'text',
+            animation: featured
+              ? 'panelNumSweep 3.6s linear infinite, panelNumPulse 3.6s ease-in-out infinite'
+              : `panelNumSweep ${5.8 + i * 0.9}s linear infinite`,
+          }}
+        >
+          {`0${i + 1}`}
+        </motion.span>
+      </div>
+    </motion.article>
+  );
+}
+// ────────────────────────────────────────────────────────────────────────────
 
 export type { HomeLocale };
 
@@ -26,10 +268,17 @@ const content: Record<
     ctaTitle: string;
     ctaBody: string;
     ctaCta: string;
+    footer: {
+      tagline: string;
+      colGetStarted: string;
+      colGuide: string;
+      colReference: string;
+      copyright: string;
+    };
   }
 > = {
   en: {
-    eyebrow: 'Specification-driven development for AI-assisted teams',
+    eyebrow: 'Spec-driven development for AI-assisted teams',
     title: 'Build with agents, but keep humans in charge.',
     description:
       'AI SDLC Kit organizes planning, implementation, QA, and review into a disciplined workflow with explicit checkpoints, reusable artifacts, and multilingual documentation.',
@@ -119,9 +368,16 @@ const content: Record<
     ctaTitle: 'Start building with agents today.',
     ctaBody: 'The kit — agents, prompts, templates, and checkpoints — is open and ready to use.',
     ctaCta: 'Open the docs',
+    footer: {
+      tagline: 'Spec-driven AI workflows for engineering teams.',
+      colGetStarted: 'Get Started',
+      colGuide: 'Guide',
+      colReference: 'Reference',
+      copyright: '© 2026 AI SDLC Kit · MIT License',
+    },
   },
   pt: {
-    eyebrow: 'Entrega guiada por especificação para times com IA',
+    eyebrow: 'Spec-Driven Development para times com IA',
     title: 'Use agentes para acelerar, sem abrir mão do controle humano.',
     description:
       'O AI SDLC Kit organiza planejamento, implementação, QA e revisão em um fluxo disciplinado com checkpoints explícitos, artefatos reutilizáveis e documentação multilíngue.',
@@ -135,7 +391,7 @@ const content: Record<
     ],
     panels: [
       {
-        title: 'Da discovery à operação',
+        title: 'Do discovery à operação',
         text: 'Comece por uma ideia bruta ou uma tarefa delimitada e avance por PRD, spec técnica, implementação, QA e review sem perder o contexto.',
         href: '/pt/get-started/how-it-works',
         linkLabel: 'Como funciona',
@@ -208,12 +464,19 @@ const content: Record<
         href: '/pt/reference/agents',
       },
     ],
-    ctaTitle: 'Comece a construir com agentes hoje.',
+    ctaTitle: 'Comece a criar com agentes hoje.',
     ctaBody: 'O kit — agentes, prompts, templates e checkpoints — está aberto e pronto para uso.',
     ctaCta: 'Abrir a documentação',
+    footer: {
+      tagline: 'Fluxos de IA guiados por especificação para times de engenharia.',
+      colGetStarted: 'Início',
+      colGuide: 'Guia',
+      colReference: 'Referência',
+      copyright: '© 2026 AI SDLC Kit · Licença MIT',
+    },
   },
   es: {
-    eyebrow: 'Entrega guiada por especificación para equipos con IA',
+    eyebrow: 'Spec-Driven Development para equipos con IA',
     title: 'Trabaja con agentes sin perder la decisión humana.',
     description:
       'AI SDLC Kit organiza planificación, implementación, QA y revisión en un flujo disciplinado con checkpoints explícitos, artefactos reutilizables y documentación multilingüe.',
@@ -303,6 +566,13 @@ const content: Record<
     ctaTitle: 'Empieza a construir con agentes hoy.',
     ctaBody: 'El kit — agentes, prompts, plantillas y checkpoints — está abierto y listo para usar.',
     ctaCta: 'Abrir la documentación',
+    footer: {
+      tagline: 'Flujos de IA guiados por especificación para equipos de ingeniería.',
+      colGetStarted: 'Inicio',
+      colGuide: 'Guía',
+      colReference: 'Referencia',
+      copyright: '© 2026 AI SDLC Kit · Licencia MIT',
+    },
   },
 };
 
@@ -331,11 +601,52 @@ export function HomePage({ locale }: { locale: HomeLocale }) {
   const heroOpacity = useTransform(scrollYProgress, [0, 0.55], [1, 0]);
   const hintOpacity = useTransform(scrollYProgress, [0, 0.14], [1, 0]);
 
+  // ── Page-wide scroll progress (for progress bar)
+  const { scrollYProgress: pageProgress } = useScroll();
+  const progressBarScaleX = useSpring(pageProgress, { stiffness: 200, damping: 30, mass: 0.5 });
+
+  // ── Section refs for per-section parallax
+  const panelsRef   = useRef<HTMLElement>(null);
+  const workflowRef = useRef<HTMLElement>(null);
+  const agentsRef   = useRef<HTMLElement>(null);
+  const ctaRef      = useRef<HTMLElement>(null);
+
+  // ── Panels parallax
+  const { scrollYProgress: panelsSP } = useScroll({ target: panelsRef, offset: ['start end', 'end start'] });
+  const panelsOrbAY = useTransform(panelsSP, [0, 1], ['0%', '-65%']);
+  const panelsOrbBY = useTransform(panelsSP, [0, 1], ['0%', '-85%']);
+  const panelsOrbCY = useTransform(panelsSP, [0, 1], ['0%', '-48%']);
+  const panelsKitY  = useTransform(panelsSP, [0, 1], ['0%', '-55%']);
+
+  // ── Workflow parallax
+  const { scrollYProgress: workflowSP } = useScroll({ target: workflowRef, offset: ['start end', 'end start'] });
+  const workflowGlow1Y = useTransform(workflowSP, [0, 1], ['0%', '-75%']);
+  const workflowGlow2Y = useTransform(workflowSP, [0, 1], ['0%', '-48%']);
+
+  // ── Agents parallax
+  const { scrollYProgress: agentsSP } = useScroll({ target: agentsRef, offset: ['start end', 'end start'] });
+  const agentsOrbY = useTransform(agentsSP, [0, 1], ['0%', '-72%']);
+
+  // ── CTA parallax
+  const { scrollYProgress: ctaSP } = useScroll({ target: ctaRef, offset: ['start end', 'end start'] });
+  const ctaGridY = useTransform(ctaSP, [0, 1], ['0%', '-38%']);
+  const ctaOrbY  = useTransform(ctaSP, [0, 1], ['0%', '-90%']);
+
   return (
     <div
       className="overflow-x-hidden text-white"
       style={{ background: '#050609', fontFamily: 'var(--font-sans)' }}
     >
+      {/* ── Scroll progress bar ── */}
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none fixed left-0 top-0 z-[9999] h-[2px] w-full origin-left"
+        style={{
+          scaleX: progressBarScaleX,
+          background: 'linear-gradient(90deg, #F59E0B 0%, #14B8A6 100%)',
+          boxShadow: '0 0 8px rgba(245,158,11,0.7)',
+        }}
+      />
       {/* ─────────── HERO ─────────── */}
       <section ref={heroRef} className="relative flex min-h-screen flex-col overflow-hidden">
 
@@ -494,31 +805,62 @@ export function HomePage({ locale }: { locale: HomeLocale }) {
           <motion.div
             initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.60, delay: 0.58, ease: [0.22, 1, 0.36, 1] }}
-            className="mb-8 grid grid-cols-3 divide-x divide-white/[0.07]"
-            style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}
+            className="mb-8"
+            style={{
+              borderTop: '1px solid rgba(245,158,11,0.18)',
+              background: 'linear-gradient(180deg, rgba(245,158,11,0.04) 0%, transparent 48%)',
+            }}
           >
-            {copy.highlights.map((item) => (
-              <div key={item.label} className="px-6 pt-6 pb-4">
-                <span
-                  className="block tabular-nums leading-none"
+            <div className="grid grid-cols-3">
+              {copy.highlights.map((item, idx) => (
+                <div
+                  key={item.label}
+                  className="relative px-6 pt-6 pb-5"
                   style={{
-                    fontFamily: 'var(--font-label)',
-                    fontSize: 'clamp(1.8rem, 4vw, 2.8rem)',
-                    fontWeight: 600,
-                    color: '#f5f0e8',
-                    letterSpacing: '-0.03em',
+                    borderRight: idx < 2 ? '1px solid rgba(255,255,255,0.06)' : undefined,
                   }}
                 >
-                  {item.value}
-                </span>
-                <span
-                  className="mt-2 block text-[11px] uppercase tracking-[0.28em]"
-                  style={{ color: 'rgba(255,255,255,0.28)', fontFamily: 'var(--font-label)' }}
-                >
-                  {item.label}
-                </span>
-              </div>
-            ))}
+                  {/* Amber glint on the border top, only for first stat */}
+                  {idx === 0 && (
+                    <span
+                      aria-hidden="true"
+                      className="absolute left-6 top-0 -translate-y-1/2 inline-block h-[5px] w-[5px] rounded-full"
+                      style={{ background: '#F59E0B', boxShadow: '0 0 10px 2px rgba(245,158,11,0.55)' }}
+                    />
+                  )}
+                  <span
+                    className="block tabular-nums leading-none"
+                    style={{
+                      fontFamily: 'var(--font-label)',
+                      fontSize: 'clamp(1.9rem, 4.2vw, 3rem)',
+                      fontWeight: 600,
+                      letterSpacing: '-0.04em',
+                      ...(idx === 0
+                        ? {
+                            background: 'linear-gradient(135deg, #FDE68A 0%, #F59E0B 55%, #D97706 100%)',
+                            WebkitBackgroundClip: 'text',
+                            WebkitTextFillColor: 'transparent',
+                            backgroundClip: 'text',
+                          }
+                        : {
+                            color: idx === 1 ? 'rgba(245,240,232,0.78)' : 'rgba(245,240,232,0.55)',
+                          }),
+                    }}
+                  >
+                    {item.value}
+                  </span>
+                  <span
+                    className="mt-2.5 block text-[10px] uppercase tracking-[0.32em]"
+                    style={{
+                      color: idx === 0 ? 'rgba(245,158,11,0.52)' : 'rgba(255,255,255,0.22)',
+                      fontFamily: 'var(--font-label)',
+                    }}
+                  >
+                    {item.label}
+                  </span>
+                </div>
+              ))}
+            </div>
           </motion.div>
         </motion.div>
 
@@ -544,99 +886,173 @@ export function HomePage({ locale }: { locale: HomeLocale }) {
 
       {/* ─────────── PANELS ─────────── */}
       <section
-        className="relative px-6 py-28 sm:px-10 lg:px-12"
-        style={{ background: 'linear-gradient(180deg, #050609 0%, #08090f 100%)' }}
+        ref={panelsRef}
+        className="relative overflow-hidden px-6 py-28 sm:px-10 lg:px-12"
+        style={{ background: 'linear-gradient(180deg, #050609 0%, #07080d 100%)' }}
       >
-        {/* Amber separator rule */}
-        <div className="mx-auto mb-20 max-w-7xl">
-          <div
-            className="h-px"
-            style={{ background: 'linear-gradient(90deg, transparent, rgba(245,158,11,0.22), transparent)' }}
-          />
-        </div>
+        {/* All panel keyframes + aurora animations */}
+        <style>{`
+          @keyframes panelNumSweep {
+            from { background-position: -300% center; }
+            to   { background-position:  300% center; }
+          }
+          @keyframes panelNumPulse {
+            0%, 100% { filter: drop-shadow(0 0  6px rgba(245,158,11,0.00)); }
+            50%       { filter: drop-shadow(0 0 36px rgba(245,178,40,0.60)); }
+          }
+          @keyframes panelIdxPop {
+            0%   { opacity: 0; transform: scale(0.55) translateY(4px); }
+            70%  { opacity: 1; transform: scale(1.12) translateY(-1px); }
+            100% { opacity: 1; transform: scale(1)   translateY(0);    }
+          }
+          @keyframes auroraDrift0 {
+            0%   { transform: translate(0px,   0px)   scale(1);    }
+            33%  { transform: translate(60px, -40px)  scale(1.08); }
+            66%  { transform: translate(-30px, 50px)  scale(0.94); }
+            100% { transform: translate(0px,   0px)   scale(1);    }
+          }
+          @keyframes auroraDrift1 {
+            0%   { transform: translate(0px,   0px)   scale(1);    }
+            40%  { transform: translate(-70px, 35px)  scale(1.06); }
+            75%  { transform: translate(45px,  -55px) scale(0.96); }
+            100% { transform: translate(0px,   0px)   scale(1);    }
+          }
+          @keyframes auroraDrift2 {
+            0%   { transform: translate(0px,  0px)   scale(1);    }
+            50%  { transform: translate(25px, 60px)  scale(1.1);  }
+            100% { transform: translate(0px,  0px)   scale(1);    }
+          }
+        `}</style>
 
-        <div className="mx-auto max-w-7xl grid gap-6 md:grid-cols-3">
-          {copy.panels.map((panel, i) => (
-            <motion.article
-              key={panel.title}
-              initial={{ opacity: 0, y: 52 }}
+        {/* ── Aurora background blobs (z-0) ── */}
+        {/* Orb A — amber, bottom-left */}
+        <motion.div
+          aria-hidden="true"
+          className="pointer-events-none absolute"
+          style={{ bottom: '-80px', left: '-60px', width: '520px', height: '520px', borderRadius: '50%', zIndex: 0, y: panelsOrbAY }}
+        >
+          <div className="h-full w-full rounded-full" style={{ background: 'radial-gradient(circle, rgba(245,158,11,0.26) 0%, transparent 68%)', filter: 'blur(50px)', animation: 'auroraDrift0 22s ease-in-out infinite' }} />
+        </motion.div>
+        {/* Orb B — teal, top-right */}
+        <motion.div
+          aria-hidden="true"
+          className="pointer-events-none absolute"
+          style={{ top: '-60px', right: '-80px', width: '440px', height: '440px', borderRadius: '50%', zIndex: 0, y: panelsOrbBY }}
+        >
+          <div className="h-full w-full rounded-full" style={{ background: 'radial-gradient(circle, rgba(20,184,166,0.20) 0%, transparent 68%)', filter: 'blur(55px)', animation: 'auroraDrift1 28s ease-in-out infinite' }} />
+        </motion.div>
+        {/* Orb C — white, center */}
+        <motion.div
+          aria-hidden="true"
+          className="pointer-events-none absolute"
+          style={{ top: '30%', left: '38%', width: '360px', height: '360px', borderRadius: '50%', zIndex: 0, y: panelsOrbCY }}
+        >
+          <div className="h-full w-full rounded-full" style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 68%)', filter: 'blur(70px)', animation: 'auroraDrift2 35s ease-in-out infinite' }} />
+        </motion.div>
+
+        {/* Giant decorative word "Kit" — atmospheric background watermark */}
+        <motion.div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-16 right-0 select-none overflow-hidden leading-none"
+          style={{
+            fontFamily: 'var(--font-display)',
+            fontSize: 'clamp(12rem, 26vw, 26rem)',
+            color: 'rgba(255,255,255,0.014)',
+            letterSpacing: '-0.06em',
+            fontWeight: 400,
+            lineHeight: 0.88,
+            zIndex: 0,
+            y: panelsKitY,
+          }}
+        >
+          Kit
+        </motion.div>
+
+        {/* All content above aurora blobs */}
+        <div className="relative" style={{ zIndex: 1 }}>
+          {/* Amber separator rule */}
+          <div className="mx-auto mb-16 max-w-7xl">
+            <div
+              className="h-px"
+              style={{ background: 'linear-gradient(90deg, transparent, rgba(245,158,11,0.22), transparent)' }}
+            />
+          </div>
+
+          {/* Section header */}
+          <div className="mx-auto mb-16 max-w-7xl">
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-64px' }}
-              transition={{ duration: 0.75, delay: i * 0.14, ease: [0.22, 1, 0.36, 1] }}
-              whileHover={{ y: -6, transition: { duration: 0.26, ease: 'easeOut' } }}
-              className="group relative flex flex-col p-8"
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              className="mb-5 flex items-center gap-3"
+            >
+              <span className="h-px w-6" style={{ background: '#F59E0B', opacity: 0.6 }} />
+              <span
+                className="text-[9px] font-medium uppercase tracking-[0.38em]"
+                style={{ color: '#F59E0B', opacity: 0.75, fontFamily: 'var(--font-label)' }}
+              >
+                Core Capabilities
+              </span>
+            </motion.p>
+            <motion.h2
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ duration: 0.75, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+              className="max-w-lg leading-[1.1]"
               style={{
-                borderTop: i === 1
-                  ? '1px solid rgba(245,158,11,0.5)'
-                  : '1px solid rgba(255,255,255,0.08)',
+                fontFamily: 'var(--font-display)',
+                fontWeight: 400,
+                fontSize: 'clamp(1.9rem, 3.8vw, 2.9rem)',
+                color: '#f5f0e8',
+                letterSpacing: '-0.025em',
               }}
             >
-              {/* Amber left accent for featured panel */}
-              {i === 1 && (
-                <div
-                  className="absolute left-0 top-0 h-full w-px"
-                  style={{ background: 'linear-gradient(180deg, rgba(245,158,11,0.45) 0%, transparent 100%)' }}
-                />
-              )}
-
-              <p
-                className="mb-7 text-[9px] font-medium uppercase tracking-[0.4em]"
-                style={{ color: 'rgba(255,255,255,0.22)', fontFamily: 'var(--font-label)' }}
-              >
-                {`0${i + 1}`}
-              </p>
-
-              <h2
-                className="leading-snug"
+              Built different,<br />
+              <em
                 style={{
-                  fontFamily: 'var(--font-display)',
-                  fontWeight: 400,
-                  fontSize: 'clamp(1.3rem, 2.4vw, 1.65rem)',
-                  color: i === 1 ? '#F5ECB8' : '#f0ece4',
-                  letterSpacing: '-0.01em',
+                  fontStyle: 'italic',
+                  background: 'linear-gradient(105deg, #F5ECB8 0%, #F59E0B 48%, #FDE68A 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
                 }}
               >
-                {panel.title}
-              </h2>
+                by design.
+              </em>
+            </motion.h2>
+          </div>
 
-              <p
-                className="mt-4 flex-1 text-sm leading-[1.85]"
-                style={{ color: 'rgba(255,255,255,0.38)', fontWeight: 300, fontFamily: 'var(--font-sans)' }}
-              >
-                {panel.text}
-              </p>
-
-              <Link
-                href={panel.href}
-                className="mt-8 inline-flex w-fit items-center gap-2 text-xs font-medium transition-all group-hover:opacity-100"
-                style={{
-                  color: i === 1 ? 'rgba(245,224,100,0.55)' : 'rgba(255,255,255,0.30)',
-                  fontFamily: 'var(--font-label)',
-                  letterSpacing: '0.06em',
-                }}
-              >
-                <span
-                  className="uppercase tracking-[0.16em]"
-                  style={{ borderBottom: '1px solid currentColor', paddingBottom: 2, opacity: 0.8 }}
-                >
-                  {panel.linkLabel}
-                </span>
-                <span className="-translate-x-1 opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100">
-                  →
-                </span>
-              </Link>
-            </motion.article>
-          ))}
+          {/* Cards grid */}
+          <div className="mx-auto max-w-7xl grid gap-5 md:grid-cols-3 items-start">
+            {copy.panels.map((panel, i) => (
+              <PanelCard key={panel.title} panel={panel} i={i} featured={i === 1} />
+            ))}
+          </div>
         </div>
       </section>
 
       {/* ─────────── WORKFLOW PIPELINE ─────────── */}
       <section
-        className="relative px-6 py-28 sm:px-10 lg:px-12"
-        style={{ background: '#08090f' }}
+        ref={workflowRef}
+        className="relative overflow-hidden px-6 py-28 sm:px-10 lg:px-12"
+        style={{ background: '#07080d' }}
       >
+        {/* Atmospheric twin glows */}
+        <motion.div
+          className="pointer-events-none absolute bottom-0 left-0 h-[580px] w-[580px]"
+          aria-hidden="true"
+          style={{ background: 'radial-gradient(circle at bottom left, rgba(245,158,11,0.065) 0%, transparent 58%)', y: workflowGlow1Y }}
+        />
+        <motion.div
+          className="pointer-events-none absolute bottom-0 right-0 h-[580px] w-[580px]"
+          aria-hidden="true"
+          style={{ background: 'radial-gradient(circle at bottom right, rgba(6,182,212,0.065) 0%, transparent 58%)', y: workflowGlow2Y }}
+        />
+
         {/* Section header */}
-        <div className="mx-auto mb-20 max-w-7xl">
+        <div className="relative mx-auto mb-20 max-w-7xl">
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -671,72 +1087,218 @@ export function HomePage({ locale }: { locale: HomeLocale }) {
           </motion.h2>
         </div>
 
-        {/* 6-phase grid */}
-        <div className="mx-auto max-w-7xl grid gap-px md:grid-cols-2 lg:grid-cols-3"
-          style={{ border: '1px solid rgba(255,255,255,0.05)', background: 'rgba(255,255,255,0.05)' }}
-        >
-          {copy.steps.map((step, i) => (
-            <motion.div
-              key={step.num}
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-48px' }}
-              transition={{ duration: 0.65, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-              className="group relative flex flex-col p-8 lg:p-10"
-              style={{ background: '#08090f' }}
-            >
-              {/* Phase number */}
-              <span
-                className="mb-6 block"
-                style={{
-                  fontFamily: 'var(--font-label)',
-                  fontSize: '0.68rem',
-                  fontWeight: 500,
-                  color: 'rgba(245,158,11,0.45)',
-                  letterSpacing: '0.22em',
-                }}
-              >
-                {step.num}
-              </span>
+        <div className="relative mx-auto max-w-7xl">
 
-              {/* Phase name with animated amber underline */}
-              <h3
-                className="relative mb-5 w-fit pb-3"
-                style={{
-                  fontFamily: 'var(--font-display)',
-                  fontWeight: 400,
-                  fontSize: 'clamp(1.2rem, 2vw, 1.45rem)',
-                  color: '#f5f0e8',
-                  letterSpacing: '-0.01em',
-                }}
-              >
-                {step.phase}
-                {/* Amber underline grows on hover */}
-                <span
-                  className="absolute bottom-0 left-0 block h-px transition-all duration-300 group-hover:w-full"
-                  style={{
-                    width: '1.5rem',
-                    background: 'rgba(245,158,11,0.55)',
-                  }}
+          {/* ── DESKTOP: two pipeline rows (lg+) ── */}
+          <div className="hidden lg:block space-y-16">
+            {[
+              {
+                steps: copy.steps.slice(0, 3),
+                offset: 0,
+                lineGrad: 'linear-gradient(90deg,#F59E0B 0%,#F97316 50%,#EAB308 100%)',
+                rowDelay: 0,
+              },
+              {
+                steps: copy.steps.slice(3, 6),
+                offset: 3,
+                lineGrad: 'linear-gradient(90deg,#10B981 0%,#14B8A6 50%,#06B6D4 100%)',
+                rowDelay: 0.18,
+              },
+            ].map((row, rowIdx) => (
+              <div key={rowIdx} className="relative grid grid-cols-3 gap-6">
+
+                {/* Gradient connecting line — vertically centred on the node (node is h-16, top half = 32px = top-8) */}
+                <motion.div
+                  className="pointer-events-none absolute left-[16.667%] right-[16.667%] top-8 h-px -translate-y-1/2"
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true, margin: '-60px' }}
+                  transition={{ duration: 1.1, delay: row.rowDelay, ease: [0.4, 0, 0.2, 1] }}
+                  style={{ transformOrigin: 'left center', background: row.lineGrad }}
                 />
-              </h3>
 
-              <p
-                className="text-sm leading-[1.85]"
-                style={{ color: 'rgba(255,255,255,0.35)', fontWeight: 300 }}
-              >
-                {step.desc}
-              </p>
-            </motion.div>
-          ))}
+                {row.steps.map((step, j) => {
+                  const c = pipelineColors[row.offset + j];
+                  const StepIcon = stepIconList[row.offset + j];
+                  return (
+                    <motion.div
+                      key={step.num}
+                      className="flex flex-col items-center"
+                      initial={{ opacity: 0, y: 28 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: '-60px' }}
+                      transition={{ duration: 0.7, delay: row.rowDelay + 0.32 + j * 0.11, ease: [0.22, 1, 0.36, 1] }}
+                    >
+                      {/* Glowing node — solid ring gap isolates node from line */}
+                      <motion.div
+                        className="relative z-10 flex h-16 w-16 cursor-default items-center justify-center rounded-full"
+                        whileHover={{ scale: 1.13 }}
+                        transition={{ duration: 0.2, ease: 'easeOut' }}
+                        style={{
+                          background: `rgba(${c.rgb},0.10)`,
+                          border: `1px solid rgba(${c.rgb},0.55)`,
+                          boxShadow: `0 0 0 5px #07080d, 0 0 0 6px rgba(${c.rgb},0.18), 0 0 36px -6px rgba(${c.rgb},0.65)`,
+                        }}
+                      >
+                        <StepIcon size={22} strokeWidth={1.4} style={{ color: c.color }} aria-hidden="true" />
+                      </motion.div>
+
+                      {/* Stem */}
+                      <div
+                        className="h-7 w-px"
+                        style={{ background: `linear-gradient(180deg, rgba(${c.rgb},0.45) 0%, transparent 100%)` }}
+                      />
+
+                      {/* Phase card */}
+                      <div
+                        className="group/card relative w-full overflow-hidden p-6 transition-all duration-300 hover:shadow-[0_8px_40px_-12px_rgba(0,0,0,0.7)]"
+                        style={{
+                          background: `linear-gradient(148deg, rgba(${c.rgb},0.08) 0%, rgba(7,8,13,0.98) 58%)`,
+                          border: `1px solid rgba(${c.rgb},0.13)`,
+                          borderTop: `2px solid rgba(${c.rgb},0.5)`,
+                        }}
+                      >
+                        {/* Watermark number */}
+                        <span
+                          className="pointer-events-none absolute -bottom-4 -right-1 select-none leading-none"
+                          aria-hidden="true"
+                          style={{
+                            fontFamily: 'var(--font-label)',
+                            fontSize: '6rem',
+                            fontWeight: 700,
+                            color: `rgba(${c.rgb},0.038)`,
+                            letterSpacing: '-0.05em',
+                          }}
+                        >
+                          {step.num}
+                        </span>
+
+                        <span
+                          className="mb-3 block text-[9px] font-medium uppercase tracking-[0.32em]"
+                          style={{ color: c.color, opacity: 0.72, fontFamily: 'var(--font-label)' }}
+                        >
+                          {step.num}
+                        </span>
+                        <h3
+                          className="mb-3 leading-tight"
+                          style={{
+                            fontFamily: 'var(--font-display)',
+                            fontWeight: 400,
+                            fontSize: 'clamp(1.05rem, 1.5vw, 1.28rem)',
+                            color: '#f5f0e8',
+                            letterSpacing: '-0.015em',
+                          }}
+                        >
+                          {step.phase}
+                        </h3>
+                        <div
+                          className="mb-4 h-px w-7 transition-all duration-300 group-hover/card:w-14"
+                          style={{ background: `rgba(${c.rgb},0.55)` }}
+                        />
+                        <p
+                          className="text-[0.79rem] leading-[1.85]"
+                          style={{ color: 'rgba(255,255,255,0.37)', fontWeight: 300 }}
+                        >
+                          {step.desc}
+                        </p>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            ))}
+          </div>
+
+          {/* ── MOBILE/TABLET: vertical spine timeline (< lg) ── */}
+          <div className="relative lg:hidden">
+            {/* Full-height color-spectrum spine */}
+            <div
+              className="absolute bottom-0 left-5 top-0 w-px"
+              style={{
+                background:
+                  'linear-gradient(180deg,#F59E0B 0%,#F97316 20%,#EAB308 37%,#10B981 60%,#14B8A6 80%,#06B6D4 100%)',
+              }}
+            />
+            <div className="space-y-0">
+              {copy.steps.map((step, i) => {
+                const c = pipelineColors[i];
+                const StepIcon = stepIconList[i];
+                return (
+                  <motion.div
+                    key={step.num}
+                    className="relative flex gap-5 pb-8"
+                    initial={{ opacity: 0, x: -14 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: '-40px' }}
+                    transition={{ duration: 0.55, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    {/* Node on spine */}
+                    <div
+                      className="relative z-10 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full"
+                      style={{
+                        background: `rgba(${c.rgb},0.10)`,
+                        border: `1px solid rgba(${c.rgb},0.48)`,
+                        boxShadow: `0 0 0 3px #07080d, 0 0 16px -4px rgba(${c.rgb},0.55)`,
+                      }}
+                    >
+                      <StepIcon size={16} strokeWidth={1.5} style={{ color: c.color }} aria-hidden="true" />
+                    </div>
+
+                    {/* Card */}
+                    <div
+                      className="flex-1 p-5"
+                      style={{
+                        background: `rgba(${c.rgb},0.042)`,
+                        border: `1px solid rgba(${c.rgb},0.11)`,
+                        borderLeft: `2px solid rgba(${c.rgb},0.42)`,
+                      }}
+                    >
+                      <span
+                        className="mb-2 block text-[9px] uppercase tracking-[0.3em]"
+                        style={{ color: c.color, opacity: 0.68, fontFamily: 'var(--font-label)' }}
+                      >
+                        {step.num}
+                      </span>
+                      <h3
+                        className="mb-2 leading-snug"
+                        style={{
+                          fontFamily: 'var(--font-display)',
+                          fontWeight: 400,
+                          fontSize: '1.1rem',
+                          color: '#f5f0e8',
+                          letterSpacing: '-0.01em',
+                        }}
+                      >
+                        {step.phase}
+                      </h3>
+                      <p
+                        className="text-sm leading-[1.75]"
+                        style={{ color: 'rgba(255,255,255,0.35)', fontWeight: 300 }}
+                      >
+                        {step.desc}
+                      </p>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+
         </div>
       </section>
 
       {/* ─────────── AGENTS BENTO GRID ─────────── */}
       <section
-        className="relative px-6 py-28 sm:px-10 lg:px-12"
+        ref={agentsRef}
+        className="relative overflow-hidden px-6 py-28 sm:px-10 lg:px-12"
         style={{ background: 'linear-gradient(180deg, #08090f 0%, #050609 100%)' }}
       >
+        {/* Parallax bg orb */}
+        <motion.div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-20 left-1/2 -translate-x-1/2"
+          style={{ width: '600px', height: '600px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(245,158,11,0.06) 0%, transparent 65%)', filter: 'blur(60px)', y: agentsOrbY }}
+        />
         {/* Amber separator rule */}
         <div className="mx-auto mb-20 max-w-7xl">
           <div
@@ -780,166 +1342,538 @@ export function HomePage({ locale }: { locale: HomeLocale }) {
           </motion.h2>
         </div>
 
-        {/* Bento grid — featured card spans 2 cols on lg */}
-        <div className="mx-auto max-w-7xl grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {copy.agentCards.map((card, i) => (
-            <motion.div
-              key={card.name}
-              initial={{ opacity: 0, y: 32 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-48px' }}
-              transition={{ duration: 0.7, delay: i * 0.09, ease: [0.22, 1, 0.36, 1] }}
-              className={`group relative flex flex-col p-8 ${card.featured ? 'lg:col-span-2' : ''}`}
-              style={{
-                background: card.featured
-                  ? 'linear-gradient(135deg, rgba(245,158,11,0.07) 0%, rgba(8,9,15,0.95) 60%)'
-                  : 'rgba(255,255,255,0.026)',
-                border: card.featured
-                  ? '1px solid rgba(245,158,11,0.22)'
-                  : '1px solid rgba(255,255,255,0.06)',
-              }}
-            >
-              {/* Flow badge */}
-              <span
-                className="mb-8 block w-fit rounded-full px-3 py-1 text-[9px] font-medium uppercase tracking-[0.28em]"
+        {/* Bento grid */}
+        <div className="mx-auto max-w-5xl grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+          {copy.agentCards.map((card, i) => {
+            const isFlowA = card.flow === 'Flow A';
+            const accentColor = isFlowA ? '#F59E0B' : '#14B8A6';
+            const accentRgb = isFlowA ? '245,158,11' : '20,184,166';
+            const AgentIcon = agentIconList[i];
+            const isLastAlone = i === copy.agentCards.length - 1 && !card.featured;
+
+            return (
+              <motion.div
+                key={card.name}
+                initial={{ opacity: 0, y: 36 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-48px' }}
+                transition={{ duration: 0.72, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={{ y: -4, transition: { duration: 0.22, ease: 'easeOut' } }}
+                className={`group relative flex flex-col overflow-hidden ${
+                  card.featured ? 'lg:col-span-2' : isLastAlone ? 'lg:col-start-2' : ''
+                }`}
                 style={{
-                  fontFamily: 'var(--font-label)',
-                  background: 'rgba(255,255,255,0.05)',
-                  color: card.featured ? 'rgba(245,158,11,0.75)' : 'rgba(255,255,255,0.28)',
-                  border: card.featured ? '1px solid rgba(245,158,11,0.2)' : '1px solid rgba(255,255,255,0.07)',
+                  background: card.featured
+                    ? `linear-gradient(145deg, rgba(${accentRgb},0.09) 0%, rgba(5,6,9,0.97) 55%)`
+                    : 'rgba(255,255,255,0.023)',
+                  border: `1px solid rgba(${accentRgb},${card.featured ? '0.28' : '0.10'})`,
+                  borderRadius: '2px',
+                  boxShadow: card.featured
+                    ? `0 0 0 1px rgba(${accentRgb},0.06), inset 0 1px 0 rgba(255,255,255,0.04)`
+                    : 'inset 0 1px 0 rgba(255,255,255,0.03)',
+                  transition: 'border-color 0.25s ease, box-shadow 0.25s ease',
                 }}
               >
-                {card.flow}
-              </span>
-
-              {/* Emoji + name */}
-              <div className="flex items-start gap-4">
-                <span className="text-3xl leading-none" aria-hidden="true">{card.tag}</span>
-                <h3
-                  style={{
-                    fontFamily: 'var(--font-display)',
-                    fontWeight: 400,
-                    fontSize: card.featured ? 'clamp(1.5rem, 3vw, 2.1rem)' : 'clamp(1.15rem, 2vw, 1.4rem)',
-                    color: '#f5f0e8',
-                    letterSpacing: '-0.015em',
-                    lineHeight: 1.15,
-                  }}
-                >
-                  {card.name}
-                </h3>
-              </div>
-
-              <p
-                className="mt-5 flex-1 text-sm leading-[1.85]"
-                style={{ color: 'rgba(255,255,255,0.38)', fontWeight: 300 }}
-              >
-                {card.desc}
-              </p>
-
-              {/* Hover-reveal link */}
-              <Link
-                href={card.href}
-                className="mt-7 inline-flex w-fit items-center gap-2 text-[10px] font-medium uppercase tracking-[0.2em] opacity-0 transition-all duration-300 group-hover:opacity-100"
-                style={{
-                  fontFamily: 'var(--font-label)',
-                  color: card.featured ? '#F59E0B' : 'rgba(255,255,255,0.45)',
-                }}
-              >
-                <span style={{ borderBottom: '1px solid currentColor', paddingBottom: 1 }}>
-                  View agent
-                </span>
-                <span>→</span>
-              </Link>
-
-              {/* Amber corner accent on featured */}
-              {card.featured && (
+                {/* Top accent bar — grows on hover */}
                 <div
-                  className="pointer-events-none absolute right-0 top-0 h-32 w-32"
+                  className="absolute left-0 top-0 h-[2px] w-0 transition-all duration-500 group-hover:w-full"
+                  style={{ background: `linear-gradient(90deg, rgba(${accentRgb},0.8), rgba(${accentRgb},0.2))` }}
+                />
+
+                {/* Atmospheric glow — top right */}
+                <div
+                  className="pointer-events-none absolute -right-12 -top-12 h-48 w-48 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                  aria-hidden="true"
                   style={{
-                    background: 'radial-gradient(circle at top right, rgba(245,158,11,0.12) 0%, transparent 70%)',
+                    background: `radial-gradient(circle at center, rgba(${accentRgb},0.13) 0%, transparent 65%)`,
                   }}
                 />
-              )}
-            </motion.div>
-          ))}
+
+                {/* Large watermark index number */}
+                <div
+                  className="pointer-events-none absolute -right-2 -bottom-4 select-none leading-none"
+                  aria-hidden="true"
+                  style={{
+                    fontFamily: 'var(--font-label)',
+                    fontSize: card.featured ? '7rem' : '5.5rem',
+                    fontWeight: 700,
+                    color: `rgba(${accentRgb},0.045)`,
+                    letterSpacing: '-0.05em',
+                  }}
+                >
+                  {String(i + 1).padStart(2, '0')}
+                </div>
+
+                {/* Card inner padding */}
+                <div className="relative flex flex-1 flex-col p-8 lg:p-9">
+
+                  {/* Header row: flow pill + icon */}
+                  <div className="mb-7 flex items-center justify-between">
+                    {/* Flow pill */}
+                    <span
+                      className="inline-flex items-center gap-1.5 rounded-full px-3 py-[5px] text-[9px] font-semibold uppercase tracking-[0.3em]"
+                      style={{
+                        fontFamily: 'var(--font-label)',
+                        background: `rgba(${accentRgb},0.08)`,
+                        color: accentColor,
+                        border: `1px solid rgba(${accentRgb},0.2)`,
+                      }}
+                    >
+                      <span
+                        className="inline-block h-1 w-1 rounded-full"
+                        style={{ background: accentColor, opacity: 0.85 }}
+                      />
+                      {card.flow}
+                    </span>
+
+                    {/* Icon container */}
+                    <div
+                      className="flex h-11 w-11 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-110"
+                      style={{
+                        background: `rgba(${accentRgb},0.07)`,
+                        border: `1px solid rgba(${accentRgb},0.16)`,
+                        boxShadow: `0 0 16px -4px rgba(${accentRgb},0.2)`,
+                      }}
+                    >
+                      <AgentIcon
+                        size={card.featured ? 22 : 18}
+                        strokeWidth={1.5}
+                        style={{ color: accentColor, opacity: 0.9 }}
+                        aria-hidden="true"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Agent name */}
+                  <h3
+                    className="mb-4 leading-[1.1]"
+                    style={{
+                      fontFamily: 'var(--font-display)',
+                      fontWeight: 400,
+                      fontSize: card.featured ? 'clamp(1.7rem, 3.2vw, 2.4rem)' : 'clamp(1.25rem, 2.2vw, 1.6rem)',
+                      color: '#f5f0e8',
+                      letterSpacing: '-0.02em',
+                    }}
+                  >
+                    {card.name}
+                  </h3>
+
+                  {/* Thin separator */}
+                  <div
+                    className="mb-5 h-px w-12 transition-all duration-400 group-hover:w-20"
+                    style={{ background: `rgba(${accentRgb},0.35)` }}
+                  />
+
+                  {/* Description */}
+                  <p
+                    className="flex-1 text-sm leading-[1.9]"
+                    style={{ color: 'rgba(255,255,255,0.40)', fontWeight: 300, fontFamily: 'var(--font-sans)' }}
+                  >
+                    {card.desc}
+                  </p>
+
+                  {/* Footer link — always visible, slides on hover */}
+                  <div className="mt-8 flex items-center justify-between">
+                    <Link
+                      href={card.href}
+                      className="group/link inline-flex items-center gap-2.5 text-[10px] font-medium uppercase tracking-[0.22em]"
+                      style={{
+                        fontFamily: 'var(--font-label)',
+                        color: `rgba(${accentRgb},0.55)`,
+                        transition: 'color 0.2s ease',
+                      }}
+                      onMouseEnter={(e) => (e.currentTarget.style.color = accentColor)}
+                      onMouseLeave={(e) => (e.currentTarget.style.color = `rgba(${accentRgb},0.55)`)}
+                    >
+                      <span style={{ borderBottom: `1px solid rgba(${accentRgb},0.3)`, paddingBottom: 1 }}>
+                        View agent
+                      </span>
+                      <span className="translate-x-0 transition-transform duration-200 group-hover/link:translate-x-1">
+                        →
+                      </span>
+                    </Link>
+
+                    {/* Status dot */}
+                    <span
+                      className="inline-flex items-center gap-1.5 text-[9px] uppercase tracking-widest"
+                      style={{ fontFamily: 'var(--font-label)', color: 'rgba(255,255,255,0.18)' }}
+                    >
+                      <span
+                        className="inline-block h-1.5 w-1.5 rounded-full"
+                        style={{ background: `rgba(${accentRgb},0.5)` }}
+                      />
+                      Active
+                    </span>
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </section>
 
       {/* ─────────── CTA FINAL ─────────── */}
       <section
-        className="relative overflow-hidden px-6 py-36 sm:px-10 lg:px-12"
-        style={{ background: '#050609' }}
+        ref={ctaRef}
+        className="relative overflow-hidden px-6 py-32 sm:px-10 lg:px-12"
+        style={{ background: '#030406' }}
       >
-        {/* Amber radial glow */}
-        <div
-          className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[600px]"
-          aria-hidden="true"
-          style={{
-            background: 'radial-gradient(circle at center, rgba(245,158,11,0.09) 0%, transparent 65%)',
-          }}
-        />
+        {/* CTA keyframes */}
+        <style>{`
+          @keyframes ctaGridPulse {
+            0%, 100% { opacity: 0.28; }
+            50%       { opacity: 0.55; }
+          }
+          @keyframes ctaOrb {
+            0%   { transform: scale(1)    translateY(0px);  }
+            50%  { transform: scale(1.12) translateY(-18px); }
+            100% { transform: scale(1)    translateY(0px);  }
+          }
+          @keyframes ctaBadgeIn {
+            from { opacity: 0; transform: translateY(12px) scale(0.9); }
+            to   { opacity: 1; transform: translateY(0)    scale(1);   }
+          }
+        `}</style>
 
-        {/* Hairline grid overlay */}
-        <div
-          className="pointer-events-none absolute inset-0 opacity-40"
+        {/* Animated SVG circuit lines */}
+        <motion.div
           aria-hidden="true"
-          style={{
-            backgroundImage:
-              'linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px)',
-            backgroundSize: '72px 72px',
-          }}
-        />
+          className="pointer-events-none absolute inset-0"
+          style={{ y: ctaGridY }}
+        >
+        <svg
+          aria-hidden="true"
+          className="h-full w-full"
+          preserveAspectRatio="xMidYMid slice"
+          style={{ opacity: 0.18 }}
+        >
+          <defs>
+            <linearGradient id="lineGradH" x1="0" x2="1" y1="0" y2="0">
+              <stop offset="0%" stopColor="transparent" />
+              <stop offset="30%" stopColor="#F59E0B" stopOpacity="0.7" />
+              <stop offset="70%" stopColor="#14B8A6" stopOpacity="0.7" />
+              <stop offset="100%" stopColor="transparent" />
+            </linearGradient>
+            <linearGradient id="lineGradV" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stopColor="transparent" />
+              <stop offset="40%" stopColor="#F59E0B" stopOpacity="0.5" />
+              <stop offset="100%" stopColor="transparent" />
+            </linearGradient>
+          </defs>
+          {/* Horizontal lines */}
+          {[18, 38, 58, 78].map((pct) => (
+            <motion.line
+              key={`h${pct}`}
+              x1="0%" y1={`${pct}%`} x2="100%" y2={`${pct}%`}
+              stroke="url(#lineGradH)" strokeWidth="0.5"
+              initial={{ pathLength: 0, opacity: 0 }}
+              whileInView={{ pathLength: 1, opacity: 1 }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{ duration: 1.8, delay: pct / 120, ease: 'easeInOut' }}
+            />
+          ))}
+          {/* Vertical lines */}
+          {[15, 35, 50, 65, 85].map((pct) => (
+            <motion.line
+              key={`v${pct}`}
+              x1={`${pct}%`} y1="0%" x2={`${pct}%`} y2="100%"
+              stroke="url(#lineGradV)" strokeWidth="0.5"
+              initial={{ pathLength: 0, opacity: 0 }}
+              whileInView={{ pathLength: 1, opacity: 1 }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{ duration: 2.2, delay: 0.1 + pct / 200, ease: 'easeInOut' }}
+            />
+          ))}
+          {/* Intersection node dots */}
+          {[{cx:'15%',cy:'38%'},{cx:'35%',cy:'18%'},{cx:'50%',cy:'58%'},{cx:'65%',cy:'38%'},{cx:'85%',cy:'78%'},{cx:'35%',cy:'78%'}].map((pt, idx) => (
+            <motion.circle
+              key={idx}
+              cx={pt.cx} cy={pt.cy} r="3"
+              fill="none"
+              stroke={idx % 2 === 0 ? '#F59E0B' : '#14B8A6'}
+              strokeWidth="1"
+              initial={{ scale: 0, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 0.7 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.8 + idx * 0.12 }}
+            />
+          ))}
+        </svg>
+        </motion.div>
 
-        <div className="relative mx-auto max-w-4xl text-center">
+        {/* Amber center glow orb */}
+        <motion.div
+          aria-hidden="true"
+          className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+          style={{ y: ctaOrbY }}
+        >
+          <div style={{ width: '700px', height: '700px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(245,158,11,0.12) 0%, transparent 60%)', filter: 'blur(40px)', animation: 'ctaOrb 8s ease-in-out infinite' }} />
+        </motion.div>
+
+        <div className="relative mx-auto max-w-3xl text-center">
+
+          {/* Stat badges */}
+          <div className="mb-12 flex flex-wrap items-center justify-center gap-3">
+            {copy.highlights.map(({ value, label }, idx) => (
+              <motion.span
+                key={label}
+                initial={{ opacity: 0, y: 12, scale: 0.9 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                className="inline-flex items-center gap-2 rounded-full px-4 py-1.5"
+                style={{
+                  background: 'rgba(255,255,255,0.04)',
+                  border: '1px solid rgba(255,255,255,0.10)',
+                  fontFamily: 'var(--font-label)',
+                  fontSize: '10px',
+                  letterSpacing: '0.12em',
+                  color: 'rgba(255,255,255,0.55)',
+                  textTransform: 'uppercase',
+                }}
+              >
+                <span style={{ color: '#F59E0B', fontWeight: 700, fontSize: '13px', fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}>
+                  {value}
+                </span>
+                {label}
+              </motion.span>
+            ))}
+          </div>
+
+          {/* Headline with amber→cream gradient */}
           <motion.h2
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            className="leading-[1.1] tracking-[-0.025em]"
+            className="leading-[1.08] tracking-[-0.03em]"
             style={{
               fontFamily: 'var(--font-display)',
               fontWeight: 400,
-              fontSize: 'clamp(2.4rem, 6vw, 4.5rem)',
-              color: '#f5f0e8',
+              fontSize: 'clamp(2.6rem, 6.5vw, 5rem)',
+              backgroundImage: 'linear-gradient(135deg, #F59E0B 0%, #FBBF24 30%, #F5ECB8 65%, #f0ece4 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
             }}
           >
             {copy.ctaTitle}
           </motion.h2>
 
+          {/* Subtext */}
           <motion.p
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.7, delay: 0.14, ease: [0.22, 1, 0.36, 1] }}
-            className="mx-auto mt-8 max-w-xl text-base leading-[1.9] sm:text-lg"
-            style={{ color: 'rgba(255,255,255,0.38)', fontWeight: 300 }}
+            className="mx-auto mt-7 max-w-lg text-base leading-[1.9] sm:text-lg"
+            style={{ color: 'rgba(255,255,255,0.38)', fontWeight: 300, fontFamily: 'var(--font-sans)' }}
           >
             {copy.ctaBody}
           </motion.p>
 
+          {/* CTA buttons row */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.65, delay: 0.26, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-12"
+            className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row"
           >
+            {/* Primary CTA */}
             <Link
               href={`/${locale}/get-started/installation`}
-              className="group inline-flex items-center gap-2.5 rounded-full px-9 py-4 text-sm font-semibold text-[#050609] transition-all hover:brightness-110"
+              className="group inline-flex items-center gap-2.5 rounded-full px-9 py-4 text-sm font-semibold text-[#050609] transition-all hover:brightness-110 hover:scale-[1.03] active:scale-[0.98]"
               style={{
                 background: '#F59E0B',
-                boxShadow: '0 0 80px -12px rgba(245,158,11,0.65)',
+                boxShadow: '0 0 60px -8px rgba(245,158,11,0.70), 0 0 120px -20px rgba(245,158,11,0.35)',
                 fontFamily: 'var(--font-sans)',
+                transition: 'transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease',
               }}
             >
               {copy.ctaCta}
               <span className="transition-transform group-hover:translate-x-1">→</span>
             </Link>
+
+            {/* Secondary: GitHub */}
+            <a
+              href="https://github.com/glaucia86/ai-sdlc-kit"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-2.5 rounded-full px-7 py-[14px] text-sm font-medium transition-all hover:border-white/30 hover:text-white"
+              style={{
+                border: '1px solid rgba(255,255,255,0.14)',
+                color: 'rgba(255,255,255,0.55)',
+                fontFamily: 'var(--font-sans)',
+                transition: 'border-color 0.2s ease, color 0.2s ease',
+              }}
+            >
+              <Github size={15} strokeWidth={1.6} aria-hidden="true" />
+              Star on GitHub
+              <ExternalLink size={12} strokeWidth={1.5} aria-hidden="true" className="opacity-50" />
+            </a>
           </motion.div>
         </div>
       </section>
+
+      {/* ─────────── FOOTER ─────────── */}
+      <footer
+        style={{ background: '#020305', borderTop: '1px solid rgba(245,158,11,0.14)' }}
+      >
+        {/* Main footer grid */}
+        <div className="mx-auto max-w-7xl px-6 py-16 sm:px-10 lg:px-12">
+          <div className="grid gap-12 md:grid-cols-4">
+
+            {/* Brand column */}
+            <div className="md:col-span-1">
+              <div className="mb-4 flex items-center gap-2">
+                <span
+                  style={{
+                    fontFamily: 'var(--font-display)',
+                    fontSize: '1.15rem',
+                    letterSpacing: '-0.02em',
+                    color: '#f5f0e8',
+                    fontWeight: 400,
+                  }}
+                >
+                  AI SDLC Kit
+                </span>
+              </div>
+              <p
+                className="mb-6 text-xs leading-[1.8]"
+                style={{ color: 'rgba(255,255,255,0.36)', fontFamily: 'var(--font-sans)', fontWeight: 300 }}
+              >
+                {copy.footer.tagline}
+              </p>
+              <a
+                href="https://github.com/glaucia86/ai-sdlc-kit"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-[10px] font-medium uppercase tracking-[0.18em] transition-all hover:border-amber-400/40 hover:text-amber-400"
+                style={{
+                  fontFamily: 'var(--font-label)',
+                  border: '1px solid rgba(255,255,255,0.12)',
+                  color: 'rgba(255,255,255,0.45)',
+                  transition: 'border-color 0.2s ease, color 0.2s ease',
+                }}
+              >
+                <Github size={12} strokeWidth={1.6} aria-hidden="true" />
+                GitHub
+                <ExternalLink size={10} strokeWidth={1.5} aria-hidden="true" className="opacity-60" />
+              </a>
+            </div>
+
+            {/* Get Started column */}
+            <div>
+              <p
+                className="mb-5 text-[9px] font-medium uppercase tracking-[0.38em]"
+                style={{ color: '#F59E0B', opacity: 0.7, fontFamily: 'var(--font-label)' }}
+              >
+                {copy.footer.colGetStarted}
+              </p>
+              <ul className="space-y-3">
+                {[
+                  { label: 'How it works', path: 'get-started/how-it-works' },
+                  { label: 'Installation', path: 'get-started/installation' },
+                  { label: 'Quick start', path: 'get-started/quick-start' },
+                ].map(({ label, path }) => (
+                  <li key={path}>
+                    <Link
+                      href={`/${locale}/${path}`}
+                      className="text-xs transition-colors hover:text-white"
+                      style={{ color: 'rgba(255,255,255,0.38)', fontFamily: 'var(--font-sans)' }}
+                    >
+                      {label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Guide column */}
+            <div>
+              <p
+                className="mb-5 text-[9px] font-medium uppercase tracking-[0.38em]"
+                style={{ color: '#F59E0B', opacity: 0.7, fontFamily: 'var(--font-label)' }}
+              >
+                {copy.footer.colGuide}
+              </p>
+              <ul className="space-y-3">
+                {[
+                  { label: 'Discovery phase', path: 'guide/discovery-phase' },
+                  { label: 'HITL checkpoints', path: 'guide/hil-checkpoints' },
+                  { label: 'Spec phase', path: 'guide/spec-phase' },
+                  { label: 'Epic phase', path: 'guide/epic-phase' },
+                  { label: 'Operations', path: 'guide/operations-phase' },
+                ].map(({ label, path }) => (
+                  <li key={path}>
+                    <Link
+                      href={`/${locale}/${path}`}
+                      className="text-xs transition-colors hover:text-white"
+                      style={{ color: 'rgba(255,255,255,0.38)', fontFamily: 'var(--font-sans)' }}
+                    >
+                      {label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Reference column */}
+            <div>
+              <p
+                className="mb-5 text-[9px] font-medium uppercase tracking-[0.38em]"
+                style={{ color: '#F59E0B', opacity: 0.7, fontFamily: 'var(--font-label)' }}
+              >
+                {copy.footer.colReference}
+              </p>
+              <ul className="space-y-3">
+                {[
+                  { label: 'Agents', path: 'reference/agents' },
+                  { label: 'Prompts', path: 'reference/prompts' },
+                  { label: 'Templates', path: 'reference/templates' },
+                  { label: 'Artifacts', path: 'reference/artifacts' },
+                ].map(({ label, path }) => (
+                  <li key={path}>
+                    <Link
+                      href={`/${locale}/${path}`}
+                      className="text-xs transition-colors hover:text-white"
+                      style={{ color: 'rgba(255,255,255,0.38)', fontFamily: 'var(--font-sans)' }}
+                    >
+                      {label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom bar */}
+        <div
+          className="mx-auto max-w-7xl px-6 py-5 sm:px-10 lg:px-12"
+          style={{ borderTop: '1px solid rgba(255,255,255,0.055)' }}
+        >
+          <div className="flex flex-col items-center justify-between gap-3 sm:flex-row">
+            <p
+              className="text-[10px] uppercase tracking-[0.24em]"
+              style={{ color: 'rgba(255,255,255,0.22)', fontFamily: 'var(--font-label)' }}
+            >
+              {copy.footer.copyright}
+            </p>
+            <a
+              href="https://github.com/glaucia86/ai-sdlc-kit"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 text-[10px] uppercase tracking-[0.2em] transition-colors hover:text-amber-400"
+              style={{ color: 'rgba(255,255,255,0.22)', fontFamily: 'var(--font-label)' }}
+            >
+              <Github size={11} strokeWidth={1.5} aria-hidden="true" />
+              glaucia86/ai-sdlc-kit
+            </a>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
