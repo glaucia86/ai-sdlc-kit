@@ -25,4 +25,4 @@ Rules:
 - write in English
 - use clear headings and descriptive text
 
-When done, notify the user that `idea.md` is ready for review (mandatory HIL before proceeding to `/discovery-spec`).
+When done, notify the user that `idea.md` is ready for review (mandatory HITL before proceeding to `/discovery-spec`).

@@ -90,7 +90,7 @@ Rules:
 - use technical, objective, and actionable language
 - if any section does not apply to the epic, explicitly record "Not applicable for this epic." instead of omitting it
 
-**Pause here and notify the user that `ops-epic-<N>.md` is ready for review (mandatory HIL).**
+**Pause here and notify the user that `ops-epic-<N>.md` is ready for review (mandatory HITL).**
 
 After user approval, signal:
 

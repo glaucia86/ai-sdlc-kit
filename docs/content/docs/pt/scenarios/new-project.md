@@ -40,7 +40,7 @@ Saída: `idea.md`
 
 O agente Discovery remove viés, preenche lacunas estruturais e produz um documento de ideia limpo e inequívoco que não sobre-especifica nem sub-especifica o produto.
 
-**HIL-A1:** Revise `idea.md`. Pergunte-se: isso captura o que eu realmente quero construir? Algo está faltando? Algo está declarado como fato que é, na verdade, uma premissa?
+**HITL-A1:** Revise `idea.md`. Pergunte-se: isso captura o que eu realmente quero construir? Algo está faltando? Algo está declarado como fato que é, na verdade, uma premissa?
 
 ### Passo 2 — Spec funcional
 
@@ -51,7 +51,7 @@ Saída: `non-technical-spec.md`
 
 O agente PM traduz a ideia em requisitos funcionais estruturados — o que o produto faz, para quem, sob quais restrições — sem fazer escolhas técnicas.
 
-**HIL-A2:** Revise `non-technical-spec.md`. Pergunte-se: todas as histórias de usuário estão completas? Existem casos extremos que não estão cobertos?
+**HITL-A2:** Revise `non-technical-spec.md`. Pergunte-se: todas as histórias de usuário estão completas? Existem casos extremos que não estão cobertos?
 
 ### Passo 3 — Requisitos de produto
 
@@ -62,7 +62,7 @@ Saída: `PRD.md`
 
 O agente Tech Lead estrutura a spec funcional em requisitos de produto formais: critérios de aceitação testáveis, priorização, dependências.
 
-**HIL-A3:** Revise `PRD.md`. Pergunte-se: esses requisitos são testáveis? As prioridades estão corretas?
+**HITL-A3:** Revise `PRD.md`. Pergunte-se: esses requisitos são testáveis? As prioridades estão corretas?
 
 ### Passo 4 — Especificação técnica
 
@@ -73,7 +73,7 @@ Saída: `technical-spec.md`
 
 O agente Architect seleciona a stack, define a arquitetura, identifica pontos de integração e documenta todas as restrições técnicas.
 
-**HIL-A4:** Revise `technical-spec.md`. Pergunte-se: esta arquitetura é sólida? As escolhas de stack são apropriadas? Existem restrições que o agente não poderia saber?
+**HITL-A4:** Revise `technical-spec.md`. Pergunte-se: esta arquitetura é sólida? As escolhas de stack são apropriadas? Existem restrições que o agente não poderia saber?
 
 ### Passo 5 — Estrutura de epics
 
@@ -84,7 +84,7 @@ Saída: `epics.md`
 
 O agente Architect divide o escopo completo do produto em epics independentemente entregáveis, cada um terminando com um incremento testável e entregável.
 
-**HIL-A5:** Revise `epics.md`. Pergunte-se: esses epics são independentes? O sequenciamento está correto? O Epic 1 está bem dimensionado para uma primeira entrega?
+**HITL-A5:** Revise `epics.md`. Pergunte-se: esses epics são independentes? O sequenciamento está correto? O Epic 1 está bem dimensionado para uma primeira entrega?
 
 ---
 
@@ -101,7 +101,7 @@ Saída: `spec-epic-1.md`, `PRD.md` (com escopo do epic), `epic-1.md`
 
 O Architect gera a spec por epic, o PRD com escopo reduzido e a lista de tarefas para o Epic 1.
 
-**HIL-B1:** Revise os três artefatos. A spec é o contrato para este epic. Aprove apenas quando os critérios de aceitação estiverem completos.
+**HITL-B1:** Revise os três artefatos. A spec é o contrato para este epic. Aprove apenas quando os critérios de aceitação estiverem completos.
 
 ### Passo 2 — Inicializar tarefas
 
@@ -112,7 +112,7 @@ Saída: decomposição granular de tarefas
 
 O Planner decompõe a lista de tarefas do epic em unidades implementáveis — cada tarefa focada em uma única preocupação.
 
-**HIL-B2:** Revise a lista de tarefas. As tarefas são granulares o suficiente? Algo está faltando?
+**HITL-B2:** Revise a lista de tarefas. As tarefas são granulares o suficiente? Algo está faltando?
 
 ### Passo 3 — Implementar cada tarefa
 
@@ -137,7 +137,7 @@ Execute `/task-review` usando o agente 🔎 Reviewer.
 Entrada: implementação + spec + resultados de testes  
 Saída: relatório de revisão
 
-**HIL-B3/B4:** Revise o relatório. Todos os critérios de aceitação estão satisfeitos? Algum problema sinalizado é bloqueador?
+**HITL-B3/B4:** Revise o relatório. Todos os critérios de aceitação estão satisfeitos? Algum problema sinalizado é bloqueador?
 
 ### Passo 6 — Fechar o epic
 
@@ -146,7 +146,7 @@ Execute `/epic-close` usando o agente 🚀 Ops.
 Entrada: `CONTEXT.md` + implementação  
 Saída: `ops-epic-1.md` (plano de deploy, rollback, observabilidade)
 
-**HIL-B5:** Aprove o plano de deploy antes do merge.
+**HITL-B5:** Aprove o plano de deploy antes do merge.
 
 ### Passo 7 — Sincronizar contexto
 

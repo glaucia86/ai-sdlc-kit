@@ -3,7 +3,7 @@ title: Referencia de Templates
 description: Todos los templates de artefactos del AI SDLC Kit con sus secciones y propósito.
 ---
 
-El AI SDLC Kit incluye templates estructurados para cada artefacto del pipeline. Los templates garantizan que los artefactos generados por los agentes sean consistentes, revisables y útiles en los HIL checkpoints.
+El AI SDLC Kit incluye templates estructurados para cada artefacto del pipeline. Los templates garantizan que los artefactos generados por los agentes sean consistentes, revisables y útiles en los HITL checkpoints.
 
 ---
 

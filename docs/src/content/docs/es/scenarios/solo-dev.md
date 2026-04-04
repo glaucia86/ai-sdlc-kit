@@ -3,7 +3,7 @@ title: Desarrollador Solo
 description: Cómo adaptar el AI SDLC Kit cuando trabajas sin equipo.
 ---
 
-El AI SDLC Kit fue diseñado para equipos, pero funciona bien para un desarrollador en solitario. La diferencia está en cómo manejas los HIL checkpoints y cómo adaptas el proceso sin perder sus garantías fundamentales.
+El AI SDLC Kit fue diseñado para equipos, pero funciona bien para un desarrollador en solitario. La diferencia está en cómo manejas los HITL checkpoints y cómo adaptas el proceso sin perder sus garantías fundamentales.
 
 ---
 
@@ -19,13 +19,13 @@ Esto lleva a aprobar artefactos que tienen suposiciones incorrectas o ambigüeda
 
 > **Nunca apruebes un artefacto inmediatamente después de que fue generado.**
 
-Espera al menos algunas horas — idealmente hasta el día siguiente — antes de revisar un artefacto en un HIL checkpoint. El distanciamiento temporal te ayuda a leerlo de forma más crítica, como si fuera de otra persona.
+Espera al menos algunas horas — idealmente hasta el día siguiente — antes de revisar un artefacto en un HITL checkpoint. El distanciamiento temporal te ayuda a leerlo de forma más crítica, como si fuera de otra persona.
 
 Esta es la adaptación más importante para el desarrollador solo.
 
 ---
 
-## HIL simplificado para solo dev
+## HITL simplificado para solo dev
 
 No necesitas ser tan formal como en un equipo, pero los checkpoints siguen siendo obligatorios. Una versión simplificada:
 
@@ -80,4 +80,4 @@ Como desarrollador solo, eres el humano detrás de todos los agentes. Los agente
 
 ## Ventaja del desarrollador solo
 
-Como todos los contextos viven en tu cabeza, puedes enriquecer los artefactos de los agentes con correcciones precisas en los HIL checkpoints. Esto hace que tu ciclo sea más rápido que el de un equipo coordinando revisiones — si usas bien el distanciamiento temporal y lees los artefactos con ojo crítico.
+Como todos los contextos viven en tu cabeza, puedes enriquecer los artefactos de los agentes con correcciones precisas en los HITL checkpoints. Esto hace que tu ciclo sea más rápido que el de un equipo coordinando revisiones — si usas bien el distanciamiento temporal y lees los artefactos con ojo crítico.

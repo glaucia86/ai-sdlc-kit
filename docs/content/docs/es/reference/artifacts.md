@@ -11,7 +11,7 @@ Los artefactos son los documentos y archivos producidos a lo largo del pipeline 
 
 Estos artefactos son producidos durante la fase de Discovery y definen el proyecto de alto nivel a bajo nivel.
 
-| Artefacto | Producido por | Consumido por | HIL requerido |
+| Artefacto | Producido por | Consumido por | HITL requerido |
 |---|---|---|---|
 | `idea.md` | 🧭 Discovery | 🗂️ PM | ✅ |
 | `non-technical-spec.md` | 🗂️ PM | 🧑‍💼 Tech Lead | ✅ |
@@ -25,7 +25,7 @@ Estos artefactos son producidos durante la fase de Discovery y definen el proyec
 
 Estos artefactos son producidos una vez por epic y son la puerta antes de la implementación.
 
-| Artefacto | Producido por | Consumido por | HIL requerido |
+| Artefacto | Producido por | Consumido por | HITL requerido |
 |---|---|---|---|
 | `epic-N.md` | 🏗️ Architect | Todos los agentes del epic | ✅ |
 | `spec-epic-N.md` | 🏗️ Architect | 🛠️ Implementer, 🧪 QA, 🔎 Reviewer | ✅ |
@@ -36,7 +36,7 @@ Estos artefactos son producidos una vez por epic y son la puerta antes de la imp
 
 Estos artefactos son producidos para tareas individuales en el Flow B.
 
-| Artefacto | Producido por | Consumido por | HIL requerido |
+| Artefacto | Producido por | Consumido por | HITL requerido |
 |---|---|---|---|
 | `tarefa.md` | 📥 Intake | 📐 Planner | ✅ |
 | `PRD.md` | 📐 Planner | 📐 Planner (spec) | ✅ |
@@ -60,21 +60,21 @@ Estos artefactos son transversales — sobreviven entre epics y acumulan conocim
 ```
 idea.txt
   ↓ [/discovery-refine]
-idea.md  ──────────────────────────────────────────────────── HIL ✅
+idea.md  ──────────────────────────────────────────────────── HITL ✅
   ↓ [/discovery-spec]
-non-technical-spec.md  ──────────────────────────────────── HIL ✅
+non-technical-spec.md  ──────────────────────────────────── HITL ✅
   ↓ [/discovery-prd]
-PRD.md  ──────────────────────────────────────────────────── HIL ✅
+PRD.md  ──────────────────────────────────────────────────── HITL ✅
   ↓ [/discovery-tech-spec]
-technical-spec.md  ──────────────────────────────────────── HIL ✅
+technical-spec.md  ──────────────────────────────────────── HITL ✅
   ↓ [/discovery-epics]
-epics.md  ────────────────────────────────────────────────── HIL ✅
+epics.md  ────────────────────────────────────────────────── HITL ✅
   ↓ [/epic-init N]
-epic-N.md + spec-epic-N.md  ─────────────────────────────── HIL ✅
+epic-N.md + spec-epic-N.md  ─────────────────────────────── HITL ✅
   ↓ [/task-implement → /task-tests → /task-review]
 código implementado y aprobado
   ↓ [/epic-close N]
-resumen de deploy  ───────────────────────────────────────── HIL ✅
+resumen de deploy  ───────────────────────────────────────── HITL ✅
   ↓ [/context-sync N]
 CONTEXT.md actualizado
 ```

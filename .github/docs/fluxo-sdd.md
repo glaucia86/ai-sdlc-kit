@@ -25,11 +25,11 @@ Indicado quando existe uma ideia bruta a ser refinada e estruturada antes da imp
 ### Fase de Discovery
 
 1. Criar `doc-specs/idea.txt`
-2. Executar `/discovery-refine` → **revisar** `doc-specs/idea.md` (HIL ✅)
-3. Executar `/discovery-spec` → **revisar** `doc-specs/non-technical-spec.md` (HIL ✅)
-4. Executar `/discovery-prd` → **revisar** `doc-specs/PRD.md` (HIL ✅)
-5. Executar `/discovery-tech-spec` → **revisar** `doc-specs/technical-spec.md` (HIL ✅)
-6. Executar `/discovery-epics` → **revisar** `doc-specs/epics.md` (HIL ✅)
+2. Executar `/discovery-refine` → **revisar** `doc-specs/idea.md` (HITL ✅)
+3. Executar `/discovery-spec` → **revisar** `doc-specs/non-technical-spec.md` (HITL ✅)
+4. Executar `/discovery-prd` → **revisar** `doc-specs/PRD.md` (HITL ✅)
+5. Executar `/discovery-tech-spec` → **revisar** `doc-specs/technical-spec.md` (HITL ✅)
+6. Executar `/discovery-epics` → **revisar** `doc-specs/epics.md` (HITL ✅)
 
 ### Fase de Delivery (por épico)
 
@@ -41,15 +41,15 @@ Para cada épico em `epics.md`:
    ```
 
 7. Executar `/epic-init` (o agente pergunta o número do épico)
-   - **revisar** `doc-specs/<N>-epic/epic-<N>.md` (HIL ✅)
-   - **revisar** `doc-specs/<N>-epic/PRD.md` (HIL ✅)
-   - **revisar** `doc-specs/<N>-epic/spec-epic-<N>.md` (HIL ✅)
+   - **revisar** `doc-specs/<N>-epic/epic-<N>.md` (HITL ✅)
+   - **revisar** `doc-specs/<N>-epic/PRD.md` (HITL ✅)
+   - **revisar** `doc-specs/<N>-epic/spec-epic-<N>.md` (HITL ✅)
    - `doc-specs/<N>-epic/decisions-log.md` criado automaticamente (vazio)
 8. Executar `/task-implement` apontando para `doc-specs/<N>-epic/PRD.md` e `doc-specs/<N>-epic/spec-epic-<N>.md`
 9. Preencher o checklist em `spec-epic-<N>.md` e atualizar `decisions-log.md`
-10. Executar `/task-tests` → aguardar gate de QA (HIL se gate bloqueado ⛔)
+10. Executar `/task-tests` → aguardar gate de QA (HITL se gate bloqueado ⛔)
 11. Executar `/task-review`
-12. Executar `/epic-close <N>` → **revisar** `doc-specs/<N>-epic/ops-epic-<N>.md` (HIL ✅)
+12. Executar `/epic-close <N>` → **revisar** `doc-specs/<N>-epic/ops-epic-<N>.md` (HITL ✅)
 13. Mergear branch `feat/E<NN>-<slug>` para `main` e validar deploy em produção
 14. Executar `/context-sync <N>`
 15. Avançar para o próximo épico
@@ -63,11 +63,11 @@ Para cada épico em `epics.md`:
 Indicado quando a tarefa já está clara. Este é o fluxo original do ai-sdlc-kit, preservado integralmente.
 
 1. Criar `doc-specs/tarefa.txt`
-2. Executar `/task-init` → **revisar** `doc-specs/tarefa.md` (HIL ✅)
-3. Executar `/task-prd` → **revisar** `doc-specs/PRD.md` (HIL ✅)
-4. Executar `/task-spec` → **revisar** `doc-specs/spec.md` (HIL ✅)
+2. Executar `/task-init` → **revisar** `doc-specs/tarefa.md` (HITL ✅)
+3. Executar `/task-prd` → **revisar** `doc-specs/PRD.md` (HITL ✅)
+4. Executar `/task-spec` → **revisar** `doc-specs/spec.md` (HITL ✅)
 5. Executar `/task-implement`
-6. Executar `/task-tests` → aguardar gate de QA (HIL se gate bloqueado ⛔)
+6. Executar `/task-tests` → aguardar gate de QA (HITL se gate bloqueado ⛔)
 7. Executar `/task-review`
 
 ---

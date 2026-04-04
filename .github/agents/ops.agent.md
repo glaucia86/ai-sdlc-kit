@@ -69,7 +69,7 @@ This responsibility is triggered at any time after the epic is in production, vi
 
 At the end of `/epic-close`, explicitly signal to the user:
 
-1. The `ops-epic-<N>.md` file is ready for review (mandatory HIL).
+1. The `ops-epic-<N>.md` file is ready for review (mandatory HITL).
 2. Once approved, the branch `feat/E<NN>-<slug>` must be merged into `main`.
 3. The deploy must be validated in production using the criteria defined in `ops-epic-<N>.md`.
 4. Only after production validation confirms success, run `/context-sync <N>` and proceed to the next epic.

@@ -52,11 +52,11 @@ Juntos, esses três artefatos dão ao agente 🛠️ Implementer uma visão comp
 Todo prompt na fase de Construção tem um portão:
 
 1. `/epic-init` — Architect gera os três artefatos de spec a partir de `CONTEXT.md` + `technical-spec.md`
-2. **HIL checkpoint humano** — revisa a spec antes de qualquer código ser gerado
+2. **HITL checkpoint humano** — revisa a spec antes de qualquer código ser gerado
 3. `/task-init` — Planner decompõe `epic-N.md` em tarefas; humano aprova a lista de tarefas
 4. `/task-implement` — Implementer gera código por tarefa; a spec está sempre no contexto
 5. `/task-review` — Reviewer verifica a implementação contra a spec; sinaliza divergências
-6. **HIL checkpoint humano** — revisão final antes do merge
+6. **HITL checkpoint humano** — revisão final antes do merge
 
 O agente Implementer lê a spec. O agente Reviewer referencia a spec. Divergência da spec é um bloqueador, não um comentário.
 

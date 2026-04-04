@@ -5,10 +5,10 @@ import type { ReactNode } from 'react';
 
 export default async function DocsRootLayout({
   params,
-  children,
+  cHITLdren,
 }: {
   params: Promise<{ lang: string }>;
-  children: ReactNode;
+  cHITLdren: ReactNode;
 }) {
   const { lang } = await params;
 
@@ -17,7 +17,7 @@ export default async function DocsRootLayout({
       tree={source.getPageTree(lang)}
       {...baseOptions(lang)}
     >
-      {children}
+      {cHITLdren}
     </DocsLayout>
   );
 }

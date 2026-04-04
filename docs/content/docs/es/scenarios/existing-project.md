@@ -66,7 +66,7 @@ Usa **`/task-spec`** directamente, proporcionando el PRD existente como contexto
 
 ## Paso 3: Ejecutar el ciclo normal
 
-Una vez que tengas la spec aprobada en el HIL checkpoint, el ciclo es idéntico al de un proyecto nuevo:
+Una vez que tengas la spec aprobada en el HITL checkpoint, el ciclo es idéntico al de un proyecto nuevo:
 
 ```
 /task-implement
@@ -95,7 +95,7 @@ Esto garantiza que `CONTEXT.md` refleje el estado actualizado del proyecto para 
 | No crear `CONTEXT.md` inicial | Los agentes actúan sin conocer el sistema existente | Crea `CONTEXT.md` antes de cualquier prompt |
 | Dar inputs vagos al Intake | `tarefa.md` hereda la vaguedad | Sé específico en `tarefa.txt` — el Intake no infiere contexto que no está escrito |
 | Asumir que el Implementer conoce el código existente | El Implementer solo conoce lo que está en la spec y en `CONTEXT.md` | Incluye en la spec referencias a módulos y patrones existentes |
-| Saltarse los HIL checkpoints por "conocer el proyecto" | El sesgo de familiaridad hace ignorar suposiciones incorrectas | Lee los artefactos como si otro los hubiera escrito |
+| Saltarse los HITL checkpoints por "conocer el proyecto" | El sesgo de familiaridad hace ignorar suposiciones incorrectas | Lee los artefactos como si otro los hubiera escrito |
 | No actualizar `CONTEXT.md` después de cada entrega | El contexto queda desactualizado y los agentes actúan sobre información incorrecta | Ejecuta siempre `/context-sync` después del deploy |
 
 ---
@@ -104,6 +104,6 @@ Esto garantiza que `CONTEXT.md` refleje el estado actualizado del proyecto para 
 
 Si el proyecto tiene más de un desarrollador:
 
-- Define quién es responsable de ejecutar los HIL checkpoints para cada tipo de artefacto
+- Define quién es responsable de ejecutar los HITL checkpoints para cada tipo de artefacto
 - Usa `decisions-log.md` para registrar decisiones de arquitectura del equipo, no solo las de los agentes
 - Asegúrate de que todos los miembros del equipo entiendan que `CONTEXT.md` es la fuente de verdad para el contexto del proyecto

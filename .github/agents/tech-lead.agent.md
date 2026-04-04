@@ -28,6 +28,6 @@ Read `doc-specs/non-technical-spec.md` and generate `doc-specs/PRD.md` (Product 
 
 `doc-specs/PRD.md` — complete PRD with the sections defined in the `/discovery-prd` prompt.
 
-## Mandatory HIL
+## Mandatory HITL
 
 After generating `PRD.md`, signal to the user that the file is ready for review before proceeding to the next step.

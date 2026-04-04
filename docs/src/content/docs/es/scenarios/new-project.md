@@ -33,7 +33,7 @@ La fase de Discovery transforma tu idea en artefactos estructurados listos para 
 
 El agente 🧭 Discovery produce `idea.md`. Revisa que tu idea fue capturada sin distorsión.
 
-> **HIL checkpoint:** ¿`idea.md` representa correctamente lo que quieres construir?
+> **HITL checkpoint:** ¿`idea.md` representa correctamente lo que quieres construir?
 
 ### Paso 2: Spec funcional
 
@@ -43,7 +43,7 @@ El agente 🧭 Discovery produce `idea.md`. Revisa que tu idea fue capturada sin
 
 El agente 🗂️ PM produce `non-technical-spec.md` con los recorridos de usuario y las reglas de negocio.
 
-> **HIL checkpoint:** ¿Los recorridos de usuario y las reglas de negocio son correctos y completos?
+> **HITL checkpoint:** ¿Los recorridos de usuario y las reglas de negocio son correctos y completos?
 
 ### Paso 3: PRD
 
@@ -53,7 +53,7 @@ El agente 🗂️ PM produce `non-technical-spec.md` con los recorridos de usuar
 
 El agente 🧑‍💼 Tech Lead produce `PRD.md` con el alcance, los criterios de aceptación y los riesgos.
 
-> **HIL checkpoint:** ¿El alcance está bien delimitado? ¿Los criterios de aceptación son verificables?
+> **HITL checkpoint:** ¿El alcance está bien delimitado? ¿Los criterios de aceptación son verificables?
 
 ### Paso 4: Arquitectura
 
@@ -63,7 +63,7 @@ El agente 🧑‍💼 Tech Lead produce `PRD.md` con el alcance, los criterios d
 
 El agente 🏗️ Architect produce `technical-spec.md` con el stack, la arquitectura y los ADRs.
 
-> **HIL checkpoint:** ¿Las decisiones de arquitectura son adecuadas para el contexto?
+> **HITL checkpoint:** ¿Las decisiones de arquitectura son adecuadas para el contexto?
 
 ### Paso 5: Epics
 
@@ -73,7 +73,7 @@ El agente 🏗️ Architect produce `technical-spec.md` con el stack, la arquite
 
 El agente 🏗️ Architect produce `epics.md` con la secuenciación del trabajo.
 
-> **HIL checkpoint:** ¿La secuenciación y los límites de los epics tienen sentido?
+> **HITL checkpoint:** ¿La secuenciación y los límites de los epics tienen sentido?
 
 ---
 
@@ -89,7 +89,7 @@ Para cada epic en `epics.md`, repite el siguiente ciclo:
 
 El agente 🏗️ Architect produce `epic-1.md` y `spec-epic-1.md`. Esta es la puerta más importante.
 
-> **HIL checkpoint:** ¿La spec es suficientemente precisa? ¿Las tareas son claras y sin ambigüedad? ¿Los criterios de aceptación son testables?
+> **HITL checkpoint:** ¿La spec es suficientemente precisa? ¿Las tareas son claras y sin ambigüedad? ¿Los criterios de aceptación son testables?
 
 ### Implementación por tarea
 
@@ -111,7 +111,7 @@ Si la revisión aprueba, avanza a la siguiente tarea. Si no, corrige y reinicia 
 
 El agente 🚀 Ops prepara el deploy y la documentación de observabilidad.
 
-> **HIL checkpoint:** ¿El epic está completo y listo para producción?
+> **HITL checkpoint:** ¿El epic está completo y listo para producción?
 
 ```
 /context-sync 1
@@ -162,7 +162,7 @@ doc-specs/
 El tiempo varía mucho según la complejidad del proyecto, pero en general:
 
 - **Discovery completo** (pasos 1-5): puede hacerse en una sola sesión de trabajo si la idea es clara
-- **Spec de un epic** (epic-init): 15-30 minutos incluyendo el HIL checkpoint
+- **Spec de un epic** (epic-init): 15-30 minutos incluyendo el HITL checkpoint
 - **Implementación de un epic**: depende de la complejidad de las tareas
 
-La mayor inversión de tiempo es en los HIL checkpoints — y es intencional. El tiempo invertido en revisar artefactos evita retrabajo en la implementación.
+La mayor inversión de tiempo es en los HITL checkpoints — y es intencional. El tiempo invertido en revisar artefactos evita retrabajo en la implementación.

@@ -47,7 +47,7 @@
 - **Immediate investigation:** <!-- Where to look first? Which logs, metrics, or endpoints to check? -->
 - **Remediation action:**
   1. Workaround: <!-- Immediate action to limit impact without fixing the root cause -->
-  2. Mitigate: <!-- Reduce impact while the fix is being prepared -->
+  2. Mitigate: <!-- Reduce impact wHITLe the fix is being prepared -->
   3. Fix: <!-- Definitive fix -->
   4. Prevent: <!-- What to change so this doesn't happen again -->
 - **Escalation:** <!-- If the above actions don't resolve in X minutes, who/what to escalate to? -->

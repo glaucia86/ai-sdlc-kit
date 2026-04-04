@@ -1,19 +1,19 @@
 ---
-title: HIL Checkpoints
-description: Todos os HIL checkpoints do AI SDLC Kit — quando ocorrem, o que revisar e quando retroceder.
+title: HITL Checkpoints
+description: Todos os HITL checkpoints do AI SDLC Kit — quando ocorrem, o que revisar e quando retroceder.
 ---
 
-## O que é HIL neste contexto?
+## O que é HITL neste contexto?
 
-Human in the Loop (HIL) é a prática de inserir **portões de revisão humana obrigatórios** em pontos específicos do fluxo orientado por IA. No AI SDLC Kit, HIL não é uma caixa de seleção — é o princípio estrutural que impede que artefatos gerados por IA fluam diretamente para a implementação sem validação humana.
+Human in the Loop (HITL) é a prática de inserir **portões de revisão humana obrigatórios** em pontos específicos do fluxo orientado por IA. No AI SDLC Kit, HITL não é uma caixa de seleção — é o princípio estrutural que impede que artefatos gerados por IA fluam diretamente para a implementação sem validação humana.
 
-O kit trata cada HIL checkpoint como um ponto de decisão: _Este artefato é preciso e completo o suficiente para guiar o próximo passo?_
+O kit trata cada HITL checkpoint como um ponto de decisão: _Este artefato é preciso e completo o suficiente para guiar o próximo passo?_
 
 Se a resposta for **não**, o fluxo retorna à etapa anterior. Não há avanço com uma spec "próxima o suficiente".
 
 ---
 
-## Referência completa de HIL
+## Referência completa de HITL
 
 ### Flow A — Discovery + Entrega
 
@@ -88,4 +88,4 @@ Se a resposta for **não**, o fluxo retorna à etapa anterior. Não há avanço 
 | Portão QA falha | Retorne ao Implementer → humano decide se corrige ou adia |
 | Reviewer encontra desvio da spec | Atualize spec ou implementação → execute `/task-review` novamente |
 
-Retroceder não é uma falha — é o mecanismo que mantém o fluxo preciso. O custo de uma spec ruim que flui para a implementação é sempre maior do que o custo de uma iteração HIL extra.
+Retroceder não é uma falha — é o mecanismo que mantém o fluxo preciso. O custo de uma spec ruim que flui para a implementação é sempre maior do que o custo de uma iteração HITL extra.

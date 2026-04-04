@@ -204,11 +204,11 @@ Nenhum fluxo é pré-requisito do outro. A escolha é feita pelo time com base n
 | 🧑‍💼 Tech Lead | `tech-lead.agent.md` | Lê `non-technical-spec.md` e gera `PRD.md` |
 | 🏗️ Architect | `architect.agent.md` | Gera `technical-spec.md` e `epics.md`; prepara artefatos de épicos |
 
-### HILs obrigatórios na Fase de Discovery
+### HITLs obrigatórios na Fase de Discovery
 
 Todos os artefatos da fase de Discovery exigem revisão humana antes de avançar:
 
-| Artefato | Prompt que o gera | HIL |
+| Artefato | Prompt que o gera | HITL |
 |---|---|---|
 | `idea.md` | `/discovery-refine` | ✅ obrigatório |
 | `non-technical-spec.md` | `/discovery-spec` | ✅ obrigatório |
@@ -237,7 +237,7 @@ Cada pasta contém três artefatos: `epic-<N>.md`, `PRD.md` e `spec-epic-<N>.md`
 
 ### Implementação por épico
 
-Após os HILs dos três artefatos do épico, a implementação segue com `/task-implement`, apontando manualmente para os arquivos do épico:
+Após os HITLs dos três artefatos do épico, a implementação segue com `/task-implement`, apontando manualmente para os arquivos do épico:
 - `doc-specs/<N>-epic/PRD.md`
 - `doc-specs/<N>-epic/spec-epic-<N>.md`
 
@@ -267,7 +267,7 @@ Onde `<NN>` é o número do épico com dois dígitos e `<slug>` é um identifica
 - `feat/E03-painel-admin`
 
 A branch do épico N deve ser mergeada para `main` somente após:
-1. `ops-epic-<N>.md` gerado e aprovado (HIL)
+1. `ops-epic-<N>.md` gerado e aprovado (HITL)
 2. Deploy executado e validado em produção
 
 O próximo épico só pode começar após a branch anterior estar mergeada e o deploy validado.
@@ -290,22 +290,22 @@ A seção `## Critérios de aceite técnicos` de cada `spec-epic-<N>.md` contém
 
 ```
 0.  Criar branch feat/E<NN>-<slug>          [pré-requisito manual]
-1.  /epic-init <N>                       [HIL: epic-<N>.md]
-                                             [HIL: PRD.md do épico]
-                                             [HIL: spec-epic-<N>.md]
+1.  /epic-init <N>                       [HITL: epic-<N>.md]
+                                             [HITL: PRD.md do épico]
+                                             [HITL: spec-epic-<N>.md]
 2.  /task-implement
 3.  Preencher checklist + decisions-log.md
-4.  /task-review                             [HIL obrigatório]
-5.  /epic-close <N>                    [HIL obrigatório]
+4.  /task-review                             [HITL obrigatório]
+5.  /epic-close <N>                    [HITL obrigatório]
 6.  Mergear branch feat/E<NN>-<slug>         [gate manual]
 7.  Validar em produção                      [gate manual]
 8.  /context-sync <N>
 9.  Avançar para o próximo épico
 ```
 
-### HILs obrigatórios na Fase de Operations
+### HITLs obrigatórios na Fase de Operations
 
-| Artefato | Prompt que o gera | HIL |
+| Artefato | Prompt que o gera | HITL |
 |---|---|---|
 | `ops-epic-<N>.md` | `/epic-close` | ✅ obrigatório |
 | Merge da branch + validação em produção | — gate manual | ✅ obrigatório |

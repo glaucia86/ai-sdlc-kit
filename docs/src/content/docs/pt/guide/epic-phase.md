@@ -29,7 +29,7 @@ spec-epic-N.md aprovado pelo humano
    ↓
 /task-review  (🔎 Reviewer avalia aderência)
    ↓
-  HIL ✅  Humano revisa saída do Reviewer
+  HITL ✅  Humano revisa saída do Reviewer
    ↓
   Se aprovado → avança para a fase de Operations
   Se rejeitado → atualiza spec ou implementação → executa novamente
@@ -112,7 +112,7 @@ O agente 🔎 Reviewer:
 | Lacunas | Coisas que foram especificadas mas não implementadas |
 | Recomendação final | Aprovado / Aprovado com condições / Rejeitado |
 
-**✅ HIL (obrigatório):** O humano revisa a saída do Reviewer e decide:
+**✅ HITL (obrigatório):** O humano revisa a saída do Reviewer e decide:
 - A entrega está aprovada?
 - Existem correções obrigatórias antes de fechar?
 - A spec precisa ser ajustada?

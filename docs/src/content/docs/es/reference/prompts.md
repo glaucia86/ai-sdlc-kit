@@ -11,7 +11,7 @@ El AI SDLC Kit incluye prompts organizados en cuatro grupos: Discovery (Flow A),
 
 Estos prompts transforman una idea no estructurada en artefactos listos para la implementación.
 
-| Prompt | Agente | Entrada | Salida | HIL |
+| Prompt | Agente | Entrada | Salida | HITL |
 |---|---|---|---|---|
 | `/discovery-refine` | 🧭 Discovery | `idea.txt` | `idea.md` | ✅ |
 | `/discovery-spec` | 🗂️ PM | `idea.md` | `non-technical-spec.md` | ✅ |
@@ -25,7 +25,7 @@ Estos prompts transforman una idea no estructurada en artefactos listos para la 
 
 Estos prompts preparan cada epic para la implementación.
 
-| Prompt | Agente | Entrada | Salida | HIL |
+| Prompt | Agente | Entrada | Salida | HITL |
 |---|---|---|---|---|
 | `/epic-init <N>` | 🏗️ Architect | `epics.md`, `technical-spec.md`, `PRD.md` | `epic-N.md`, `spec-epic-N.md` | ✅ |
 
@@ -37,7 +37,7 @@ Estos prompts ejecutan el ciclo de implementación para cada tarea.
 
 ### Flow B — Planificación previa
 
-| Prompt | Agente | Entrada | Salida | HIL |
+| Prompt | Agente | Entrada | Salida | HITL |
 |---|---|---|---|---|
 | `/task-init` | 📥 Intake | `tarefa.txt` | `tarefa.md` | ✅ |
 | `/task-prd` | 📐 Planner | `tarefa.md` | `PRD.md` | ✅ |
@@ -45,7 +45,7 @@ Estos prompts ejecutan el ciclo de implementación para cada tarea.
 
 ### Implementación (Flow A y B)
 
-| Prompt | Agente | Entrada | Salida | HIL |
+| Prompt | Agente | Entrada | Salida | HITL |
 |---|---|---|---|---|
 | `/task-implement` | 🛠️ Implementer | `spec-epic-N.md` o `spec.md`, `PRD.md`, `CONTEXT.md` | Código funcional | — |
 | `/task-tests` | 🧪 QA | spec, implementación | Informe de pruebas | — |
@@ -57,7 +57,7 @@ Estos prompts ejecutan el ciclo de implementación para cada tarea.
 
 Estos prompts cierran el ciclo del epic y sincronizan el contexto.
 
-| Prompt | Agente | Entrada | Salida | HIL |
+| Prompt | Agente | Entrada | Salida | HITL |
 |---|---|---|---|---|
 | `/epic-close <N>` | 🚀 Ops | epic completo, spec, informe QA | Resumen de deploy, documentación de observabilidad | ✅ |
 | `/context-sync <N>` | 🏗️ Architect | epic cerrado, `decisions-log.md` | `CONTEXT.md` actualizado | — |

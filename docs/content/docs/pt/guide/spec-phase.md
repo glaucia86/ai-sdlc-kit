@@ -23,7 +23,7 @@ A fase de Spec acontece uma vez por epic. Ela é o portão entre planejamento e 
 
 O agente 🏗️ Architect solicita o número do epic e lê `doc-specs/epics.md`, `doc-specs/technical-spec.md` e `doc-specs/CONTEXT.md` para gerar os três artefatos em `doc-specs/<N>-epic/`.
 
-O agente **faz uma pausa após cada artefato** e aguarda sua confirmação antes de gerar o próximo. Isso cria três HIL checkpoints discretos.
+O agente **faz uma pausa após cada artefato** e aguarda sua confirmação antes de gerar o próximo. Isso cria três HITL checkpoints discretos.
 
 ---
 
@@ -40,7 +40,7 @@ Fornece contexto e limites para o epic:
 | Dependências técnicas | Epics que devem estar completos antes deste |
 | Critérios de conclusão | Sinais observáveis de que o epic está concluído |
 
-**✅ HIL:** Os limites deste epic fazem sentido? As dependências estão corretas?
+**✅ HITL:** Os limites deste epic fazem sentido? As dependências estão corretas?
 
 ---
 
@@ -55,7 +55,7 @@ Um PRD com escopo reduzido para o epic — mais restrito que o PRD do projeto:
 | Critérios de aceitação | Condições testáveis que definem "concluído" |
 | Perguntas em aberto | Itens não resolvidos que poderiam bloquear a implementação |
 
-**✅ HIL:** Todos os RFs e RNFs são mensuráveis? Os critérios de aceitação são testáveis?
+**✅ HITL:** Todos os RFs e RNFs são mensuráveis? Os critérios de aceitação são testáveis?
 
 ---
 
@@ -75,7 +75,7 @@ A especificação implementável central:
 
 A spec também inclui uma **seção de checklist** que o agente 🛠️ Implementer deve marcar como completo antes de passar para o 🔎 Reviewer. Itens não marcados bloqueiam a transferência para revisão.
 
-**✅ HIL:** A spec é específica o suficiente para implementar sem premissas perigosas? Os riscos estão documentados?
+**✅ HITL:** A spec é específica o suficiente para implementar sem premissas perigosas? Os riscos estão documentados?
 
 ---
 

@@ -42,7 +42,7 @@ The 🧭 Discovery agent reads `idea.txt` and generates `doc-specs/idea.md`.
 
 ---
 
-## Step 3 — Review `idea.md` (HIL checkpoint)
+## Step 3 — Review `idea.md` (HITL checkpoint)
 
 Open `doc-specs/idea.md` and review:
 

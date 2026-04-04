@@ -37,7 +37,7 @@ It generates `doc-specs/<N>-epic/ops-epic-N.md` with:
 | Anomaly patterns | What distinguishes normal from abnormal behavior for the features delivered |
 | Feedback for future epics | Risks, learnings, and suggested adjustments to `epics.md` |
 
-**✅ HIL:** Review `ops-epic-N.md` before deploying.
+**✅ HITL:** Review `ops-epic-N.md` before deploying.
 - Is the deploy sequence safe?
 - Are all breaking changes documented?
 - Are anomaly patterns precise enough for on-call monitoring?

@@ -5,7 +5,7 @@ description: Implementa, prueba y revisa cada tarea dentro de un epic.
 
 La fase de Epic es el núcleo del ciclo de desarrollo: donde el código se escribe, prueba y valida. Cada epic pasa por un ciclo de tres prompts para cada tarea: **implementar → pruebas → revisión**.
 
-Esta fase comienza solo después de que la spec del epic (fase anterior) fue aprobada en el HIL checkpoint.
+Esta fase comienza solo después de que la spec del epic (fase anterior) fue aprobada en el HITL checkpoint.
 
 ---
 

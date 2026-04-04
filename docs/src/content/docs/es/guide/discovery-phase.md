@@ -24,11 +24,11 @@ Esta fase solo existe en el **Flow A**. El Flow B (tareas ya definidas) comienza
 
 | Prompt | Entrada | Salida |
 |---|---|---|
-| `/discovery-refine` | `idea.txt` | `idea.md` — HIL checkpoint |
-| `/discovery-spec` | `idea.md` | `non-technical-spec.md` — HIL checkpoint |
-| `/discovery-prd` | `non-technical-spec.md` | `PRD.md` — HIL checkpoint |
-| `/discovery-tech-spec` | `PRD.md` | `technical-spec.md` — HIL checkpoint |
-| `/discovery-epics` | `technical-spec.md` | `epics.md` — HIL checkpoint |
+| `/discovery-refine` | `idea.txt` | `idea.md` — HITL checkpoint |
+| `/discovery-spec` | `idea.md` | `non-technical-spec.md` — HITL checkpoint |
+| `/discovery-prd` | `non-technical-spec.md` | `PRD.md` — HITL checkpoint |
+| `/discovery-tech-spec` | `PRD.md` | `technical-spec.md` — HITL checkpoint |
+| `/discovery-epics` | `technical-spec.md` | `epics.md` — HITL checkpoint |
 
 ---
 
@@ -47,7 +47,7 @@ un ciclo de vida de desarrollo completo a partir de especificaciones.
 
 El agente 🧭 Discovery lee `idea.txt` y produce `idea.md`.
 
-> **HIL checkpoint:** Lee `idea.md`. ¿Tu idea está correctamente representada sin distorsión técnica?
+> **HITL checkpoint:** Lee `idea.md`. ¿Tu idea está correctamente representada sin distorsión técnica?
 
 ### 3. Ejecuta `/discovery-spec`
 
@@ -57,7 +57,7 @@ El agente 🗂️ PM lee `idea.md` y produce `non-technical-spec.md` con:
 - Reglas de negocio relevantes
 - Criterios de aceptación por escenario
 
-> **HIL checkpoint:** ¿Los recorridos de usuario y las reglas de negocio reflejan lo que realmente quieres construir?
+> **HITL checkpoint:** ¿Los recorridos de usuario y las reglas de negocio reflejan lo que realmente quieres construir?
 
 ### 4. Ejecuta `/discovery-prd`
 
@@ -67,7 +67,7 @@ El agente 🧑‍💼 Tech Lead lee `non-technical-spec.md` y produce `PRD.md` c
 - Riesgos e incertidumbres
 - Dependencias externas
 
-> **HIL checkpoint:** ¿El alcance y los criterios de aceptación están bien delimitados?
+> **HITL checkpoint:** ¿El alcance y los criterios de aceptación están bien delimitados?
 
 ### 5. Ejecuta `/discovery-tech-spec`
 
@@ -77,7 +77,7 @@ El agente 🏗️ Architect lee `PRD.md` y produce `technical-spec.md` con:
 - Estructura de componentes y datos
 - Puntos de integración externa
 
-> **HIL checkpoint:** ¿Las decisiones arquitectónicas son razonables para el contexto?
+> **HITL checkpoint:** ¿Las decisiones arquitectónicas son razonables para el contexto?
 
 ### 6. Ejecuta `/discovery-epics`
 
@@ -86,7 +86,7 @@ El agente 🏗️ Architect lee `technical-spec.md` y produce `epics.md` con:
 - Alcance por epic, con sus dependencias
 - Criterios de completitud por epic
 
-> **HIL checkpoint:** ¿La secuenciación de los epics tiene sentido? ¿Faltan o sobran epics?
+> **HITL checkpoint:** ¿La secuenciación de los epics tiene sentido? ¿Faltan o sobran epics?
 
 ---
 

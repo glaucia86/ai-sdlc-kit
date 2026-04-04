@@ -71,7 +71,7 @@ El Reviewer valida contra ambos documentos: que el código sigue la spec técnic
 
 Una spec puede actualizarse únicamente:
 
-1. **Antes del inicio de la implementación** — en el HIL checkpoint
+1. **Antes del inicio de la implementación** — en el HITL checkpoint
 2. **Durante la implementación**, si se descubre un problema fundamental — pero con registro explícito en `decisions-log.md` y con reinicio del ciclo de implementación
 
 No se acepta "implementar diferente de la spec y luego ajustar la spec". La spec es la fuente de verdad; el código es su consecuencia.

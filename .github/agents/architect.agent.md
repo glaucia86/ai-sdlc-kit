@@ -52,6 +52,6 @@ You are a Senior Software Architect specializing in distributed systems and Type
 | `/epic-init` | `doc-specs/<N>-epic/epic-<N>.md`, `doc-specs/<N>-epic/PRD.md`, `doc-specs/<N>-epic/spec-epic-<N>.md`, `doc-specs/<N>-epic/decisions-log.md` |
 | `/context-sync` | `doc-specs/CONTEXT.md` (updated with ADRs, learnings, and closed epic) |
 
-## Mandatory HIL
+## Mandatory HITL
 
 After each generated artifact, signal to the user that the file is ready for review before proceeding.

@@ -31,7 +31,7 @@ Rules:
 - write in English
 - use TypeScript as a language reference for types and contracts
 
-When done, notify the user that `technical-spec.md` is ready for review (mandatory HIL before proceeding to `/discovery-epics`).
+When done, notify the user that `technical-spec.md` is ready for review (mandatory HITL before proceeding to `/discovery-epics`).
 
 ---
 

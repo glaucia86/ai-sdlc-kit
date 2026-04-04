@@ -14,7 +14,7 @@ todas las tareas aprobadas por Reviewer
          ↓
      /epic-close <N>
          ↓
-   gate de producción  ← HIL ✅ validación final
+   gate de producción  ← HITL ✅ validación final
          ↓
       merge + deploy
          ↓
@@ -45,7 +45,7 @@ todas las tareas aprobadas por Reviewer
 
 Antes del merge, el agente 🚀 Ops presenta un resumen del epic para validación humana:
 
-> **HIL checkpoint:** ¿El epic N está completo, con todas las pruebas pasando y sin desvíos de spec?
+> **HITL checkpoint:** ¿El epic N está completo, con todas las pruebas pasando y sin desvíos de spec?
 
 Este es el último checkpoint antes de que el código llegue a la rama principal. Su propósito es garantizar que el responsable técnico o el dueño del producto confirme conscientemente que el epic está listo.
 

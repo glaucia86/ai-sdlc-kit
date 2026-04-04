@@ -28,4 +28,4 @@ Rules:
 - write in English
 - use clear headings and descriptive text
 
-When done, notify the user that `non-technical-spec.md` is ready for review (mandatory HIL before proceeding to `/discovery-prd`).
+When done, notify the user that `non-technical-spec.md` is ready for review (mandatory HITL before proceeding to `/discovery-prd`).

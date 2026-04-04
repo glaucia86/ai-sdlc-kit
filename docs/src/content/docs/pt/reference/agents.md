@@ -82,7 +82,7 @@ description: Referência completa de todos os agentes do AI SDLC Kit.
 - Fundamenta decisões técnicas no PRD e no codebase observável
 - Ordena epics por dependência técnica, não por prioridade de negócio
 - Cada epic deve ser independentemente entregável
-- Faz uma pausa após cada artefato e sinaliza HIL antes de gerar o próximo
+- Faz uma pausa após cada artefato e sinaliza HITL antes de gerar o próximo
 - Escreve em português brasileiro
 
 **Responsabilidade de artefatos:**
@@ -204,7 +204,7 @@ description: Referência completa de todos os agentes do AI SDLC Kit.
 **Regras principais:**
 - Lê `decisions-log.md` para distinguir desvios deliberados de erros
 - Não recomenda expansão de escopo
-- HIL é obrigatório após este agente
+- HITL é obrigatório após este agente
 
 ---
 

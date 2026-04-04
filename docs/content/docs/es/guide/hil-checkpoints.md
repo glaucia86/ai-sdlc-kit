@@ -1,21 +1,21 @@
 ---
-title: HIL Checkpoints
+title: HITL Checkpoints
 description: Referencia de todos los puntos de validación humana en el AI SDLC Kit.
 ---
 
-Los HIL (Human-in-the-Loop) checkpoints son los puntos de pausa obligatorios donde un humano valida el trabajo producido antes de que el pipeline avance. Son la garantía de que la IA ejecuta la intención humana, no la suya propia.
+Los HITL (Human-in-the-Loop) checkpoints son los puntos de pausa obligatorios donde un humano valida el trabajo producido antes de que el pipeline avance. Son la garantía de que la IA ejecuta la intención humana, no la suya propia.
 
 ---
 
-## Por qué los HIL checkpoints no son opcionales
+## Por qué los HITL checkpoints no son opcionales
 
 Un agente de IA puede producir artefactos con apariencia convincente — bien estructurados, internamente consistentes — pero equivocados desde el punto de vista del producto. Los checkpoints existen porque:
 
 1. **La IA no puede inferir contexto implícito** — lo que no está en el prompt no está en el output
 2. **Los errores se amplifican** — una spec equivocada produce código equivocado a escala
-3. **El contrato de calidad** — quien aprueba en el HIL asume responsabilidad sobre lo que se construirá
+3. **El contrato de calidad** — quien aprueba en el HITL asume responsabilidad sobre lo que se construirá
 
-Omitir un HIL checkpoint no ahorra tiempo. Garantiza retrabajo.
+Omitir un HITL checkpoint no ahorra tiempo. Garantiza retrabajo.
 
 ---
 

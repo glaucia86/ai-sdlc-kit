@@ -28,7 +28,7 @@ Detailed description of the epic:
 - dependencies on previous epics
 - completion criteria
 
-**Pause here and notify the user that `epic-<N>.md` is ready for review (mandatory HIL).**
+**Pause here and notify the user that `epic-<N>.md` is ready for review (mandatory HITL).**
 
 ### `doc-specs/<N>-epic/PRD.md`
 Epic-specific PRD:
@@ -39,7 +39,7 @@ Epic-specific PRD:
 - acceptance criteria
 - open questions
 
-**Pause here and notify the user that the epic `PRD.md` is ready for review (mandatory HIL).**
+**Pause here and notify the user that the epic `PRD.md` is ready for review (mandatory HITL).**
 
 ### `doc-specs/<N>-epic/spec-epic-<N>.md`
 Epic technical specification:
@@ -54,7 +54,7 @@ Epic technical specification:
 - technical acceptance criteria
 - risks and open questions
 
-**Pause here and notify the user that `spec-epic-<N>.md` is ready for review (mandatory HIL).**
+**Pause here and notify the user that `spec-epic-<N>.md` is ready for review (mandatory HITL).**
 
 ---
 
@@ -79,4 +79,4 @@ After generating `doc-specs/<N>-epic/spec-epic-<N>.md`, also create the file `do
 
 ---
 
-After all HILs are approved, inform the user that the epic artifacts are ready and that implementation can be started with `/task-implement`, pointing manually to the files `doc-specs/<N>-epic/PRD.md` and `doc-specs/<N>-epic/spec-epic-<N>.md`.
+After all HITLs are approved, inform the user that the epic artifacts are ready and that implementation can be started with `/task-implement`, pointing manually to the files `doc-specs/<N>-epic/PRD.md` and `doc-specs/<N>-epic/spec-epic-<N>.md`.

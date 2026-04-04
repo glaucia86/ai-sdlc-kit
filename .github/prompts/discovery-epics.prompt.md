@@ -30,4 +30,4 @@ Rules:
 - write in English
 - each epic must be small enough to be implemented independently
 
-When done, notify the user that `epics.md` is ready for review (mandatory HIL before proceeding to `/epic-init`).
+When done, notify the user that `epics.md` is ready for review (mandatory HITL before proceeding to `/epic-init`).

@@ -245,7 +245,7 @@ header.header {
   border-left: 1px solid var(--c-border-sub);
 }
 
-starlight-toc nav > :first-child {
+starlight-toc nav > :first-cHITLd {
   font-family: var(--font-mono);
   font-size: 0.6rem;
   font-weight: 700;
@@ -671,7 +671,7 @@ starlight-toc a[aria-current='true'] {
   color:         var(--c-ink-2);
   vertical-align:top;
 }
-.sl-markdown-content tr:last-child td { border-bottom: none; }
+.sl-markdown-content tr:last-cHITLd td { border-bottom: none; }
 .sl-markdown-content tr:hover td      { background: var(--c-bg-sunken); }
 
 /* ─── Lists ──────────────────────────────────────────────────── */
@@ -923,15 +923,15 @@ pre {
   animation: intro-rise 560ms cubic-bezier(0.21, 0.9, 0.25, 1) forwards;
 }
 
-.hero .copy > *:nth-child(1) {
+.hero .copy > *:nth-cHITLd(1) {
   animation-delay: 80ms;
 }
 
-.hero .copy > *:nth-child(2) {
+.hero .copy > *:nth-cHITLd(2) {
   animation-delay: 160ms;
 }
 
-.hero .copy > *:nth-child(3) {
+.hero .copy > *:nth-cHITLd(3) {
   animation-delay: 240ms;
 }
 

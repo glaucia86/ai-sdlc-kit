@@ -1,13 +1,13 @@
 ---
-title: Human-in-the-Loop (HIL)
-description: Why HIL checkpoints exist, what they protect, and how to use them without turning them into rubber stamps.
+title: Human-in-the-Loop (HITL)
+description: Why HITL checkpoints exist, what they protect, and how to use them without turning them into rubber stamps.
 ---
 
-## What is a HIL checkpoint?
+## What is a HITL checkpoint?
 
-A Human-in-the-Loop (HIL) checkpoint is a deliberate pause in the agent workflow where a human must review, validate, and explicitly approve an artefact before the workflow continues.
+A Human-in-the-Loop (HITL) checkpoint is a deliberate pause in the agent workflow where a human must review, validate, and explicitly approve an artefact before the workflow continues.
 
-HIL checkpoints in ai-sdlc-kit are not suggestions. They are hard stops. No subsequent step begins until the human at the checkpoint has either:
+HITL checkpoints in ai-sdlc-kit are not suggestions. They are hard stops. No subsequent step begins until the human at the checkpoint has either:
 
 - **Approved** — the artefact is correct and complete; continue
 - **Requested changes** — specific items to fix; agent revises and resubmits
@@ -15,9 +15,9 @@ HIL checkpoints in ai-sdlc-kit are not suggestions. They are hard stops. No subs
 
 ---
 
-## Why HIL is not optional
+## Why HITL is not optional
 
-The common objection to HIL checkpoints is that they slow things down. The kit's position is the opposite: **skipping HIL checkpoints is what creates slowdowns**.
+The common objection to HITL checkpoints is that they slow things down. The kit's position is the opposite: **skipping HITL checkpoints is what creates slowdowns**.
 
 When an artefact is wrong and no human review catches it:
 
@@ -26,20 +26,20 @@ When an artefact is wrong and no human review catches it:
 3. By the time the error surfaces, it has propagated across multiple artefacts
 4. Correction requires revisiting every downstream artefact — which takes far longer than the original review would have
 
-The HIL checkpoint at each gate is the mechanism that keeps errors _local_.
+The HITL checkpoint at each gate is the mechanism that keeps errors _local_.
 
 ---
 
-## The difference between a real HIL and a rubber stamp
+## The difference between a real HITL and a rubber stamp
 
-A HIL checkpoint only works if the human actually reads the artefact.
+A HITL checkpoint only works if the human actually reads the artefact.
 
-Signs that a HIL checkpoint has become a rubber stamp:
+Signs that a HITL checkpoint has become a rubber stamp:
 - The review takes under 30 seconds for a multi-page document
 - No change requests have been made in the last five checkpoints
 - The human is approving content they do not fully understand
 
-Signs of a real HIL checkpoint:
+Signs of a real HITL checkpoint:
 - The reviewer can articulate what would have happened if a specific item were wrong
 - Change requests are specific and actionable ("update the acceptance criteria for task 3 to include error handling for 404 responses")
 - Occasional rejects occur when the direction has drifted
@@ -48,27 +48,27 @@ Signs of a real HIL checkpoint:
 
 ---
 
-## HIL in the Discovery flow (Flow A)
+## HITL in the Discovery flow (Flow A)
 
 | Checkpoint | After artefact | What to verify |
 |---|---|---|
-| **HIL-A1** | `idea.md` | Idea captured without strategic bias; hallucinated constraints removed |
-| **HIL-A2** | `non-technical-spec.md` | Functional requirements are complete; nothing critical was dropped |
-| **HIL-A3** | `PRD.md` | Requirements are testable; priorities are correct |
-| **HIL-A4** | `technical-spec.md` | Architecture is sound; constraints are realistic |
-| **HIL-A5** | `epics.md` | Epics are independently deliverable; sequencing is correct |
+| **HITL-A1** | `idea.md` | Idea captured without strategic bias; hallucinated constraints removed |
+| **HITL-A2** | `non-technical-spec.md` | Functional requirements are complete; nothing critical was dropped |
+| **HITL-A3** | `PRD.md` | Requirements are testable; priorities are correct |
+| **HITL-A4** | `technical-spec.md` | Architecture is sound; constraints are realistic |
+| **HITL-A5** | `epics.md` | Epics are independently deliverable; sequencing is correct |
 
 ---
 
-## HIL in the Construction flow (Flow B)
+## HITL in the Construction flow (Flow B)
 
 | Checkpoint | After artefact | What to verify |
 |---|---|---|
-| **HIL-B1** | `spec-epic-N.md` + `epic-N.md` | Scope is correct; acceptance criteria are complete and testable |
-| **HIL-B2** | Task list from `/task-init` | Tasks are granular; no task spans more than one concern |
-| **HIL-B3** | Implementation from `/task-implement` | Spec acceptance criteria are satisfied; no divergence |
-| **HIL-B4** | Review report from `/task-review` | All flagged issues addressed or explicitly accepted |
-| **HIL-B5** | `ops-epic-N.md` | Deploy plan is safe; rollback is defined |
+| **HITL-B1** | `spec-epic-N.md` + `epic-N.md` | Scope is correct; acceptance criteria are complete and testable |
+| **HITL-B2** | Task list from `/task-init` | Tasks are granular; no task spans more than one concern |
+| **HITL-B3** | Implementation from `/task-implement` | Spec acceptance criteria are satisfied; no divergence |
+| **HITL-B4** | Review report from `/task-review` | All flagged issues addressed or explicitly accepted |
+| **HITL-B5** | `ops-epic-N.md` | Deploy plan is safe; rollback is defined |
 
 ---
 
@@ -82,10 +82,10 @@ Agents in the kit are designed to handle rejection gracefully. Providing a clear
 
 ---
 
-## HIL and solo developers
+## HITL and solo developers
 
 When using ai-sdlc-kit as a solo developer, the same person who requested the artefact is also the reviewer. This creates a bias risk — it is tempting to approve your own framing.
 
 Mitigation: **review the artefact the day after it was generated**. A 24-hour gap breaks the fluency illusion and makes it easier to see what is actually wrong.
 
-See also: [Solo Developer Scenario](/en/scenarios/solo-dev/) for adapted HIL practices.
+See also: [Solo Developer Scenario](/en/scenarios/solo-dev/) for adapted HITL practices.

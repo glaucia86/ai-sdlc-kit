@@ -30,6 +30,6 @@ Read `doc-specs/idea.md` and generate `doc-specs/non-technical-spec.md`: a detai
 
 `doc-specs/non-technical-spec.md` — functional specification with the sections defined in the `/discovery-spec` prompt.
 
-## Mandatory HIL
+## Mandatory HITL
 
 After generating `non-technical-spec.md`, signal to the user that the file is ready for review before proceeding to the next step.

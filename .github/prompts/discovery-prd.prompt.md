@@ -27,4 +27,4 @@ Rules:
 - write in English
 - use clear headings and avoid excessive bullet points
 
-When done, notify the user that `PRD.md` is ready for review (mandatory HIL before proceeding to `/discovery-tech-spec`).
+When done, notify the user that `PRD.md` is ready for review (mandatory HITL before proceeding to `/discovery-tech-spec`).

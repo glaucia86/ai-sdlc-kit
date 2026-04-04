@@ -44,7 +44,7 @@ El AI SDLC solo funciona bien cuando los agentes tienen contexto suficiente. Los
 | Lo que proveen los humanos | Lo que proveen los agentes |
 |---|---|
 | `idea.txt` o `tarefa.txt` | `idea.md`, `non-technical-spec.md`, `PRD.md` |
-| Aprobación en HIL checkpoints | `technical-spec.md`, `epics.md`, `spec-N.md` |
+| Aprobación en HITL checkpoints | `technical-spec.md`, `epics.md`, `spec-N.md` |
 | Decisiones de producto y negocio | Código, pruebas, informe de revisión |
 | Contexto de dominio implícito | `CONTEXT.md`, `decisions-log.md` |
 
@@ -63,7 +63,7 @@ El AI SDLC respeta esta división. Los agentes producen artefactos y código con
 El AI SDLC no reemplaza Scrum, Kanban ni SAFe. Es una capa de prácticas que puede operar dentro de cualquier metodología:
 
 - Los **epics** y **tareas** mapean naturalmente a sprints o releases
-- Los **HIL checkpoints** mapean a ceremonias de refinamiento o revisión
+- Los **HITL checkpoints** mapean a ceremonias de refinamiento o revisión
 - Los **artefactos** (`PRD.md`, `spec.md`) son la documentación de decisiones
 
 Lo que el AI SDLC agrega es la disciplina de hacer que los agentes de IA actúen sobre artefactos aprobados en lugar de interpretaciones informales del trabajo.

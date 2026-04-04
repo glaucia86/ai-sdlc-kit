@@ -89,7 +89,7 @@ todas las tareas del epic N aprobadas
            ↓
       /epic-close N
            ↓
-   gate de producción (HIL)
+   gate de producción (HITL)
            ↓
       merge + deploy
            ↓

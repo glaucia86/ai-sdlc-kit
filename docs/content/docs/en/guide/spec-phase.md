@@ -23,7 +23,7 @@ The Spec phase happens once per epic. It is the gate between planning and implem
 
 The 🏗️ Architect agent asks for the epic number, then reads `doc-specs/epics.md`, `doc-specs/technical-spec.md`, and `doc-specs/CONTEXT.md` to generate the three artefacts under `doc-specs/<N>-epic/`.
 
-The agent **pauses after each artefact** and waits for your confirmation before generating the next one. This creates three discrete HIL checkpoints.
+The agent **pauses after each artefact** and waits for your confirmation before generating the next one. This creates three discrete HITL checkpoints.
 
 ---
 
@@ -40,7 +40,7 @@ Provides context and boundaries for the epic:
 | Technical dependencies | Epics that must be complete before this one starts |
 | Completion criteria | Observable signals that the epic is done |
 
-**✅ HIL:** Does this epic boundary make sense? Are dependencies accurate?
+**✅ HITL:** Does this epic boundary make sense? Are dependencies accurate?
 
 ---
 
@@ -55,7 +55,7 @@ A scoped PRD for the epic — narrower than the project PRD:
 | Acceptance criteria | Testable conditions that define "done" |
 | Open questions | Unresolved items that could block implementation |
 
-**✅ HIL:** Are all FRs and NFRs measurable? Are acceptance criteria testable?
+**✅ HITL:** Are all FRs and NFRs measurable? Are acceptance criteria testable?
 
 ---
 
@@ -75,7 +75,7 @@ The core implementable specification:
 
 The spec also includes a **checklist section** that the 🛠️ Implementer agent must mark complete before handing off to the 🔎 Reviewer. Unchecked items block the review handoff.
 
-**✅ HIL:** Is the spec specific enough to implement without dangerous assumptions? Are risks documented?
+**✅ HITL:** Is the spec specific enough to implement without dangerous assumptions? Are risks documented?
 
 ---
 

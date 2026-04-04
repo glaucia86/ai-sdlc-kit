@@ -37,7 +37,7 @@ El agente 🏗️ Architect lee `epics.md`, `technical-spec.md` y el `PRD.md` re
 - **`doc-specs/epic-N.md`** — descripción narrativa del epic: contexto, objetivo, límites y criterios de completitud
 - **`doc-specs/spec-epic-N.md`** — spec técnica detallada: lista de tareas, reglas de implementación, restricciones y flujo de datos
 
-> **HIL checkpoint:** ¿La spec del epic N es suficientemente precisa para guiar la implementación sin ambigüedades?
+> **HITL checkpoint:** ¿La spec del epic N es suficientemente precisa para guiar la implementación sin ambigüedades?
 
 ### Qué debe contener `spec-epic-N.md`
 
@@ -58,19 +58,19 @@ Una spec de calidad incluye:
 
 El agente 📥 Intake lee `tarefa.txt` y produce `tarefa.md` — la tarea estructurada en formato estandarizado.
 
-> **HIL checkpoint:** ¿La tarea está correctamente capturada?
+> **HITL checkpoint:** ¿La tarea está correctamente capturada?
 
 ### `/task-prd`
 
 El agente 📐 Planner lee `tarefa.md` y produce `PRD.md` con criterios de aceptación y límites de alcance.
 
-> **HIL checkpoint:** ¿El alcance y los criterios de aceptación son correctos?
+> **HITL checkpoint:** ¿El alcance y los criterios de aceptación son correctos?
 
 ### `/task-spec`
 
 El agente 📐 Planner lee `PRD.md` y `tarefa.md` y produce `spec.md` con la spec técnica detallada de la tarea.
 
-> **HIL checkpoint:** ¿La spec es suficientemente precisa para guiar la implementación?
+> **HITL checkpoint:** ¿La spec es suficientemente precisa para guiar la implementación?
 
 ---
 
@@ -78,7 +78,7 @@ El agente 📐 Planner lee `PRD.md` y `tarefa.md` y produce `spec.md` con la spe
 
 Antes de invocar `/task-implement`, verifica:
 
-- [ ] La spec (`.spec-epic-N.md` o `spec.md`) fue aprobada en el HIL checkpoint
+- [ ] La spec (`.spec-epic-N.md` o `spec.md`) fue aprobada en el HITL checkpoint
 - [ ] El `PRD.md` relevante está actualizado y aprobado
 - [ ] No hay ambigüedades de implementación sin responder en la spec
 - [ ] `doc-specs/CONTEXT.md` está actualizado con aprendizajes del epic anterior (si aplica)

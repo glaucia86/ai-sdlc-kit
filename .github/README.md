@@ -59,7 +59,7 @@ Escreva a ideia livremente — sem formato obrigatório.
 
 **O que acontece:** o 🧭 Discovery lê `idea.txt` e gera `doc-specs/idea.md` com a ideia estruturada, sem viés técnico.
 
-**✅ HIL obrigatório:** revise `idea.md` antes de continuar.
+**✅ HITL obrigatório:** revise `idea.md` antes de continuar.
 - A ideia original foi preservada?
 - As ambiguidades foram registradas?
 - Há algo inventado que não estava em `idea.txt`?
@@ -74,7 +74,7 @@ Escreva a ideia livremente — sem formato obrigatório.
 
 **O que acontece:** o 🗂️ PM lê `idea.md` e gera `doc-specs/non-technical-spec.md` com personas, jornadas de usuário, casos de uso e regras de negócio — sem linguagem técnica.
 
-**✅ HIL obrigatório:** revise `non-technical-spec.md` antes de continuar.
+**✅ HITL obrigatório:** revise `non-technical-spec.md` antes de continuar.
 - Os fluxos de usuário estão claros?
 - As regras de negócio foram capturadas corretamente?
 - Existem perguntas em aberto que precisam de resposta antes de avançar?
@@ -89,7 +89,7 @@ Escreva a ideia livremente — sem formato obrigatório.
 
 **O que acontece:** o 🧑‍💼 Tech Lead lê `non-technical-spec.md` e gera `doc-specs/PRD.md` com requisitos funcionais, não funcionais e critérios de aceite estruturados.
 
-**✅ HIL obrigatório:** revise `PRD.md` antes de continuar.
+**✅ HITL obrigatório:** revise `PRD.md` antes de continuar.
 - O escopo está bem delimitado (incluído / não incluído)?
 - Os critérios de aceite fazem sentido?
 - Algo foi extrapolado além da especificação funcional?
@@ -104,7 +104,7 @@ Escreva a ideia livremente — sem formato obrigatório.
 
 **O que acontece:** o 🏗️ Architect lê `PRD.md` e a codebase e gera `doc-specs/technical-spec.md` com decisões de arquitetura, componentes, contratos, fluxos técnicos e estratégia de testes.
 
-**✅ HIL obrigatório:** revise `technical-spec.md` antes de continuar.
+**✅ HITL obrigatório:** revise `technical-spec.md` antes de continuar.
 - As decisões de arquitetura estão fundamentadas?
 - Os riscos e dependências estão registrados?
 - Há ambiguidades que precisam ser resolvidas antes de quebrar em épicos?
@@ -119,7 +119,7 @@ Escreva a ideia livremente — sem formato obrigatório.
 
 **O que acontece:** o 🏗️ Architect lê `technical-spec.md` e `PRD.md` e gera `doc-specs/epics.md` com os épicos ordenados por dependência técnica.
 
-**✅ HIL obrigatório:** revise `epics.md` antes de continuar.
+**✅ HITL obrigatório:** revise `epics.md` antes de continuar.
 - O sequenciamento faz sentido técnico?
 - Cada épico é pequeno o suficiente para ser implementado de forma independente?
 - As dependências entre épicos estão corretas?
@@ -144,7 +144,7 @@ O agente pergunta o número do épico antes de agir.
 
 O agente pausa após cada arquivo e aguarda confirmação antes de gerar o próximo.
 
-**✅ HIL obrigatório para cada arquivo** — `epic-<N>.md`, `PRD.md` e `spec-epic-<N>.md`.
+**✅ HITL obrigatório para cada arquivo** — `epic-<N>.md`, `PRD.md` e `spec-epic-<N>.md`.
 
 > **Regra de ouro:** sem `spec-epic-<N>.md` validada por humano, não se implementa o épico N.
 
@@ -162,7 +162,7 @@ Aponte manualmente para os arquivos do épico quando solicitado:
 
 **O que acontece:** o 🛠️ Implementer lê os artefatos do épico, resume o plano de implementação e executa. Ao final, preenche o checklist de `spec-epic-<N>.md` e atualiza `decisions-log.md` com decisões tomadas.
 
-**⚠️ HIL recomendado:** acompanhe o plano proposto pelo agente antes de confirmar as alterações, especialmente em épicos maiores.
+**⚠️ HITL recomendado:** acompanhe o plano proposto pelo agente antes de confirmar as alterações, especialmente em épicos maiores.
 
 ---
 
@@ -174,7 +174,7 @@ Aponte manualmente para os arquivos do épico quando solicitado:
 
 **O que acontece:** o 🔎 Reviewer compara os artefatos do épico com a implementação e produz uma síntese de aderência, desvios, riscos e recomendação final.
 
-**✅ HIL obrigatório:** decida se a entrega está aprovada, se há correções obrigatórias ou se o épico precisa de ajuste antes de avançar para o próximo.
+**✅ HITL obrigatório:** decida se a entrega está aprovada, se há correções obrigatórias ou se o épico precisa de ajuste antes de avançar para o próximo.
 
 ---
 
@@ -188,7 +188,7 @@ O agente pergunta o número do épico antes de agir.
 
 **O que acontece:** o 🚀 Ops lê os artefatos do épico e gera `doc-specs/<N>-epic/ops-epic-<N>.md` com preparação para deploy, observabilidade e feedback para épicos futuros.
 
-**✅ HIL obrigatório:** revise `ops-epic-<N>.md` antes de continuar.
+**✅ HITL obrigatório:** revise `ops-epic-<N>.md` antes de continuar.
 
 ---
 
@@ -240,7 +240,7 @@ Escreva a descrição bruta da tarefa — pode estar desorganizada. O fluxo exis
 
 **O que acontece:** o 📥 Intake lê `tarefa.txt` e gera `doc-specs/tarefa.md` estruturado. Ele não acessa PRD, spec nem a codebase — apenas transforma a entrada bruta fielmente.
 
-**✅ HIL obrigatório:** revise `tarefa.md` antes de continuar.
+**✅ HITL obrigatório:** revise `tarefa.md` antes de continuar.
 - O objetivo ficou claro?
 - Houve perda ou distorção de informação?
 - Existem ambiguidades que precisam ser resolvidas agora?
@@ -255,7 +255,7 @@ Escreva a descrição bruta da tarefa — pode estar desorganizada. O fluxo exis
 
 **O que acontece:** o 📐 Planner lê `tarefa.md` e gera `doc-specs/PRD.md` com visão geral, objetivos, escopo, requisitos funcionais e não funcionais, critérios de aceite e perguntas abertas.
 
-**✅ HIL obrigatório:** revise `PRD.md` antes de continuar.
+**✅ HITL obrigatório:** revise `PRD.md` antes de continuar.
 - O PRD representa corretamente a tarefa?
 - O escopo está delimitado (incluído / não incluído)?
 - Existem perguntas abertas que precisam de resposta antes da spec?
@@ -270,7 +270,7 @@ Escreva a descrição bruta da tarefa — pode estar desorganizada. O fluxo exis
 
 **O que acontece:** o 📐 Planner lê `PRD.md` e a codebase e gera `doc-specs/spec.md` com contexto técnico, componentes afetados, fluxo de implementação, estratégia de testes, riscos e dúvidas em aberto.
 
-**✅ HIL obrigatório:** revise `spec.md` antes de continuar.
+**✅ HITL obrigatório:** revise `spec.md` antes de continuar.
 - A spec está coerente com o PRD?
 - As decisões técnicas estão explícitas o suficiente?
 - A implementação conseguirá seguir esse documento sem suposições perigosas?
@@ -293,7 +293,7 @@ Para tarefas com componentes de frontend, use:
 
 **O que acontece:** o 🛠️ Implementer lê `PRD.md` e `spec.md`, resume o plano, identifica arquivos afetados e executa a implementação. Se encontrar uma ambiguidade crítica, para e sinaliza.
 
-**⚠️ HIL recomendado:** acompanhe o plano proposto antes de confirmar, especialmente em mudanças maiores.
+**⚠️ HITL recomendado:** acompanhe o plano proposto antes de confirmar, especialmente em mudanças maiores.
 
 ---
 
@@ -305,7 +305,7 @@ Para tarefas com componentes de frontend, use:
 
 **O que acontece:** o 🔎 Reviewer compara `PRD.md`, `spec.md` e a implementação. Produz: síntese de aderência, desvios encontrados, riscos, lacunas e recomendação final.
 
-**✅ HIL obrigatório:** decida se a entrega está aprovada ou se há correções antes de fechar a tarefa.
+**✅ HITL obrigatório:** decida se a entrega está aprovada ou se há correções antes de fechar a tarefa.
 
 ---
 

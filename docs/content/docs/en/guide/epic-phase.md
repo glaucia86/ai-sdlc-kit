@@ -29,7 +29,7 @@ spec-epic-N.md approved by human
    ↓
 /task-review  (🔎 Reviewer evaluates adherence)
    ↓
-  HIL ✅  Human reviews Reviewer output
+  HITL ✅  Human reviews Reviewer output
    ↓
   If approved → move to Operations phase
   If rejected  → update spec or implementation → re-run
@@ -112,7 +112,7 @@ The 🔎 Reviewer agent:
 | Gaps | Things that were specified but not implemented |
 | Final recommendation | Approved / Approved with conditions / Rejected |
 
-**✅ HIL (mandatory):** The human reviews the Reviewer output and decides:
+**✅ HITL (mandatory):** The human reviews the Reviewer output and decides:
 - Is the delivery approved?
 - Are there mandatory corrections before closing?
 - Does the spec need to be adjusted?

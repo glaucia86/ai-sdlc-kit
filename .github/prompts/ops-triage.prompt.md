@@ -55,7 +55,7 @@ Format:
 Propose actions at four levels, in order:
 
 1. **Workaround** — immediate action to limit impact without fixing the cause (e.g.: disable feature flag, redirect traffic, activate fallback)
-2. **Mitigate** — reduce impact while the definitive fix is prepared (e.g.: increase timeout, limit load, enable additional cache)
+2. **Mitigate** — reduce impact wHITLe the definitive fix is prepared (e.g.: increase timeout, limit load, enable additional cache)
 3. **Fix** — definitive fix of the root cause
 4. **Prevent** — structural change to prevent the incident from recurring (e.g.: add test, improve alert, adjust playbook)
 

@@ -73,7 +73,7 @@ Se você tem uma spec existente (página no Confluence, doc no Notion, Google Do
 - Execute `/discovery-prd` usando o agente 🧑‍💼 Tech Lead
 - Saída: `PRD.md` estruturado com critérios de aceitação testáveis
 
-**HIL:** Revise `PRD.md` em relação ao entendimento real da sua equipe/stakeholders. A conversão pode ter omitido nuances ou formalizado excessivamente acordos informais.
+**HITL:** Revise `PRD.md` em relação ao entendimento real da sua equipe/stakeholders. A conversão pode ter omitido nuances ou formalizado excessivamente acordos informais.
 
 ---
 
@@ -85,7 +85,7 @@ Se você não tem uma spec técnica formal, mas tem uma arquitetura existente:
 - Forneça `PRD.md` + o `CONTEXT.md` atual como contexto
 - O agente documentará a arquitetura existente, não inventará uma nova
 
-**HIL:** Verifique se o `technical-spec.md` gerado reflete a realidade com precisão. Agentes que documentam código existente podem perder nuances — especialmente comportamentos implícitos e restrições não documentadas.
+**HITL:** Verifique se o `technical-spec.md` gerado reflete a realidade com precisão. Agentes que documentam código existente podem perder nuances — especialmente comportamentos implícitos e restrições não documentadas.
 
 ---
 
@@ -98,7 +98,7 @@ Se você está no meio de um projeto e quer aplicar o kit ao seu backlog restant
 - Entrada: `technical-spec.md` + `PRD.md` (com escopo apenas para o que resta)
 - Saída: `epics.md` apenas para o trabalho restante
 
-**HIL:** Certifique-se de que o Epic 1 no novo `epics.md` representa trabalho que ainda não foi feito.
+**HITL:** Certifique-se de que o Epic 1 no novo `epics.md` representa trabalho que ainda não foi feito.
 
 ---
 

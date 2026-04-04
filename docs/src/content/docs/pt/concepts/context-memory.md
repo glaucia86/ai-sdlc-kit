@@ -27,7 +27,7 @@ O ai-sdlc-kit resolve isso com dois documentos de contexto estruturados que todo
 | **Decisões principais** | Escolhas arquiteturais feitas e por quê (de `decisions-log.md`) |
 | **Restrições** | Limites fixos: orçamentos de desempenho, restrições de dependência, acordos da equipe |
 | **Glossário** | Termos de domínio que aparecem na spec e no código |
-| **Perguntas em aberto** | Itens não resolvidos sinalizados para o próximo HIL checkpoint |
+| **Perguntas em aberto** | Itens não resolvidos sinalizados para o próximo HITL checkpoint |
 
 ### Por que todos os agentes leem o CONTEXT.md primeiro
 

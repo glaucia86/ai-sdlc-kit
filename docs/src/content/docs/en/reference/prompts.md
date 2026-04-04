@@ -5,7 +5,7 @@ description: Complete reference for all prompts in the AI SDLC Kit.
 
 ## Discovery prompts (Flow A)
 
-| Command | File | Agent | Reads | Produces | HIL after? |
+| Command | File | Agent | Reads | Produces | HITL after? |
 |---|---|---|---|---|---|
 | `/discovery-refine` | `discovery-refine.prompt.md` | 🧭 Discovery | `idea.txt` | `idea.md` | ✅ Required |
 | `/discovery-spec` | `discovery-spec.prompt.md` | 🗂️ PM | `idea.md` | `non-technical-spec.md` | ✅ Required |
@@ -17,7 +17,7 @@ description: Complete reference for all prompts in the AI SDLC Kit.
 
 ## Epic prompts (Flow A)
 
-| Command | File | Agent | Reads | Produces | HIL after? |
+| Command | File | Agent | Reads | Produces | HITL after? |
 |---|---|---|---|---|---|
 | `/epic-init` | `epic-init.prompt.md` | 🏗️ Architect | `epics.md`, `technical-spec.md`, `CONTEXT.md` | `epic-N.md`, `PRD.md`, `spec-epic-N.md`, `decisions-log.md` | ✅ Required (3×) |
 | `/epic-close` | `epic-close.prompt.md` | 🚀 Ops | `spec-epic-N.md`, `PRD.md`, `decisions-log.md`, `CONTEXT.md` | `ops-epic-N.md` | ✅ Required |
@@ -27,7 +27,7 @@ description: Complete reference for all prompts in the AI SDLC Kit.
 
 ## Task prompts (Flow B — Direct Delivery)
 
-| Command | File | Agent | Reads | Produces | HIL after? |
+| Command | File | Agent | Reads | Produces | HITL after? |
 |---|---|---|---|---|---|
 | `/task-init` | `task-init.prompt.md` | 📥 Intake | `tarefa.txt` | `tarefa.md` | ✅ Required |
 | `/task-prd` | `task-prd.prompt.md` | 📐 Planner | `tarefa.md` | `PRD.md` | ✅ Required |
@@ -37,11 +37,11 @@ description: Complete reference for all prompts in the AI SDLC Kit.
 
 ## Implementation prompts (Flow A and B)
 
-| Command | File | Agent | Reads | Produces | HIL after? |
+| Command | File | Agent | Reads | Produces | HITL after? |
 |---|---|---|---|---|---|
 | `/task-implement` | `task-implement.prompt.md` | 🛠️ Implementer | `spec.md` / `spec-epic-N.md`, `PRD.md`, `CONTEXT.md` | Implementation + checklist + `decisions-log.md` | ⚠️ Recommended (plan) |
 | `/task-implement-frontend` | `task-implement-frontend.prompt.md` | 🛠️ Implementer | Same as above | Same as above + design/accessibility compliance | ⚠️ Recommended (plan) |
-| `/task-tests` | `task-tests.prompt.md` | 🧪 QA | `spec-epic-N.md`, `CONTEXT.md` | Test report | ⛔ HIL if gate fails |
+| `/task-tests` | `task-tests.prompt.md` | 🧪 QA | `spec-epic-N.md`, `CONTEXT.md` | Test report | ⛔ HITL if gate fails |
 | `/task-review` | `task-review.prompt.md` | 🔎 Reviewer | `PRD.md`, `spec.md`, implementation, `decisions-log.md` | Review report | ✅ Required |
 
 ---

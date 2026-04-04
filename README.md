@@ -36,7 +36,7 @@
 - [Discovery Phase (optional — Flow A)](#-discovery-phase-optional--flow-a)
 - [Prompts reference (Flow B — Direct Delivery)](#-prompts-reference-flow-b--direct-delivery)
 - [Running the full workflow](#-running-the-full-workflow)
-- [HIL checkpoints summary](#-hil-checkpoints-summary)
+- [HITL checkpoints summary](#-HITL-checkpoints-summary)
 - [Core rule](#️-core-rule)
 - [When to step back](#️-when-to-step-back)
 - [When to use /agents-init](#-when-to-use-agents-init)
@@ -280,7 +280,7 @@ This step uses the 📥 Intake agent to read `doc-specs/task.txt` and generate `
 
 Intake is a restricted-scope agent: it reads only `task.txt`, and does not access PRD, spec, or the codebase. This ensures the raw task entry is faithfully structured, without technical or architectural contamination.
 
-> 🔵 **Mandatory HIL after this step.**
+> 🔵 **Mandatory HITL after this step.**
 > A person must review `task.md` and answer:
 > - Is the task objective clear?
 > - Was any information lost?
@@ -303,7 +303,7 @@ This step uses the 📐 Planner agent to read `doc-specs/task.md` and generate `
 
 The PRD is generated with the following structure: overview, objectives, scope (in/out), assumptions, functional requirements, non-functional requirements, acceptance criteria, and open questions.
 
-> 🔵 **Mandatory HIL after this step.**
+> 🔵 **Mandatory HITL after this step.**
 > A person must review `PRD.md` and answer:
 > - Does the PRD correctly represent the task?
 > - Are the objectives coherent?
@@ -327,7 +327,7 @@ This step uses the 📐 Planner agent to read `doc-specs/PRD.md` and generate `d
 
 The spec is generated with the following structure: context, technical objective, implementation scope, architectural impact, affected components, expected functional flow, technical rules, implementation strategy, testing strategy, technical acceptance criteria, risks, and open questions.
 
-> 🔵 **Mandatory HIL after this step.**
+> 🔵 **Mandatory HITL after this step.**
 > A person must review `spec.md` and answer:
 > - Is the spec consistent with the PRD?
 > - Is it technical enough to support implementation?
@@ -357,7 +357,7 @@ This step uses the 🛠️ Implementer agent to:
 
 If the agent finds a critical ambiguity, it must flag it and stop, rather than decide on its own. If this happens, go back to the spec step and update the document.
 
-> 🟡 **Recommended HIL during implementation.**
+> 🟡 **Recommended HITL during implementation.**
 > Depending on the size of the change, monitor the agent's proposed plan, the files it intends to modify, and the most sensitive changes. For small tasks this can be lighter; for larger tasks, oversight is important.
 
 > **Handoffs and `send: false`:** at the end of implementation, the agent may propose a handoff to the Reviewer. That handoff is only executed if you confirm it manually. Copilot displays the continuation option but never invokes the next agent without your confirmation — this is part of the Human-in-the-Loop design.
@@ -376,7 +376,7 @@ This step uses the 🔎 Reviewer agent to review `doc-specs/PRD.md`, `doc-specs/
 
 Output should cover: adherence summary, deviations found, risks and points of attention, gaps, and a final recommendation.
 
-> 🔵 **Mandatory HIL at closing.**
+> 🔵 **Mandatory HITL at closing.**
 > A person must review the reviewer's output and decide:
 > - Is the delivery within scope?
 > - Are there mandatory corrections?
@@ -387,7 +387,7 @@ Output should cover: adherence summary, deviations found, risks and points of at
 
 ---
 
-## 🔵 HIL checkpoints summary
+## 🔵 HITL checkpoints summary
 
 | Checkpoint | Type |
 |------------|------|
@@ -434,25 +434,25 @@ It generates an initial `AGENTS.md`: minimal, stable, coherent with the project,
 ```
 idea.txt
    ↓
-/discovery-refine        → HIL — review idea.md
+/discovery-refine        → HITL — review idea.md
    ↓
-/discovery-spec          → HIL — review non-technical-spec.md
+/discovery-spec          → HITL — review non-technical-spec.md
    ↓
-/discovery-prd           → HIL — review PRD.md
+/discovery-prd           → HITL — review PRD.md
    ↓
-/discovery-tech-spec     → HIL — review technical-spec.md
+/discovery-tech-spec     → HITL — review technical-spec.md
    ↓
-/discovery-epics         → HIL — review epics.md
+/discovery-epics         → HITL — review epics.md
    ↓ (per epic)
-/epic-init               → HIL — review epic-N.md
-                         → HIL — review PRD.md for the epic
-                         → HIL — review spec-epic-N.md
+/epic-init               → HITL — review epic-N.md
+                         → HITL — review PRD.md for the epic
+                         → HITL — review spec-epic-N.md
    ↓
 /task-implement  (point to doc-specs/<N>-epic/)
    ↓
 /task-review
    ↓
-Final HIL
+Final HITL
 ```
 
 ### Flow B — Direct Delivery
@@ -460,17 +460,17 @@ Final HIL
 ```
 task.txt
    ↓
-/task-init      → HIL — review task.md
+/task-init      → HITL — review task.md
    ↓
-/task-prd       → HIL — review PRD.md
+/task-prd       → HITL — review PRD.md
    ↓
-/task-spec      → HIL — review spec.md
+/task-spec      → HITL — review spec.md
    ↓
 /task-implement
    ↓
 /task-review
    ↓
-Final HIL
+Final HITL
 ```
 
 ---

@@ -1,15 +1,15 @@
 ---
-title: Human-in-the-Loop (HIL)
+title: Human-in-the-Loop (HITL)
 description: Por qué la supervisión humana no es opcional en el AI SDLC Kit.
 ---
 
-El Human-in-the-Loop (HIL) es el principio de que los humanos deben estar presentes en los puntos de decisión críticos del pipeline — no solo como observadores, sino como validadores conscientes y responsables.
+El Human-in-the-Loop (HITL) es el principio de que los humanos deben estar presentes en los puntos de decisión críticos del pipeline — no solo como observadores, sino como validadores conscientes y responsables.
 
 ---
 
-## Qué es un HIL checkpoint
+## Qué es un HITL checkpoint
 
-Un HIL checkpoint es una pausa obligatoria en el pipeline donde un humano lee el artefacto producido por un agente y decide conscientemente:
+Un HITL checkpoint es una pausa obligatoria en el pipeline donde un humano lee el artefacto producido por un agente y decide conscientemente:
 
 > **¿Este artefacto es suficientemente correcto y preciso para guiar el siguiente paso?**
 
@@ -19,7 +19,7 @@ Si la respuesta es sí, el pipeline avanza. Si es no, el artefacto se corrige an
 
 ## Por qué no es opcional
 
-Los checkpoints HIL existen porque:
+Los checkpoints HITL existen porque:
 
 1. **La IA no tiene acceso a tu contexto implícito** — el conocimiento de dominio, la política de la empresa, las restricciones no escritas que tú cargas en tu cabeza
 2. **Los errores se amplifican** — una suposición incorrecta en `idea.md` se propaga a `non-technical-spec.md`, luego a `PRD.md`, luego a `technical-spec.md`, y finalmente al código
@@ -31,7 +31,7 @@ Un checkpoint omitido no es una optimización. Es una transferencia de riesgo in
 
 ## Rubber stamp vs. revisión real
 
-Un HIL checkpoint de calidad no es firmar sin leer. Es:
+Un HITL checkpoint de calidad no es firmar sin leer. Es:
 
 | Revisión real | Rubber stamp |
 |---|---|
@@ -43,7 +43,7 @@ Un HIL checkpoint de calidad no es firmar sin leer. Es:
 
 ---
 
-## HIL checkpoints en Flow A
+## HITL checkpoints en Flow A
 
 | Checkpoint | Artefacto | Pregunta clave |
 |---|---|---|
@@ -57,7 +57,7 @@ Un HIL checkpoint de calidad no es firmar sin leer. Es:
 
 ---
 
-## HIL checkpoints en Flow B
+## HITL checkpoints en Flow B
 
 | Checkpoint | Artefacto | Pregunta clave |
 |---|---|---|

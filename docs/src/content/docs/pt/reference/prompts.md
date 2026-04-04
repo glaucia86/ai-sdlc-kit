@@ -5,7 +5,7 @@ description: Referência completa de todos os prompts do AI SDLC Kit.
 
 ## Prompts de Discovery (Flow A)
 
-| Comando | Arquivo | Agente | Lê | Produz | HIL após? |
+| Comando | Arquivo | Agente | Lê | Produz | HITL após? |
 |---|---|---|---|---|---|
 | `/discovery-refine` | `discovery-refine.prompt.md` | 🧭 Discovery | `idea.txt` | `idea.md` | ✅ Obrigatório |
 | `/discovery-spec` | `discovery-spec.prompt.md` | 🗂️ PM | `idea.md` | `non-technical-spec.md` | ✅ Obrigatório |
@@ -17,7 +17,7 @@ description: Referência completa de todos os prompts do AI SDLC Kit.
 
 ## Prompts de Epic (Flow A)
 
-| Comando | Arquivo | Agente | Lê | Produz | HIL após? |
+| Comando | Arquivo | Agente | Lê | Produz | HITL após? |
 |---|---|---|---|---|---|
 | `/epic-init` | `epic-init.prompt.md` | 🏗️ Architect | `epics.md`, `technical-spec.md`, `CONTEXT.md` | `epic-N.md`, `PRD.md`, `spec-epic-N.md`, `decisions-log.md` | ✅ Obrigatório (3×) |
 | `/epic-close` | `epic-close.prompt.md` | 🚀 Ops | `spec-epic-N.md`, `PRD.md`, `decisions-log.md`, `CONTEXT.md` | `ops-epic-N.md` | ✅ Obrigatório |
@@ -27,7 +27,7 @@ description: Referência completa de todos os prompts do AI SDLC Kit.
 
 ## Prompts de Tarefa (Flow B — Entrega Direta)
 
-| Comando | Arquivo | Agente | Lê | Produz | HIL após? |
+| Comando | Arquivo | Agente | Lê | Produz | HITL após? |
 |---|---|---|---|---|---|
 | `/task-init` | `task-init.prompt.md` | 📥 Intake | `tarefa.txt` | `tarefa.md` | ✅ Obrigatório |
 | `/task-prd` | `task-prd.prompt.md` | 📐 Planner | `tarefa.md` | `PRD.md` | ✅ Obrigatório |
@@ -37,11 +37,11 @@ description: Referência completa de todos os prompts do AI SDLC Kit.
 
 ## Prompts de Implementação (Flow A e B)
 
-| Comando | Arquivo | Agente | Lê | Produz | HIL após? |
+| Comando | Arquivo | Agente | Lê | Produz | HITL após? |
 |---|---|---|---|---|---|
 | `/task-implement` | `task-implement.prompt.md` | 🛠️ Implementer | `spec.md` / `spec-epic-N.md`, `PRD.md`, `CONTEXT.md` | Implementação + checklist + `decisions-log.md` | ⚠️ Recomendado (plano) |
 | `/task-implement-frontend` | `task-implement-frontend.prompt.md` | 🛠️ Implementer | Igual ao acima | Igual ao acima + conformidade de design/acessibilidade | ⚠️ Recomendado (plano) |
-| `/task-tests` | `task-tests.prompt.md` | 🧪 QA | `spec-epic-N.md`, `CONTEXT.md` | Relatório de testes | ⛔ HIL se portão falhar |
+| `/task-tests` | `task-tests.prompt.md` | 🧪 QA | `spec-epic-N.md`, `CONTEXT.md` | Relatório de testes | ⛔ HITL se portão falhar |
 | `/task-review` | `task-review.prompt.md` | 🔎 Reviewer | `PRD.md`, `spec.md`, implementação, `decisions-log.md` | Relatório de revisão | ✅ Obrigatório |
 
 ---

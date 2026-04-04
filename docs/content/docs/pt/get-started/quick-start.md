@@ -43,7 +43,7 @@ O agente 🧭 Discovery lê `idea.txt` e gera `doc-specs/idea.md`.
 
 ---
 
-## Passo 3 — Revise `idea.md` (HIL checkpoint)
+## Passo 3 — Revise `idea.md` (HITL checkpoint)
 
 Abra `doc-specs/idea.md` e revise:
 

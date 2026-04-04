@@ -24,7 +24,7 @@ A fase de Discovery é **sempre opcional**. Se você já tem uma tarefa clara e 
 
 ## Os cinco prompts de Discovery
 
-| Prompt | Agente | Lê | Produz | HIL? |
+| Prompt | Agente | Lê | Produz | HITL? |
 |---|---|---|---|---|
 | `/discovery-refine` | 🧭 Discovery | `idea.txt` | `idea.md` | ✅ Obrigatório |
 | `/discovery-spec` | 🗂️ PM | `idea.md` | `non-technical-spec.md` | ✅ Obrigatório |
@@ -44,7 +44,7 @@ A fase de Discovery é **sempre opcional**. Se você já tem uma tarefa clara e 
 
 O agente 🧭 Discovery lê `doc-specs/idea.txt` e produz `doc-specs/idea.md`. Ele opera sem viés técnico — sem frameworks, sem arquitetura, sem detalhes de implementação. Preserva a intenção original, estrutura-a e sinaliza ambiguidades.
 
-**✅ HIL:** revise `idea.md` antes de continuar.
+**✅ HITL:** revise `idea.md` antes de continuar.
 - A ideia original foi preservada com precisão?
 - Existem premissas que não deveriam ter sido assumidas?
 - As perguntas em aberto estão claramente sinalizadas?
@@ -64,7 +64,7 @@ O agente 🗂️ PM lê `idea.md` e produz `doc-specs/non-technical-spec.md` com
 - Critérios de aceitação funcionais
 - Perguntas em aberto
 
-**✅ HIL:** revise `non-technical-spec.md`.
+**✅ HITL:** revise `non-technical-spec.md`.
 - Os fluxos de usuário estão claros e completos?
 - As regras de negócio foram capturadas corretamente?
 - Algo está faltando antes de avançar para o PRD?
@@ -87,7 +87,7 @@ O agente 🧑‍💼 Tech Lead lê `non-technical-spec.md` e produz `doc-specs/P
 - Critérios de aceitação
 - Perguntas em aberto
 
-**✅ HIL:** revise `PRD.md`.
+**✅ HITL:** revise `PRD.md`.
 - O escopo está corretamente delimitado?
 - Os RNFs fazem sentido?
 - Os critérios de aceitação são testáveis?
@@ -111,7 +111,7 @@ O agente 🏗️ Architect lê `PRD.md` e inspeciona o codebase (via `search/cod
 
 Também cria o `doc-specs/CONTEXT.md` inicial.
 
-**✅ HIL:** revise `technical-spec.md`.
+**✅ HITL:** revise `technical-spec.md`.
 - As decisões de arquitetura estão justificadas?
 - Os riscos e dependências estão registrados?
 - Existem ambiguidades que precisam ser resolvidas antes dos epics?
@@ -126,7 +126,7 @@ Também cria o `doc-specs/CONTEXT.md` inicial.
 
 O agente 🏗️ Architect lê `technical-spec.md` e `PRD.md` e produz `doc-specs/epics.md`. Os epics são ordenados por **dependência técnica** (não por prioridade de negócio) — cada epic deve ser entregável independentemente, sem depender de um epic posterior.
 
-**✅ HIL:** revise `epics.md`.
+**✅ HITL:** revise `epics.md`.
 - O sequenciamento faz sentido técnico?
 - Cada epic é pequeno o suficiente para ser implementado independentemente?
 - As dependências entre epics estão corretas?

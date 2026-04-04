@@ -65,7 +65,7 @@ Goal: close each epic safely into production and maintain project-wide context.
 | Inception phase | Flow A — Discovery phase + `/discovery-*` prompts |
 | Construction phase | Spec phase + `/epic-init` + `/task-implement` + `/task-review` |
 | Operations phase | `/epic-close` + `/context-sync` + `/ops-triage` |
-| Human oversight | HIL checkpoints after every generated artefact |
+| Human oversight | HITL checkpoints after every generated artefact |
 | Context memory | `CONTEXT.md` — read by all agents, updated after each epic |
 | Audit trail | `decisions-log.md` — append-only ADR record per epic |
 
@@ -83,7 +83,7 @@ AI agents in the kit do not carry:
 - Team capacity and delivery reality
 - The lived experience of what "done" means for this specific project
 
-The HIL checkpoints exist precisely to inject that missing context at the moments it matters most — before each artefact becomes the input to the next stage.
+The HITL checkpoints exist precisely to inject that missing context at the moments it matters most — before each artefact becomes the input to the next stage.
 
 ---
 

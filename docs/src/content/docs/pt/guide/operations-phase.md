@@ -37,7 +37,7 @@ Ele gera `doc-specs/<N>-epic/ops-epic-N.md` com:
 | Padrões de anomalia | O que distingue comportamento normal de anormal para as features entregues |
 | Feedback para epics futuros | Riscos, aprendizados e ajustes sugeridos para `epics.md` |
 
-**✅ HIL:** Revise `ops-epic-N.md` antes de fazer o deploy.
+**✅ HITL:** Revise `ops-epic-N.md` antes de fazer o deploy.
 - A sequência de deploy é segura?
 - Todos os breaking changes estão documentados?
 - Os padrões de anomalia são precisos o suficiente para monitoramento on-call?

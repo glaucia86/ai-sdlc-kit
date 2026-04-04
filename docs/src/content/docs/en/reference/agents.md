@@ -82,7 +82,7 @@ description: Complete reference for all agents in the AI SDLC Kit.
 - Grounds technical decisions in the PRD and observable codebase
 - Orders epics by technical dependency, not business priority
 - Each epic must be independently deliverable
-- Pauses after each artefact and signals HIL before generating the next
+- Pauses after each artefact and signals HITL before generating the next
 - Writes in Brazilian Portuguese
 
 **Artefact responsibility:**
@@ -204,7 +204,7 @@ description: Complete reference for all agents in the AI SDLC Kit.
 **Key rules:**
 - Reads `decisions-log.md` to distinguish deliberate deviations from mistakes
 - Does not recommend expanding scope
-- HIL is mandatory after this agent
+- HITL is mandatory after this agent
 
 ---
 

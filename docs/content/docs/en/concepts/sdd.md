@@ -52,11 +52,11 @@ Together, these three artefacts give the 🛠️ Implementer agent a complete, u
 Every prompt in the Construction phase is gated:
 
 1. `/epic-init` — Architect generates the three spec artefacts from `CONTEXT.md` + `technical-spec.md`
-2. **Human HIL checkpoint** — reviews spec before any code is generated
+2. **Human HITL checkpoint** — reviews spec before any code is generated
 3. `/task-init` — Planner decomposes `epic-N.md` into tasks; human approves task list
 4. `/task-implement` — Implementer generates code per task; spec is always in context
 5. `/task-review` — Reviewer checks implementation against spec; flags divergence
-6. **Human HIL checkpoint** — final review before merge
+6. **Human HITL checkpoint** — final review before merge
 
 The Implementer agent reads the spec. The Reviewer agent references the spec. Divergence from spec is a blocker, not a comment.
 

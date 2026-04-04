@@ -1,19 +1,19 @@
 ---
-title: HIL Checkpoints
+title: HITL Checkpoints
 description: Every Human in the Loop checkpoint in the AI SDLC Kit — when, what to review, and when to go back.
 ---
 
-## What is HIL in this context?
+## What is HITL in this context?
 
-Human in the Loop (HIL) is the practice of inserting **mandatory human review gates** at specific points in the AI-driven workflow. In the AI SDLC Kit, HIL is not a checkbox — it is the structural principle that prevents AI-generated artefacts from flowing directly into implementation without human validation.
+Human in the Loop (HITL) is the practice of inserting **mandatory human review gates** at specific points in the AI-driven workflow. In the AI SDLC Kit, HITL is not a checkbox — it is the structural principle that prevents AI-generated artefacts from flowing directly into implementation without human validation.
 
-The kit treats each HIL checkpoint as a decision point: _Is this artefact accurate and complete enough to drive the next step?_
+The kit treats each HITL checkpoint as a decision point: _Is this artefact accurate and complete enough to drive the next step?_
 
 If the answer is **no**, the workflow returns to the previous step. There is no moving forward with a "close enough" spec.
 
 ---
 
-## Complete HIL reference
+## Complete HITL reference
 
 ### Flow A — Discovery + Delivery
 
@@ -88,4 +88,4 @@ If the answer is **no**, the workflow returns to the previous step. There is no 
 | QA gate fails | Return to Implementer → human decides whether to fix or defer |
 | Reviewer finds spec deviation | Update spec or implementation → re-run `/task-review` |
 
-Going back is not a failure — it is the mechanism that keeps the workflow accurate. The cost of a bad spec that flows into implementation is always higher than the cost of one extra HIL iteration.
+Going back is not a failure — it is the mechanism that keeps the workflow accurate. The cost of a bad spec that flows into implementation is always higher than the cost of one extra HITL iteration.

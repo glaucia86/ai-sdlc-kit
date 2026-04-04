@@ -71,7 +71,7 @@
 - [ ] `decisions-log.md` updated with relevant decisions from the epic
 - [ ] Ambiguities found recorded in this file under the open questions section
 
-### Blocking criteria (prevent progress even with HIL)
+### Blocking criteria (prevent progress even with HITL)
 
 <!-- List here criteria whose failure must completely prevent progress -->
 <!-- E.g.: "authentication cannot be bypassed in any flow" -->

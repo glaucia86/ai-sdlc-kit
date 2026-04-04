@@ -13,17 +13,17 @@ El AI SDLC Kit organiza el desarrollo en dos flujos independientes que comparten
 │                                                                 │
 │  idea.txt                                                       │
 │     ↓                                                           │
-│  /discovery-refine   → HIL ✅ revisar idea.md                  │
+│  /discovery-refine   → HITL ✅ revisar idea.md                  │
 │     ↓                                                           │
-│  /discovery-spec     → HIL ✅ revisar non-technical-spec.md     │
+│  /discovery-spec     → HITL ✅ revisar non-technical-spec.md     │
 │     ↓                                                           │
-│  /discovery-prd      → HIL ✅ revisar PRD.md                    │
+│  /discovery-prd      → HITL ✅ revisar PRD.md                    │
 │     ↓                                                           │
-│  /discovery-tech-spec → HIL ✅ revisar technical-spec.md        │
+│  /discovery-tech-spec → HITL ✅ revisar technical-spec.md        │
 │     ↓                                                           │
-│  /discovery-epics    → HIL ✅ revisar epics.md                  │
+│  /discovery-epics    → HITL ✅ revisar epics.md                  │
 │     ↓  (por epic)                                               │
-│  /epic-init <N>      → HIL ✅ epic-N.md, PRD.md, spec-epic-N.md │
+│  /epic-init <N>      → HITL ✅ epic-N.md, PRD.md, spec-epic-N.md │
 │     ↓                                                           │
 │  /task-implement → /task-tests → /task-review                   │
 │     ↓                                                           │
@@ -35,11 +35,11 @@ El AI SDLC Kit organiza el desarrollo en dos flujos independientes que comparten
 │                                                                 │
 │  tarefa.txt                                                     │
 │     ↓                                                           │
-│  /task-init   → HIL ✅ revisar tarefa.md                        │
+│  /task-init   → HITL ✅ revisar tarefa.md                        │
 │     ↓                                                           │
-│  /task-prd    → HIL ✅ revisar PRD.md                           │
+│  /task-prd    → HITL ✅ revisar PRD.md                           │
 │     ↓                                                           │
-│  /task-spec   → HIL ✅ revisar spec.md                          │
+│  /task-spec   → HITL ✅ revisar spec.md                          │
 │     ↓                                                           │
 │  /task-implement → /task-tests → /task-review                   │
 └─────────────────────────────────────────────────────────────────┘
@@ -61,16 +61,16 @@ Esta regla existe porque los agentes de IA son excelentes produciendo especifica
 
 ## El papel del Human in the Loop
 
-Los HIL checkpoints son **obligatorios**, no opcionales. Aparecen después de cada artefacto generado que moldea materialmente lo que se construirá.
+Los HITL checkpoints son **obligatorios**, no opcionales. Aparecen después de cada artefacto generado que moldea materialmente lo que se construirá.
 
-| Artefacto | Por qué el HIL importa aquí |
+| Artefacto | Por qué el HITL importa aquí |
 |---|---|
 | `idea.md` | Garantiza que la idea no fue distorsionada durante la estructuración |
 | `non-technical-spec.md` | Valida recorridos de usuario y reglas de negocio |
 | `PRD.md` | Confirma límites de alcance y criterios de aceptación |
 | `technical-spec.md` | Valida decisiones de arquitectura y evaluación de riesgos |
 | `epics.md` | Confirma secuenciación y límites de los epics |
-| `spec-epic-N.md` | **Puerta antes de la implementación** — el HIL más crítico |
+| `spec-epic-N.md` | **Puerta antes de la implementación** — el HITL más crítico |
 
 En cada checkpoint, un humano responde: _¿Este documento es lo suficientemente preciso para guiar el siguiente paso?_ Si la respuesta es no, el documento se revisa antes de continuar.
 

@@ -24,7 +24,7 @@ The Discovery phase is **always optional**. If you already have a clear, defined
 
 ## The five Discovery prompts
 
-| Prompt | Agent | Reads | Produces | HIL? |
+| Prompt | Agent | Reads | Produces | HITL? |
 |---|---|---|---|---|
 | `/discovery-refine` | 🧭 Discovery | `idea.txt` | `idea.md` | ✅ Required |
 | `/discovery-spec` | 🗂️ PM | `idea.md` | `non-technical-spec.md` | ✅ Required |
@@ -44,7 +44,7 @@ The Discovery phase is **always optional**. If you already have a clear, defined
 
 The 🧭 Discovery agent reads `doc-specs/idea.txt` and produces `doc-specs/idea.md`. It operates without technical bias — no frameworks, no architecture, no implementation details. It preserves the original intent, structures it, and flags ambiguities.
 
-**✅ HIL:** review `idea.md` before continuing.
+**✅ HITL:** review `idea.md` before continuing.
 - Was the original idea preserved accurately?
 - Are there assumptions that should not have been made?
 - Are open questions clearly flagged?
@@ -64,7 +64,7 @@ The 🗂️ PM agent reads `idea.md` and produces `doc-specs/non-technical-spec.
 - Functional acceptance criteria
 - Open questions
 
-**✅ HIL:** review `non-technical-spec.md`.
+**✅ HITL:** review `non-technical-spec.md`.
 - Are user flows clear and complete?
 - Are business rules captured correctly?
 - Is anything missing before moving to PRD?
@@ -87,7 +87,7 @@ The 🧑‍💼 Tech Lead agent reads `non-technical-spec.md` and produces `doc-
 - Acceptance criteria
 - Open questions
 
-**✅ HIL:** review `PRD.md`.
+**✅ HITL:** review `PRD.md`.
 - Is the scope correctly bounded?
 - Do the NFRs make sense?
 - Are acceptance criteria testable?
@@ -111,7 +111,7 @@ The 🏗️ Architect agent reads `PRD.md` and inspects the codebase (via `searc
 
 It also creates the initial `doc-specs/CONTEXT.md`.
 
-**✅ HIL:** review `technical-spec.md`.
+**✅ HITL:** review `technical-spec.md`.
 - Are architecture decisions justified?
 - Are risks and dependencies registered?
 - Are there ambiguities that must be resolved before epics?
@@ -126,7 +126,7 @@ It also creates the initial `doc-specs/CONTEXT.md`.
 
 The 🏗️ Architect agent reads `technical-spec.md` and `PRD.md` and produces `doc-specs/epics.md`. Epics are ordered by **technical dependency** (not business priority) — each epic must be deliverable independently without depending on a later epic being done first.
 
-**✅ HIL:** review `epics.md`.
+**✅ HITL:** review `epics.md`.
 - Does the sequencing make technical sense?
 - Is each epic small enough to be implemented independently?
 - Are dependencies between epics accurate?

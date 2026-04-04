@@ -27,7 +27,7 @@ ai-sdlc-kit solves this with two structured context documents that every agent r
 | **Key decisions** | Architectural choices made and why (from `decisions-log.md`) |
 | **Constraints** | Hard limits: performance budgets, dependency restrictions, team agreements |
 | **Glossary** | Domain terms that appear in spec and code |
-| **Open questions** | Unresolved items flagged for the next HIL checkpoint |
+| **Open questions** | Unresolved items flagged for the next HITL checkpoint |
 
 ### Why all agents read CONTEXT.md first
 

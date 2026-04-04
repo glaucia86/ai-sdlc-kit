@@ -29,6 +29,6 @@ Read `doc-specs/idea.txt` and generate `doc-specs/idea.md` with the refined and 
 
 `doc-specs/idea.md` — structured idea with the sections defined in the `/discovery-refine` prompt.
 
-## Mandatory HIL
+## Mandatory HITL
 
 After generating `idea.md`, signal to the user that the file is ready for review before proceeding to the next step.

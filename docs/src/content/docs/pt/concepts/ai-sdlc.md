@@ -65,7 +65,7 @@ Objetivo: fechar cada epic com segurança em produção e manter o contexto do p
 | Fase de Concepção | Flow A — fase de Discovery + prompts `/discovery-*` |
 | Fase de Construção | Fase de Spec + `/epic-init` + `/task-implement` + `/task-review` |
 | Fase de Operações | `/epic-close` + `/context-sync` + `/ops-triage` |
-| Supervisão humana | HIL checkpoints após cada artefato gerado |
+| Supervisão humana | HITL checkpoints após cada artefato gerado |
 | Memória de contexto | `CONTEXT.md` — lido por todos os agentes, atualizado após cada epic |
 | Trilha de auditoria | `decisions-log.md` — registro ADR append-only por epic |
 
@@ -83,7 +83,7 @@ Os agentes de IA no kit não carregam:
 - Capacidade da equipe e realidade de entrega
 - A experiência vivida do que "concluído" significa para este projeto específico
 
-Os HIL checkpoints existem precisamente para injetar esse contexto ausente nos momentos em que mais importa — antes que cada artefato se torne a entrada para o próximo estágio.
+Os HITL checkpoints existem precisamente para injetar esse contexto ausente nos momentos em que mais importa — antes que cada artefato se torne a entrada para o próximo estágio.
 
 ---
 

@@ -9,16 +9,16 @@ export function generateStaticParams() {
 
 export default async function LangLayout({
   params,
-  children,
+  cHITLdren,
 }: {
   params: Promise<{ lang: string }>;
-  children: ReactNode;
+  cHITLdren: ReactNode;
 }) {
   const { lang } = await params;
 
   return (
     <RootProvider i18n={i18nUI.provider(lang)}>
-      {children}
+      {cHITLdren}
     </RootProvider>
   );
 }

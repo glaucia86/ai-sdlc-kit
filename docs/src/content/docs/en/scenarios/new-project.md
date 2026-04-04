@@ -40,7 +40,7 @@ Output: `idea.md`
 
 The Discovery agent removes bias, fills structural gaps, and produces a clean, unambiguous idea document that neither over-specifies nor under-specifies the product.
 
-**HIL-A1:** Review `idea.md`. Ask: does this capture what I actually want to build? Is anything missing? Is anything stated as a fact that is actually an assumption?
+**HITL-A1:** Review `idea.md`. Ask: does this capture what I actually want to build? Is anything missing? Is anything stated as a fact that is actually an assumption?
 
 ### Step 2 — Functional spec
 
@@ -51,7 +51,7 @@ Output: `non-technical-spec.md`
 
 The PM agent translates the idea into structured functional requirements — what the product does, for whom, under what constraints — without making technical choices.
 
-**HIL-A2:** Review `non-technical-spec.md`. Ask: are all the user stories complete? Are there edge cases that aren't covered?
+**HITL-A2:** Review `non-technical-spec.md`. Ask: are all the user stories complete? Are there edge cases that aren't covered?
 
 ### Step 3 — Product requirements
 
@@ -62,7 +62,7 @@ Output: `PRD.md`
 
 The Tech Lead agent structures the functional spec into formal product requirements: testable acceptance criteria, prioritization, dependencies.
 
-**HIL-A3:** Review `PRD.md`. Ask: are these requirements testable? Are the priorities correct?
+**HITL-A3:** Review `PRD.md`. Ask: are these requirements testable? Are the priorities correct?
 
 ### Step 4 — Technical specification
 
@@ -73,7 +73,7 @@ Output: `technical-spec.md`
 
 The Architect agent selects the stack, defines the architecture, identifies integration points, and documents all technical constraints.
 
-**HIL-A4:** Review `technical-spec.md`. Ask: is this architecture sound? Are the stack choices appropriate? Are there constraints the agent couldn't know about?
+**HITL-A4:** Review `technical-spec.md`. Ask: is this architecture sound? Are the stack choices appropriate? Are there constraints the agent couldn't know about?
 
 ### Step 5 — Epic breakdown
 
@@ -84,7 +84,7 @@ Output: `epics.md`
 
 The Architect agent breaks the full product scope into independently deliverable epics, each ending with a testable, shippable increment.
 
-**HIL-A5:** Review `epics.md`. Ask: are these epics independent? Is the sequencing correct? Is Epic 1 right-sized for a first delivery?
+**HITL-A5:** Review `epics.md`. Ask: are these epics independent? Is the sequencing correct? Is Epic 1 right-sized for a first delivery?
 
 ---
 
@@ -101,7 +101,7 @@ Output: `spec-epic-1.md`, `PRD.md` (epic-scoped), `epic-1.md`
 
 The Architect generates the per-epic spec, the scoped PRD, and the task list for Epic 1.
 
-**HIL-B1:** Review all three artefacts. The spec is the contract for this epic. Approve only when acceptance criteria are complete.
+**HITL-B1:** Review all three artefacts. The spec is the contract for this epic. Approve only when acceptance criteria are complete.
 
 ### Step 2 — Initialize tasks
 
@@ -112,7 +112,7 @@ Output: granular task breakdown
 
 The Planner decomposes the epic task list into implementable units — each task focused on a single concern.
 
-**HIL-B2:** Review the task list. Are tasks granular enough? Is anything missing?
+**HITL-B2:** Review the task list. Are tasks granular enough? Is anything missing?
 
 ### Step 3 — Implement each task
 
@@ -137,7 +137,7 @@ Run `/task-review` using the 🔎 Reviewer agent.
 Input: implementation + spec + test results  
 Output: review report
 
-**HIL-B3/B4:** Review the report. Are all acceptance criteria satisfied? Are any flagged issues blockers?
+**HITL-B3/B4:** Review the report. Are all acceptance criteria satisfied? Are any flagged issues blockers?
 
 ### Step 6 — Close the epic
 
@@ -146,7 +146,7 @@ Run `/epic-close` using the 🚀 Ops agent.
 Input: `CONTEXT.md` + implementation  
 Output: `ops-epic-1.md` (deploy plan, rollback, observability)
 
-**HIL-B5:** Approve deploy plan before merging.
+**HITL-B5:** Approve deploy plan before merging.
 
 ### Step 7 — Sync context
 
