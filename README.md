@@ -14,12 +14,19 @@
 
 <br/>
 
+[![Docs CI/CD](https://github.com/glaucia86/ai-sdlc-kit/actions/workflows/docs.yml/badge.svg)](https://github.com/glaucia86/ai-sdlc-kit/actions/workflows/docs.yml)
+[![Last Commit](https://img.shields.io/github/last-commit/glaucia86/ai-sdlc-kit?style=flat-square&color=6366f1)](https://github.com/glaucia86/ai-sdlc-kit/commits/main)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/glaucia86/ai-sdlc-kit/pulls)
+[![Release](https://img.shields.io/github/v/release/glaucia86/ai-sdlc-kit?style=flat-square&color=f59e0b)](https://github.com/glaucia86/ai-sdlc-kit/releases)
+
+<br/>
+
 > **A reusable kit to run a Spec-Driven Development (SDD) workflow with GitHub Copilot in VS Code.**
 > It organizes the process into clear stages, with intermediate artifacts and human-in-the-loop checkpoints before implementation begins.
 
 <br/>
 
-[📖 Official Docs](https://glaucia86.github.io/ai-sdlc-kit) · [🚀 Quick Start](#-running-the-full-workflow) · [🧩 Agents](#-agents) · [📦 Installation](#-installation)
+[📖 Official Docs](https://glaucia86.github.io/ai-sdlc-kit) · [🚀 Quick Start](#-running-the-full-workflow) · [🧩 Agents](#-agents) · [📦 Installation](#-installation) · [📝 Changelog](./CHANGELOG.md)
 
 </div>
 
@@ -44,6 +51,8 @@
 - [Best practices](#-best-practices)
 - [Expected outcome](#-expected-outcome)
 - [Installation](#-installation)
+- [Contributing](#-contributing)
+- [Author](#-author)
 
 ---
 
@@ -559,11 +568,46 @@ See `Makefile` and `scripts/install.ts` for details.
 
 ---
 
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! If you have ideas for new agents, prompts, templates, or improvements to the workflow, feel free to:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feat/my-feature`)
+3. Commit your changes following [Conventional Commits](https://www.conventionalcommits.org/)
+4. Open a Pull Request
+
+Please ensure your changes are consistent with the SDD workflow philosophy: **clarity, human oversight, and structured artifacts before implementation**.
+
+---
+
+## 👩‍💻 Author
+
+<div align="center">
+
+<img src="https://github.com/glaucia86.png" width="120" style="border-radius: 50%" alt="Glaucia Lemos"/>
+
+**Glaucia Lemos**
+
+*Senior Cloud Advocate at Microsoft · AI & JavaScript Enthusiast*
+
+[![GitHub](https://img.shields.io/badge/GitHub-glaucia86-181717?style=flat-square&logo=github)](https://github.com/glaucia86)
+[![X (Twitter)](https://img.shields.io/badge/X-@glaucia__lemos86-000000?style=flat-square&logo=x)](https://twitter.com/glaucia_lemos86)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-glaucialemos-0077B5?style=flat-square&logo=linkedin)](https://www.linkedin.com/in/glaucialemos/)
+[![Blog](https://img.shields.io/badge/Blog-glaucia86.github.io-6366f1?style=flat-square&logo=github)](https://glaucia86.github.io)
+
+</div>
+
+---
+
 <div align="center">
 
 Made with ❤️ to bring structure, clarity, and human oversight to AI-assisted development.
 
 [![Docs](https://img.shields.io/badge/Official%20Docs-glaucia86.github.io%2Fai--sdlc--kit-6366f1?style=flat-square&logo=readthedocs&logoColor=white)](https://glaucia86.github.io/ai-sdlc-kit)
 [![GitHub](https://img.shields.io/badge/GitHub-glaucia86%2Fai--sdlc--kit-181717?style=flat-square&logo=github)](https://github.com/glaucia86/ai-sdlc-kit)
+[![Changelog](https://img.shields.io/badge/Changelog-CHANGELOG.md-10b981?style=flat-square)](./CHANGELOG.md)
 
 </div>
