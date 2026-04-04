@@ -1,0 +1,42 @@
+/* Home page animation keyframes */
+@keyframes panelNumSweep {
+  from { background-position: -300% center; }
+  to   { background-position: 300% center; }
+}
+
+@keyframes panelNumPulse {
+  0%, 100% { filter: drop-shadow(0 0 6px rgba(245,158,11,0.00)); }
+  50% { filter: drop-shadow(0 0 36px rgba(245,178,40,0.60)); }
+}
+
+@keyframes panelIdxPop {
+  0% { opacity: 0; transform: scale(0.55) translateY(4px); }
+  70% { opacity: 1; transform: scale(1.12) translateY(-1px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes auroraDrift0 {
+  0% { transform: translate(0px, 0px) scale(1); }
+  33% { transform: translate(60px, -40px) scale(1.08); }
+  66% { transform: translate(-30px, 50px) scale(0.94); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+@keyframes auroraDrift1 {
+  0% { transform: translate(0px, 0px) scale(1); }
+  40% { transform: translate(-70px, 35px) scale(1.06); }
+  75% { transform: translate(45px, -55px) scale(0.96); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+@keyframes auroraDrift2 {
+  0% { transform: translate(0px, 0px) scale(1); }
+  50% { transform: translate(25px, 60px) scale(1.1); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+@keyframes ctaOrb {
+  0% { transform: scale(1) translateY(0px); }
+  50% { transform: scale(1.12) translateY(-18px); }
+  100% { transform: scale(1) translateY(0px); }
+}

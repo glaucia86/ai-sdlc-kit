@@ -76,6 +76,22 @@ npm install
 npm run dev
 ```
 
+### Docs CI/CD (GitHub Pages)
+
+The repository includes a workflow at [.github/workflows/docs.yml](.github/workflows/docs.yml) that:
+
+- runs docs build checks on pull requests targeting `main`
+- builds and deploys docs to GitHub Pages on pushes to `main`
+- allows manual deployment with `workflow_dispatch`
+
+To enable deployment in your repository:
+
+1. Open GitHub repository settings.
+2. Go to **Settings → Pages**.
+3. Set **Source** to **GitHub Actions**.
+
+Optional for forks: set the repository variable `PAGES_ENVIRONMENT` to `github-pages` (or your desired environment name).
+
 ---
 
 ## ✅ Prerequisites
