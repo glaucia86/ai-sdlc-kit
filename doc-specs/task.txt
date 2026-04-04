@@ -1,0 +1,8 @@
+# Task Description
+
+Describe the task here in raw form, as it came from the backlog or context shared by the team.
+
+Example:
+- What needs to be done?
+- What is the context or problem that originated this request?
+- Are there any known constraints or dependencies?
