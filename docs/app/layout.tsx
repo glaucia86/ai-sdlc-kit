@@ -1,10 +1,10 @@
 import type { ReactNode } from 'react';
 import './global.css';
 
-export default function RootLayout({ cHITLdren }: { cHITLdren: ReactNode }) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html suppressHydrationWarning>
-      <body>{cHITLdren}</body>
+      <body>{children}</body>
     </html>
   );
 }

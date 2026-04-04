@@ -19,6 +19,13 @@ const content: Record<
     languageLabel: string;
     highlights: Array<{ value: string; label: string }>;
     panels: Array<{ title: string; text: string; href: string; linkLabel: string }>;
+    workflowTitle: string;
+    steps: Array<{ num: string; phase: string; desc: string }>;
+    agentsTitle: string;
+    agentCards: Array<{ tag: string; name: string; desc: string; flow: string; href: string; featured?: boolean }>;
+    ctaTitle: string;
+    ctaBody: string;
+    ctaCta: string;
   }
 > = {
   en: {
@@ -54,6 +61,64 @@ const content: Record<
         linkLabel: 'Browse templates',
       },
     ],
+    workflowTitle: 'From idea to production,\nwithout losing the thread.',
+    steps: [
+      { num: '01', phase: 'Discovery', desc: 'A raw idea becomes a structured, unbiased product spec.' },
+      { num: '02', phase: 'PM Spec', desc: 'User journeys, personas, and business rules are formalized.' },
+      { num: '03', phase: 'Tech PRD', desc: 'Requirements gain measurable acceptance criteria and scope boundaries.' },
+      { num: '04', phase: 'Architecture', desc: 'Technical spec, ordered epics, and per-epic artefacts are generated.' },
+      { num: '05', phase: 'Build & Review', desc: 'Implementer writes code. QA validates. Reviewer approves.' },
+      { num: '06', phase: 'Ops & Release', desc: 'Observability, anomaly patterns, and deploy pipeline are closed.' },
+    ],
+    agentsTitle: 'Ten agents. One coherent pipeline.',
+    agentCards: [
+      {
+        tag: '🧭',
+        name: 'Discovery',
+        desc: 'Structures raw ideas without technical bias. The first agent in Flow A.',
+        flow: 'Flow A',
+        href: '/en/reference/agents',
+        featured: true,
+      },
+      {
+        tag: '🗂️',
+        name: 'PM',
+        desc: 'Translates the structured idea into a functional spec with user journeys.',
+        flow: 'Flow A',
+        href: '/en/reference/agents',
+      },
+      {
+        tag: '🧑‍💼',
+        name: 'Tech Lead',
+        desc: 'Bridges product and engineering — turns the functional spec into a full PRD.',
+        flow: 'Flow A',
+        href: '/en/reference/agents',
+      },
+      {
+        tag: '🏗️',
+        name: 'Architect',
+        desc: 'Produces the full technical architecture, epics breakdown, and per-epic artefacts.',
+        flow: 'Flow A',
+        href: '/en/reference/agents',
+      },
+      {
+        tag: '📥',
+        name: 'Intake',
+        desc: 'Structures a raw task description into a scoped, unambiguous deliverable.',
+        flow: 'Flow B',
+        href: '/en/reference/agents',
+      },
+      {
+        tag: '📐',
+        name: 'Planner',
+        desc: 'Generates PRD and spec for Flow B tasks from the structured intake.',
+        flow: 'Flow B',
+        href: '/en/reference/agents',
+      },
+    ],
+    ctaTitle: 'Start building with agents today.',
+    ctaBody: 'The kit — agents, prompts, templates, and checkpoints — is open and ready to use.',
+    ctaCta: 'Open the docs',
   },
   pt: {
     eyebrow: 'Entrega guiada por especificação para times com IA',
@@ -88,6 +153,64 @@ const content: Record<
         linkLabel: 'Explorar templates',
       },
     ],
+    workflowTitle: 'Da ideia à produção,\nsem perder o fio da meada.',
+    steps: [
+      { num: '01', phase: 'Discovery', desc: 'Uma ideia bruta vira uma spec de produto estruturada e sem viés técnico.' },
+      { num: '02', phase: 'Spec de PM', desc: 'Jornadas de usuário, personas e regras de negócio são formalizadas.' },
+      { num: '03', phase: 'Tech PRD', desc: 'Os requisitos ganham critérios de aceite mensuráveis e escopo delimitado.' },
+      { num: '04', phase: 'Arquitetura', desc: 'Spec técnica, épicos ordenados e artefatos por épico são gerados.' },
+      { num: '05', phase: 'Build & Review', desc: 'Implementer escreve o código. QA valida. Reviewer aprova.' },
+      { num: '06', phase: 'Ops & Release', desc: 'Observabilidade, padrões de anomalia e pipeline de deploy são encerrados.' },
+    ],
+    agentsTitle: 'Dez agentes. Um pipeline coerente.',
+    agentCards: [
+      {
+        tag: '🧭',
+        name: 'Discovery',
+        desc: 'Estrutura ideias brutas sem viés técnico. Primeiro agente do Flow A.',
+        flow: 'Flow A',
+        href: '/pt/reference/agents',
+        featured: true,
+      },
+      {
+        tag: '🗂️',
+        name: 'PM',
+        desc: 'Traduz a ideia estruturada em uma spec funcional com jornadas de usuário.',
+        flow: 'Flow A',
+        href: '/pt/reference/agents',
+      },
+      {
+        tag: '🧑‍💼',
+        name: 'Tech Lead',
+        desc: 'Conecta produto e engenharia — transforma a spec funcional em um PRD completo.',
+        flow: 'Flow A',
+        href: '/pt/reference/agents',
+      },
+      {
+        tag: '🏗️',
+        name: 'Architect',
+        desc: 'Produz arquitetura técnica completa, épicos ordenados e artefatos por épico.',
+        flow: 'Flow A',
+        href: '/pt/reference/agents',
+      },
+      {
+        tag: '📥',
+        name: 'Intake',
+        desc: 'Estrutura uma tarefa bruta em um entregável delimitado e sem ambiguidades.',
+        flow: 'Flow B',
+        href: '/pt/reference/agents',
+      },
+      {
+        tag: '📐',
+        name: 'Planner',
+        desc: 'Gera PRD e spec para tarefas do Flow B a partir do intake estruturado.',
+        flow: 'Flow B',
+        href: '/pt/reference/agents',
+      },
+    ],
+    ctaTitle: 'Comece a construir com agentes hoje.',
+    ctaBody: 'O kit — agentes, prompts, templates e checkpoints — está aberto e pronto para uso.',
+    ctaCta: 'Abrir a documentação',
   },
   es: {
     eyebrow: 'Entrega guiada por especificación para equipos con IA',
@@ -105,7 +228,7 @@ const content: Record<
     panels: [
       {
         title: 'De discovery a operaciones',
-        text: 'Empieza con una idea en bruto o una tarea acotada y avanza por PRD, spec técnica, implementación, QA y revisión sin perder el HITLo.',
+        text: 'Empieza con una idea en bruto o una tarea acotada y avanza por PRD, spec técnica, implementación, QA y revisión sin perder el hilo.',
         href: '/es/get-started/how-it-works',
         linkLabel: 'Cómo funciona',
       },
@@ -122,6 +245,64 @@ const content: Record<
         linkLabel: 'Ver plantillas',
       },
     ],
+    workflowTitle: 'De la idea a producción,\nsin perder el hilo.',
+    steps: [
+      { num: '01', phase: 'Discovery', desc: 'Una idea en bruto se convierte en una spec de producto estructurada sin sesgo técnico.' },
+      { num: '02', phase: 'Spec de PM', desc: 'Los journeys de usuario, personas y reglas de negocio se formalizan.' },
+      { num: '03', phase: 'Tech PRD', desc: 'Los requisitos obtienen criterios de aceptación medibles y límites de alcance.' },
+      { num: '04', phase: 'Arquitectura', desc: 'Se generan spec técnica, épicas ordenadas y artefactos por épica.' },
+      { num: '05', phase: 'Build & Review', desc: 'El Implementer escribe código. QA valida. El Reviewer aprueba.' },
+      { num: '06', phase: 'Ops & Release', desc: 'Observabilidad, patrones de anomalía y pipeline de deploy se cierran.' },
+    ],
+    agentsTitle: 'Diez agentes. Un pipeline coherente.',
+    agentCards: [
+      {
+        tag: '🧭',
+        name: 'Discovery',
+        desc: 'Estructura ideas en bruto sin sesgo técnico. Primer agente de Flow A.',
+        flow: 'Flow A',
+        href: '/es/reference/agents',
+        featured: true,
+      },
+      {
+        tag: '🗂️',
+        name: 'PM',
+        desc: 'Traduce la idea estructurada en una spec funcional con journeys de usuario.',
+        flow: 'Flow A',
+        href: '/es/reference/agents',
+      },
+      {
+        tag: '🧑‍💼',
+        name: 'Tech Lead',
+        desc: 'Conecta producto e ingeniería — convierte la spec funcional en un PRD completo.',
+        flow: 'Flow A',
+        href: '/es/reference/agents',
+      },
+      {
+        tag: '🏗️',
+        name: 'Architect',
+        desc: 'Produce arquitectura técnica completa, épicas ordenadas y artefactos por épica.',
+        flow: 'Flow A',
+        href: '/es/reference/agents',
+      },
+      {
+        tag: '📥',
+        name: 'Intake',
+        desc: 'Estructura una tarea en bruto en un entregable delimitado y sin ambigüedades.',
+        flow: 'Flow B',
+        href: '/es/reference/agents',
+      },
+      {
+        tag: '📐',
+        name: 'Planner',
+        desc: 'Genera PRD y spec para tareas de Flow B a partir del intake estructurado.',
+        flow: 'Flow B',
+        href: '/es/reference/agents',
+      },
+    ],
+    ctaTitle: 'Empieza a construir con agentes hoy.',
+    ctaBody: 'El kit — agentes, prompts, plantillas y checkpoints — está abierto y listo para usar.',
+    ctaCta: 'Abrir la documentación',
   },
 };
 
@@ -379,10 +560,10 @@ export function HomePage({ locale }: { locale: HomeLocale }) {
             <motion.article
               key={panel.title}
               initial={{ opacity: 0, y: 52 }}
-              wHITLeInView={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-64px' }}
               transition={{ duration: 0.75, delay: i * 0.14, ease: [0.22, 1, 0.36, 1] }}
-              wHITLeHover={{ y: -6, transition: { duration: 0.26, ease: 'easeOut' } }}
+              whileHover={{ y: -6, transition: { duration: 0.26, ease: 'easeOut' } }}
               className="group relative flex flex-col p-8"
               style={{
                 borderTop: i === 1
@@ -446,6 +627,317 @@ export function HomePage({ locale }: { locale: HomeLocale }) {
               </Link>
             </motion.article>
           ))}
+        </div>
+      </section>
+
+      {/* ─────────── WORKFLOW PIPELINE ─────────── */}
+      <section
+        className="relative px-6 py-28 sm:px-10 lg:px-12"
+        style={{ background: '#08090f' }}
+      >
+        {/* Section header */}
+        <div className="mx-auto mb-20 max-w-7xl">
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="mb-5 flex items-center gap-3"
+          >
+            <span className="h-px w-6" style={{ background: '#F59E0B', opacity: 0.6 }} />
+            <span
+              className="text-[9px] font-medium uppercase tracking-[0.38em]"
+              style={{ color: '#F59E0B', opacity: 0.75, fontFamily: 'var(--font-label)' }}
+            >
+              Pipeline
+            </span>
+          </motion.p>
+          <motion.h2
+            initial={{ opacity: 0, y: 32 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.8, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+            className="max-w-2xl leading-[1.12]"
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontWeight: 400,
+              fontSize: 'clamp(2rem, 4.5vw, 3.4rem)',
+              color: '#f5f0e8',
+              letterSpacing: '-0.02em',
+              whiteSpace: 'pre-line',
+            }}
+          >
+            {copy.workflowTitle}
+          </motion.h2>
+        </div>
+
+        {/* 6-phase grid */}
+        <div className="mx-auto max-w-7xl grid gap-px md:grid-cols-2 lg:grid-cols-3"
+          style={{ border: '1px solid rgba(255,255,255,0.05)', background: 'rgba(255,255,255,0.05)' }}
+        >
+          {copy.steps.map((step, i) => (
+            <motion.div
+              key={step.num}
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-48px' }}
+              transition={{ duration: 0.65, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+              className="group relative flex flex-col p-8 lg:p-10"
+              style={{ background: '#08090f' }}
+            >
+              {/* Phase number */}
+              <span
+                className="mb-6 block"
+                style={{
+                  fontFamily: 'var(--font-label)',
+                  fontSize: '0.68rem',
+                  fontWeight: 500,
+                  color: 'rgba(245,158,11,0.45)',
+                  letterSpacing: '0.22em',
+                }}
+              >
+                {step.num}
+              </span>
+
+              {/* Phase name with animated amber underline */}
+              <h3
+                className="relative mb-5 w-fit pb-3"
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontWeight: 400,
+                  fontSize: 'clamp(1.2rem, 2vw, 1.45rem)',
+                  color: '#f5f0e8',
+                  letterSpacing: '-0.01em',
+                }}
+              >
+                {step.phase}
+                {/* Amber underline grows on hover */}
+                <span
+                  className="absolute bottom-0 left-0 block h-px transition-all duration-300 group-hover:w-full"
+                  style={{
+                    width: '1.5rem',
+                    background: 'rgba(245,158,11,0.55)',
+                  }}
+                />
+              </h3>
+
+              <p
+                className="text-sm leading-[1.85]"
+                style={{ color: 'rgba(255,255,255,0.35)', fontWeight: 300 }}
+              >
+                {step.desc}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* ─────────── AGENTS BENTO GRID ─────────── */}
+      <section
+        className="relative px-6 py-28 sm:px-10 lg:px-12"
+        style={{ background: 'linear-gradient(180deg, #08090f 0%, #050609 100%)' }}
+      >
+        {/* Amber separator rule */}
+        <div className="mx-auto mb-20 max-w-7xl">
+          <div
+            className="h-px"
+            style={{ background: 'linear-gradient(90deg, transparent, rgba(245,158,11,0.18), transparent)' }}
+          />
+        </div>
+
+        {/* Section header */}
+        <div className="mx-auto mb-16 max-w-7xl">
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="mb-5 flex items-center gap-3"
+          >
+            <span className="h-px w-6" style={{ background: '#F59E0B', opacity: 0.6 }} />
+            <span
+              className="text-[9px] font-medium uppercase tracking-[0.38em]"
+              style={{ color: '#F59E0B', opacity: 0.75, fontFamily: 'var(--font-label)' }}
+            >
+              Agents
+            </span>
+          </motion.p>
+          <motion.h2
+            initial={{ opacity: 0, y: 32 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.8, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+            className="max-w-2xl leading-[1.12]"
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontWeight: 400,
+              fontSize: 'clamp(2rem, 4.5vw, 3.4rem)',
+              color: '#f5f0e8',
+              letterSpacing: '-0.02em',
+            }}
+          >
+            {copy.agentsTitle}
+          </motion.h2>
+        </div>
+
+        {/* Bento grid — featured card spans 2 cols on lg */}
+        <div className="mx-auto max-w-7xl grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {copy.agentCards.map((card, i) => (
+            <motion.div
+              key={card.name}
+              initial={{ opacity: 0, y: 32 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-48px' }}
+              transition={{ duration: 0.7, delay: i * 0.09, ease: [0.22, 1, 0.36, 1] }}
+              className={`group relative flex flex-col p-8 ${card.featured ? 'lg:col-span-2' : ''}`}
+              style={{
+                background: card.featured
+                  ? 'linear-gradient(135deg, rgba(245,158,11,0.07) 0%, rgba(8,9,15,0.95) 60%)'
+                  : 'rgba(255,255,255,0.026)',
+                border: card.featured
+                  ? '1px solid rgba(245,158,11,0.22)'
+                  : '1px solid rgba(255,255,255,0.06)',
+              }}
+            >
+              {/* Flow badge */}
+              <span
+                className="mb-8 block w-fit rounded-full px-3 py-1 text-[9px] font-medium uppercase tracking-[0.28em]"
+                style={{
+                  fontFamily: 'var(--font-label)',
+                  background: 'rgba(255,255,255,0.05)',
+                  color: card.featured ? 'rgba(245,158,11,0.75)' : 'rgba(255,255,255,0.28)',
+                  border: card.featured ? '1px solid rgba(245,158,11,0.2)' : '1px solid rgba(255,255,255,0.07)',
+                }}
+              >
+                {card.flow}
+              </span>
+
+              {/* Emoji + name */}
+              <div className="flex items-start gap-4">
+                <span className="text-3xl leading-none" aria-hidden="true">{card.tag}</span>
+                <h3
+                  style={{
+                    fontFamily: 'var(--font-display)',
+                    fontWeight: 400,
+                    fontSize: card.featured ? 'clamp(1.5rem, 3vw, 2.1rem)' : 'clamp(1.15rem, 2vw, 1.4rem)',
+                    color: '#f5f0e8',
+                    letterSpacing: '-0.015em',
+                    lineHeight: 1.15,
+                  }}
+                >
+                  {card.name}
+                </h3>
+              </div>
+
+              <p
+                className="mt-5 flex-1 text-sm leading-[1.85]"
+                style={{ color: 'rgba(255,255,255,0.38)', fontWeight: 300 }}
+              >
+                {card.desc}
+              </p>
+
+              {/* Hover-reveal link */}
+              <Link
+                href={card.href}
+                className="mt-7 inline-flex w-fit items-center gap-2 text-[10px] font-medium uppercase tracking-[0.2em] opacity-0 transition-all duration-300 group-hover:opacity-100"
+                style={{
+                  fontFamily: 'var(--font-label)',
+                  color: card.featured ? '#F59E0B' : 'rgba(255,255,255,0.45)',
+                }}
+              >
+                <span style={{ borderBottom: '1px solid currentColor', paddingBottom: 1 }}>
+                  View agent
+                </span>
+                <span>→</span>
+              </Link>
+
+              {/* Amber corner accent on featured */}
+              {card.featured && (
+                <div
+                  className="pointer-events-none absolute right-0 top-0 h-32 w-32"
+                  style={{
+                    background: 'radial-gradient(circle at top right, rgba(245,158,11,0.12) 0%, transparent 70%)',
+                  }}
+                />
+              )}
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* ─────────── CTA FINAL ─────────── */}
+      <section
+        className="relative overflow-hidden px-6 py-36 sm:px-10 lg:px-12"
+        style={{ background: '#050609' }}
+      >
+        {/* Amber radial glow */}
+        <div
+          className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[600px]"
+          aria-hidden="true"
+          style={{
+            background: 'radial-gradient(circle at center, rgba(245,158,11,0.09) 0%, transparent 65%)',
+          }}
+        />
+
+        {/* Hairline grid overlay */}
+        <div
+          className="pointer-events-none absolute inset-0 opacity-40"
+          aria-hidden="true"
+          style={{
+            backgroundImage:
+              'linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px)',
+            backgroundSize: '72px 72px',
+          }}
+        />
+
+        <div className="relative mx-auto max-w-4xl text-center">
+          <motion.h2
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            className="leading-[1.1] tracking-[-0.025em]"
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontWeight: 400,
+              fontSize: 'clamp(2.4rem, 6vw, 4.5rem)',
+              color: '#f5f0e8',
+            }}
+          >
+            {copy.ctaTitle}
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.7, delay: 0.14, ease: [0.22, 1, 0.36, 1] }}
+            className="mx-auto mt-8 max-w-xl text-base leading-[1.9] sm:text-lg"
+            style={{ color: 'rgba(255,255,255,0.38)', fontWeight: 300 }}
+          >
+            {copy.ctaBody}
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.65, delay: 0.26, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-12"
+          >
+            <Link
+              href={`/${locale}/get-started/installation`}
+              className="group inline-flex items-center gap-2.5 rounded-full px-9 py-4 text-sm font-semibold text-[#050609] transition-all hover:brightness-110"
+              style={{
+                background: '#F59E0B',
+                boxShadow: '0 0 80px -12px rgba(245,158,11,0.65)',
+                fontFamily: 'var(--font-sans)',
+              }}
+            >
+              {copy.ctaCta}
+              <span className="transition-transform group-hover:translate-x-1">→</span>
+            </Link>
+          </motion.div>
         </div>
       </section>
     </div>
