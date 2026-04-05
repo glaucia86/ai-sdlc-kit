@@ -77,6 +77,8 @@ The AI SDLC Kit has a full **trilingual documentation site** (EN / PT-BR / ES) b
 
 **👉 [https://glaucia86.github.io/ai-sdlc-kit](https://glaucia86.github.io/ai-sdlc-kit)**
 
+The public docs site now includes the operational guidance for runtime usage, including offline bundles and governed environments.
+
 To run the docs locally:
 
 ```bash
@@ -193,8 +195,9 @@ The remaining files are generated progressively throughout the workflow.
 .vscode/
   settings.json
 scripts/
-  install.ts
-Makefile
+  install.sh
+  package-bundle.sh
+bundle-metadata.json
 ```
 
 ---
@@ -527,19 +530,22 @@ This is the signal that the SDD workflow functioned correctly.
 
 ## 📦 Installation
 
-There are two ways to use this kit.
+There are two supported ways to use this kit today.
 
-### Option A — Copy into the project
+### Option A — Commit the runtime into the project
 
 Copy:
 - `agents/*` into `.github/agents/`
 - `prompts/*` into `.github/prompts/`
+- `templates/*` into `.github/templates/`
+- `skills/*` into `.github/skills/`
+- `docs/*` into `.github/docs/`
 
-This is the simplest option when you want the workflow to travel alongside the repository.
+This is the simplest and most governed-friendly option. It does not depend on PowerShell, external package tooling, or the public docs site.
 
-### Option B — Keep the kit folder reusable and point VS Code to it
+### Option B — Keep the kit folder reusable or unpack an offline bundle
 
-If you prefer to keep `ai-sdlc-kit` outside of `.github`, add the following to your project's `.vscode/settings.json`:
+If you prefer to keep `ai-sdlc-kit` outside of `.github`, or if you unpacked the offline bundle into an approved shared path, add the following to your project's `.vscode/settings.json`:
 
 ```json
 {
@@ -550,21 +556,47 @@ If you prefer to keep `ai-sdlc-kit` outside of `.github`, add the following to y
 
 #### Automated setup (Option B)
 
-To avoid editing `settings.json` manually, run:
+To avoid editing `settings.json` manually, run the installer from the **consumer project root** so it updates that project's `.vscode/settings.json` and creates that project's `doc-specs/` folder:
 
 ```bash
-make install
+bash /path/to/ai-sdlc-kit/scripts/install.sh /path/to/ai-sdlc-kit
 ```
 
-The script detects whether a `settings.json` already exists and **merges** the necessary entries without overwriting the rest of the file. If the file does not exist, it is created.
-
-To point to a custom external path:
+For example:
 
 ```bash
-make install-external PATH=/path/to/ai-sdlc-kit
+cd /path/to/your-project
+bash /path/to/ai-sdlc-kit/scripts/install.sh /path/to/ai-sdlc-kit
 ```
 
-See `Makefile` and `scripts/install.ts` for details.
+If you copied the kit into the consumer repo as `./ai-sdlc-kit`, you can still run:
+
+```bash
+cd /path/to/your-project
+bash ./ai-sdlc-kit/scripts/install.sh ./ai-sdlc-kit
+```
+
+The installer detects whether a `settings.json` already exists and **merges** the necessary entries without overwriting the rest of the file. If the file does not exist, it is created. It also ensures `doc-specs/` exists.
+
+### Offline bundle for governed environments
+
+To generate a portable bundle for internal distribution of this kit repository, make sure `python3` or `python` is available in your shell environment first. The bundler uses Python to read package metadata and generate the manifest and SHA-256 checksums.
+
+Then run:
+
+```bash
+bash scripts/package-bundle.sh
+```
+
+This creates:
+
+- `dist/ai-sdlc-kit-<version>/`
+- `dist/ai-sdlc-kit-<version>.tar.gz`
+- `dist/ai-sdlc-kit-<version>.sha256`
+
+Use the bundle when the customer environment allows only approved artifacts, mirrored repositories, or bash-based automation.
+
+See `scripts/install.sh`, `scripts/package-bundle.sh`, and the official docs pages under `Get Started` for details.
 
 ---
 

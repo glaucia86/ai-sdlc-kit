@@ -62,8 +62,8 @@ Para cada épico em `epics.md`:
 
 Indicado quando a tarefa já está clara. Este é o fluxo original do ai-sdlc-kit, preservado integralmente.
 
-1. Criar `doc-specs/tarefa.txt`
-2. Executar `/task-init` → **revisar** `doc-specs/tarefa.md` (HITL ✅)
+1. Criar `doc-specs/task.txt`
+2. Executar `/task-init` → **revisar** `doc-specs/task.md` (HITL ✅)
 3. Executar `/task-prd` → **revisar** `doc-specs/PRD.md` (HITL ✅)
 4. Executar `/task-spec` → **revisar** `doc-specs/spec.md` (HITL ✅)
 5. Executar `/task-implement`

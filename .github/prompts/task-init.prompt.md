@@ -1,17 +1,17 @@
 ---
 name: "task-init"
-description: "Reads the raw task description and generates tarefa.md in structured format."
+description: "Reads the raw task description and generates task.md in structured format."
 agent: "📥 Intake"
 ---
 
-Carefully read the `doc-specs/tarefa.txt` file.
+Carefully read the `doc-specs/task.txt` file.
 
-Based EXCLUSIVELY on that content, generate a `doc-specs/tarefa.md` file in Markdown.
+Based EXCLUSIVELY on that content, generate a `doc-specs/task.md` file in Markdown.
 
 Objective:
 Transform the raw task description into a clearer, organized document that is faithful to the original content.
 
-The `tarefa.md` must contain:
+The `task.md` must contain:
 - demand context;
 - main objective;
 - perceived requirements;

@@ -1,10 +1,10 @@
 ---
 name: "task-prd"
-description: "Generates PRD.md from tarefa.md using the SDD planning agent."
+description: "Generates PRD.md from task.md using the SDD planning agent."
 agent: "📐 Planner"
 ---
 
-Carefully read the `doc-specs/tarefa.md` file.
+Carefully read the `doc-specs/task.md` file.
 
 Based EXCLUSIVELY on that content and the observable codebase context, generate a `doc-specs/PRD.md` file.
 
@@ -23,7 +23,7 @@ The `PRD.md` must contain exactly:
 
 Rules:
 - do not invent requirements;
-- do not extrapolate beyond what is in `tarefa.md`;
+- do not extrapolate beyond what is in `task.md`;
 - when there is ambiguity, record it in "Open questions";
 - write in English;
 - be concise, objective, and faithful to the task;

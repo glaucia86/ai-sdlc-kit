@@ -1,0 +1,6 @@
+{
+  "name": "ai-sdlc-kit",
+  "version": "1.0.0",
+  "docs_entrypoint": "/en/get-started/operational-modes",
+  "governed_docs_entrypoint": "/en/get-started/governed-environments"
+}

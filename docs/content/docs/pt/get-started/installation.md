@@ -38,32 +38,57 @@ mkdir doc-specs
 
 ---
 
-## Opção B — Apontar o VS Code para a pasta do kit
+## Opção B — Apontar o VS Code para a pasta do kit ou para um bundle offline
 
 Se preferir manter o kit como uma pasta externa compartilhada (p. ex., usada em múltiplos projetos), adicione os caminhos ao `.vscode/settings.json`:
 
 ```json
 {
-  "chat.agentFilesLocations": { "./ai-sdlc-kit/agents": true },
-  "chat.promptFilesLocations": { "./ai-sdlc-kit/prompts": true }
+  "chat.agentFilesLocations": { "./ai-sdlc-kit/.github/agents": true },
+  "chat.promptFilesLocations": { "./ai-sdlc-kit/.github/prompts": true }
 }
 ```
 
-#### Instalação automatizada (Opção B)
+#### Instalação bash-first (Opção B)
 
-Para evitar editar o `settings.json` manualmente, execute:
+Para evitar editar o `settings.json` manualmente, execute o instalador a partir da **raiz do projeto consumidor**, para que ele atualize o `.vscode/settings.json` desse projeto:
 
 ```bash
-make install
+bash /caminho/para/ai-sdlc-kit/scripts/install.sh /caminho/para/ai-sdlc-kit
+```
+
+Por exemplo:
+
+```bash
+cd /caminho/para/seu-projeto
+bash /caminho/para/ai-sdlc-kit/scripts/install.sh /caminho/para/ai-sdlc-kit
+```
+
+Se você copiou o kit para dentro do repositório consumidor como `./ai-sdlc-kit`, também pode executar:
+
+```bash
+cd /caminho/para/seu-projeto
+bash ./ai-sdlc-kit/scripts/install.sh ./ai-sdlc-kit
 ```
 
 O script detecta um `settings.json` existente e **mescla** as entradas necessárias sem sobrescrever nenhuma outra configuração. Se o arquivo não existir, ele é criado.
 
-Para apontar para um caminho externo personalizado:
+---
+
+## Ambientes offline e governados
+
+Você não precisa de uma segunda fonte de documentação para usar o kit. A orientação operacional agora fica diretamente na documentação oficial em:
+
+- [Modos Operacionais](/pt/get-started/operational-modes)
+- [Ambientes Governados](/pt/get-started/governed-environments)
+
+Para gerar um artefato offline aprovado para distribuição interna:
 
 ```bash
-make install-external PATH=/caminho/para/ai-sdlc-kit
+bash scripts/package-bundle.sh
 ```
+
+Isso produz um diretório versionado, um arquivo `.tar.gz` e um arquivo `sha256` dentro de `dist/`.
 
 ---
 

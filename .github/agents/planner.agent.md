@@ -33,7 +33,7 @@ Your role is to transform task inputs into clear, objective, and actionable plan
 ## Edit permissions
 
 You may only create and update files within the `doc-specs/` folder to generate:
-- `doc-specs/tarefa.md`
+- `doc-specs/task.md`
 - `doc-specs/PRD.md`
 - `doc-specs/spec.md`
 

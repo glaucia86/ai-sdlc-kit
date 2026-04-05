@@ -7,6 +7,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [Unreleased]
+
+### Added
+
+- `bundle-metadata.json` as the source of truth for offline bundle metadata
+- `scripts/install.sh` as the new bash-first bootstrap path for governed environments
+- `scripts/package-bundle.sh` to generate an offline `.tar.gz` bundle plus checksums
+- `bundle.yml` workflow to publish offline bundle artifacts on GitHub releases
+- Trilingual `Get Started` pages for operational modes and governed environments
+
+### Changed
+
+- `README.md` now documents the supported distribution paths through bash-first setup and offline bundle
+- Operational guidance now lives in the official docs instead of a separate runtime README
+- Offline bundle generation no longer depends on an APM manifest at the repository root
+- Documentation now positions repository-committed runtime files and offline bundles as the only supported installation paths
+
+### Removed
+
+- `Makefile` and the legacy `scripts/install.ts` bootstrap in favor of the bash-first installer
+- Redundant `.github/README.md`
+- Experimental APM distribution assets, including the `apm-validation/` lab and root `apm.yml`
+- Unused generated or duplicated docs artifacts, including `docs/src/`, `docs/tsconfig.tsbuildinfo`, and stale skills lockfiles
+
+---
+
 ## [1.0.0] - 2026-04-04
 
 ### Added

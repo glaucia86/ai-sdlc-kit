@@ -38,32 +38,57 @@ mkdir doc-specs
 
 ---
 
-## Option B — Point VS Code to the kit folder
+## Option B — Point VS Code to the kit folder or an unpacked bundle
 
 If you prefer to keep the kit as a shared external folder (e.g., used across multiple projects), add the paths to your `.vscode/settings.json`:
 
 ```json
 {
-  "chat.agentFilesLocations": { "./ai-sdlc-kit/agents": true },
-  "chat.promptFilesLocations": { "./ai-sdlc-kit/prompts": true }
+  "chat.agentFilesLocations": { "./ai-sdlc-kit/.github/agents": true },
+  "chat.promptFilesLocations": { "./ai-sdlc-kit/.github/prompts": true }
 }
 ```
 
-#### Automated installation (Option B)
+#### Bash-first installation (Option B)
 
-To avoid editing `settings.json` manually, run:
+To avoid editing `settings.json` manually, run the installer from the **consumer project root** so it updates that project's `.vscode/settings.json`:
 
 ```bash
-make install
+bash /path/to/ai-sdlc-kit/scripts/install.sh /path/to/ai-sdlc-kit
+```
+
+For example:
+
+```bash
+cd /path/to/your-project
+bash /path/to/ai-sdlc-kit/scripts/install.sh /path/to/ai-sdlc-kit
+```
+
+If you copied the kit into the consumer repo as `./ai-sdlc-kit`, you can still run:
+
+```bash
+cd /path/to/your-project
+bash ./ai-sdlc-kit/scripts/install.sh ./ai-sdlc-kit
 ```
 
 The script detects an existing `settings.json` and **merges** the required entries without overwriting any other configuration. If the file does not exist, it is created.
 
-To point to a custom external path:
+---
+
+## Offline and governed environments
+
+You do not need a second documentation source to run the kit. The operational guidance now lives directly in the official docs under:
+
+- [Operational Modes](/en/get-started/operational-modes)
+- [Governed Environments](/en/get-started/governed-environments)
+
+To generate an approved offline artifact for internal distribution:
 
 ```bash
-make install-external PATH=/path/to/ai-sdlc-kit
+bash scripts/package-bundle.sh
 ```
+
+This produces a versioned bundle directory, a `.tar.gz` archive, and a `sha256` file under `dist/`.
 
 ---
 
@@ -93,7 +118,7 @@ your-project/
 │   └── settings.json    ← agent/prompt discovery config
 ├── doc-specs/           ← all spec artefacts go here
 │   └── idea.txt         ← (Flow A) or
-│   └── tarefa.txt       ← (Flow B)
+│   └── task.txt         ← (Flow B)
 └── ...
 ```
 
