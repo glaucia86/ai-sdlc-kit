@@ -77,7 +77,7 @@ The AI SDLC Kit has a full **trilingual documentation site** (EN / PT-BR / ES) b
 
 **👉 [https://glaucia86.github.io/ai-sdlc-kit](https://glaucia86.github.io/ai-sdlc-kit)**
 
-The public docs site now includes the operational guidance for runtime usage, including package-based setup, offline bundles, and governed environments.
+The public docs site now includes the operational guidance for runtime usage, including offline bundles and governed environments.
 
 To run the docs locally:
 
@@ -197,7 +197,7 @@ The remaining files are generated progressively throughout the workflow.
 scripts/
   install.sh
   package-bundle.sh
-apm.yml
+bundle-metadata.json
 ```
 
 ---
@@ -530,7 +530,7 @@ This is the signal that the SDD workflow functioned correctly.
 
 ## 📦 Installation
 
-There are two supported ways to use this kit today, plus one future distribution path under validation.
+There are two supported ways to use this kit today.
 
 ### Option A — Commit the runtime into the project
 
@@ -541,7 +541,7 @@ Copy:
 - `skills/*` into `.github/skills/`
 - `docs/*` into `.github/docs/`
 
-This is the simplest and most governed-friendly option. It does not depend on PowerShell, APM, or the public docs site.
+This is the simplest and most governed-friendly option. It does not depend on PowerShell, external package tooling, or the public docs site.
 
 ### Option B — Keep the kit folder reusable or unpack an offline bundle
 
@@ -578,21 +578,6 @@ bash ./ai-sdlc-kit/scripts/install.sh ./ai-sdlc-kit
 
 The installer detects whether a `settings.json` already exists and **merges** the necessary entries without overwriting the rest of the file. If the file does not exist, it is created. It also ensures `doc-specs/` exists.
 
-### Future path — APM package distribution
-
-The repository now includes an `apm.yml`, but the package layout is still being validated against APM's native package primitive model.
-
-What is already true:
-
-- `apm.yml` is valid as a minimal APM manifest
-- consumer repositories can use the standard APM workflow with `apm.yml`, `apm.lock.yaml`, and `apm_modules/`
-
-What is not ready yet:
-
-- treating `glaucia86/ai-sdlc-kit` as a production-ready APM package that auto-deploys prompts, agents, and skills into the consumer `.github/` tree
-
-Until that package layout is corrected, do not treat APM as the official installation path for this kit.
-
 ### Offline bundle for governed environments
 
 To generate a portable bundle for internal distribution of this kit repository, make sure `python3` or `python` is available in your shell environment first. The bundler uses Python to read package metadata and generate the manifest and SHA-256 checksums.
@@ -610,12 +595,6 @@ This creates:
 - `dist/ai-sdlc-kit-<version>.sha256`
 
 Use the bundle when the customer environment allows only approved artifacts, mirrored repositories, or bash-based automation.
-
-If you are in a consumer repository that already uses APM and has an `apm.lock.yaml`, the official APM portable bundle flow is:
-
-```bash
-apm pack --archive
-```
 
 See `scripts/install.sh`, `scripts/package-bundle.sh`, and the official docs pages under `Get Started` for details.
 

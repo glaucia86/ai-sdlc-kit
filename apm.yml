@@ -1,6 +1,0 @@
-name: ai-sdlc-kit
-version: 1.0.0
-description: Spec-driven development kit for GitHub Copilot in VS Code with offline-friendly packaging.
-author: Glaucia Lemos
-dependencies:
-  apm: []

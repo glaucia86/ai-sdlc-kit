@@ -1,9 +1,9 @@
 ---
 title: Modos Operacionais
-description: Como executar o AI SDLC Kit a partir do repositório, via APM ou por meio de um bundle offline.
+description: Como executar o AI SDLC Kit a partir do repositório ou por meio de um bundle offline.
 ---
 
-O AI SDLC Kit suporta dois modos operacionais prontos para produção hoje, além de um caminho futuro de distribuição ainda em validação. A melhor escolha depende do nível de restrição do ambiente alvo e do quanto de governança central você precisa.
+O AI SDLC Kit suporta dois modos operacionais prontos para produção hoje. A melhor escolha depende do nível de restrição do ambiente alvo e do quanto de governança central você precisa.
 
 ## Modo 1 — Runtime versionado no próprio repositório
 
@@ -20,7 +20,7 @@ O repositório alvo contém:
 Neste modo:
 
 - o fluxo não depende do site público de documentação
-- o fluxo não depende do APM em runtime
+- os arquivos de runtime viajam junto com o próprio projeto
 - o fluxo continua funcionando mesmo quando a execução de shell é bastante restrita
 
 ## Modo 2 — Uso por bundle offline
@@ -44,26 +44,28 @@ O bundle é voltado para:
 - workstations desconectadas
 - processos de intake de software com aprovação formal
 
-Para repositórios que já consomem pacotes APM e possuem `apm.lock.yaml`, o comando oficial de bundle portátil é:
-
-```bash
-apm pack --archive
-```
-
 O `scripts/package-bundle.sh` deste repositório é um helper de distribuição do próprio AI SDLC Kit.
 
 ## Bootstrap bash-first
 
-Quando a execução de shell é permitida, o bootstrap preferencial é:
+Quando a execução de shell é permitida, execute o instalador a partir da raiz do projeto consumidor:
 
 ```bash
-bash scripts/install.sh
+bash /caminho/para/ai-sdlc-kit/scripts/install.sh /caminho/para/ai-sdlc-kit
 ```
 
-Para apontar para um bundle descompactado ou para um caminho compartilhado do kit:
+Por exemplo:
 
 ```bash
-bash scripts/install.sh /caminho/para/ai-sdlc-kit
+cd /caminho/para/seu-projeto
+bash /caminho/para/ai-sdlc-kit/scripts/install.sh /caminho/para/ai-sdlc-kit
+```
+
+Se você copiou o kit para dentro do repositório consumidor como `./ai-sdlc-kit`, também pode executar:
+
+```bash
+cd /caminho/para/seu-projeto
+bash ./ai-sdlc-kit/scripts/install.sh ./ai-sdlc-kit
 ```
 
 O script:
@@ -86,22 +88,6 @@ Depois disso, o usuário pode começar com:
 
 - `doc-specs/idea.txt` para o Fluxo A
 - `doc-specs/task.txt` para o Fluxo B
-
-## Caminho futuro — distribuição via APM
-
-Este repositório já contém um `apm.yml`, e o fluxo normal de consumidor APM continua válido:
-
-- versionar `apm.yml`
-- versionar `apm.lock.yaml`
-- ignorar `apm_modules/`
-
-Porém, a validação real com o CLI mostrou que o layout atual do pacote ainda não é reconhecido pelo APM como prompts, agents, instructions ou skills implantáveis automaticamente na árvore `.github/` do consumidor.
-
-Então, por enquanto:
-
-- APM é um caminho futuro de distribuição
-- APM não é o caminho recomendado de instalação para este kit
-- os caminhos prontos para produção são cópia direta e `bash scripts/install.sh`
 
 ## Leitura relacionada
 

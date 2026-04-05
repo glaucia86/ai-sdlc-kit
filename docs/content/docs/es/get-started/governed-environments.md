@@ -8,17 +8,16 @@ Esta guía es para entornos donde:
 - el acceso a internet es restringido o está totalmente bloqueado
 - no se puede usar PowerShell
 - solo se aprueba bash para automatización
-- las fuentes de paquetes deben venir de un punto interno aprobado
+- los artefactos de release deben venir de un punto interno aprobado
 
 ## Modelo operativo recomendado
 
-Usa una estrategia de distribución dual-mode:
+Usa una estrategia con dos rutas soportadas:
 
-1. usa APM como fuente de verdad del empaquetado
+1. versiona el runtime directamente dentro del proyecto cuando se requiera el máximo control
 2. publica un bundle offline aprobado para consumidores restringidos
-3. permite archivos de runtime versionados directamente en el repositorio como fallback con menos piezas móviles
 
-Esto da una experiencia fluida de paquete a los equipos normales sin obligar a los consumidores regulados a depender de internet o PowerShell.
+Esto mantiene a los consumidores regulados independientes de internet, registries de paquetes y PowerShell, sin renunciar a una distribución centralizada de artefactos aprobados.
 
 ## Runtime mínimo aprobado
 
@@ -42,24 +41,13 @@ Evita descargas de paquetes en tiempo de ejecución y permite que el proyecto vi
 
 ### Ruta B — Descomprimir un bundle offline aprobado
 
-Si APM está disponible en el entorno gobernado:
-
-```bash
-apm unpack ai-sdlc-kit-<version>.tar.gz --output /ruta/al/proyecto
-```
-
-Si APM no está disponible:
-
 1. extrae el archivo con la herramienta `tar` aprobada
-2. ejecuta el bootstrap bash desde la carpeta descomprimida
+2. ejecuta el bootstrap bash desde la raíz del proyecto consumidor
 
 ```bash
-bash scripts/install.sh /ruta/aprobada/ai-sdlc-kit
+cd /ruta/al/proyecto
+bash /ruta/aprobada/ai-sdlc-kit/scripts/install.sh /ruta/aprobada/ai-sdlc-kit
 ```
-
-### Ruta C — Reflejar el paquete APM internamente
-
-Si la organización permite APM solo contra fuentes internas, refleja el paquete y consúmelo desde el registry o el Git mirror aprobado.
 
 ## Fallback sin instalador
 
@@ -74,11 +62,10 @@ Este fallback importa porque algunos entornos regulados permiten entrega de arch
 
 ## Recomendación de release enterprise
 
-Para clientes gobernados, publica tres artefactos por versión:
+Para clientes gobernados, publica dos artefactos por versión:
 
-1. la fuente APM con `apm.yml`
-2. el bundle offline `.tar.gz`
-3. el archivo de checksum `sha256`
+1. el bundle offline `.tar.gz`
+2. el archivo de checksum `sha256`
 
 Almacénalos en un punto interno aprobado, como:
 

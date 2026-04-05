@@ -90,30 +90,6 @@ bash scripts/package-bundle.sh
 
 This produces a versioned bundle directory, a `.tar.gz` archive, and a `sha256` file under `dist/`.
 
-If the repository is already acting as an APM consumer with installed dependencies and an `apm.lock.yaml`, prefer the official APM bundle flow instead:
-
-```bash
-apm pack --archive
-```
-
----
-
-## Future path — APM package distribution
-
-This repository already contains an `apm.yml`, and the standard APM consumer workflow is valid:
-
-- commit `apm.yml`
-- commit `apm.lock.yaml`
-- ignore `apm_modules/`
-
-However, the AI SDLC Kit package layout is still being validated against APM's native primitive deployment model.
-
-Today, this means:
-
-- APM is a future distribution path for this kit
-- APM is not the official installation path yet
-- the supported installation paths remain direct copy and `bash scripts/install.sh`
-
 ---
 
 ## Verify discovery
@@ -142,7 +118,7 @@ your-project/
 │   └── settings.json    ← agent/prompt discovery config
 ├── doc-specs/           ← all spec artefacts go here
 │   └── idea.txt         ← (Flow A) or
-│   └── tarefa.txt       ← (Flow B)
+│   └── task.txt         ← (Flow B)
 └── ...
 ```
 

@@ -90,30 +90,6 @@ bash scripts/package-bundle.sh
 
 Esto genera un directorio versionado, un archivo `.tar.gz` y un archivo `sha256` dentro de `dist/`.
 
-Si el repositorio ya actúa como consumidor APM con dependencias instaladas y `apm.lock.yaml`, prefiere el flujo oficial de bundle del propio APM:
-
-```bash
-apm pack --archive
-```
-
----
-
-## Ruta futura — distribución como paquete APM
-
-Este repositorio ya contiene un `apm.yml`, y el flujo estándar de consumidor APM sigue siendo válido:
-
-- versionar `apm.yml`
-- versionar `apm.lock.yaml`
-- ignorar `apm_modules/`
-
-Sin embargo, el layout del paquete AI SDLC Kit todavía se está validando frente al modelo nativo de despliegue de primitivas de APM.
-
-Hoy esto significa:
-
-- APM es una ruta futura de distribución para este kit
-- APM aún no es la ruta oficial de instalación
-- las rutas soportadas siguen siendo la copia directa y `bash scripts/install.sh`
-
 ---
 
 ## Verificar el descubrimiento

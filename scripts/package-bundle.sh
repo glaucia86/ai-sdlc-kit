@@ -136,6 +136,31 @@ with open(os.path.join(bundle_dir, "manifest.json"), "w", encoding="utf-8") as h
 PY
 }
 
+read_bundle_metadata() {
+  "$PYTHON_BIN" - "$ROOT_DIR/bundle-metadata.json" <<'PY'
+import json
+import sys
+
+metadata_path = sys.argv[1]
+
+with open(metadata_path, "r", encoding="utf-8") as handle:
+    metadata = json.load(handle)
+
+required_fields = (
+    "name",
+    "version",
+    "docs_entrypoint",
+    "governed_docs_entrypoint",
+)
+
+for field in required_fields:
+    value = metadata.get(field)
+    if not isinstance(value, str) or not value.strip():
+        raise SystemExit(f"Missing required field '{field}' in {metadata_path}")
+    print(value.strip())
+PY
+}
+
 write_checksums() {
   "$PYTHON_BIN" - "$BUNDLE_DIR" "$ARCHIVE_PATH" "$CHECKSUMS_PATH" <<'PY'
 import hashlib
@@ -171,31 +196,19 @@ PY
 main() {
   local meta
   local relative
+  local default_docs_entrypoint
+  local default_governed_docs_entrypoint
 
   PYTHON_BIN="$(find_python)"
-
-  meta="$("$PYTHON_BIN" - "$ROOT_DIR/apm.yml" <<'PY'
-import re
-import sys
-
-text = open(sys.argv[1], "r", encoding="utf-8").read()
-
-def match(field):
-    result = re.search(rf"^{field}:\s*(.+)$", text, re.MULTILINE)
-    if not result:
-        raise SystemExit(f"Missing required field '{field}' in apm.yml")
-    return result.group(1).strip()
-
-print(match("name"))
-print(match("version"))
-PY
-)"
+  meta="$(read_bundle_metadata)"
 
   PACKAGE_NAME="$(printf '%s' "$meta" | sed -n '1p')"
   PACKAGE_VERSION="$(printf '%s' "$meta" | sed -n '2p')"
+  default_docs_entrypoint="$(printf '%s' "$meta" | sed -n '3p')"
+  default_governed_docs_entrypoint="$(printf '%s' "$meta" | sed -n '4p')"
   SOURCE_REPO="$(detect_source_repo)"
-  DOCS_ENTRYPOINT="${BUNDLE_DOCS_ENTRYPOINT:-/en/get-started/operational-modes}"
-  GOVERNED_DOCS_ENTRYPOINT="${BUNDLE_GOVERNED_DOCS_ENTRYPOINT:-/en/get-started/governed-environments}"
+  DOCS_ENTRYPOINT="${BUNDLE_DOCS_ENTRYPOINT:-$default_docs_entrypoint}"
+  GOVERNED_DOCS_ENTRYPOINT="${BUNDLE_GOVERNED_DOCS_ENTRYPOINT:-$default_governed_docs_entrypoint}"
   BUNDLE_DIR="${OUTPUT_DIR}/${PACKAGE_NAME}-${PACKAGE_VERSION}"
   ARCHIVE_PATH="${OUTPUT_DIR}/${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz"
   CHECKSUMS_PATH="${OUTPUT_DIR}/${PACKAGE_NAME}-${PACKAGE_VERSION}.sha256"
@@ -204,7 +217,7 @@ PY
   mkdir -p "$OUTPUT_DIR" "$BUNDLE_DIR"
 
   for relative in \
-    "apm.yml" \
+    "bundle-metadata.json" \
     "README.md" \
     "CHANGELOG.md" \
     "scripts/install.sh" \

@@ -1,8 +1,0 @@
-lockfile_version: '1'
-generated_at: '2026-04-05T01:04:32.139469+00:00'
-apm_version: 0.8.10
-dependencies:
-- repo_url: _local/package-source
-  package_type: apm_package
-  source: local
-  local_path: ../package-source

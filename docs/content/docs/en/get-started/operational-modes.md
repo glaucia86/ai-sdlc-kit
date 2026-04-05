@@ -1,9 +1,9 @@
 ---
 title: Operational Modes
-description: How to run the AI SDLC Kit from the repository, via APM, or through an offline bundle.
+description: How to run the AI SDLC Kit from the repository or through an offline bundle.
 ---
 
-The AI SDLC Kit supports two production-ready operational modes today, plus one future distribution path under validation. The right choice depends on how restricted the target environment is and how much central governance you need.
+The AI SDLC Kit supports two production-ready operational modes today. The right choice depends on how restricted the target environment is and how much central governance you need.
 
 ## Mode 1 — Runtime committed into the repository
 
@@ -20,7 +20,7 @@ The target repository contains:
 In this mode:
 
 - the workflow does not depend on the public docs site
-- the workflow does not depend on APM at runtime
+- the workflow keeps all runtime files with the project itself
 - the workflow can still run even if shell execution is heavily restricted
 
 ## Mode 2 — Use an offline bundle
@@ -44,26 +44,28 @@ The bundle is intended for:
 - disconnected workstations
 - approval-based software intake processes
 
-For repositories that already consume APM packages and have an `apm.lock.yaml`, the official portable bundle command is:
-
-```bash
-apm pack --archive
-```
-
 The local `scripts/package-bundle.sh` in this repository is a repo-level distribution helper for the AI SDLC Kit itself.
 
 ## Bash-first bootstrap
 
-When shell scripting is allowed, the preferred bootstrap is:
+When shell scripting is allowed, run the installer from the consumer project root:
 
 ```bash
-bash scripts/install.sh
+bash /path/to/ai-sdlc-kit/scripts/install.sh /path/to/ai-sdlc-kit
 ```
 
-To point to an unpacked bundle or shared kit path:
+For example:
 
 ```bash
-bash scripts/install.sh /path/to/ai-sdlc-kit
+cd /path/to/your-project
+bash /path/to/ai-sdlc-kit/scripts/install.sh /path/to/ai-sdlc-kit
+```
+
+If you copied the kit into the consumer repository as `./ai-sdlc-kit`, you can also run:
+
+```bash
+cd /path/to/your-project
+bash ./ai-sdlc-kit/scripts/install.sh ./ai-sdlc-kit
 ```
 
 The script:
@@ -86,22 +88,6 @@ Then the user can begin with:
 
 - `doc-specs/idea.txt` for Flow A
 - `doc-specs/task.txt` for Flow B
-
-## Future path — APM distribution
-
-This repository already contains an `apm.yml`, and the normal APM consumer workflow still applies:
-
-- commit `apm.yml`
-- commit `apm.lock.yaml`
-- ignore `apm_modules/`
-
-However, real CLI validation showed that the current package layout is not yet recognized by APM as deployable prompts, agents, instructions, or skills for automatic integration into the consumer `.github/` tree.
-
-So for now:
-
-- APM is a future distribution path
-- APM is not the recommended installation path for this kit
-- the production-ready paths are direct copy and `bash scripts/install.sh`
 
 ## Related reading
 

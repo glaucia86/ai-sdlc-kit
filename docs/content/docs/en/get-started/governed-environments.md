@@ -8,17 +8,16 @@ This guide is for environments where:
 - internet access is restricted or fully blocked
 - PowerShell cannot be used
 - only bash is approved for automation
-- package sources must come from an approved internal distribution point
+- release artifacts must come from an approved internal distribution point
 
 ## Recommended operating model
 
-Use a dual-mode distribution strategy:
+Use a two-path distribution strategy:
 
-1. use APM as the packaging source of truth
+1. commit the runtime directly into the project when maximum control is required
 2. publish an approved offline bundle for restricted consumers
-3. allow direct repository-committed runtime files as the fallback with the fewest moving parts
 
-This gives normal teams a smooth package experience while keeping regulated consumers independent from internet access and PowerShell.
+This keeps regulated consumers independent from internet access, package registries, and PowerShell while still allowing centralized distribution of approved artifacts.
 
 ## Minimum approved runtime
 
@@ -42,24 +41,13 @@ It avoids runtime package fetches and lets the project travel with everything it
 
 ### Path B — Unpack an approved offline bundle
 
-If APM is available in the governed environment:
-
-```bash
-apm unpack ai-sdlc-kit-<version>.tar.gz --output /path/to/project
-```
-
-If APM is not available:
-
 1. extract the archive with approved `tar` tooling
-2. run the bash bootstrap from the unpacked folder
+2. run the bash bootstrap from the consumer project root
 
 ```bash
-bash scripts/install.sh /approved/path/ai-sdlc-kit
+cd /path/to/project
+bash /approved/path/ai-sdlc-kit/scripts/install.sh /approved/path/ai-sdlc-kit
 ```
-
-### Path C — Mirror the APM package internally
-
-If the organization allows APM only against internal sources, mirror the package and consume it from the approved registry or Git mirror.
 
 ## Zero-installer fallback
 
@@ -74,11 +62,10 @@ This fallback matters because some regulated environments allow file delivery bu
 
 ## Enterprise release recommendation
 
-For governed clients, publish three artifacts per version:
+For governed clients, publish two artifacts per version:
 
-1. the APM package source with `apm.yml`
-2. the offline bundle `.tar.gz`
-3. the `sha256` checksum file
+1. the offline bundle `.tar.gz`
+2. the `sha256` checksum file
 
 Store them in an approved internal distribution point such as:
 

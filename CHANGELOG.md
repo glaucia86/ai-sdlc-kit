@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- `apm.yml` so the kit can be consumed as an APM package source of truth
+- `bundle-metadata.json` as the source of truth for offline bundle metadata
 - `scripts/install.sh` as the new bash-first bootstrap path for governed environments
 - `scripts/package-bundle.sh` to generate an offline `.tar.gz` bundle plus checksums
 - `bundle.yml` workflow to publish offline bundle artifacts on GitHub releases
@@ -19,15 +19,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- `README.md` now documents dual-mode distribution through bash-first setup, APM install, and offline bundle
+- `README.md` now documents the supported distribution paths through bash-first setup and offline bundle
 - Operational guidance now lives in the official docs instead of a separate runtime README
-- APM guidance now matches the official Quick Start more closely by documenting `apm.lock.yaml`, deployed files, and `apm_modules/`
-- Documentation now marks APM as a future distribution path, not a production-ready installation path for this kit
+- Offline bundle generation no longer depends on an APM manifest at the repository root
+- Documentation now positions repository-committed runtime files and offline bundles as the only supported installation paths
 
 ### Removed
 
 - `Makefile` and the legacy `scripts/install.ts` bootstrap in favor of the bash-first installer
 - Redundant `.github/README.md`
+- Experimental APM distribution assets, including the `apm-validation/` lab and root `apm.yml`
 - Unused generated or duplicated docs artifacts, including `docs/src/`, `docs/tsconfig.tsbuildinfo`, and stale skills lockfiles
 
 ---
