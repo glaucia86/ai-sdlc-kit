@@ -1,28 +1,118 @@
-# ai-sdlc-kit
+<div align="center">
 
-Kit reutilizável para executar um fluxo de Spec-Driven Development (SDD) com GitHub Copilot no VS Code.
+# 🤖 AI SDLC Kit
 
-A ideia central é simples: **nenhuma linha de código é escrita sem uma spec validada por humano.** O kit organiza o caminho da ideia ou tarefa bruta até a implementação, com checkpoints obrigatórios de revisão em cada etapa.
+### Spec-Driven Development with GitHub Copilot in VS Code
 
-O kit tem dois fluxos independentes:
+[![Docs](https://img.shields.io/badge/docs-ai--sdlc--kit-6366f1?style=for-the-badge&logo=readthedocs&logoColor=white)](https://glaucia86.github.io/ai-sdlc-kit)
+[![GitHub Stars](https://img.shields.io/github/stars/glaucia86/ai-sdlc-kit?style=for-the-badge&logo=github&color=f59e0b)](https://github.com/glaucia86/ai-sdlc-kit/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/glaucia86/ai-sdlc-kit?style=for-the-badge&logo=github&color=10b981)](https://github.com/glaucia86/ai-sdlc-kit/network/members)
+[![GitHub Issues](https://img.shields.io/github/issues/glaucia86/ai-sdlc-kit?style=for-the-badge&logo=github&color=ef4444)](https://github.com/glaucia86/ai-sdlc-kit/issues)
+[![License](https://img.shields.io/github/license/glaucia86/ai-sdlc-kit?style=for-the-badge&color=8b5cf6)](./LICENSE)
+[![VS Code](https://img.shields.io/badge/VS%20Code-Compatible-007ACC?style=for-the-badge&logo=visualstudiocode)](https://code.visualstudio.com/)
+[![GitHub Copilot](https://img.shields.io/badge/GitHub%20Copilot-Powered-000000?style=for-the-badge&logo=github)](https://github.com/features/copilot)
 
-| | Fluxo A — Discovery + Delivery | Fluxo B — Delivery direto |
-|---|---|---|
-| **Entrada** | `idea.txt` (ideia bruta) | `tarefa.txt` (tarefa definida) |
-| **Quando usar** | Projeto novo, ideia a ser estruturada | Tarefa já clara, projeto em andamento |
-| **Saída** | Épicos com specs individuais | `spec.md` única |
-| **Opcional?** | Sim — pode pular e ir direto ao Fluxo B | — |
+<br/>
 
-Nenhum fluxo é pré-requisito do outro.
+[![Docs CI/CD](https://github.com/glaucia86/ai-sdlc-kit/actions/workflows/docs.yml/badge.svg)](https://github.com/glaucia86/ai-sdlc-kit/actions/workflows/docs.yml)
+[![Last Commit](https://img.shields.io/github/last-commit/glaucia86/ai-sdlc-kit?style=flat-square&color=6366f1)](https://github.com/glaucia86/ai-sdlc-kit/commits/main)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/glaucia86/ai-sdlc-kit/pulls)
+[![Release](https://img.shields.io/github/v/release/glaucia86/ai-sdlc-kit?style=flat-square&color=f59e0b)](https://github.com/glaucia86/ai-sdlc-kit/releases)
+
+<br/>
+
+> **A reusable kit to run a Spec-Driven Development (SDD) workflow with GitHub Copilot in VS Code.**
+> It organizes the process into clear stages, with intermediate artifacts and human-in-the-loop checkpoints before implementation begins.
+
+<br/>
+
+[📖 Official Docs](https://glaucia86.github.io/ai-sdlc-kit) · [🚀 Quick Start](#-running-the-full-workflow) · [🧩 Agents](#-agents) · [📦 Installation](#-installation) · [📝 Changelog](./CHANGELOG.md)
+
+</div>
 
 ---
 
-## Pré-requisitos
+## 📚 Table of Contents
 
-Antes de começar:
+- [Overview](#-overview)
+- [Official Documentation](#-official-documentation)
+- [Prerequisites](#-prerequisites)
+- [Expected doc-specs/ structure](#-expected-doc-specs-structure)
+- [Kit structure](#️-kit-structure)
+- [Agents](#-agents)
+- [Discovery Phase (optional — Flow A)](#-discovery-phase-optional--flow-a)
+- [Prompts reference (Flow B — Direct Delivery)](#-prompts-reference-flow-b--direct-delivery)
+- [Running the full workflow](#-running-the-full-workflow)
+- [HITL checkpoints summary](#-HITL-checkpoints-summary)
+- [Core rule](#️-core-rule)
+- [When to step back](#️-when-to-step-back)
+- [When to use /agents-init](#-when-to-use-agents-init)
+- [Workflow at a glance](#-workflow-at-a-glance)
+- [Best practices](#-best-practices)
+- [Expected outcome](#-expected-outcome)
+- [Installation](#-installation)
+- [Contributing](#-contributing)
+- [Author](#-author)
 
-- VS Code aberto com GitHub Copilot habilitado
-- Agentes e prompts descobertos pelo VS Code — adicione ao `.vscode/settings.json` do projeto:
+---
+
+## ✨ Overview
+
+The goal of this kit is to prevent implementation from starting directly from a raw idea or task, before there is sufficient functional and technical clarity.
+
+It supports **two independent flows**:
+
+| Flow | Entry point | Best for |
+|------|-------------|----------|
+| **🔭 Flow A — Discovery + Delivery** | `idea.txt` | New projects, unstructured ideas |
+| **⚡ Flow B — Direct Delivery** | `task.txt` | Well-defined tasks, existing backlogs |
+
+> Neither flow is a prerequisite for the other.
+
+---
+
+## 📖 Official Documentation
+
+The AI SDLC Kit has a full **trilingual documentation site** (EN / PT-BR / ES) built with Astro + Starlight, covering all agents, prompts, templates, artifacts, concepts, and usage scenarios.
+
+**👉 [https://glaucia86.github.io/ai-sdlc-kit](https://glaucia86.github.io/ai-sdlc-kit)**
+
+To run the docs locally:
+
+```bash
+cd docs
+npm install
+npm run dev
+```
+
+### Docs CI/CD (GitHub Pages)
+
+The repository includes a workflow at [.github/workflows/docs.yml](.github/workflows/docs.yml) that:
+
+- runs docs build checks on pull requests targeting `main`
+- builds and deploys docs to GitHub Pages on pushes to `main`
+- allows manual deployment with `workflow_dispatch`
+
+To enable deployment in your repository:
+
+1. Open GitHub repository settings.
+2. Go to **Settings → Pages**.
+3. Set **Source** to **GitHub Actions**.
+
+Optional for forks: set the repository variable `PAGES_ENVIRONMENT` to `github-pages` (or your desired environment name).
+
+---
+
+## ✅ Prerequisites
+
+Before you begin, make sure:
+
+- the project is open in **VS Code**
+- **agents** are enabled in the environment
+- **prompt files** and **custom agents** are being discovered by VS Code
+- a `doc-specs/` folder exists at the root of the project
+
+To ensure VS Code discovers the agents and prompts from this kit, add the following to your project's `.vscode/settings.json`:
 
 ```json
 {
@@ -31,358 +121,52 @@ Antes de começar:
 }
 ```
 
-- Pasta `doc-specs/` criada na raiz do projeto
+---
+
+## 📁 Expected `doc-specs/` structure
+
+The workflow assumes the following files:
+
+```
+doc-specs/task.txt
+doc-specs/task.md
+doc-specs/PRD.md
+doc-specs/spec.md
+```
+
+Not all of them exist at the start. You will usually begin with only:
+
+```
+doc-specs/task.txt
+```
+
+The remaining files are generated progressively throughout the workflow.
 
 ---
 
-## Fluxo A — Discovery + Delivery (opcional)
-
-Use quando você tem uma ideia bruta e precisa estruturá-la antes de implementar.
-
-### Antes de começar
-
-Crie o arquivo de entrada:
-
-```
-doc-specs/idea.txt
-```
-
-Escreva a ideia livremente — sem formato obrigatório.
-
----
-
-### Passo 1 — Refinar a ideia
-
-```
-/discovery-refine
-```
-
-**O que acontece:** o 🧭 Discovery lê `idea.txt` e gera `doc-specs/idea.md` com a ideia estruturada, sem viés técnico.
-
-**✅ HITL obrigatório:** revise `idea.md` antes de continuar.
-- A ideia original foi preservada?
-- As ambiguidades foram registradas?
-- Há algo inventado que não estava em `idea.txt`?
-
----
-
-### Passo 2 — Gerar especificação funcional
-
-```
-/discovery-spec
-```
-
-**O que acontece:** o 🗂️ PM lê `idea.md` e gera `doc-specs/non-technical-spec.md` com personas, jornadas de usuário, casos de uso e regras de negócio — sem linguagem técnica.
-
-**✅ HITL obrigatório:** revise `non-technical-spec.md` antes de continuar.
-- Os fluxos de usuário estão claros?
-- As regras de negócio foram capturadas corretamente?
-- Existem perguntas em aberto que precisam de resposta antes de avançar?
-
----
-
-### Passo 3 — Gerar PRD
-
-```
-/discovery-prd
-```
-
-**O que acontece:** o 🧑‍💼 Tech Lead lê `non-technical-spec.md` e gera `doc-specs/PRD.md` com requisitos funcionais, não funcionais e critérios de aceite estruturados.
-
-**✅ HITL obrigatório:** revise `PRD.md` antes de continuar.
-- O escopo está bem delimitado (incluído / não incluído)?
-- Os critérios de aceite fazem sentido?
-- Algo foi extrapolado além da especificação funcional?
-
----
-
-### Passo 4 — Gerar especificação técnica
-
-```
-/discovery-tech-spec
-```
-
-**O que acontece:** o 🏗️ Architect lê `PRD.md` e a codebase e gera `doc-specs/technical-spec.md` com decisões de arquitetura, componentes, contratos, fluxos técnicos e estratégia de testes.
-
-**✅ HITL obrigatório:** revise `technical-spec.md` antes de continuar.
-- As decisões de arquitetura estão fundamentadas?
-- Os riscos e dependências estão registrados?
-- Há ambiguidades que precisam ser resolvidas antes de quebrar em épicos?
-
----
-
-### Passo 5 — Gerar épicos
-
-```
-/discovery-epics
-```
-
-**O que acontece:** o 🏗️ Architect lê `technical-spec.md` e `PRD.md` e gera `doc-specs/epics.md` com os épicos ordenados por dependência técnica.
-
-**✅ HITL obrigatório:** revise `epics.md` antes de continuar.
-- O sequenciamento faz sentido técnico?
-- Cada épico é pequeno o suficiente para ser implementado de forma independente?
-- As dependências entre épicos estão corretas?
-
----
-
-### Passo 6 — Preparar artefatos do épico
-
-```
-/epic-init
-```
-
-O agente pergunta o número do épico antes de agir.
-
-**O que acontece:** o 🏗️ Architect gera três arquivos em `doc-specs/<N>-epic/`:
-
-| Arquivo | Conteúdo |
-|---|---|
-| `epic-<N>.md` | Contexto, escopo e critérios de conclusão do épico |
-| `PRD.md` | Requisitos funcionais e não funcionais do épico |
-| `spec-epic-<N>.md` | Especificação técnica implementável do épico |
-
-O agente pausa após cada arquivo e aguarda confirmação antes de gerar o próximo.
-
-**✅ HITL obrigatório para cada arquivo** — `epic-<N>.md`, `PRD.md` e `spec-epic-<N>.md`.
-
-> **Regra de ouro:** sem `spec-epic-<N>.md` validada por humano, não se implementa o épico N.
-
----
-
-### Passo 7 — Implementar o épico
-
-```
-/task-implement
-```
-
-Aponte manualmente para os arquivos do épico quando solicitado:
-- `doc-specs/<N>-epic/PRD.md`
-- `doc-specs/<N>-epic/spec-epic-<N>.md`
-
-**O que acontece:** o 🛠️ Implementer lê os artefatos do épico, resume o plano de implementação e executa. Ao final, preenche o checklist de `spec-epic-<N>.md` e atualiza `decisions-log.md` com decisões tomadas.
-
-**⚠️ HITL recomendado:** acompanhe o plano proposto pelo agente antes de confirmar as alterações, especialmente em épicos maiores.
-
----
-
-### Passo 8 — Revisar a entrega
-
-```
-/task-review
-```
-
-**O que acontece:** o 🔎 Reviewer compara os artefatos do épico com a implementação e produz uma síntese de aderência, desvios, riscos e recomendação final.
-
-**✅ HITL obrigatório:** decida se a entrega está aprovada, se há correções obrigatórias ou se o épico precisa de ajuste antes de avançar para o próximo.
-
----
-
-### Passo 9 — Fechar o épico
-
-```
-/epic-close
-```
-
-O agente pergunta o número do épico antes de agir.
-
-**O que acontece:** o 🚀 Ops lê os artefatos do épico e gera `doc-specs/<N>-epic/ops-epic-<N>.md` com preparação para deploy, observabilidade e feedback para épicos futuros.
-
-**✅ HITL obrigatório:** revise `ops-epic-<N>.md` antes de continuar.
-
----
-
-### Passo 10 — Gate de produção
-
-Etapa manual — sem prompt de agente.
-
-1. Faça o merge da branch `feat/E<NN>-<slug>` para `main`.
-2. Execute o deploy.
-3. Valide em produção usando os critérios definidos em `ops-epic-<N>.md`.
-
-Somente após essa validação o próximo épico pode começar.
-
----
-
-### Passo 11 — Atualizar memória global
-
-```
-/context-sync
-```
-
-**O que acontece:** o 🏗️ Architect lê `ops-epic-<N>.md` e `decisions-log.md` e atualiza `doc-specs/CONTEXT.md` com o épico concluído, ADRs e aprendizados.
-
-Após isso, repita a partir do **Passo 0** para o próximo épico.
-
----
-
-## Fluxo B — Delivery direto
-
-Use quando a tarefa já está clara e definida. Este é o fluxo original do ai-sdlc-kit.
-
-### Antes de começar
-
-Crie o arquivo de entrada:
-
-```
-doc-specs/tarefa.txt
-```
-
-Escreva a descrição bruta da tarefa — pode estar desorganizada. O fluxo existe para organizar antes de implementar.
-
----
-
-### Passo 1 — Estruturar a tarefa
-
-```
-/task-init
-```
-
-**O que acontece:** o 📥 Intake lê `tarefa.txt` e gera `doc-specs/tarefa.md` estruturado. Ele não acessa PRD, spec nem a codebase — apenas transforma a entrada bruta fielmente.
-
-**✅ HITL obrigatório:** revise `tarefa.md` antes de continuar.
-- O objetivo ficou claro?
-- Houve perda ou distorção de informação?
-- Existem ambiguidades que precisam ser resolvidas agora?
-
----
-
-### Passo 2 — Gerar PRD
-
-```
-/task-prd
-```
-
-**O que acontece:** o 📐 Planner lê `tarefa.md` e gera `doc-specs/PRD.md` com visão geral, objetivos, escopo, requisitos funcionais e não funcionais, critérios de aceite e perguntas abertas.
-
-**✅ HITL obrigatório:** revise `PRD.md` antes de continuar.
-- O PRD representa corretamente a tarefa?
-- O escopo está delimitado (incluído / não incluído)?
-- Existem perguntas abertas que precisam de resposta antes da spec?
-
----
-
-### Passo 3 — Gerar spec
-
-```
-/task-spec
-```
-
-**O que acontece:** o 📐 Planner lê `PRD.md` e a codebase e gera `doc-specs/spec.md` com contexto técnico, componentes afetados, fluxo de implementação, estratégia de testes, riscos e dúvidas em aberto.
-
-**✅ HITL obrigatório:** revise `spec.md` antes de continuar.
-- A spec está coerente com o PRD?
-- As decisões técnicas estão explícitas o suficiente?
-- A implementação conseguirá seguir esse documento sem suposições perigosas?
-
-> **Regra de ouro:** sem `spec.md` validada por humano, não se implementa.
-
----
-
-### Passo 4 — Implementar
-
-```
-/task-implement
-```
-
-Para tarefas com componentes de frontend, use:
-
-```
-/task-implement-frontend
-```
-
-**O que acontece:** o 🛠️ Implementer lê `PRD.md` e `spec.md`, resume o plano, identifica arquivos afetados e executa a implementação. Se encontrar uma ambiguidade crítica, para e sinaliza.
-
-**⚠️ HITL recomendado:** acompanhe o plano proposto antes de confirmar, especialmente em mudanças maiores.
-
----
-
-### Passo 5 — Revisar a entrega
-
-```
-/task-review
-```
-
-**O que acontece:** o 🔎 Reviewer compara `PRD.md`, `spec.md` e a implementação. Produz: síntese de aderência, desvios encontrados, riscos, lacunas e recomendação final.
-
-**✅ HITL obrigatório:** decida se a entrega está aprovada ou se há correções antes de fechar a tarefa.
-
----
-
-## Quando voltar uma etapa
-
-| Situação | Volte para |
-|---|---|
-| A tarefa foi mal interpretada | Etapa de intake / `idea.txt` |
-| O PRD não reflete o escopo correto | Geração do PRD |
-| A spec está superficial ou ambígua | Geração da spec |
-| O implementador encontrou ambiguidade crítica | Spec (ajustar e regenerar) |
-| O reviewer apontou desvio de especificação | Spec ou PRD |
-
----
-
-## Referência — Agentes
-
-| Agente | Fluxo | Responsabilidade |
-|---|---|---|
-| 🧭 Discovery | A | Refina `idea.txt` e gera `idea.md` sem viés técnico |
-| 🗂️ PM | A | Gera `non-technical-spec.md` com especificação funcional |
-| 🧑‍💼 Tech Lead | A | Gera `PRD.md` a partir da especificação funcional |
-| 🏗️ Architect | A | Gera `technical-spec.md`, `epics.md`, artefatos por épico e atualiza `CONTEXT.md` |
-| 🚀 Ops | A | Fecha o ciclo do épico: deploy, observabilidade, feedback |
-| 📥 Intake | B | Estrutura `tarefa.txt` em `tarefa.md` |
-| 📐 Planner | B | Gera `PRD.md` e `spec.md` |
-| 🛠️ Implementer | A e B | Implementa com base nos artefatos aprovados |
-| 🔎 Reviewer | A e B | Revisa aderência entre spec e implementação |
-
----
-
-## Referência — Prompts
-
-| Prompt | Fluxo | O que faz |
-|---|---|---|
-| `/discovery-refine` | A | `idea.txt` → `idea.md` |
-| `/discovery-spec` | A | `idea.md` → `non-technical-spec.md` |
-| `/discovery-prd` | A | `non-technical-spec.md` → `PRD.md` |
-| `/discovery-tech-spec` | A | `PRD.md` → `technical-spec.md` + `CONTEXT.md` |
-| `/discovery-epics` | A | `technical-spec.md` → `epics.md` |
-| `/epic-init` | A | Gera os 4 artefatos de `doc-specs/<N>-epic/` (incluindo `decisions-log.md`) |
-| `/epic-close` | A | Gera `ops-epic-<N>.md` com deploy, observabilidade e feedback |
-| `/context-sync` | A | Atualiza `CONTEXT.md` com ADRs e aprendizados do épico |
-| `/task-init` | B | `tarefa.txt` → `tarefa.md` |
-| `/task-prd` | B | `tarefa.md` → `PRD.md` |
-| `/task-spec` | B | `PRD.md` → `spec.md` |
-| `/task-implement` | A e B | Implementa com base nos artefatos aprovados |
-| `/task-implement-frontend` | A e B | Implementa frontend com skills de design injetadas |
-| `/task-review` | A e B | Revisa aderência entre artefatos e implementação |
-| `/agents-init` | — | Gera `AGENTS.md` inicial para o projeto |
-
----
-
-## Estrutura do kit
+## 🗂️ Kit structure
 
 ```
 .github/
   agents/
-    discovery.agent.md
-    pm.agent.md
-    tech-lead.agent.md
-    architect.agent.md
-    ops.agent.md
+    discovery.agent.md          ← Discovery Phase
+    pm.agent.md                 ← Discovery Phase
+    tech-lead.agent.md          ← Discovery Phase
+    architect.agent.md          ← Discovery Phase
     intake.agent.md
     planner.agent.md
     implementer.agent.md
     reviewer.agent.md
     qa.agent.md
+    ops.agent.md
   prompts/
-    discovery-refine.prompt.md
-    discovery-spec.prompt.md
-    discovery-prd.prompt.md
-    discovery-tech-spec.prompt.md
-    discovery-epics.prompt.md
-    epic-init.prompt.md
+    discovery-refine.prompt.md       ← Discovery Phase
+    discovery-spec.prompt.md         ← Discovery Phase
+    discovery-prd.prompt.md          ← Discovery Phase
+    discovery-tech-spec.prompt.md    ← Discovery Phase
+    discovery-epics.prompt.md        ← Discovery Phase
+    epic-init.prompt.md              ← Discovery Phase
     epic-close.prompt.md
-    context-sync.prompt.md
     task-init.prompt.md
     task-prd.prompt.md
     task-spec.prompt.md
@@ -390,37 +174,372 @@ Para tarefas com componentes de frontend, use:
     task-implement-frontend.prompt.md
     task-review.prompt.md
     task-tests.prompt.md
-    ops-triage.prompt.md
     agents-init.prompt.md
+    context-sync.prompt.md
+    ops-triage.prompt.md
   templates/
-    idea.template.md
-    non-technical-spec.template.md
-    technical-spec.template.md
-    epics.template.md
-    epic-N.template.md
-    spec-epic-N.template.md
-    ops-epic-N.template.md
-    decisions-log.template.md
-    CONTEXT.template.md
+    idea.template.md                ← Discovery Phase
+    non-technical-spec.template.md  ← Discovery Phase
+    technical-spec.template.md      ← Discovery Phase
+    epics.template.md               ← Discovery Phase
+    epic-N.template.md              ← Discovery Phase
+    spec-epic-N.template.md         ← Discovery Phase
     AGENTS.base.md
     PRD.template.md
     spec.template.md
   docs/
     convencoes.md
     fluxo-sdd.md
+.vscode/
+  settings.json
+scripts/
+  install.ts
+Makefile
 ```
 
 ---
 
-## Como instalar em um projeto
+## 🧩 Agents
 
-### Opção A — copiar para o projeto
+### 📥 Intake
 
-Copie `agents/*` e `prompts/*` para `.github/agents/` e `.github/prompts/` do seu projeto.
+Responsible exclusively for the intake step. It:
 
-### Opção B — apontar o VS Code para a pasta do kit
+- reads `task.txt`
+- generates a structured `task.md`
+- does not access PRD, spec, codebase, or any other artifact
+- explicitly records doubts and ambiguities
 
-Adicione ao `.vscode/settings.json` do projeto:
+### 📐 Planner
+
+Responsible for planning and specification. It:
+
+- reads the task
+- generates `PRD.md`
+- generates `spec.md`
+- does not implement code
+
+### 🛠️ Implementer
+
+Responsible for implementation. It:
+
+- reads `PRD.md` and `spec.md`
+- summarizes what will be done before modifying any file
+- implements the task
+- tries to stay within the defined scope
+- flags critical ambiguities instead of deciding on its own
+
+### 🔎 Reviewer
+
+Responsible for the final review. It:
+
+- compares `PRD.md`, `spec.md`, and the implementation
+- identifies deviations, risks, gaps, and pending issues
+- produces an actionable final recommendation
+
+---
+
+## 🔭 Discovery Phase (optional — Flow A)
+
+The Discovery Phase is intended for new projects or when there is an idea that needs to be structured before planning development. It is always optional — if the task is already clear, use Flow B directly.
+
+### Discovery Phase Agents
+
+| Agent | File | Responsibility |
+|-------|------|----------------|
+| 🧭 Discovery | `discovery.agent.md` | Refines `idea.txt` without technical bias and generates `idea.md` |
+| 🗂️ PM | `pm.agent.md` | Generates `non-technical-spec.md` with functional specification |
+| 🧑‍💼 Tech Lead | `tech-lead.agent.md` | Generates `PRD.md` from the functional specification |
+| 🏗️ Architect | `architect.agent.md` | Generates `technical-spec.md`, `epics.md`, and per-epic artifacts |
+
+### Discovery Phase Prompts
+
+| Prompt | What it does |
+|--------|--------------|
+| `/discovery-refine` | Reads `idea.txt` and generates `idea.md` (without technical bias) |
+| `/discovery-spec` | Reads `idea.md` and generates `non-technical-spec.md` |
+| `/discovery-prd` | Reads `non-technical-spec.md` and generates `PRD.md` |
+| `/discovery-tech-spec` | Reads `PRD.md` and generates `technical-spec.md` |
+| `/discovery-epics` | Reads `technical-spec.md` and generates `epics.md` (ordered by technical dependency) |
+| `/epic-init` | Generates the 3 artifacts for an epic in `doc-specs/<N>-epic/` (the agent asks for the epic number) |
+
+---
+
+## 📋 Prompts reference (Flow B — Direct Delivery)
+
+| Prompt | What it does |
+|--------|--------------|
+| `/task-init` | Converts `task.txt` into `task.md` (uses 📥 Intake) |
+| `/task-prd` | Converts `task.md` into `PRD.md` |
+| `/task-spec` | Converts `PRD.md` into `spec.md` |
+| `/task-implement` | Starts implementation based on `PRD.md` and `spec.md` |
+| `/task-implement-frontend` | Frontend implementation with design and accessibility skills injected |
+| `/task-review` | Performs adherence review between artifacts and code |
+| `/agents-init` | Generates a minimal, stable initial `AGENTS.md` for the project |
+
+---
+
+## 🚀 Running the full workflow
+
+### Step 0 — Create the initial task entry
+
+Create the `doc-specs/` folder if it does not exist yet. Then create:
+
+```
+doc-specs/task.txt
+```
+
+This file should contain the raw task description, typically coming from the backlog, a project management tool, or context passed by the team. It may still be disorganized. The workflow exists precisely to structure this before implementation begins.
+
+---
+
+### Step 1 — Generate `task.md`
+
+In the Copilot chat, run:
+
+```
+/task-init
+```
+
+This step uses the 📥 Intake agent to read `doc-specs/task.txt` and generate `doc-specs/task.md`.
+
+Intake is a restricted-scope agent: it reads only `task.txt`, and does not access PRD, spec, or the codebase. This ensures the raw task entry is faithfully structured, without technical or architectural contamination.
+
+> 🔵 **Mandatory HITL after this step.**
+> A person must review `task.md` and answer:
+> - Is the task objective clear?
+> - Was any information lost?
+> - Was anything misinterpreted?
+> - Are there ambiguities that need to be corrected now?
+>
+> If the answer is "not good enough", adjust the input and run this step again. Do not advance to the PRD without this validation.
+
+---
+
+### Step 2 — Generate `PRD.md`
+
+In the Copilot chat, run:
+
+```
+/task-prd
+```
+
+This step uses the 📐 Planner agent to read `doc-specs/task.md` and generate `doc-specs/PRD.md`.
+
+The PRD is generated with the following structure: overview, objectives, scope (in/out), assumptions, functional requirements, non-functional requirements, acceptance criteria, and open questions.
+
+> 🔵 **Mandatory HITL after this step.**
+> A person must review `PRD.md` and answer:
+> - Does the PRD correctly represent the task?
+> - Are the objectives coherent?
+> - Is the scope clear?
+> - Do the acceptance criteria make sense?
+> - Are there open questions that need to be resolved before the spec?
+>
+> If there is misalignment, adjust and regenerate the PRD. Do not advance to the spec without this validation.
+
+---
+
+### Step 3 — Generate `spec.md`
+
+In the Copilot chat, run:
+
+```
+/task-spec
+```
+
+This step uses the 📐 Planner agent to read `doc-specs/PRD.md` and generate `doc-specs/spec.md`.
+
+The spec is generated with the following structure: context, technical objective, implementation scope, architectural impact, affected components, expected functional flow, technical rules, implementation strategy, testing strategy, technical acceptance criteria, risks, and open questions.
+
+> 🔵 **Mandatory HITL after this step.**
+> A person must review `spec.md` and answer:
+> - Is the spec consistent with the PRD?
+> - Is it technical enough to support implementation?
+> - Are there important technical decisions that are too implicit?
+> - Are there missing risks, dependencies, or open questions?
+> - Can implementation follow this document without dangerous assumptions?
+>
+> If the spec is shallow or misaligned, refine and regenerate. Implementation must not begin without human approval of the spec.
+
+---
+
+### Step 4 — Implement
+
+Only after human approval of `spec.md`, run:
+
+```
+/task-implement
+```
+
+This step uses the 🛠️ Implementer agent to:
+
+- read `doc-specs/PRD.md` and `doc-specs/spec.md`
+- summarize what will be implemented
+- identify the main affected files and components
+- flag critical ambiguities before modifying any file
+- begin implementation
+
+If the agent finds a critical ambiguity, it must flag it and stop, rather than decide on its own. If this happens, go back to the spec step and update the document.
+
+> 🟡 **Recommended HITL during implementation.**
+> Depending on the size of the change, monitor the agent's proposed plan, the files it intends to modify, and the most sensitive changes. For small tasks this can be lighter; for larger tasks, oversight is important.
+
+> **Handoffs and `send: false`:** at the end of implementation, the agent may propose a handoff to the Reviewer. That handoff is only executed if you confirm it manually. Copilot displays the continuation option but never invokes the next agent without your confirmation — this is part of the Human-in-the-Loop design.
+
+---
+
+### Step 5 — Review
+
+After implementation, run:
+
+```
+/task-review
+```
+
+This step uses the 🔎 Reviewer agent to review `doc-specs/PRD.md`, `doc-specs/spec.md`, and the current implementation.
+
+Output should cover: adherence summary, deviations found, risks and points of attention, gaps, and a final recommendation.
+
+> 🔵 **Mandatory HITL at closing.**
+> A person must review the reviewer's output and decide:
+> - Is the delivery within scope?
+> - Are there mandatory corrections?
+> - Does the spec need to be updated?
+> - Can implementation proceed to the next stage?
+>
+> The reviewer agent helps find inconsistencies, but the final decision remains human.
+
+---
+
+## 🔵 HITL checkpoints summary
+
+| Checkpoint | Type |
+|------------|------|
+| After `task.md` | **Mandatory** |
+| After `PRD.md` | **Mandatory** |
+| After `spec.md` | **Mandatory** |
+| After the final reviewer output | **Mandatory** |
+| During implementation (larger changes) | Recommended |
+
+---
+
+## ⚠️ Core rule
+
+> **Without a human-validated `spec.md`, implementation does not start.**
+
+This is the central rule of this orchestration.
+
+---
+
+## ↩️ When to step back
+
+Step back to the previous stage when:
+
+- the task is poorly represented
+- the PRD does not correctly reflect the scope
+- the spec is shallow or ambiguous
+- implementation depends on undocumented decisions
+- the reviewer flags deviations that indicate a specification error
+
+---
+
+## 🛟 When to use `/agents-init`
+
+Use this prompt only when you want to create or revise the project's `AGENTS.md`. It is not part of the mandatory per-task flow.
+
+It generates an initial `AGENTS.md`: minimal, stable, coherent with the project, and aligned with progressive disclosure.
+
+---
+
+## 🔄 Workflow at a glance
+
+### Flow A — Discovery + Delivery (optional)
+
+```
+idea.txt
+   ↓
+/discovery-refine        → HITL — review idea.md
+   ↓
+/discovery-spec          → HITL — review non-technical-spec.md
+   ↓
+/discovery-prd           → HITL — review PRD.md
+   ↓
+/discovery-tech-spec     → HITL — review technical-spec.md
+   ↓
+/discovery-epics         → HITL — review epics.md
+   ↓ (per epic)
+/epic-init               → HITL — review epic-N.md
+                         → HITL — review PRD.md for the epic
+                         → HITL — review spec-epic-N.md
+   ↓
+/task-implement  (point to doc-specs/<N>-epic/)
+   ↓
+/task-review
+   ↓
+Final HITL
+```
+
+### Flow B — Direct Delivery
+
+```
+task.txt
+   ↓
+/task-init      → HITL — review task.md
+   ↓
+/task-prd       → HITL — review PRD.md
+   ↓
+/task-spec      → HITL — review spec.md
+   ↓
+/task-implement
+   ↓
+/task-review
+   ↓
+Final HITL
+```
+
+---
+
+## 💡 Best practices
+
+- never skip the spec review
+- do not treat the PRD as a technical document
+- do not leave ambiguities unrecorded
+- do not use the implementer to discover scope
+- use the reviewer to validate adherence, not to redefine the task
+
+---
+
+## ✅ Expected outcome
+
+At the end of the process, there should be coherence between:
+
+- the original task description
+- the structured task
+- the PRD
+- the spec
+- the implementation
+- the final review
+
+This is the signal that the SDD workflow functioned correctly.
+
+---
+
+## 📦 Installation
+
+There are two ways to use this kit.
+
+### Option A — Copy into the project
+
+Copy:
+- `agents/*` into `.github/agents/`
+- `prompts/*` into `.github/prompts/`
+
+This is the simplest option when you want the workflow to travel alongside the repository.
+
+### Option B — Keep the kit folder reusable and point VS Code to it
+
+If you prefer to keep `ai-sdlc-kit` outside of `.github`, add the following to your project's `.vscode/settings.json`:
 
 ```json
 {
@@ -429,14 +548,66 @@ Adicione ao `.vscode/settings.json` do projeto:
 }
 ```
 
-Para instalar automaticamente (detecta e faz merge do `settings.json` existente):
+#### Automated setup (Option B)
+
+To avoid editing `settings.json` manually, run:
 
 ```bash
 make install
 ```
 
-Para apontar para um caminho externo personalizado:
+The script detects whether a `settings.json` already exists and **merges** the necessary entries without overwriting the rest of the file. If the file does not exist, it is created.
+
+To point to a custom external path:
 
 ```bash
-make install-external PATH=/caminho/para/ai-sdlc-kit
+make install-external PATH=/path/to/ai-sdlc-kit
 ```
+
+See `Makefile` and `scripts/install.ts` for details.
+
+---
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! If you have ideas for new agents, prompts, templates, or improvements to the workflow, feel free to:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feat/my-feature`)
+3. Commit your changes following [Conventional Commits](https://www.conventionalcommits.org/)
+4. Open a Pull Request
+
+Please ensure your changes are consistent with the SDD workflow philosophy: **clarity, human oversight, and structured artifacts before implementation**.
+
+---
+
+## 👩‍💻 Author
+
+<div align="center">
+
+<img src="https://github.com/glaucia86.png" width="120" style="border-radius: 50%" alt="Glaucia Lemos"/>
+
+**Glaucia Lemos**
+
+*Senior Cloud Advocate at Microsoft · AI & JavaScript Enthusiast*
+
+[![GitHub](https://img.shields.io/badge/GitHub-glaucia86-181717?style=flat-square&logo=github)](https://github.com/glaucia86)
+[![X (Twitter)](https://img.shields.io/badge/X-@glaucia__lemos86-000000?style=flat-square&logo=x)](https://twitter.com/glaucia_lemos86)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-glaucialemos-0077B5?style=flat-square&logo=linkedin)](https://www.linkedin.com/in/glaucialemos/)
+[![Blog](https://img.shields.io/badge/Blog-glaucia86.github.io-6366f1?style=flat-square&logo=github)](https://glaucia86.github.io)
+
+</div>
+
+---
+
+<div align="center">
+
+Made with ❤️ to bring structure, clarity, and human oversight to AI-assisted development.
+
+[![Docs](https://img.shields.io/badge/Official%20Docs-glaucia86.github.io%2Fai--sdlc--kit-6366f1?style=flat-square&logo=readthedocs&logoColor=white)](https://glaucia86.github.io/ai-sdlc-kit)
+[![GitHub](https://img.shields.io/badge/GitHub-glaucia86%2Fai--sdlc--kit-181717?style=flat-square&logo=github)](https://github.com/glaucia86/ai-sdlc-kit)
+[![Changelog](https://img.shields.io/badge/Changelog-CHANGELOG.md-10b981?style=flat-square)](./CHANGELOG.md)
+
+</div>
