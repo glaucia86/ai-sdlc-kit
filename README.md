@@ -556,16 +556,24 @@ If you prefer to keep `ai-sdlc-kit` outside of `.github`, or if you unpacked the
 
 #### Automated setup (Option B)
 
-To avoid editing `settings.json` manually, run the bash-first installer:
+To avoid editing `settings.json` manually, run the installer from the **consumer project root** so it updates that project's `.vscode/settings.json` and creates that project's `doc-specs/` folder:
 
 ```bash
-bash scripts/install.sh
+bash /path/to/ai-sdlc-kit/scripts/install.sh /path/to/ai-sdlc-kit
 ```
 
-To point to a custom external path:
+For example:
 
 ```bash
-bash scripts/install.sh /path/to/ai-sdlc-kit
+cd /path/to/your-project
+bash /path/to/ai-sdlc-kit/scripts/install.sh /path/to/ai-sdlc-kit
+```
+
+If you copied the kit into the consumer repo as `./ai-sdlc-kit`, you can still run:
+
+```bash
+cd /path/to/your-project
+bash ./ai-sdlc-kit/scripts/install.sh ./ai-sdlc-kit
 ```
 
 The installer detects whether a `settings.json` already exists and **merges** the necessary entries without overwriting the rest of the file. If the file does not exist, it is created. It also ensures `doc-specs/` exists.
@@ -587,7 +595,9 @@ Until that package layout is corrected, do not treat APM as the official install
 
 ### Offline bundle for governed environments
 
-To generate a portable bundle for internal distribution of this kit repository:
+To generate a portable bundle for internal distribution of this kit repository, make sure `python3` or `python` is available in your shell environment first. The bundler uses Python to read package metadata and generate the manifest and SHA-256 checksums.
+
+Then run:
 
 ```bash
 bash scripts/package-bundle.sh

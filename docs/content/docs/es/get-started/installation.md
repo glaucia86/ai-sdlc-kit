@@ -51,16 +51,24 @@ Si prefieres mantener el kit como una carpeta externa compartida (p. ej., usada 
 
 #### Instalación bash-first (Opción B)
 
-Para evitar editar `settings.json` manualmente, ejecuta:
+Para evitar editar `settings.json` manualmente, ejecuta el instalador desde la **raíz del proyecto consumidor**, para que actualice el `.vscode/settings.json` de ese proyecto:
 
 ```bash
-bash scripts/install.sh
+bash /ruta/a/ai-sdlc-kit/scripts/install.sh /ruta/a/ai-sdlc-kit
 ```
 
-Para apuntar a una ruta externa personalizada:
+Por ejemplo:
 
 ```bash
-bash scripts/install.sh /ruta/a/ai-sdlc-kit
+cd /ruta/a/tu-proyecto
+bash /ruta/a/ai-sdlc-kit/scripts/install.sh /ruta/a/ai-sdlc-kit
+```
+
+Si copiaste el kit dentro del repositorio consumidor como `./ai-sdlc-kit`, también puedes ejecutar:
+
+```bash
+cd /ruta/a/tu-proyecto
+bash ./ai-sdlc-kit/scripts/install.sh ./ai-sdlc-kit
 ```
 
 El script detecta un `settings.json` existente y **fusiona** las entradas requeridas sin sobrescribir ninguna otra configuración. Si el archivo no existe, se crea.

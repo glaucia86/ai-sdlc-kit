@@ -4,6 +4,6 @@ description: APM project for consumer
 author: Glaucia Lemos
 dependencies:
   apm:
-  - ..\package-source
+  - ../package-source
   mcp: []
 scripts: {}

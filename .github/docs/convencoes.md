@@ -10,9 +10,9 @@ O objetivo é garantir que tarefa, PRD, spec e implementação permaneçam coere
 
 ### 1. A implementação nunca começa direto pela tarefa bruta
 
-Toda demanda deve partir de uma entrada inicial em `doc-specs/tarefa.txt`.
+Toda demanda deve partir de uma entrada inicial em `doc-specs/task.txt`.
 
-Essa entrada deve ser transformada em `doc-specs/tarefa.md`, depois em `doc-specs/PRD.md`, depois em `doc-specs/spec.md`.
+Essa entrada deve ser transformada em `doc-specs/task.md`, depois em `doc-specs/PRD.md`, depois em `doc-specs/spec.md`.
 
 Somente após revisão humana da spec a implementação pode começar.
 
@@ -21,7 +21,7 @@ Somente após revisão humana da spec a implementação pode começar.
 O fluxo não é totalmente automático.
 
 Há checkpoints obrigatórios de validação humana após:
-- geração de `tarefa.md`
+- geração de `task.md`
 - geração de `PRD.md`
 - geração de `spec.md`
 
@@ -30,8 +30,8 @@ Se houver ambiguidade, inconsistência ou falta de clareza, o fluxo deve voltar 
 ### 3. O agente não deve inventar requisitos
 
 Toda geração de artefato deve estar sustentada por:
-- `tarefa.txt`
-- `tarefa.md`
+- `task.txt`
+- `task.md`
 - `PRD.md`
 - `spec.md`
 - codebase observável
@@ -75,10 +75,10 @@ O agente revisor não substitui revisão humana, mas ajuda a identificar:
 
 ## Estrutura esperada dos artefatos
 
-### tarefa.txt
+### task.txt
 Entrada bruta da tarefa.
 
-### tarefa.md
+### task.md
 Versão estruturada da tarefa para leitura humana e para geração do PRD.
 
 ### PRD.md
@@ -116,8 +116,8 @@ O fluxo assume a existência da pasta:
 
 Com os seguintes arquivos:
 
-- `doc-specs/tarefa.txt`
-- `doc-specs/tarefa.md`
+- `doc-specs/task.txt`
+- `doc-specs/task.md`
 - `doc-specs/PRD.md`
 - `doc-specs/spec.md`
 
@@ -181,7 +181,7 @@ Ela é indicada para projetos novos ou quando há necessidade de estruturar uma 
 
 ### Entrada do fluxo
 
-A entrada da Fase de Discovery é o arquivo `doc-specs/idea.txt`, equivalente ao `tarefa.txt` no Fluxo B. Deve conter a ideia bruta, sem formatação obrigatória.
+A entrada da Fase de Discovery é o arquivo `doc-specs/idea.txt`, equivalente ao `task.txt` no Fluxo B. Deve conter a ideia bruta, sem formatação obrigatória.
 
 ### Dois fluxos independentes
 
@@ -191,7 +191,7 @@ O kit suporta dois fluxos de trabalho independentes:
 `idea.txt → idea.md → non-technical-spec.md → PRD.md → technical-spec.md → epics.md → spec-epic-N.md → implementação`
 
 **Fluxo B — Delivery direto** (quando a tarefa já está clara):
-`tarefa.txt → tarefa.md → PRD.md → spec.md → implementação`
+`task.txt → task.md → PRD.md → spec.md → implementação`
 
 Nenhum fluxo é pré-requisito do outro. A escolha é feita pelo time com base no contexto do projeto.
 

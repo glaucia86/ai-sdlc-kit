@@ -5,4 +5,4 @@ dependencies:
 - repo_url: _local/package-source
   package_type: apm_package
   source: local
-  local_path: ..\package-source
+  local_path: ../package-source

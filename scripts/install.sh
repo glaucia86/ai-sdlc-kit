@@ -62,7 +62,8 @@ import sys
 settings_path, agents_path, prompts_path = sys.argv[1:4]
 
 if os.path.exists(settings_path):
-    raw = open(settings_path, "r", encoding="utf-8").read().strip()
+    with open(settings_path, "r", encoding="utf-8") as handle:
+        raw = handle.read().strip()
     if raw:
         try:
             settings = json.loads(raw)
