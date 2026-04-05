@@ -22,7 +22,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `README.md` now documents dual-mode distribution through bash-first setup, APM install, and offline bundle
 - Operational guidance now lives in the official docs instead of a separate runtime README
 - APM guidance now matches the official Quick Start more closely by documenting `apm.lock.yaml`, deployed files, and `apm_modules/`
-- Documentation now marks APM as a future distribution path, not a production-ready installation path for this kit
 
 ### Removed
 

@@ -1,5 +1,6 @@
 # Dependencies
 node_modules/
+apm_modules/
 
 # Build outputs
 dist/
@@ -7,6 +8,8 @@ dist/
 .next/
 out/
 .source/
+*.tsbuildinfo
+skills-lock.json
 
 # Agent workspace artifacts
 .agents/

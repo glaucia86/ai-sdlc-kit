@@ -530,7 +530,7 @@ This is the signal that the SDD workflow functioned correctly.
 
 ## 📦 Installation
 
-There are two supported ways to use this kit today, plus one future distribution path under validation.
+There are now three supported ways to use this kit.
 
 ### Option A — Commit the runtime into the project
 
@@ -543,7 +543,26 @@ Copy:
 
 This is the simplest and most governed-friendly option. It does not depend on PowerShell, APM, or the public docs site.
 
-### Option B — Keep the kit folder reusable or unpack an offline bundle
+### Option B — Install from APM
+
+The kit now exposes an `apm.yml`, so it can be used as an APM package source of truth.
+
+Typical consumer flow:
+
+```bash
+apm install glaucia86/ai-sdlc-kit
+```
+
+This mode is recommended for teams that can use internet-connected or internally mirrored APM sources.
+
+When a consumer project installs APM packages, follow the APM Quick Start model:
+
+- commit `apm.yml`
+- commit `apm.lock.yaml`
+- ignore `apm_modules/`
+- commit deployed runtime files such as `.github/agents/` and `.github/prompts/`
+
+### Option C — Keep the kit folder reusable or unpack an offline bundle
 
 If you prefer to keep `ai-sdlc-kit` outside of `.github`, or if you unpacked the offline bundle into an approved shared path, add the following to your project's `.vscode/settings.json`:
 
@@ -554,7 +573,7 @@ If you prefer to keep `ai-sdlc-kit` outside of `.github`, or if you unpacked the
 }
 ```
 
-#### Automated setup (Option B)
+#### Automated setup (Option C)
 
 To avoid editing `settings.json` manually, run the bash-first installer:
 
@@ -569,21 +588,6 @@ bash scripts/install.sh /path/to/ai-sdlc-kit
 ```
 
 The installer detects whether a `settings.json` already exists and **merges** the necessary entries without overwriting the rest of the file. If the file does not exist, it is created. It also ensures `doc-specs/` exists.
-
-### Future path — APM package distribution
-
-The repository now includes an `apm.yml`, but the package layout is still being validated against APM's native package primitive model.
-
-What is already true:
-
-- `apm.yml` is valid as a minimal APM manifest
-- consumer repositories can use the standard APM workflow with `apm.yml`, `apm.lock.yaml`, and `apm_modules/`
-
-What is not ready yet:
-
-- treating `glaucia86/ai-sdlc-kit` as a production-ready APM package that auto-deploys prompts, agents, and skills into the consumer `.github/` tree
-
-Until that package layout is corrected, do not treat APM as the official installation path for this kit.
 
 ### Offline bundle for governed environments
 
@@ -601,7 +605,7 @@ This creates:
 
 Use the bundle when the customer environment allows only approved artifacts, mirrored repositories, or bash-based automation.
 
-If you are in a consumer repository that already uses APM and has an `apm.lock.yaml`, the official APM portable bundle flow is:
+If you are in a consumer repository that already uses APM and has an `apm.lock.yaml`, prefer the official APM bundling flow:
 
 ```bash
 apm pack --archive

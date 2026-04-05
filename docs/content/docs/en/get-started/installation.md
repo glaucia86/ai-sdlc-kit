@@ -38,32 +38,73 @@ mkdir doc-specs
 
 ---
 
-## Option B — Point VS Code to the kit folder
+## Option B — Point VS Code to the kit folder or an unpacked bundle
 
 If you prefer to keep the kit as a shared external folder (e.g., used across multiple projects), add the paths to your `.vscode/settings.json`:
 
 ```json
 {
-  "chat.agentFilesLocations": { "./ai-sdlc-kit/agents": true },
-  "chat.promptFilesLocations": { "./ai-sdlc-kit/prompts": true }
+  "chat.agentFilesLocations": { "./ai-sdlc-kit/.github/agents": true },
+  "chat.promptFilesLocations": { "./ai-sdlc-kit/.github/prompts": true }
 }
 ```
 
-#### Automated installation (Option B)
+#### Bash-first installation (Option B)
 
 To avoid editing `settings.json` manually, run:
 
 ```bash
-make install
+bash scripts/install.sh
 ```
-
-The script detects an existing `settings.json` and **merges** the required entries without overwriting any other configuration. If the file does not exist, it is created.
 
 To point to a custom external path:
 
 ```bash
-make install-external PATH=/path/to/ai-sdlc-kit
+bash scripts/install.sh /path/to/ai-sdlc-kit
 ```
+
+The script detects an existing `settings.json` and **merges** the required entries without overwriting any other configuration. If the file does not exist, it is created.
+
+---
+
+## Offline and governed environments
+
+You do not need a second documentation source to run the kit. The operational guidance now lives directly in the official docs under:
+
+- [Operational Modes](/en/get-started/operational-modes)
+- [Governed Environments](/en/get-started/governed-environments)
+
+To generate an approved offline artifact for internal distribution:
+
+```bash
+bash scripts/package-bundle.sh
+```
+
+This produces a versioned bundle directory, a `.tar.gz` archive, and a `sha256` file under `dist/`.
+
+If the repository is already acting as an APM consumer with installed dependencies and an `apm.lock.yaml`, prefer the official APM bundle flow instead:
+
+```bash
+apm pack --archive
+```
+
+---
+
+## Future path — APM package distribution
+
+This repository already contains an `apm.yml`, and the standard APM consumer workflow is valid:
+
+- commit `apm.yml`
+- commit `apm.lock.yaml`
+- ignore `apm_modules/`
+
+However, the AI SDLC Kit package layout is still being validated against APM's native primitive deployment model.
+
+Today, this means:
+
+- APM is a future distribution path for this kit
+- APM is not the official installation path yet
+- the supported installation paths remain direct copy and `bash scripts/install.sh`
 
 ---
 

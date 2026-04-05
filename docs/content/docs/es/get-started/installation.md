@@ -38,32 +38,73 @@ mkdir doc-specs
 
 ---
 
-## Opción B — Apuntar VS Code a la carpeta del kit
+## Opción B — Apuntar VS Code a la carpeta del kit o a un bundle offline
 
 Si prefieres mantener el kit como una carpeta externa compartida (p. ej., usada en múltiples proyectos), agrega las rutas a `.vscode/settings.json`:
 
 ```json
 {
-  "chat.agentFilesLocations": { "./ai-sdlc-kit/agents": true },
-  "chat.promptFilesLocations": { "./ai-sdlc-kit/prompts": true }
+  "chat.agentFilesLocations": { "./ai-sdlc-kit/.github/agents": true },
+  "chat.promptFilesLocations": { "./ai-sdlc-kit/.github/prompts": true }
 }
 ```
 
-#### Instalación automatizada (Opción B)
+#### Instalación bash-first (Opción B)
 
 Para evitar editar `settings.json` manualmente, ejecuta:
 
 ```bash
-make install
+bash scripts/install.sh
 ```
-
-El script detecta un `settings.json` existente y **fusiona** las entradas requeridas sin sobrescribir ninguna otra configuración. Si el archivo no existe, se crea.
 
 Para apuntar a una ruta externa personalizada:
 
 ```bash
-make install-external PATH=/ruta/a/ai-sdlc-kit
+bash scripts/install.sh /ruta/a/ai-sdlc-kit
 ```
+
+El script detecta un `settings.json` existente y **fusiona** las entradas requeridas sin sobrescribir ninguna otra configuración. Si el archivo no existe, se crea.
+
+---
+
+## Entornos offline y gobernados
+
+No necesitas una segunda fuente de documentación para usar el kit. La guía operativa ahora vive directamente en la documentación oficial en:
+
+- [Modos Operativos](/es/get-started/operational-modes)
+- [Entornos Gobernados](/es/get-started/governed-environments)
+
+Para generar un artefacto offline aprobado para distribución interna:
+
+```bash
+bash scripts/package-bundle.sh
+```
+
+Esto genera un directorio versionado, un archivo `.tar.gz` y un archivo `sha256` dentro de `dist/`.
+
+Si el repositorio ya actúa como consumidor APM con dependencias instaladas y `apm.lock.yaml`, prefiere el flujo oficial de bundle del propio APM:
+
+```bash
+apm pack --archive
+```
+
+---
+
+## Ruta futura — distribución como paquete APM
+
+Este repositorio ya contiene un `apm.yml`, y el flujo estándar de consumidor APM sigue siendo válido:
+
+- versionar `apm.yml`
+- versionar `apm.lock.yaml`
+- ignorar `apm_modules/`
+
+Sin embargo, el layout del paquete AI SDLC Kit todavía se está validando frente al modelo nativo de despliegue de primitivas de APM.
+
+Hoy esto significa:
+
+- APM es una ruta futura de distribución para este kit
+- APM aún no es la ruta oficial de instalación
+- las rutas soportadas siguen siendo la copia directa y `bash scripts/install.sh`
 
 ---
 

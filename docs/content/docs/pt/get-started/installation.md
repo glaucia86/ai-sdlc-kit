@@ -38,32 +38,73 @@ mkdir doc-specs
 
 ---
 
-## Opção B — Apontar o VS Code para a pasta do kit
+## Opção B — Apontar o VS Code para a pasta do kit ou para um bundle offline
 
 Se preferir manter o kit como uma pasta externa compartilhada (p. ex., usada em múltiplos projetos), adicione os caminhos ao `.vscode/settings.json`:
 
 ```json
 {
-  "chat.agentFilesLocations": { "./ai-sdlc-kit/agents": true },
-  "chat.promptFilesLocations": { "./ai-sdlc-kit/prompts": true }
+  "chat.agentFilesLocations": { "./ai-sdlc-kit/.github/agents": true },
+  "chat.promptFilesLocations": { "./ai-sdlc-kit/.github/prompts": true }
 }
 ```
 
-#### Instalação automatizada (Opção B)
+#### Instalação bash-first (Opção B)
 
 Para evitar editar o `settings.json` manualmente, execute:
 
 ```bash
-make install
+bash scripts/install.sh
 ```
-
-O script detecta um `settings.json` existente e **mescla** as entradas necessárias sem sobrescrever nenhuma outra configuração. Se o arquivo não existir, ele é criado.
 
 Para apontar para um caminho externo personalizado:
 
 ```bash
-make install-external PATH=/caminho/para/ai-sdlc-kit
+bash scripts/install.sh /caminho/para/ai-sdlc-kit
 ```
+
+O script detecta um `settings.json` existente e **mescla** as entradas necessárias sem sobrescrever nenhuma outra configuração. Se o arquivo não existir, ele é criado.
+
+---
+
+## Ambientes offline e governados
+
+Você não precisa de uma segunda fonte de documentação para usar o kit. A orientação operacional agora fica diretamente na documentação oficial em:
+
+- [Modos Operacionais](/pt/get-started/operational-modes)
+- [Ambientes Governados](/pt/get-started/governed-environments)
+
+Para gerar um artefato offline aprovado para distribuição interna:
+
+```bash
+bash scripts/package-bundle.sh
+```
+
+Isso produz um diretório versionado, um arquivo `.tar.gz` e um arquivo `sha256` dentro de `dist/`.
+
+Se o repositório já estiver atuando como consumidor APM com dependências instaladas e `apm.lock.yaml`, prefira o fluxo oficial de bundle do próprio APM:
+
+```bash
+apm pack --archive
+```
+
+---
+
+## Caminho futuro — distribuição como pacote APM
+
+Este repositório já contém um `apm.yml`, e o fluxo padrão de consumidor APM continua válido:
+
+- versionar `apm.yml`
+- versionar `apm.lock.yaml`
+- ignorar `apm_modules/`
+
+Porém, o layout do pacote AI SDLC Kit ainda está sendo validado contra o modelo nativo de deploy de primitivas do APM.
+
+Hoje isso significa:
+
+- APM é um caminho futuro de distribuição para este kit
+- APM ainda não é o caminho oficial de instalação
+- os caminhos suportados continuam sendo cópia direta e `bash scripts/install.sh`
 
 ---
 
