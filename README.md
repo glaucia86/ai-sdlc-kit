@@ -568,8 +568,6 @@ See `Makefile` and `scripts/install.ts` for details.
 
 ---
 
----
-
 ## 🤝 Contributing
 
 Contributions are welcome! If you have ideas for new agents, prompts, templates, or improvements to the workflow, feel free to:
@@ -591,12 +589,11 @@ Please ensure your changes are consistent with the SDD workflow philosophy: **cl
 
 **Glaucia Lemos**
 
-*Senior Cloud Advocate at Microsoft · AI & JavaScript Enthusiast*
+*A.I Developer at Zup Innovation/Itaú Unibanco · AI & JavaScript Enthusiast*
 
 [![GitHub](https://img.shields.io/badge/GitHub-glaucia86-181717?style=flat-square&logo=github)](https://github.com/glaucia86)
 [![X (Twitter)](https://img.shields.io/badge/X-@glaucia__lemos86-000000?style=flat-square&logo=x)](https://twitter.com/glaucia_lemos86)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-glaucialemos-0077B5?style=flat-square&logo=linkedin)](https://www.linkedin.com/in/glaucialemos/)
-[![Blog](https://img.shields.io/badge/Blog-glaucia86.github.io-6366f1?style=flat-square&logo=github)](https://glaucia86.github.io)
 
 </div>
 
